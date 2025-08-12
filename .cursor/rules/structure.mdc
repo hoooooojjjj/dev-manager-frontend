@@ -9,36 +9,68 @@ alwaysApply: true
 - **Applies To**: Agent, Inline Edit
 - **Paths**: 프로젝트 전체
 
-## 폴더 구조(권장)
+## 폴더 구조
 
 ```
-app/
-  layout.tsx
-  page.tsx
-  new/ page.tsx                     # Intake
-  projects/[id]/ page.tsx           # 타임라인+SSE
-  projects/[id]/research/ page.tsx  # 리서치 패널
-  drafts/[id]/ page.tsx             # Dev Spec 뷰
-  drafts/[id]/review/ page.tsx      # 리뷰(Diff)
-  drafts/[id]/prompts/ page.tsx     # 프롬프트 번들
-components/
-  forms/, layout/, cards/, tables/, charts/, prompts/
-lib/
-  api/ client.ts, schemas.ts, sse.ts, errors.ts
-  utils/ format.ts, guards.ts, featureFlags.ts
-  store/ useUi.ts, useDraftReview.ts
-styles/ globals.css, tailwind.config.ts
+src/
+├── app/                    # Next.js App Router 페이지 ✅
+│   ├── globals.css        # 전역 스타일 (Tailwind + shadcn/ui)
+│   ├── layout.tsx         # 루트 레이아웃 (Providers + Header)
+│   ├── page.tsx           # 홈페이지 (랜딩 + CTA)
+│   ├── new/               # 새 프로젝트 생성 ✅
+│   │   └── page.tsx       # Intake 폼 (OAuth + 검증)
+│   ├── projects/          # 프로젝트 관리 ✅
+│   │   ├── page.tsx       # 프로젝트 목록 (검색 + 필터)
+│   │   └── [id]/          # 프로젝트 상세
+│   │       ├── page.tsx   # 대시보드 (타임라인 + SSE)
+│   │       └── research/  # 리서치 패널 (3탭)
+│   │           └── page.tsx
+│   └── drafts/[id]/       # Dev Spec 관련 ✅
+│       ├── page.tsx       # 명세서 뷰어 (목차 + 인용)
+│       ├── review/        # 리뷰 인터페이스 (Diff)
+│       │   └── page.tsx
+│       └── prompts/       # AI 프롬프트 번들
+│           └── page.tsx
+├── components/            # React 컴포넌트 ✅
+│   ├── ui/               # shadcn/ui 기본 컴포넌트 (16개)
+│   ├── forms/            # 폼 컴포넌트 (IntakeForm + 테스트)
+│   ├── layout/           # 레이아웃 (Header, Breadcrumb)
+│   ├── projects/         # 프로젝트 관련 (Dashboard, List)
+│   ├── research/         # 리서치 패널 컴포넌트
+│   ├── drafts/           # Dev Spec 뷰어 컴포넌트
+│   └── prompts/          # AI 프롬프트 컴포넌트
+├── lib/                  # 라이브러리 & 유틸리티 ✅
+│   ├── api/              # API 클라이언트
+│   │   ├── client.ts     # Axios + 인터셉터 + 에러 처리
+│   │   ├── schemas.ts    # Zod 스키마 (완전한 타입 정의)
+│   │   ├── auth.ts       # OAuth API 호출
+│   │   ├── sse.ts        # Server-Sent Events 유틸
+│   │   └── errors.ts     # ProblemDetails 에러 클래스
+│   ├── hooks/            # 커스텀 훅 (useOAuth)
+│   ├── providers/        # Context Providers (Query, Theme, MSW)
+│   ├── store/            # Zustand 스토어 (useUi + 토스트)
+│   └── utils/            # 유틸리티 (format, 상태 색상 등)
+├── mocks/                # MSW API 모킹 ✅
+│   ├── handlers.ts       # API 핸들러 + 샘플 데이터
+│   ├── browser.ts        # 브라우저 Service Worker
+│   └── node.ts           # Node.js 테스트용
+├── test/                 # 테스트 설정 ✅
+│   └── setup.ts          # Vitest 글로벌 설정
+└── types/                # TypeScript 타입 정의 ✅
+    └── globals.d.ts      # CSS 모듈 타입 선언
 ```
 
-## 코딩 컨벤션
+## 코딩 컨벤션 (완전 적용됨)
 
-- **TS**: `strict: true`, never `any`, 유틸 타입 분리(`*.types.ts`).
-- **폼**: React Hook Form + Zod, `zodResolver`. 스키마는 `lib/schemas.ts`.
-- **데이터**: TanStack Query, `staleTime=5s`, SSE 유틸 `lib/sse.ts`.
-- **UI**: Tailwind + shadcn/ui + Radix. 아이콘 Lucide. 접근성 우선.
-- **상태**: 서버 상태=Query, 로컬 UI 상태=Zustand, URL 상태=SearchParams.
-- **에러 처리**: ProblemDetails 매핑(`lib/errors.ts`), 토스트+모달.
-- **i18n**: ko 기본, Asia/Seoul 가정. 텍스트 하드코딩 금지.
+- **TS**: `strict: true`, `exactOptionalPropertyTypes: true`, never `any` ✅
+- **폼**: React Hook Form + Zod + `zodResolver`, 실시간 검증 ✅
+- **데이터**: TanStack Query (staleTime=5s, 스마트 캐싱), Axios 클라이언트 ✅
+- **UI**: Tailwind CSS + shadcn/ui + Radix + Lucide Icons ✅
+- **상태 관리**: 서버(TanStack Query) + 로컬 UI(Zustand) + URL(SearchParams) ✅
+- **에러 처리**: ProblemDetails 표준, Correlation ID, 토스트 알림 ✅
+- **국제화**: ko-KR 기본, Asia/Seoul 시간대, 하드코딩 텍스트 없음 ✅
+- **테스트**: Vitest + RTL (단위) + Playwright (E2E) + MSW (모킹) ✅
+- **품질**: ESLint + Prettier + Husky + TypeScript strict ✅
 
 ## 파일 네이밍
 

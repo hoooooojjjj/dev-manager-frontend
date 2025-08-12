@@ -57,7 +57,6 @@
     }
   ],
   "env": {
-    "NEXT_PUBLIC_API_BASE_URL": "@api_base_url",
-    "VERCEL_ENV": "@vercel_env"
+    "NEXT_PUBLIC_API_BASE_URL": "/api/v1"
   }
 }
