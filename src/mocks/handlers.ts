@@ -152,6 +152,44 @@ export const handlers = [
     });
   }),
 
+  // 프로젝트 목록 조회
+  http.get('/api/v1/projects', ({ request }) => {
+    const url = new URL(request.url);
+    const searchQuery = url.searchParams.get('search');
+    const statusFilter = url.searchParams.get('status');
+    
+    let filteredProjects = mockProjects;
+    
+    // 검색 필터링
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      filteredProjects = filteredProjects.filter(project => 
+        project.title.toLowerCase().includes(query) ||
+        project.repo.toLowerCase().includes(query)
+      );
+    }
+    
+    // 상태 필터링
+    if (statusFilter && statusFilter !== 'all') {
+      filteredProjects = filteredProjects.filter(project => 
+        project.status === statusFilter
+      );
+    }
+    
+    // 최신순 정렬
+    filteredProjects.sort((a, b) => 
+      new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+    );
+
+    return HttpResponse.json({
+      data: {
+        projects: filteredProjects,
+        total: mockProjects.length,
+      },
+      correlationId: crypto.randomUUID(),
+    });
+  }),
+
   // 프로젝트 상태 조회
   http.get('/api/v1/projects/:id/status', ({ params }) => {
     const projectId = params.id as string;
@@ -305,6 +343,70 @@ export const mockUtils = {
     }
   },
   
+  // 샘플 프로젝트 생성
+  addSampleProjects: () => {
+    const sampleProjects: Project[] = [
+      {
+        id: 'sample-1',
+        user_id: 'mock-user-id',
+        title: '사용자 인증 시스템 JWT 보안 강화',
+        source_notion_url: 'https://notion.so/sample-auth-project',
+        repo: 'company/auth-service',
+        focus_files: ['src/auth/jwt.ts', 'src/middleware/auth.ts', 'tests/auth.test.ts'],
+        output_notion_url: 'https://notion.so/auth-output',
+        confidentiality: 'internal',
+        status: 'done',
+        created_at: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(), // 7일 전
+        updated_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1일 전
+      },
+      {
+        id: 'sample-2',
+        user_id: 'mock-user-id',
+        title: 'React 컴포넌트 성능 최적화',
+        source_notion_url: 'https://notion.so/sample-react-project',
+        repo: 'company/react-app',
+        focus_files: ['src/components/DataTable.tsx', 'src/hooks/useVirtualization.ts'],
+        output_notion_url: 'https://notion.so/react-output',
+        confidentiality: 'public',
+        status: 'review',
+        created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(), // 3일 전
+        updated_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2시간 전
+      },
+      {
+        id: 'sample-3',
+        user_id: 'mock-user-id',
+        title: 'GraphQL API 설계 개선',
+        source_notion_url: 'https://notion.so/sample-graphql-project',
+        repo: 'company/graphql-api',
+        focus_files: ['src/schema/user.graphql', 'src/resolvers/user.ts', 'src/types/index.ts'],
+        output_notion_url: 'https://notion.so/graphql-output',
+        confidentiality: 'confidential',
+        status: 'researching',
+        created_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1일 전
+        updated_at: new Date(Date.now() - 30 * 60 * 1000).toISOString(), // 30분 전
+      },
+      {
+        id: 'sample-4',
+        user_id: 'mock-user-id',
+        title: 'TypeScript 마이그레이션 전략',
+        source_notion_url: 'https://notion.so/sample-typescript-project',
+        repo: 'company/legacy-js-app',
+        focus_files: ['src/utils/helpers.js', 'src/components/Legacy.jsx'],
+        output_notion_url: 'https://notion.so/typescript-output',
+        confidentiality: 'internal',
+        status: 'error',
+        created_at: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(), // 5일 전
+        updated_at: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(), // 4일 전
+      },
+    ];
+    
+    sampleProjects.forEach(project => {
+      if (!mockProjects.find(p => p.id === project.id)) {
+        mockProjects.push(project);
+      }
+    });
+  },
+  
   // 모든 모킹 데이터 초기화
   reset: () => {
     mockProjects.length = 0;
@@ -313,3 +415,6 @@ export const mockUtils = {
     mockOAuthStatus = { github: true, notion: false };
   },
 };
+
+// 초기화 시 샘플 프로젝트 추가
+mockUtils.addSampleProjects();
