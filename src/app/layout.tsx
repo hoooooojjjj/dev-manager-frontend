@@ -11,22 +11,21 @@ export const metadata: Metadata = {
   description: "개발 착수 전 PRD→개발 명세서→AI 실행 프롬프트 생성 시스템",
 };
 
-export default function PublicLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="ko" suppressHydrationWarning>
       <body className="min-h-screen bg-background font-sans antialiased">
-      <QueryProvider>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
+          <QueryProvider>
             <MSWProvider>
               <div className="relative flex min-h-screen flex-col">
                 <Header />
@@ -34,8 +33,8 @@ export default function PublicLayout({
               </div>
               <Toaster />
             </MSWProvider>
-        </ThemeProvider>    
-      </QueryProvider>
+          </QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
