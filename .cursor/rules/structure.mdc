@@ -1,0 +1,93 @@
+---
+alwaysApply: true
+---
+
+## 메타
+
+- **Rule Name**: Next.js App Structure & Conventions
+- **Type**: Project Rule (Auto-Attached)
+- **Applies To**: Agent, Inline Edit
+- **Paths**: 프로젝트 전체
+
+## 폴더 구조(권장)
+
+```
+app/
+  (public)/layout.tsx, page.tsx
+  new/ page.tsx                     # Intake
+  projects/[id]/ page.tsx           # 타임라인+SSE
+  projects/[id]/research/ page.tsx  # 리서치 패널
+  drafts/[id]/ page.tsx             # Dev Spec 뷰
+  drafts/[id]/review/ page.tsx      # 리뷰(Diff)
+  drafts/[id]/prompts/ page.tsx     # 프롬프트 번들
+components/
+  forms/, layout/, cards/, tables/, charts/, prompts/
+lib/
+  api/ client.ts, schemas.ts, sse.ts, errors.ts
+  utils/ format.ts, guards.ts, featureFlags.ts
+  store/ useUi.ts, useDraftReview.ts
+styles/ globals.css, tailwind.config.ts
+```
+
+## 코딩 컨벤션
+
+- **TS**: `strict: true`, never `any`, 유틸 타입 분리(`*.types.ts`).
+- **폼**: React Hook Form + Zod, `zodResolver`. 스키마는 `lib/schemas.ts`.
+- **데이터**: TanStack Query, `staleTime=5s`, SSE 유틸 `lib/sse.ts`.
+- **UI**: Tailwind + shadcn/ui + Radix. 아이콘 Lucide. 접근성 우선.
+- **상태**: 서버 상태=Query, 로컬 UI 상태=Zustand, URL 상태=SearchParams.
+- **에러 처리**: ProblemDetails 매핑(`lib/errors.ts`), 토스트+모달.
+- **i18n**: ko 기본, Asia/Seoul 가정. 텍스트 하드코딩 금지.
+
+## 파일 네이밍
+
+- 페이지: `page.tsx`, 레이아웃: `layout.tsx`, 클라이언트 컴포넌트 `Client` 접미사 금지(파일 상단 `'use client'`).
+- 컴포넌트: 파스칼케이스, 훅: `useX.ts`, 스토어: `useX.ts`.
+- 테스트: `*.test.tsx`(RTL), e2e는 Playwright `*.spec.ts`.
+- 스키마/타입: `*.schema.ts`, `*.types.ts`.
+
+## API 연동 규칙
+
+- 상태 조회는 폴링 간격 3s 또는 SSE.
+- 엔드포인트 합의: `/api/v1/projects/:id/status`, `/events`(SSE), `/drafts/:id`, `PATCH /drafts/:id`, `POST /drafts/:id/publish`.
+
+## 리서치 패널 구현 규칙
+
+- 탭: References / Job Postings / Competency Map.
+- 최근 12개월 필터, 도메인 배지, 신뢰도 아이콘.
+- Competency↔Solution 매핑 표와 태그.
+- KPI 배지: 권위≥5, 공고≥3.
+
+## Dev Spec 뷰 규칙
+
+- 좌측 목차 자동 생성, 섹션 앵커.
+- 인용 포맷별 아이콘: `code://`, `pr://`, `doc://`, `web://`, `job://`.
+- 체크리스트 진행도(TL;DR/정량/인용/Prompts 연결률).
+
+## 리뷰/패치 규칙
+
+- 입력: `section_key`, `instruction`, `strict_citation`
+- 응답의 before/after를 side-by-side Diff로 표시.
+- 승인 시 버전 증가 표시, 롤백 가능.
+
+## 접근성 & 성능
+
+- 포커스 스타일, aria 속성, 대비 ≥ 4.5:1, reduced-motion 대응.
+- Suspense+Skeleton, 코드블록 지연 하이라이트, 큰 리스트 가상 스크롤.
+
+## 금지/주의
+
+- pages 라우터 사용 금지(App Router only).
+- any, 암묵적 any, 암묵적 any 리턴 금지.
+- 로컬 스토리지에 토큰 저장 금지(서버 보관).
+- 초기 단계에서 S3 등 외부 오브젝트 스토리지 사용 금지.
+
+## 프롬프트 템플릿(요약)
+
+- **Codegen**: *경로/의존성/상태관리/검증/접근성/테스트*를 명시하고 전체 파일 출력.
+- **Test**: 주요 상호작용 3건 이상(RHF 검증 실패, SSE 끊김/재연결, 체크리스트 활성화)
+- **Review**: 변경의 근거 인용과 Trade-off 포함, 최소 diff.
+
+## 출력 포맷(생성 요구)
+
+- “변경된 파일 목록” → “전체 코드” → “적용 방법(명령어/스크립트)” → “차후 작업(ToDo 5개)”

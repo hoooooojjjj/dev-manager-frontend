@@ -1,0 +1,71 @@
+---
+alwaysApply: true
+---
+
+## 프로젝트 컨텍스트
+
+- 목적: _개발 착수 전_ PRD → **개발 명세서** → **AI 실행 프롬프트**까지 자동화/반복개선.
+- 핵심 단계: **Intake → Research(Brave) → Draft → Review(Diff) → Prompts → Publish(Notion)**
+- 입력 필수: `source_notion_url`, `repo`, `focus_files[]`, `output_notion_url`
+- 리서치 기준: 최근 12개월 **권위 소스 ≥5** + **대기업 채용공고 ≥3** → **Competency Map** 생성/매핑.
+
+## 공통 원칙
+
+1. **근거 우선**: 모든 주장/해결안은 인용을 포함한다. 포맷: `code://repo/path#L12-45`, `pr://owner/repo#123`, `doc://...`, `web://...`, `job://...`
+2. **추정 금지**: 정량 수치가 없으면 _추정하지 말고_ `TODO(근거 필요)`로 남긴다.
+3. **개발 착수 전 범위 고정**: 코드/PR 자동생성은 *요청 시 예시 스니펫*만. 본 흐름의 산출물은 Dev Spec + AI 프롬프트.
+4. **리서치 충족률**이 기준 미만이면, 코드 생성 요청이 와도 **리서치 보강을 우선 제안**한다.
+
+## 단계별 워크플로우
+
+### 0) 프리플라이트 체크
+
+- 입력 검증: 4개 필수 입력 누락/형식 오류 탐지 시, 대체 입력을 요청하고 이후 단계 보류.
+- OAuth 상태(노션/깃허브) 확인 메시지 포함.
+
+### 1) Intake 정리(@docs/PRD.md, @docs/FE_SPEC.md)
+
+- PRD의 **문제/제약/목표 메트릭**을 5줄 TL;DR로 요약.
+- `focus_files[]`를 기능 단위(컴포넌트/페이지/유틸)로 그룹화해 **읽기 순서**를 제안.
+
+### 2) Research (Brave)
+
+- 최근 12개월 필터, 도메인 신뢰도·중복 제거.
+- **대기업 채용공고**에서 요구역량을 추출하여 **Competency Map** 테이블(역량↔적용 섹션/학습 포인트) 생성.
+- **리서치 커버리지 배지**: 권위≥5, 공고≥3 충족 여부 표시.
+
+### 3) Draft(개발 명세서) 생성
+
+- 스키마: `title, summary(TL;DR), current_behavior, root_cause[], solutions[], learning_points[], research_summary, ai_prompts(empty)`
+- 각 섹션 최소 1개 **근거 인용** 포함. 정량 수치 미존재 시 `TODO(근거 필요)`로 남김.
+- **솔루션**에 _Trade-off_·_작업 체크리스트_·_임팩트 메트릭(conversion, latency_ms)_ 포함.
+
+### 4) Review(Diff 기반 강화)
+
+- 지시문을 섹션 단위로 받고, **before/after** Diff와 함께 갱신.
+- `strict_citation=true`일 때, 새 텍스트에 인용 누락 시 실패로 표시하고 보완 요청.
+
+### 5) Prompts 번들 생성
+
+- 종류: `codegen`, `test`, `review` 3종.
+- 공통 형식: **Context(요약/근거 링크/제약)** → **Task** → **Acceptance** → **Patch/Output**.
+- 예: codegen 프롬프트는 “파일 경로/의존성/상태관리/형식검증(Zod)”을 명시한다.
+
+### 6) Publish(Notion)
+
+- 체크리스트 충족(TL;DR/정량/인용/Competency Map 연결/Prompts 생성) 후 발행.
+- Notion URL/버전/스냅샷 요약 반환.
+
+## 에이전트 반응 포맷(엄수)
+
+- **요약(5줄)** → **다음 액션 체크리스트(최대 6개)** → **세부 결과(표/코드/패치)** → **인용 목록**
+
+## 인라인 편집 가드
+
+- 전체 파일 생성 시 _완전한_ import/export 포함, 타입 오류 0.
+- 변경은 **최소 diff**로. 기존 스타일/네이밍 유지. 접근성(키보드, aria) 준수.
+
+## 실패 조건 & 복구
+
+- 리서치 커버리지 미달 → 보강 루틴 제시(대체 키워드/도메인 리스트/기간 완화).
+- 인용 깨짐(404/만료) → 대체 소스 재탐색.
