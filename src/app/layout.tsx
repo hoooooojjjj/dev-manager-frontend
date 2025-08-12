@@ -4,6 +4,7 @@ import { QueryProvider } from "@/lib/providers/query-provider";
 import { ThemeProvider } from "@/lib/providers/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { Header } from "@/components/layout/header";
+import { MSWProvider } from "@/lib/providers/msw-provider";
 
 export const metadata: Metadata = {
   title: "Dev Manager",
@@ -15,23 +16,26 @@ export default function PublicLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="ko" suppressHydrationWarning>
       <body className="min-h-screen bg-background font-sans antialiased">
+      <QueryProvider>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <QueryProvider>
-            <div className="relative flex min-h-screen flex-col">
-              <Header />
-              <main className="flex-1">{children}</main>
-            </div>
-            <Toaster />
-          </QueryProvider>
-        </ThemeProvider>
+            <MSWProvider>
+              <div className="relative flex min-h-screen flex-col">
+                <Header />
+                <main className="flex-1">{children}</main>
+              </div>
+              <Toaster />
+            </MSWProvider>
+        </ThemeProvider>    
+      </QueryProvider>
       </body>
     </html>
   );

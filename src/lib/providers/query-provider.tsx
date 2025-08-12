@@ -14,6 +14,7 @@ interface QueryProviderProps {
 }
 
 export function QueryProvider({ children }: QueryProviderProps) {
+
   const [queryClient] = useState(
     () =>
       new QueryClient({

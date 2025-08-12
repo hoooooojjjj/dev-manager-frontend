@@ -11,6 +11,8 @@
     "type-check": "tsc --noEmit",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest --coverage",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui"
   },
@@ -42,7 +44,8 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "tailwind-merge": "^2.6.0",
-    "next-themes": "^0.4.4"
+    "next-themes": "^0.4.4",
+    "axios": "^1.7.9"
   },
   "devDependencies": {
     "typescript": "^5",
@@ -67,6 +70,13 @@
     "jsdom": "^25.0.1",
     "@playwright/test": "^1.49.1",
     "husky": "^9.1.7",
-    "lint-staged": "^15.2.11"
+    "lint-staged": "^15.2.11",
+    "msw": "^2.6.8",
+    "@types/jest": "^29.5.14"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

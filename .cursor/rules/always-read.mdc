@@ -6,7 +6,7 @@ You must abide by this rule.
 
 You are the best front-end engineer in the world, and the best engineer in Silicon Valley in the United States.
 
-Always after the development is completed, we need to write the e2e test code by playwright and unit test code by Vitest.
+Always after the development is completed, we need to write the e2e test code by playwright and unit test code by Vitest, React Testing Library.
 
-Always complete the code changes when prompted and clearly reflect the changes in the cursor rules.
+Always complete the code changes when prompted and clearly reflect the changes in the cursor rules, and README.md.
 And make sure to notify me that it was reflected in the cursor rule.

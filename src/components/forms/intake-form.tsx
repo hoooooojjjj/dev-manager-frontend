@@ -4,32 +4,26 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { X, Plus, Github, FileText } from "lucide-react";
+import { X, Plus, Github, FileText, RefreshCw, ExternalLink } from "lucide-react";
 import { IntakeSchema, type IntakeValues } from "@/lib/api/schemas";
 import { post } from "@/lib/api/client";
 import { useToast } from "@/lib/store/useUi";
-
-interface OAuthStatus {
-  github: boolean;
-  notion: boolean;
-}
+import { useOAuthStatus, useOAuthConnect } from "@/lib/hooks/useOAuth";
 
 export function IntakeForm() {
   const router = useRouter();
   const { success, error } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [focusFileInput, setFocusFileInput] = useState("");
   
-  // Mock OAuth 상태 (실제로는 API에서 가져옴)
-  const [oauthStatus] = useState<OAuthStatus>({
-    github: true,
-    notion: false,
-  });
+  // OAuth 상태 조회
+  const { data: oauthStatus, isLoading: isOAuthLoading, refetch: refetchOAuth } = useOAuthStatus();
+  const connectOAuth = useOAuthConnect();
 
   const {
     register,
@@ -58,29 +52,45 @@ export function IntakeForm() {
     setValue("focus_files", focusFiles.filter((_, i) => i !== index));
   };
 
-  const onSubmit = async (data: IntakeValues) => {
-    try {
-      setIsSubmitting(true);
-      
-      const response = await post<{ jobId: string; projectId: string }>(
-        "/projects/intake",
-        data
-      );
-
-      success("프로젝트가 생성되었습니다!");
+  // 프로젝트 생성 mutation
+  const createProject = useMutation({
+    mutationFn: (data: IntakeValues) => 
+      post<{ jobId: string; projectId: string }>("/projects/intake", data),
+    onSuccess: (response) => {
+      success("프로젝트가 생성되었습니다! 프로젝트 대시보드로 이동합니다.");
       router.push(`/projects/${response.projectId}`);
-    } catch (err: any) {
-      error(err.message || "프로젝트 생성에 실패했습니다.");
-    } finally {
-      setIsSubmitting(false);
-    }
+    },
+    onError: (err: any) => {
+      error(err.message || "프로젝트 생성에 실패했습니다.", "프로젝트 생성 실패");
+    },
+  });
+
+  const onSubmit = (data: IntakeValues) => {
+    createProject.mutate(data);
+  };
+
+  const handleConnectOAuth = (provider: 'github' | 'notion') => {
+    connectOAuth.mutate(provider);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       {/* OAuth 상태 */}
       <div className="space-y-3">
-        <Label>연결 상태</Label>
+        <div className="flex items-center justify-between">
+          <Label>연결 상태</Label>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => refetchOAuth()}
+            disabled={isOAuthLoading}
+          >
+            <RefreshCw className={`h-4 w-4 mr-2 ${isOAuthLoading ? 'animate-spin' : ''}`} />
+            새로고침
+          </Button>
+        </div>
+        
         <div className="flex gap-3">
           <Card className="flex-1">
             <CardContent className="flex items-center justify-between p-4">
@@ -88,9 +98,23 @@ export function IntakeForm() {
                 <Github className="h-4 w-4" />
                 <span className="text-sm font-medium">GitHub</span>
               </div>
-              <Badge variant={oauthStatus.github ? "default" : "secondary"}>
-                {oauthStatus.github ? "연결됨" : "연결 필요"}
-              </Badge>
+              <div className="flex items-center gap-2">
+                <Badge variant={oauthStatus?.github ? "default" : "secondary"}>
+                  {isOAuthLoading ? "확인 중..." : oauthStatus?.github ? "연결됨" : "연결 필요"}
+                </Badge>
+                {!oauthStatus?.github && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleConnectOAuth('github')}
+                    disabled={connectOAuth.isPending}
+                  >
+                    <ExternalLink className="h-3 w-3 mr-1" />
+                    연결
+                  </Button>
+                )}
+              </div>
             </CardContent>
           </Card>
           
@@ -100,9 +124,23 @@ export function IntakeForm() {
                 <FileText className="h-4 w-4" />
                 <span className="text-sm font-medium">Notion</span>
               </div>
-              <Badge variant={oauthStatus.notion ? "default" : "secondary"}>
-                {oauthStatus.notion ? "연결됨" : "연결 필요"}
-              </Badge>
+              <div className="flex items-center gap-2">
+                <Badge variant={oauthStatus?.notion ? "default" : "secondary"}>
+                  {isOAuthLoading ? "확인 중..." : oauthStatus?.notion ? "연결됨" : "연결 필요"}
+                </Badge>
+                {!oauthStatus?.notion && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleConnectOAuth('notion')}
+                    disabled={connectOAuth.isPending}
+                  >
+                    <ExternalLink className="h-3 w-3 mr-1" />
+                    연결
+                  </Button>
+                )}
+              </div>
             </CardContent>
           </Card>
         </div>
@@ -213,8 +251,8 @@ export function IntakeForm() {
         </select>
       </div>
 
-      <Button type="submit" className="w-full" disabled={isSubmitting}>
-        {isSubmitting ? "생성 중..." : "프로젝트 생성"}
+      <Button type="submit" className="w-full" disabled={createProject.isPending}>
+        {createProject.isPending ? "생성 중..." : "프로젝트 생성"}
       </Button>
     </form>
   );

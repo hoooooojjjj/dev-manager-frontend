@@ -13,7 +13,8 @@ alwaysApply: true
 
 ```
 app/
-  (public)/layout.tsx, page.tsx
+  layout.tsx
+  page.tsx
   new/ page.tsx                     # Intake
   projects/[id]/ page.tsx           # 타임라인+SSE
   projects/[id]/research/ page.tsx  # 리서치 패널
