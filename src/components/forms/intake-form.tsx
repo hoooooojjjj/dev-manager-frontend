@@ -60,7 +60,7 @@ export function IntakeForm() {
       success("프로젝트가 생성되었습니다! 프로젝트 대시보드로 이동합니다.");
       router.push(`/projects/${response.projectId}`);
     },
-    onError: (err: any) => {
+    onError: (err: Error) => {
       error(err.message || "프로젝트 생성에 실패했습니다.", "프로젝트 생성 실패");
     },
   });

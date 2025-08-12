@@ -147,7 +147,7 @@ export async function api<T>(
 /**
  * GET 요청
  */
-export function get<T>(url: string, params?: Record<string, any>) {
+export function get<T>(url: string, params?: Record<string, string | number | boolean | undefined>) {
   return api<T>(url, {
     method: 'GET',
     params,

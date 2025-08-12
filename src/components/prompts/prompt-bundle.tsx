@@ -20,7 +20,7 @@ interface PromptBundleProps {
   draftId: string;
 }
 
-export function PromptBundle({ draftId }: PromptBundleProps) {
+export function PromptBundle({}: PromptBundleProps) {
   const { success } = useToast();
   const [copiedPrompt, setCopiedPrompt] = useState<string | null>(null);
 

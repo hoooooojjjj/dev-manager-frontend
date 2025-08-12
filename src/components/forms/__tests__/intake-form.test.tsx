@@ -3,7 +3,7 @@
  * React Testing Library + MSW를 사용한 통합 테스트
  */
 
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { beforeAll, beforeEach, afterEach, afterAll, describe, it, expect, vi } from 'vitest';
@@ -318,7 +318,9 @@ describe('IntakeForm', () => {
     const connectButtons = screen.getAllByRole('button', { name: /연결/ });
     const githubConnectButton = connectButtons[0]; // 첫 번째가 GitHub
 
-    await user.click(githubConnectButton);
+    if (githubConnectButton) {
+      await user.click(githubConnectButton);
+    }
 
     // 연결 요청이 처리되는지 확인 (버튼 상태 변화 등)
     await waitFor(() => {

@@ -27,7 +27,9 @@ const toastVariants = cva(
 
 interface ToastProps extends 
   Omit<ToastMessage, 'id'>,
-  VariantProps<typeof toastVariants> {
+  Omit<VariantProps<typeof toastVariants>, 'variant'> {
+  variant?: 'default' | 'destructive' | 'success' | 'warning';
+  className?: string;
   onClose: () => void;
 }
 

@@ -25,9 +25,9 @@ export function QueryProvider({ children }: QueryProviderProps) {
             // 5분간 캐시 보관
             gcTime: 5 * 60 * 1000,
             // 에러 시 재시도 정책
-            retry: (failureCount, error: any) => {
+            retry: (failureCount, error: Error & { status?: number }) => {
               // 4xx 에러는 재시도하지 않음
-              if (error?.status >= 400 && error?.status < 500) {
+              if (error?.status !== undefined && error.status >= 400 && error.status < 500) {
                 return false;
               }
               return failureCount < 3;

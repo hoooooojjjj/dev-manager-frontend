@@ -129,25 +129,25 @@ export const useToast = () => {
     toast: addToast,
     success: (message: string, title?: string) =>
       addToast({ 
-        title, 
+        title: title || "성공", 
         description: message, 
         variant: 'success' 
       }),
     error: (message: string, title?: string) =>
       addToast({ 
-        title, 
+        title: title || "오류", 
         description: message, 
         variant: 'destructive' 
       }),
     warning: (message: string, title?: string) =>
       addToast({ 
-        title, 
+        title: title || "경고", 
         description: message, 
         variant: 'warning' 
       }),
     info: (message: string, title?: string) =>
       addToast({ 
-        title, 
+        title: title || "알림", 
         description: message, 
         variant: 'default' 
       }),

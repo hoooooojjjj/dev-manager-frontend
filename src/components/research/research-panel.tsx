@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -11,7 +11,6 @@ import {
   User, 
   Building, 
   CheckCircle2,
-  AlertTriangle,
   Star
 } from "lucide-react";
 
@@ -19,7 +18,7 @@ interface ResearchPanelProps {
   projectId: string;
 }
 
-export function ResearchPanel({ projectId }: ResearchPanelProps) {
+export function ResearchPanel({}: ResearchPanelProps) {
   // Mock 데이터
   const researchSummary = {
     totalSources: 12,

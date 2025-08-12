@@ -130,7 +130,7 @@ export function maskEmail(email: string): string {
  */
 export function parseGitHubRepo(repo: string): { owner: string; name: string } | null {
   const match = repo.match(/^([\w.-]+)\/([\w.-]+)$/);
-  if (!match) return null;
+  if (!match || !match[1] || !match[2]) return null;
   
   return {
     owner: match[1],

@@ -36,7 +36,7 @@ export function useOAuthConnect() {
         window.open(data.redirectUrl, '_blank', 'width=600,height=700');
       }
     },
-    onError: (err: any, provider) => {
+    onError: (err: Error, provider) => {
       error(
         err.message || `${provider === 'github' ? 'GitHub' : 'Notion'} 연결에 실패했습니다.`,
         'OAuth 연결 실패'
@@ -61,7 +61,7 @@ export function useOAuthDisconnect() {
 
       success(`${provider === 'github' ? 'GitHub' : 'Notion'} 연결이 해제되었습니다.`);
     },
-    onError: (err: any, provider) => {
+    onError: (err: Error, provider) => {
       error(
         err.message || `${provider === 'github' ? 'GitHub' : 'Notion'} 연결 해제에 실패했습니다.`,
         'OAuth 연결 해제 실패'

@@ -9,7 +9,6 @@ import {
   Search, 
   GitBranch, 
   MessageSquare,
-  Zap,
   ExternalLink 
 } from "lucide-react";
 
@@ -180,7 +179,7 @@ export function ProjectDashboard({ projectId }: ProjectDashboardProps) {
               <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0" />
               <div>
                 <span className="text-muted-foreground">14:30</span>
-                <span className="ml-2">Brave 검색 시작: "사용자 인증 JWT 보안"</span>
+                <span className="ml-2">Brave 검색 시작: &ldquo;사용자 인증 JWT 보안&rdquo;</span>
               </div>
             </div>
             <div className="flex items-start gap-2 text-sm">
