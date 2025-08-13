@@ -1,78 +1,90 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useTheme } from "next-themes";
-import { Button } from "@/components/ui/button";
-import { 
-  FileText, 
-  Menu, 
-  Moon, 
-  Sun, 
-  Github
-} from "lucide-react";
-import { useUi } from "@/lib/store/useUi";
+import Link from 'next/link';
+import { useTheme } from 'next-themes';
+import { Button } from '@/components/ui/button';
+import { Menu, Moon, Sun, Github, X } from 'lucide-react';
+import { useUi } from '@/lib/store/useUi';
+import { gugi } from '@/lib/utils/font';
+import { useEffect } from 'react';
 
 export function Header() {
   const { theme, setTheme } = useTheme();
-  const { toggleSidebar } = useUi();
+  const { sidebarOpen, toggleSidebar, setSidebarOpen } = useUi();
+
+  // 외부 클릭 시 모바일 메뉴 닫기
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (sidebarOpen && !target.closest('[data-mobile-nav]')) {
+        setSidebarOpen(false);
+      }
+    };
+
+    if (sidebarOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return undefined;
+  }, [sidebarOpen, setSidebarOpen]);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 max-w-screen-2xl items-center">
-        <div className="mr-4 hidden md:flex">
+        <div className="mr-4 hidden items-center md:flex">
           <Link href="/" className="mr-4 flex items-center gap-2 font-bold">
-            <FileText className="h-6 w-6" />
-            <span className="hidden font-bold sm:inline-block">
-              Dev Manager
+            <span className={`hidden font-bold sm:inline-block ${gugi.className}`}>
+              DEV MANAGER
             </span>
           </Link>
           <nav className="flex items-center gap-4 text-sm lg:gap-6">
             <Link
               href="/new"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
+              className="text-foreground/60 transition-colors hover:text-foreground/80"
             >
               새 프로젝트
             </Link>
             <Link
               href="/projects"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
+              className="text-foreground/60 transition-colors hover:text-foreground/80"
             >
               프로젝트 목록
             </Link>
           </nav>
         </div>
-        
+
         <Button
           variant="ghost"
           size="icon"
           className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
           onClick={toggleSidebar}
+          data-mobile-nav
         >
-          <Menu className="h-5 w-5" />
+          {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           <span className="sr-only">메뉴 토글</span>
         </Button>
-        
+
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <div className="w-full flex-1 md:w-auto md:flex-none">
             <div className="md:hidden">
               <Link href="/" className="flex items-center gap-2 font-bold">
-                <FileText className="h-5 w-5" />
-                <span className="font-bold">Dev Manager</span>
+                <span className={`font-bold ${gugi.className}`}>DEV MANAGER</span>
               </Link>
             </div>
           </div>
-          
+
           <nav className="flex items-center gap-1">
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
             >
               <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
               <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
               <span className="sr-only">테마 전환</span>
             </Button>
-            
+
             <Button variant="ghost" size="icon" asChild>
               <Link
                 href="https://github.com/yourusername/dev-manager-frontend"
@@ -86,6 +98,48 @@ export function Header() {
           </nav>
         </div>
       </div>
+
+      {/* 모바일 드롭다운 메뉴 */}
+      {sidebarOpen && (
+        <div
+          className="absolute left-0 right-0 top-full z-40 border-b border-border/40 bg-background/95 backdrop-blur md:hidden"
+          data-mobile-nav
+        >
+          <div className="container px-4 py-4">
+            <nav className="flex flex-col gap-3">
+              <Link
+                href="/new"
+                className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-foreground/60 transition-colors hover:bg-accent hover:text-foreground"
+                onClick={() => setSidebarOpen(false)}
+              >
+                새 프로젝트
+              </Link>
+              <Link
+                href="/projects"
+                className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-foreground/60 transition-colors hover:bg-accent hover:text-foreground"
+                onClick={() => setSidebarOpen(false)}
+              >
+                프로젝트 목록
+              </Link>
+              <div className="mt-2 border-t border-border/40 pt-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-foreground/60">테마</span>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+                    className="h-8 w-8 px-0"
+                  >
+                    <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                    <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                    <span className="sr-only">테마 전환</span>
+                  </Button>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

@@ -17,34 +17,34 @@ export interface ToastMessage {
 interface UiState {
   // 사이드바 상태
   sidebarOpen: boolean;
-  
+
   // 모달 상태
   activeModal: string | null;
   modalData: Record<string, unknown>;
-  
+
   // 토스트 메시지
   toasts: ToastMessage[];
-  
+
   // 로딩 상태
   loadingStates: Record<string, boolean>;
-  
+
   // 브레드크럼 상태
   breadcrumbs: Array<{ label: string; href: string }>;
-  
+
   // Actions
   setSidebarOpen: (open: boolean) => void;
   toggleSidebar: () => void;
-  
+
   openModal: (modalId: string, data?: Record<string, unknown>) => void;
   closeModal: () => void;
-  
+
   addToast: (toast: Omit<ToastMessage, 'id'>) => void;
   removeToast: (id: string) => void;
   clearToasts: () => void;
-  
+
   setLoading: (key: string, loading: boolean) => void;
   isLoading: (key: string) => boolean;
-  
+
   setBreadcrumbs: (breadcrumbs: Array<{ label: string; href: string }>) => void;
 }
 
@@ -64,10 +64,8 @@ export const useUi = create<UiState>()(
       toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
 
       // Modal actions
-      openModal: (modalId, data = {}) => 
-        set({ activeModal: modalId, modalData: data }),
-      closeModal: () => 
-        set({ activeModal: null, modalData: {} }),
+      openModal: (modalId, data = {}) => set({ activeModal: modalId, modalData: data }),
+      closeModal: () => set({ activeModal: null, modalData: {} }),
 
       // Toast actions
       addToast: (toast) => {
@@ -78,9 +76,9 @@ export const useUi = create<UiState>()(
           duration: 5000,
           ...toast,
         };
-        
-        set((state) => ({ 
-          toasts: [...state.toasts, newToast] 
+
+        set((state) => ({
+          toasts: [...state.toasts, newToast],
         }));
 
         // 자동 제거
@@ -90,12 +88,12 @@ export const useUi = create<UiState>()(
           }, newToast.duration);
         }
       },
-      
+
       removeToast: (id) =>
         set((state) => ({
           toasts: state.toasts.filter((toast) => toast.id !== id),
         })),
-      
+
       clearToasts: () => set({ toasts: [] }),
 
       // Loading actions
@@ -106,7 +104,7 @@ export const useUi = create<UiState>()(
             [key]: loading,
           },
         })),
-      
+
       isLoading: (key) => get().loadingStates[key] || false,
 
       // Breadcrumb actions
@@ -124,32 +122,32 @@ export const useUi = create<UiState>()(
 // 편의 함수들
 export const useToast = () => {
   const { addToast } = useUi();
-  
+
   return {
     toast: addToast,
     success: (message: string, title?: string) =>
-      addToast({ 
-        title: title || "성공", 
-        description: message, 
-        variant: 'success' 
+      addToast({
+        title: title || '성공',
+        description: message,
+        variant: 'success',
       }),
     error: (message: string, title?: string) =>
-      addToast({ 
-        title: title || "오류", 
-        description: message, 
-        variant: 'destructive' 
+      addToast({
+        title: title || '오류',
+        description: message,
+        variant: 'destructive',
       }),
     warning: (message: string, title?: string) =>
-      addToast({ 
-        title: title || "경고", 
-        description: message, 
-        variant: 'warning' 
+      addToast({
+        title: title || '경고',
+        description: message,
+        variant: 'warning',
       }),
     info: (message: string, title?: string) =>
-      addToast({ 
-        title: title || "알림", 
-        description: message, 
-        variant: 'default' 
+      addToast({
+        title: title || '알림',
+        description: message,
+        variant: 'default',
       }),
   };
 };

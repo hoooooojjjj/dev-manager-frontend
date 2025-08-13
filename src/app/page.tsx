@@ -1,41 +1,38 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { FileText, GitBranch, Search, Zap } from "lucide-react";
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { FileText, GitBranch, Search, Zap } from 'lucide-react';
+import { gugi } from '@/lib/utils/font';
 
 export default function HomePage() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="flex flex-col items-center justify-center min-h-[80vh] text-center space-y-8">
+      <div className="flex min-h-[80vh] flex-col items-center justify-center space-y-8 text-center">
         <div className="space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
-            Dev Manager
+          <h1 className={`text-4xl font-bold tracking-tight sm:text-6xl ${gugi.className}`}>
+            DEV MANAGER
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl">
-            PRD에서 개발 명세서, AI 실행 프롬프트까지 자동 생성하는 
-            <br />
-            개발 착수 전 단계 관리 시스템
+
+          <p className="max-w-3xl text-xl text-muted-foreground">
+            PRD에서 개발 명세서, AI 실행 프롬프트까지 자동 생성하는 개발 착수 전 단계 관리 시스템
           </p>
         </div>
 
         <div className="flex gap-4">
           <Button asChild size="lg">
             <Link href="/new">
-              <FileText className="mr-2 h-4 w-4" />
-              새 프로젝트 시작
+              <FileText className="mr-2 h-4 w-4" />새 프로젝트 시작
             </Link>
           </Button>
           <Button variant="outline" size="lg" asChild>
-            <Link href="/projects">
-              프로젝트 목록
-            </Link>
+            <Link href="/projects">프로젝트 목록</Link>
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16 w-full max-w-6xl">
+        <div className="mt-16 grid w-full max-w-6xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader>
-              <Search className="h-8 w-8 text-primary mb-2" />
+              <Search className="mb-2 h-8 w-8 text-primary" />
               <CardTitle>리서치 기반</CardTitle>
             </CardHeader>
             <CardContent>
@@ -47,7 +44,7 @@ export default function HomePage() {
 
           <Card>
             <CardHeader>
-              <GitBranch className="h-8 w-8 text-primary mb-2" />
+              <GitBranch className="mb-2 h-8 w-8 text-primary" />
               <CardTitle>GitHub 통합</CardTitle>
             </CardHeader>
             <CardContent>
@@ -59,7 +56,7 @@ export default function HomePage() {
 
           <Card>
             <CardHeader>
-              <FileText className="h-8 w-8 text-primary mb-2" />
+              <FileText className="mb-2 h-8 w-8 text-primary" />
               <CardTitle>근거 기반 명세</CardTitle>
             </CardHeader>
             <CardContent>
@@ -71,7 +68,7 @@ export default function HomePage() {
 
           <Card>
             <CardHeader>
-              <Zap className="h-8 w-8 text-primary mb-2" />
+              <Zap className="mb-2 h-8 w-8 text-primary" />
               <CardTitle>AI 프롬프트 생성</CardTitle>
             </CardHeader>
             <CardContent>
