@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import "./globals.css";
+import './globals.css';
 import { QueryProvider } from '@/lib/providers/query-provider';
 import { ThemeProvider } from '@/lib/providers/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
