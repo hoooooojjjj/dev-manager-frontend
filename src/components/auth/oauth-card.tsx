@@ -14,11 +14,14 @@ interface OAuthCardProps {
   className?: string;
 }
 
-const PROVIDER_CONFIG: Record<'github' | 'notion', {
-  icon: LucideIcon;
-  label: string;
-  color: string;
-}> = {
+const PROVIDER_CONFIG: Record<
+  'github' | 'notion',
+  {
+    icon: LucideIcon;
+    label: string;
+    color: string;
+  }
+> = {
   github: {
     icon: Github,
     label: 'GitHub',
@@ -59,12 +62,10 @@ export function OAuthCard({
           <Icon className={`h-4 w-4 ${config.color}`} />
           <span className="text-sm font-medium">{config.label}</span>
         </div>
-        
+
         <div className="flex items-center gap-2">
-          <Badge variant={getStatusVariant()}>
-            {getStatusText()}
-          </Badge>
-          
+          <Badge variant={getStatusVariant()}>{getStatusText()}</Badge>
+
           {!isConnected && (
             <Button
               type="button"
