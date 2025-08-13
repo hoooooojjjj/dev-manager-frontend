@@ -87,7 +87,7 @@ export function Header() {
 
             <Button variant="ghost" size="icon" asChild>
               <Link
-                href="https://github.com/yourusername/dev-manager-frontend"
+                href="https://github.com/hoooooojjjj/dev-manager-frontend"
                 target="_blank"
                 rel="noopener noreferrer"
               >
