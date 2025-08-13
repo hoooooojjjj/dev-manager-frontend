@@ -31,10 +31,10 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 max-w-screen-2xl items-center">
+      <div className="container mx-auto flex h-14 items-center px-4 py-6">
         <div className="mr-4 hidden items-center md:flex">
           <Link href="/" className="mr-4 flex items-center gap-2 font-bold">
-            <span className={`hidden font-bold sm:inline-block ${gugi.className}`}>
+            <span className={`hidden text-lg font-bold sm:inline-block ${gugi.className}`}>
               DEV MANAGER
             </span>
           </Link>
@@ -57,7 +57,7 @@ export function Header() {
         <Button
           variant="ghost"
           size="icon"
-          className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
+          className="px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
           onClick={toggleSidebar}
           data-mobile-nav
         >
@@ -121,21 +121,6 @@ export function Header() {
               >
                 프로젝트 목록
               </Link>
-              <div className="mt-2 border-t border-border/40 pt-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-foreground/60">테마</span>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-                    className="h-8 w-8 px-0"
-                  >
-                    <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                    <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                    <span className="sr-only">테마 전환</span>
-                  </Button>
-                </div>
-              </div>
             </nav>
           </div>
         </div>

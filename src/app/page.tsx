@@ -13,16 +13,14 @@ export default function HomePage() {
             DEV MANAGER
           </h1>
 
-          <p className="max-w-3xl text-xl text-muted-foreground">
+          <p className="max-w-3xl break-keep text-sm text-muted-foreground md:text-xl">
             PRD에서 개발 명세서, AI 실행 프롬프트까지 자동 생성하는 개발 착수 전 단계 관리 시스템
           </p>
         </div>
 
         <div className="flex gap-4">
           <Button asChild size="lg">
-            <Link href="/new">
-              <FileText className="mr-2 h-4 w-4" />새 프로젝트 시작
-            </Link>
+            <Link href="/new">새 프로젝트 시작</Link>
           </Button>
           <Button variant="outline" size="lg" asChild>
             <Link href="/projects">프로젝트 목록</Link>
