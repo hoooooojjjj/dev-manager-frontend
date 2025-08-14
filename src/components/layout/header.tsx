@@ -7,6 +7,26 @@ import { Menu, Moon, Sun, Github, X } from 'lucide-react';
 import { useUi } from '@/lib/store/useUi';
 import { gugi } from '@/lib/utils/font';
 import { useEffect } from 'react';
+import {
+  header,
+  headerContainer,
+  desktopNav,
+  logoLink,
+  logoText,
+  nav,
+  navLink,
+  mobileMenuButton,
+  rightSection,
+  mobileLogoContainer,
+  mobileLogoWrapper,
+  rightNav,
+  themeIcon,
+  moonIcon,
+  mobileDropdown,
+  mobileDropdownContainer,
+  mobileNav,
+  mobileNavLink,
+} from './header.css';
 
 export function Header() {
   const { theme, setTheme } = useTheme();
@@ -30,24 +50,24 @@ export function Header() {
   }, [sidebarOpen, setSidebarOpen]);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex h-14 items-center px-4 py-6">
-        <div className="mr-4 hidden items-center md:flex">
-          <Link href="/" className="mr-4 flex items-center gap-2 font-bold">
-            <span className={`hidden text-lg font-bold sm:inline-block ${gugi.className}`}>
+    <header className={header}>
+      <div className={headerContainer}>
+        <div className={desktopNav}>
+          <Link href="/" className={logoLink}>
+            <span className={`${logoText} ${gugi.className}`}>
               DEV MANAGER
             </span>
           </Link>
-          <nav className="flex items-center gap-4 text-sm lg:gap-6">
+          <nav className={nav}>
             <Link
               href="/new"
-              className="text-foreground/60 transition-colors hover:text-foreground/80"
+              className={navLink}
             >
               새 프로젝트
             </Link>
             <Link
               href="/projects"
-              className="text-foreground/60 transition-colors hover:text-foreground/80"
+              className={navLink}
             >
               프로젝트 목록
             </Link>
@@ -57,7 +77,7 @@ export function Header() {
         <Button
           variant="ghost"
           size="icon"
-          className="px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
+          className={mobileMenuButton}
           onClick={toggleSidebar}
           data-mobile-nav
         >
@@ -65,23 +85,23 @@ export function Header() {
           <span className="sr-only">메뉴 토글</span>
         </Button>
 
-        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          <div className="w-full flex-1 md:w-auto md:flex-none">
-            <div className="md:hidden">
-              <Link href="/" className="flex items-center gap-2 font-bold">
+        <div className={rightSection}>
+          <div className={mobileLogoContainer}>
+            <div className={mobileLogoWrapper}>
+              <Link href="/" className={logoLink}>
                 <span className={`font-bold ${gugi.className}`}>DEV MANAGER</span>
               </Link>
             </div>
           </div>
 
-          <nav className="flex items-center gap-1">
+          <nav className={rightNav}>
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
             >
-              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <Sun className={themeIcon} />
+              <Moon className={moonIcon} />
               <span className="sr-only">테마 전환</span>
             </Button>
 
@@ -102,21 +122,21 @@ export function Header() {
       {/* 모바일 드롭다운 메뉴 */}
       {sidebarOpen && (
         <div
-          className="absolute left-0 right-0 top-full z-40 border-b border-border/40 bg-background/95 backdrop-blur md:hidden"
+          className={mobileDropdown}
           data-mobile-nav
         >
-          <div className="container px-4 py-4">
-            <nav className="flex flex-col gap-3">
+          <div className={mobileDropdownContainer}>
+            <nav className={mobileNav}>
               <Link
                 href="/new"
-                className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-foreground/60 transition-colors hover:bg-accent hover:text-foreground"
+                className={mobileNavLink}
                 onClick={() => setSidebarOpen(false)}
               >
                 새 프로젝트
               </Link>
               <Link
                 href="/projects"
-                className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-foreground/60 transition-colors hover:bg-accent hover:text-foreground"
+                className={mobileNavLink}
                 onClick={() => setSidebarOpen(false)}
               >
                 프로젝트 목록
