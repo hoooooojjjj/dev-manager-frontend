@@ -12,8 +12,9 @@ const nextConfig: NextConfig = {
   },
   serverExternalPackages: ['msw'],
   ...(isDev && {
-    turbopack: {
-      rules: codeInspectorPlugin({ bundler: 'turbopack' }) as any,
+    webpack: (config, { dev, isServer }) => {
+      config.plugins.push(codeInspectorPlugin({ bundler: 'webpack' }));
+      return config;
     },
   }),
 };
