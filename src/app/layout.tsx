@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
-import './globals.css';
+import '@/lib/styles/global.css';
 import { QueryProvider } from '@/lib/providers/query-provider';
 import { ThemeProvider } from '@/lib/providers/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
 import { Header } from '@/components/layout/header';
 import { MSWProvider } from '@/lib/providers/msw-provider';
+import { bodyStyle, rootContainer, mainContent } from './layout.css';
 
 export const metadata: Metadata = {
   title: 'Dev Manager',
@@ -18,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body className="min-h-screen bg-background font-sans antialiased">
+      <body className={bodyStyle}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -27,9 +28,9 @@ export default function RootLayout({
         >
           <QueryProvider>
             <MSWProvider>
-              <div className="relative flex min-h-screen flex-col">
+              <div className={rootContainer}>
                 <Header />
-                <main className="flex-1">{children}</main>
+                <main className={mainContent}>{children}</main>
               </div>
               <Toaster />
             </MSWProvider>

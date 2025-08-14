@@ -1,0 +1,91 @@
+import { style } from '@vanilla-extract/css';
+import { vars } from '@/lib/styles/theme.css';
+import { forDesktop, forMobile } from '@/lib/styles/breakpoints';
+
+export const container = style({
+  maxWidth: '1200px',
+  margin: '0 auto',
+  padding: '32px 16px',
+
+  '@media': {
+    [forMobile]: {
+      padding: '16px 12px',
+    },
+  },
+});
+
+export const heroSection = style({
+  display: 'flex',
+  minHeight: '80vh',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '32px',
+  textAlign: 'center',
+});
+
+export const heroContent = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '16px',
+});
+
+export const heroTitle = style({
+  fontSize: '3.5rem',
+  fontWeight: 'bold',
+  letterSpacing: '-0.025em',
+
+  '@media': {
+    [forMobile]: {
+      fontSize: '2.25rem',
+    },
+    '(min-width: 640px)': {
+      fontSize: '4rem',
+    },
+  },
+});
+
+export const heroDescription = style({
+  maxWidth: '768px',
+  fontSize: '1.25rem',
+  color: vars.colors.mutedForeground,
+  lineHeight: 1.6,
+  wordBreak: 'keep-all',
+
+  '@media': {
+    [forMobile]: {
+      fontSize: '0.875rem',
+    },
+  },
+});
+
+export const ctaButtonGroup = style({
+  display: 'flex',
+  gap: '16px',
+
+  '@media': {
+    [forMobile]: {
+      flexDirection: 'column',
+      width: '100%',
+      maxWidth: '280px',
+    },
+  },
+});
+
+export const featuresGrid = style({
+  marginTop: '64px',
+  display: 'grid',
+  width: '100%',
+  maxWidth: '1536px',
+  gridTemplateColumns: '1fr',
+  gap: '24px',
+
+  '@media': {
+    [forMobile]: {
+      gridTemplateColumns: 'repeat(2, 1fr)',
+    },
+    [forDesktop]: {
+      gridTemplateColumns: 'repeat(4, 1fr)',
+    },
+  },
+});

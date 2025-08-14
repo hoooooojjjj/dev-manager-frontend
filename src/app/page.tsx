@@ -3,22 +3,31 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { FileText, GitBranch, Search, Zap } from 'lucide-react';
 import { gugi } from '@/lib/utils/font';
+import { 
+  container, 
+  heroSection, 
+  heroContent, 
+  heroTitle, 
+  heroDescription, 
+  ctaButtonGroup, 
+  featuresGrid 
+} from './page.css';
 
 export default function HomePage() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex min-h-[80vh] flex-col items-center justify-center space-y-8 text-center">
-        <div className="space-y-4">
-          <h1 className={`text-4xl font-bold tracking-tight sm:text-6xl ${gugi.className}`}>
+    <div className={container}>
+      <div className={heroSection}>
+        <div className={heroContent}>
+          <h1 className={`${heroTitle} ${gugi.className}`}>
             DEV MANAGER
           </h1>
 
-          <p className="max-w-3xl break-keep text-sm text-muted-foreground md:text-xl">
+          <p className={heroDescription}>
             PRD에서 개발 명세서, AI 실행 프롬프트까지 자동 생성하는 개발 착수 전 단계 관리 서비스
           </p>
         </div>
 
-        <div className="flex gap-4">
+        <div className={ctaButtonGroup}>
           <Button asChild size="lg">
             <Link href="/new">새 프로젝트 시작</Link>
           </Button>
@@ -27,7 +36,7 @@ export default function HomePage() {
           </Button>
         </div>
 
-        <div className="mt-16 grid w-full max-w-6xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className={featuresGrid}>
           <Card>
             <CardHeader>
               <Search className="mb-2 h-8 w-8 text-primary" />
