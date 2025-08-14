@@ -14,7 +14,7 @@ export default function HomePage() {
           </h1>
 
           <p className="max-w-3xl break-keep text-sm text-muted-foreground md:text-xl">
-            PRD에서 개발 명세서, AI 실행 프롬프트까지 자동 생성하는 개발 착수 전 단계 관리 시스템
+            PRD에서 개발 명세서, AI 실행 프롬프트까지 자동 생성하는 개발 착수 전 단계 관리 서비스
           </p>
         </div>
 
