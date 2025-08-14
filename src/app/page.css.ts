@@ -89,3 +89,10 @@ export const featuresGrid = style({
     },
   },
 });
+
+export const featureIcon = style({
+  marginBottom: '8px',
+  height: '32px',
+  width: '32px',
+  color: vars.colors.primary,
+});

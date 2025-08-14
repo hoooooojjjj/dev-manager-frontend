@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { ResearchPanel } from "@/components/research/research-panel";
 import { Breadcrumb } from "@/components/layout/breadcrumb";
+import { container, contentWrapper, headerSection, title, description } from "./page.css";
 
 interface ResearchPageProps {
   params: Promise<{ id: string }>;
@@ -14,7 +15,7 @@ export default async function ResearchPage({ params }: ResearchPageProps) {
   }
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className={container}>
       <Breadcrumb 
         items={[
           { label: "홈", href: "/" },
@@ -24,10 +25,10 @@ export default async function ResearchPage({ params }: ResearchPageProps) {
         ]} 
       />
       
-      <div className="mt-6">
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold tracking-tight">리서치 결과</h1>
-          <p className="text-muted-foreground">
+      <div className={contentWrapper}>
+        <div className={headerSection}>
+          <h1 className={title}>리서치 결과</h1>
+          <p className={description}>
             Brave 검색을 통한 권위 소스와 대기업 채용공고 분석 결과
           </p>
         </div>

@@ -18,6 +18,47 @@ import { Plus, Search, Calendar, ExternalLink, FileText, GitBranch } from 'lucid
 import { get } from '@/lib/api/client';
 import { formatRelativeTime, getStatusColor } from '@/lib/utils/format';
 import type { Project } from '@/lib/api/schemas';
+import {
+  container,
+  headerActions,
+  filtersContainer,
+  searchContainer,
+  searchIcon,
+  searchInput,
+  projectGrid,
+  skeletonCard,
+  skeletonHeader,
+  skeletonDescription,
+  skeletonContent,
+  skeletonLine,
+  skeletonLineShort,
+  emptyStateContainer,
+  emptyStateIcon,
+  emptyStateTitle,
+  emptyStateDescription,
+  resultsCounter,
+  projectCard,
+  cardHeader,
+  cardHeaderContent,
+  cardHeaderLeft,
+  cardTitle,
+  badgeContainer,
+  badgeOutline,
+  projectInfo,
+  infoRow,
+  infoIcon,
+  infoText,
+  focusFilesSection,
+  focusFilesList,
+  focusFileBadge,
+  actionButtons,
+  primaryButton,
+  buttonIcon,
+  errorContainer,
+  errorContent,
+  errorMessage,
+  addProjectIcon,
+} from './projects-list.css';
 
 interface ProjectsListResponse {
   projects: Project[];
@@ -61,9 +102,9 @@ export function ProjectsList() {
   if (error) {
     return (
       <Card>
-        <CardContent className="flex items-center justify-center py-12">
-          <div className="text-center">
-            <div className="mb-2 text-destructive">프로젝트 목록을 불러오는데 실패했습니다</div>
+        <CardContent className={errorContainer}>
+          <div className={errorContent}>
+            <div className={errorMessage}>프로젝트 목록을 불러오는데 실패했습니다</div>
             <Button variant="outline" onClick={() => window.location.reload()}>
               다시 시도
             </Button>
@@ -74,24 +115,24 @@ export function ProjectsList() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className={container}>
       {/* 헤더 액션 */}
-      <div className="flex items-center justify-between max-md:items-start max-md:gap-2">
-        <div className="flex flex-1 items-center gap-4 max-md:flex-col max-md:items-start max-md:gap-2">
+      <div className={headerActions}>
+        <div className={filtersContainer}>
           {/* 검색 */}
-          <div className="relative max-w-sm flex-1">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transform text-muted-foreground" />
+          <div className={searchContainer}>
+            <Search className={searchIcon} />
             <Input
               placeholder="프로젝트 검색..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9"
+              className={searchInput}
             />
           </div>
 
           {/* 상태 필터 */}
           <Select value={statusFilter} onValueChange={setStatusFilter}>
-            <SelectTrigger className="w-40">
+            <SelectTrigger className={statusFilter}>
               <SelectValue placeholder="상태 필터" />
             </SelectTrigger>
             <SelectContent>
@@ -108,24 +149,24 @@ export function ProjectsList() {
         {/* 새 프로젝트 버튼 */}
         <Button asChild>
           <Link href="/new">
-            <Plus className="mr-2 h-4 w-4" />새 프로젝트
+            <Plus className={addProjectIcon} />새 프로젝트
           </Link>
         </Button>
       </div>
 
       {/* 프로젝트 목록 */}
       {isLoading ? (
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className={projectGrid}>
           {Array.from({ length: 6 }).map((_, i) => (
-            <Card key={i} className="animate-pulse">
+            <Card key={i} className={skeletonCard}>
               <CardHeader>
-                <div className="h-4 w-3/4 rounded bg-muted"></div>
-                <div className="h-3 w-1/2 rounded bg-muted"></div>
+                <div className={skeletonHeader}></div>
+                <div className={skeletonDescription}></div>
               </CardHeader>
               <CardContent>
-                <div className="space-y-2">
-                  <div className="h-3 rounded bg-muted"></div>
-                  <div className="h-3 w-5/6 rounded bg-muted"></div>
+                <div className={skeletonContent}>
+                  <div className={skeletonLine}></div>
+                  <div className={skeletonLineShort}></div>
                 </div>
               </CardContent>
             </Card>
@@ -133,17 +174,17 @@ export function ProjectsList() {
         </div>
       ) : filteredProjects.length === 0 ? (
         <Card>
-          <CardContent className="flex flex-col items-center justify-center py-12">
-            <FileText className="mb-4 h-12 w-12 text-muted-foreground" />
-            <h3 className="mb-2 text-lg font-semibold">프로젝트가 없습니다</h3>
-            <p className="mb-4 text-center text-muted-foreground">
+          <CardContent className={emptyStateContainer}>
+            <FileText className={emptyStateIcon} />
+            <h3 className={emptyStateTitle}>프로젝트가 없습니다</h3>
+            <p className={emptyStateDescription}>
               {searchQuery || statusFilter !== 'all'
                 ? '검색 조건에 맞는 프로젝트가 없습니다'
                 : '첫 번째 프로젝트를 생성해보세요'}
             </p>
             <Button asChild>
               <Link href="/new">
-                <Plus className="mr-2 h-4 w-4" />새 프로젝트 시작
+                <Plus className={addProjectIcon} />새 프로젝트 시작
               </Link>
             </Button>
           </CardContent>
@@ -151,23 +192,23 @@ export function ProjectsList() {
       ) : (
         <>
           {/* 결과 요약 */}
-          <div className="text-sm text-muted-foreground">
+          <div className={resultsCounter}>
             총 {data?.total || 0}개의 프로젝트 중 {filteredProjects.length}개 표시
           </div>
 
           {/* 프로젝트 카드 그리드 */}
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className={projectGrid}>
             {filteredProjects.map((project) => (
-              <Card key={project.id} className="transition-shadow hover:shadow-md">
-                <CardHeader className="items-start pb-3">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <CardTitle className="mb-2 line-clamp-2 text-lg">{project.title}</CardTitle>
-                      <div className="flex items-center gap-2">
+              <Card key={project.id} className={projectCard}>
+                <CardHeader className={cardHeader}>
+                  <div className={cardHeaderContent}>
+                    <div className={cardHeaderLeft}>
+                      <CardTitle className={cardTitle}>{project.title}</CardTitle>
+                      <div className={badgeContainer}>
                         <Badge variant="secondary" className={getStatusColor(project.status)}>
                           {getStatusLabel(project.status)}
                         </Badge>
-                        <Badge variant="outline" className="text-xs">
+                        <Badge variant="outline" className={badgeOutline}>
                           {project.confidentiality}
                         </Badge>
                       </div>
@@ -175,32 +216,32 @@ export function ProjectsList() {
                   </div>
                 </CardHeader>
 
-                <CardContent className="space-y-4">
+                <CardContent className={container}>
                   {/* 프로젝트 정보 */}
-                  <div className="space-y-2 text-sm">
-                    <div className="flex items-center gap-2 text-muted-foreground">
-                      <GitBranch className="h-4 w-4" />
-                      <span className="truncate">{project.repo}</span>
+                  <div className={projectInfo}>
+                    <div className={infoRow}>
+                      <GitBranch className={infoIcon} />
+                      <span className={infoText}>{project.repo}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-muted-foreground">
-                      <Calendar className="h-4 w-4" />
+                    <div className={infoRow}>
+                      <Calendar className={infoIcon} />
                       <span>생성: {formatRelativeTime(project.created_at)}</span>
                     </div>
                   </div>
 
                   {/* Focus Files */}
                   <div>
-                    <div className="mb-1 text-xs text-muted-foreground">
+                    <div className={focusFilesSection}>
                       Focus Files ({project.focus_files.length})
                     </div>
-                    <div className="flex flex-wrap gap-1">
+                    <div className={focusFilesList}>
                       {project.focus_files.slice(0, 2).map((file, index) => (
-                        <Badge key={index} variant="outline" className="text-xs">
+                        <Badge key={index} variant="outline" className={focusFileBadge}>
                           {file.split('/').pop()}
                         </Badge>
                       ))}
                       {project.focus_files.length > 2 && (
-                        <Badge variant="outline" className="text-xs">
+                        <Badge variant="outline" className={focusFileBadge}>
                           +{project.focus_files.length - 2}
                         </Badge>
                       )}
@@ -208,10 +249,10 @@ export function ProjectsList() {
                   </div>
 
                   {/* 액션 버튼 */}
-                  <div className="flex gap-2 pt-2">
-                    <Button asChild size="sm" className="flex-1">
+                  <div className={actionButtons}>
+                    <Button asChild size="sm" className={primaryButton}>
                       <Link href={`/projects/${project.id}`}>
-                        <ExternalLink className="mr-1 h-3 w-3" />
+                        <ExternalLink className={buttonIcon} />
                         상세보기
                       </Link>
                     </Button>
@@ -219,7 +260,7 @@ export function ProjectsList() {
                     {project.status === 'done' && (
                       <Button asChild variant="outline" size="sm">
                         <Link href={`/drafts/${project.id}`}>
-                          <FileText className="mr-1 h-3 w-3" />
+                          <FileText className={buttonIcon} />
                           명세서
                         </Link>
                       </Button>

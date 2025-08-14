@@ -23,6 +23,10 @@ export const vars = createGlobalTheme(':root', {
     border: 'hsl(240 5.9% 90%)',
     input: 'hsl(240 5.9% 90%)',
     ring: 'hsl(240 5.9% 10%)',
+    green600: 'hsl(142 76% 36%)',
+    blue600: 'hsl(221 83% 53%)',
+    purple600: 'hsl(271 81% 56%)',
+    yellow500: 'hsl(45 93% 47%)',
   },
   spacing: {
     radius: '0.5rem',
@@ -54,6 +58,11 @@ export const darkTheme = createTheme(vars, {
     border: 'hsl(240 3.7% 15.9%)',
     input: 'hsl(240 3.7% 15.9%)',
     ring: 'hsl(240 4.9% 83.9%)',
+    // Additional colors for research panel
+    green600: 'hsl(142 76% 36%)',
+    blue600: 'hsl(221 83% 53%)',
+    purple600: 'hsl(271 81% 56%)',
+    yellow500: 'hsl(45 93% 47%)',
   },
   spacing: {
     radius: '0.5rem',

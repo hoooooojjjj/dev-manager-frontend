@@ -85,8 +85,8 @@ npm run dev
 
 ### **UI/UX**
 
-- **[Tailwind CSS](https://tailwindcss.com/)** - 유틸리티 기반 스타일링
-- **[shadcn/ui](https://ui.shadcn.com/)** - 고품질 컴포넌트 라이브러리
+- **[Vanilla Extract](https://vanilla-extract.style/)** - 타입 안전한 CSS-in-JS
+- **[shadcn/ui](https://ui.shadcn.com/)** - 고품질 컴포넌트 라이브러리 (Vanilla Extract 마이그레이션)
 - **[Radix Primitives](https://www.radix-ui.com/)** - 접근성 우선 UI 기본 요소
 - **[Lucide Icons](https://lucide.dev/)** - 아이콘 시스템
 

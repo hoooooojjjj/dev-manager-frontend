@@ -1,6 +1,14 @@
 import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
 import { cn } from "@/lib/utils/format";
+import {
+  breadcrumbNav,
+  homeLink,
+  icon,
+  breadcrumbItem,
+  currentPage,
+  breadcrumbLink,
+} from './breadcrumb.css';
 
 interface BreadcrumbItem {
   label: string;
@@ -16,27 +24,27 @@ export function Breadcrumb({ items, className }: BreadcrumbProps) {
   return (
     <nav
       aria-label="Breadcrumb"
-      className={cn("flex items-center space-x-1 text-sm text-muted-foreground", className)}
+      className={cn(breadcrumbNav, className)}
     >
       <Link
         href="/"
-        className="flex items-center hover:text-foreground transition-colors"
+        className={homeLink}
         aria-label="홈으로 이동"
       >
-        <Home className="h-4 w-4" />
+        <Home className={icon} />
       </Link>
       
       {items.map((item, index) => (
-        <div key={item.href} className="flex items-center space-x-1">
-          <ChevronRight className="h-4 w-4" />
+        <div key={item.href} className={breadcrumbItem}>
+          <ChevronRight className={icon} />
           {index === items.length - 1 ? (
-            <span className="font-medium text-foreground" aria-current="page">
+            <span className={currentPage} aria-current="page">
               {item.label}
             </span>
           ) : (
             <Link
               href={item.href}
-              className="hover:text-foreground transition-colors"
+              className={breadcrumbLink}
             >
               {item.label}
             </Link>

@@ -4,13 +4,12 @@
  */
 
 import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
 
 /**
- * Tailwind CSS 클래스 조합
+ * 클래스 조합 (Vanilla Extract 환경용)
  */
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+  return clsx(inputs);
 }
 
 /**

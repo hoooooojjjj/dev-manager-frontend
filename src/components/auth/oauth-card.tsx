@@ -4,6 +4,16 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ExternalLink, Github, FileText, LucideIcon } from 'lucide-react';
+import {
+  cardContainer,
+  cardContent,
+  cardInfo,
+  providerIcon,
+  providerName,
+  statusBadge,
+  statusIcon,
+  connectedTextLight
+} from './oauth-card.css';
 
 interface OAuthCardProps {
   provider: 'github' | 'notion';
@@ -25,12 +35,12 @@ const PROVIDER_CONFIG: Record<
   github: {
     icon: Github,
     label: 'GitHub',
-    color: 'text-gray-900 dark:text-gray-100',
+    color: connectedTextLight,
   },
   notion: {
     icon: FileText,
     label: 'Notion',
-    color: 'text-gray-900 dark:text-gray-100',
+    color: connectedTextLight,
   },
 };
 
@@ -56,14 +66,14 @@ export function OAuthCard({
   };
 
   return (
-    <Card className={`flex-1 ${className}`}>
-      <CardContent className="flex items-center justify-between p-4 max-md:flex-col max-md:gap-2">
-        <div className="flex items-center gap-2">
-          <Icon className={`h-4 w-4 ${config.color}`} />
-          <span className="text-sm font-medium">{config.label}</span>
+    <Card className={`${cardContainer} ${className}`}>
+      <CardContent className={cardContent}>
+        <div className={cardInfo}>
+          <Icon className={`${providerIcon} ${config.color}`} />
+          <span className={providerName}>{config.label}</span>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className={statusBadge}>
           <Badge variant={getStatusVariant()}>{getStatusText()}</Badge>
 
           {!isConnected && (
@@ -74,7 +84,7 @@ export function OAuthCard({
               onClick={onConnect}
               disabled={isPending || isLoading}
             >
-              <ExternalLink className="mr-1 h-3 w-3" />
+              <ExternalLink className={statusIcon} />
               연결
             </Button>
           )}

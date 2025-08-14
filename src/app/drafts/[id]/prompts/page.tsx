@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { PromptBundle } from "@/components/prompts/prompt-bundle";
 import { Breadcrumb } from "@/components/layout/breadcrumb";
+import { container, contentWrapper, headerSection, title, description } from "./page.css";
 
 interface PromptsPageProps {
   params: Promise<{ id: string }>;
@@ -14,7 +15,7 @@ export default async function PromptsPage({ params }: PromptsPageProps) {
   }
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className={container}>
       <Breadcrumb 
         items={[
           { label: "홈", href: "/" },
@@ -24,10 +25,10 @@ export default async function PromptsPage({ params }: PromptsPageProps) {
         ]} 
       />
       
-      <div className="mt-6">
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold tracking-tight">AI 실행 프롬프트</h1>
-          <p className="text-muted-foreground">
+      <div className={contentWrapper}>
+        <div className={headerSection}>
+          <h1 className={title}>AI 실행 프롬프트</h1>
+          <p className={description}>
             codegen, test, review 용도별 구조화된 프롬프트 번들
           </p>
         </div>

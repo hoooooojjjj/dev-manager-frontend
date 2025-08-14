@@ -3,12 +3,44 @@
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { MessageSquare, Send, CheckCircle2, XCircle, RotateCcw, Clock } from 'lucide-react';
+import {
+  container,
+  fullWidthCard,
+  sectionsContainer,
+  sectionButton,
+  sectionButtonSelected,
+  sectionTitle,
+  reviewFormContainer,
+  instructionContainer,
+  minHeightTextarea,
+  checkboxContainer,
+  checkboxLabel,
+  submitButton,
+  buttonIcon,
+  spinningIcon,
+  historyContainer,
+  historyItem,
+  historyHeader,
+  historyMeta,
+  historyTimestamp,
+  historyActions,
+  historyContent,
+  instructionSection,
+  instructionTitle,
+  instructionText,
+  diffGrid,
+  diffSection,
+  diffHeader,
+  beforeDiff,
+  afterDiff,
+  iconDestructive,
+  iconSuccess,
+} from './review-interface.css';
 
 interface ReviewInterfaceProps {
   draftId: string;
@@ -54,25 +86,21 @@ export function ReviewInterface({}: ReviewInterfaceProps) {
   };
 
   return (
-    <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 lg:grid-cols-3">
+    <div className={container}>
       {/* 좌측: 섹션 선택 */}
-      <Card className="lg:col-span-1">
+      <Card>
         <CardHeader>
           <CardTitle>섹션 선택</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-2">
+          <div className={sectionsContainer}>
             {sections.map((section) => (
               <button
                 key={section.id}
                 onClick={() => setSelectedSection(section.id)}
-                className={`flex w-full items-center justify-between rounded-md border p-3 text-left transition-colors ${
-                  selectedSection === section.id
-                    ? 'border-primary bg-primary/5'
-                    : 'border-border hover:bg-muted'
-                }`}
+                className={selectedSection === section.id ? sectionButtonSelected : sectionButton}
               >
-                <span className="font-medium">{section.title}</span>
+                <span className={sectionTitle}>{section.title}</span>
                 <Badge
                   variant={
                     section.status === 'completed'
@@ -93,35 +121,35 @@ export function ReviewInterface({}: ReviewInterfaceProps) {
       </Card>
 
       {/* 중앙: 리뷰 폼 */}
-      <Card className="lg:col-span-2">
+      <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+          <CardTitle className={diffHeader}>
             <MessageSquare className="h-5 w-5" />
             {sections.find((s) => s.id === selectedSection)?.title} 리뷰
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <div className={reviewFormContainer}>
             {/* 지시문 입력 */}
-            <div className="space-y-2">
+            <div className={instructionContainer}>
               <Label htmlFor="instruction">수정 지시문</Label>
               <Textarea
                 id="instruction"
                 placeholder="이 섹션에서 수정하고 싶은 내용을 구체적으로 설명해주세요..."
                 value={instruction}
                 onChange={(e) => setInstruction(e.target.value)}
-                className="min-h-[120px]"
+                className={minHeightTextarea}
               />
             </div>
 
             {/* 옵션 */}
-            <div className="flex items-center space-x-2">
+            <div className={checkboxContainer}>
               <Checkbox
                 id="strict_citation"
                 checked={strictCitation}
                 onCheckedChange={(checked) => setStrictCitation(checked as boolean)}
               />
-              <Label htmlFor="strict_citation" className="text-sm">
+              <Label htmlFor="strict_citation" className={checkboxLabel}>
                 엄격한 인용 검증 (새로운 주장에 반드시 근거 포함)
               </Label>
             </div>
@@ -130,16 +158,16 @@ export function ReviewInterface({}: ReviewInterfaceProps) {
             <Button
               onClick={handleSubmitReview}
               disabled={!instruction.trim() || isProcessing}
-              className="w-full"
+              className={submitButton}
             >
               {isProcessing ? (
                 <>
-                  <Clock className="mr-2 h-4 w-4 animate-spin" />
+                  <Clock className={spinningIcon} />
                   처리 중...
                 </>
               ) : (
                 <>
-                  <Send className="mr-2 h-4 w-4" />
+                  <Send className={buttonIcon} />
                   리뷰 제출
                 </>
               )}
@@ -149,62 +177,56 @@ export function ReviewInterface({}: ReviewInterfaceProps) {
       </Card>
 
       {/* 하단: 리뷰 히스토리 */}
-      <Card className="lg:col-span-3">
+      <Card className={fullWidthCard}>
         <CardHeader>
           <CardTitle>리뷰 히스토리</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <div className={historyContainer}>
             {reviewHistory.map((review) => (
-              <div key={review.id} className="rounded-lg border p-4">
-                <div className="mb-3 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
+              <div key={review.id} className={historyItem}>
+                <div className={historyHeader}>
+                  <div className={historyMeta}>
                     <Badge variant="outline">
                       {sections.find((s) => s.id === review.section)?.title}
                     </Badge>
-                    <span className="text-sm text-muted-foreground">
+                    <span className={historyTimestamp}>
                       {new Date(review.timestamp).toLocaleString('ko-KR')}
                     </span>
                   </div>
-                  <div className="flex gap-2">
+                  <div className={historyActions}>
                     <Button variant="outline" size="sm">
-                      <RotateCcw className="mr-2 h-4 w-4" />
+                      <RotateCcw className={buttonIcon} />
                       되돌리기
                     </Button>
                     <Button variant="outline" size="sm">
-                      <CheckCircle2 className="mr-2 h-4 w-4" />
+                      <CheckCircle2 className={buttonIcon} />
                       승인
                     </Button>
                   </div>
                 </div>
 
-                <div className="space-y-3">
-                  <div>
-                    <h4 className="mb-1 text-sm font-medium">지시문</h4>
-                    <p className="rounded bg-muted p-2 text-sm text-muted-foreground">
-                      {review.instruction}
-                    </p>
+                <div className={historyContent}>
+                  <div className={instructionSection}>
+                    <h4 className={instructionTitle}>지시문</h4>
+                    <p className={instructionText}>{review.instruction}</p>
                   </div>
 
-                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                    <div>
-                      <h4 className="mb-2 flex items-center gap-2 text-sm font-medium">
-                        <XCircle className="h-4 w-4 text-destructive" />
+                  <div className={diffGrid}>
+                    <div className={diffSection}>
+                      <h4 className={diffHeader}>
+                        <XCircle className={`h-4 w-4 ${iconDestructive}`} />
                         Before
                       </h4>
-                      <div className="rounded border border-red-200 bg-red-50 p-3 text-sm">
-                        {review.before}
-                      </div>
+                      <div className={beforeDiff}>{review.before}</div>
                     </div>
 
-                    <div>
-                      <h4 className="mb-2 flex items-center gap-2 text-sm font-medium">
-                        <CheckCircle2 className="h-4 w-4 text-green-600" />
+                    <div className={diffSection}>
+                      <h4 className={diffHeader}>
+                        <CheckCircle2 className={`h-4 w-4 ${iconSuccess}`} />
                         After
                       </h4>
-                      <div className="rounded border border-green-200 bg-green-50 p-3 text-sm">
-                        {review.after}
-                      </div>
+                      <div className={afterDiff}>{review.after}</div>
                     </div>
                   </div>
                 </div>

@@ -1,9 +1,10 @@
 import { ProjectsList } from "@/components/projects/projects-list";
 import { Breadcrumb } from "@/components/layout/breadcrumb";
+import { container, contentWrapper, headerSection, title, description } from "./page.css";
 
 export default function ProjectsPage() {
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className={container}>
       <Breadcrumb 
         items={[
           { label: "홈", href: "/" },
@@ -11,10 +12,10 @@ export default function ProjectsPage() {
         ]} 
       />
       
-      <div className="mt-6">
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold tracking-tight">프로젝트 목록</h1>
-          <p className="text-muted-foreground">
+      <div className={contentWrapper}>
+        <div className={headerSection}>
+          <h1 className={title}>프로젝트 목록</h1>
+          <p className={description}>
             생성된 모든 프로젝트를 확인하고 관리하세요
           </p>
         </div>

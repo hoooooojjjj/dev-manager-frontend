@@ -4,6 +4,43 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Clock, FileText, Search, GitBranch, MessageSquare, ExternalLink } from 'lucide-react';
+import {
+  container,
+  headerContainer,
+  headerInfo,
+  projectTitle,
+  projectMeta,
+  metaItem,
+  progressSection,
+  progressHeader,
+  progressBar,
+  progressFill,
+  timelineContainer,
+  timelineItem,
+  timelineStageCompleted,
+  timelineStageCurrent,
+  timelineStagePending,
+  timelineDotCompleted,
+  timelineDotCurrent,
+  timelineDotPending,
+  timelineConnector,
+  actionGrid,
+  actionCard,
+  actionCardHeader,
+  actionCardTitle,
+  actionCardDescription,
+  actionButton,
+  buttonIcon,
+  logContainer,
+  logItem,
+  logDotBlue,
+  logDotGreen,
+  logTime,
+  logMessage,
+  iconPurple,
+  iconBlue,
+  iconGreen,
+} from './project-dashboard.css';
 
 interface ProjectDashboardProps {
   projectId: string;
@@ -30,19 +67,19 @@ export function ProjectDashboard({ projectId }: ProjectDashboardProps) {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className={container}>
       {/* 프로젝트 헤더 */}
       <Card>
         <CardHeader>
-          <div className="flex items-start justify-between max-md:w-full max-md:flex-col max-md:justify-start max-md:gap-2">
-            <div>
-              <CardTitle className="text-center text-2xl">{project.title}</CardTitle>
-              <div className="mt-2 flex items-center gap-4 text-sm text-muted-foreground max-md:flex-col max-md:items-start max-md:gap-2">
-                <div className="flex items-center gap-1">
+          <div className={headerContainer}>
+            <div className={headerInfo}>
+              <CardTitle className={projectTitle}>{project.title}</CardTitle>
+              <div className={projectMeta}>
+                <div className={metaItem}>
                   <Clock className="h-4 w-4" />
                   생성: {new Date(project.created_at).toLocaleDateString('ko-KR')}
                 </div>
-                <div className="flex items-center gap-1">
+                <div className={metaItem}>
                   <Clock className="h-4 w-4" />
                   수정: {new Date(project.updated_at).toLocaleDateString('ko-KR')}
                 </div>
@@ -54,46 +91,46 @@ export function ProjectDashboard({ projectId }: ProjectDashboardProps) {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <div className={progressSection}>
             {/* 진행률 */}
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm">
+            <div>
+              <div className={progressHeader}>
                 <span>전체 진행률</span>
                 <span>{project.progress}%</span>
               </div>
-              <div className="h-2 w-full rounded-full bg-secondary">
+              <div className={progressBar}>
                 <div
-                  className="h-2 rounded-full bg-primary transition-all duration-300"
+                  className={progressFill}
                   style={{ width: `${project.progress}%` }}
                 />
               </div>
             </div>
 
             {/* 타임라인 */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-2">
+            <div className={timelineContainer}>
               {timeline.map((item, index) => (
-                <div key={item.stage} className="flex items-center gap-2 whitespace-nowrap">
+                <div key={item.stage} className={timelineItem}>
                   <div
-                    className={`flex items-center gap-2 rounded-full px-3 py-1 text-xs ${
+                    className={
                       item.completed
-                        ? 'bg-green-100 text-green-800'
+                        ? timelineStageCompleted
                         : item.current
-                          ? 'bg-blue-100 text-blue-800'
-                          : 'bg-gray-100 text-gray-600'
-                    }`}
+                          ? timelineStageCurrent
+                          : timelineStagePending
+                    }
                   >
                     <div
-                      className={`h-2 w-2 rounded-full ${
+                      className={
                         item.completed
-                          ? 'bg-green-600'
+                          ? timelineDotCompleted
                           : item.current
-                            ? 'bg-blue-600'
-                            : 'bg-gray-400'
-                      }`}
+                            ? timelineDotCurrent
+                            : timelineDotPending
+                      }
                     />
                     {item.label}
                   </div>
-                  {index < timeline.length - 1 && <div className="h-px w-4 bg-border" />}
+                  {index < timeline.length - 1 && <div className={timelineConnector} />}
                 </div>
               ))}
             </div>
@@ -102,58 +139,58 @@ export function ProjectDashboard({ projectId }: ProjectDashboardProps) {
       </Card>
 
       {/* 액션 카드들 */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <Card className="transition-shadow hover:shadow-md">
-          <CardHeader className="pb-3">
-            <div className="flex items-center gap-2">
-              <Search className="h-5 w-5 text-purple-600" />
+      <div className={actionGrid}>
+        <Card className={actionCard}>
+          <CardHeader className={actionCardHeader}>
+            <div className={actionCardTitle}>
+              <Search className={`h-5 w-5 ${iconPurple}`} />
               <CardTitle className="text-lg">리서치 결과</CardTitle>
             </div>
           </CardHeader>
           <CardContent>
-            <p className="mb-4 text-center text-sm text-muted-foreground">
+            <p className={actionCardDescription}>
               Brave 검색을 통한 권위 소스와 채용공고 분석 결과를 확인하세요.
             </p>
-            <Button variant="outline" className="w-full" asChild>
+            <Button variant="outline" className={actionButton} asChild>
               <a href={`/projects/${projectId}/research`}>
-                <ExternalLink className="mr-2 h-4 w-4" />
+                <ExternalLink className={buttonIcon} />
                 리서치 보기
               </a>
             </Button>
           </CardContent>
         </Card>
 
-        <Card className="transition-shadow hover:shadow-md">
-          <CardHeader className="pb-3">
-            <div className="flex items-center gap-2">
-              <FileText className="h-5 w-5 text-blue-600" />
+        <Card className={actionCard}>
+          <CardHeader className={actionCardHeader}>
+            <div className={actionCardTitle}>
+              <FileText className={`h-5 w-5 ${iconBlue}`} />
               <CardTitle className="text-lg">개발 명세서</CardTitle>
             </div>
           </CardHeader>
           <CardContent>
-            <p className="mb-4 text-center text-sm text-muted-foreground">
+            <p className={actionCardDescription}>
               자동 생성된 개발 명세서를 확인하고 검토하세요.
             </p>
-            <Button variant="outline" className="w-full" disabled>
-              <FileText className="mr-2 h-4 w-4" />
+            <Button variant="outline" className={actionButton} disabled>
+              <FileText className={buttonIcon} />
               초안 생성 중...
             </Button>
           </CardContent>
         </Card>
 
-        <Card className="transition-shadow hover:shadow-md">
-          <CardHeader className="pb-3">
-            <div className="flex items-center gap-2">
-              <MessageSquare className="h-5 w-5 text-green-600" />
+        <Card className={actionCard}>
+          <CardHeader className={actionCardHeader}>
+            <div className={actionCardTitle}>
+              <MessageSquare className={`h-5 w-5 ${iconGreen}`} />
               <CardTitle className="text-lg">리뷰 & 수정</CardTitle>
             </div>
           </CardHeader>
           <CardContent>
-            <p className="mb-4 text-center text-sm text-muted-foreground">
+            <p className={actionCardDescription}>
               섹션별 수정 지시와 Diff 확인을 통해 명세서를 개선하세요.
             </p>
-            <Button variant="outline" className="w-full" disabled>
-              <MessageSquare className="mr-2 h-4 w-4" />
+            <Button variant="outline" className={actionButton} disabled>
+              <MessageSquare className={buttonIcon} />
               리뷰 시작
             </Button>
           </CardContent>
@@ -163,32 +200,32 @@ export function ProjectDashboard({ projectId }: ProjectDashboardProps) {
       {/* 실시간 로그 */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+          <CardTitle className={actionCardTitle}>
             <GitBranch className="h-5 w-5" />
             실시간 로그
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="max-h-60 space-y-2 overflow-y-auto">
-            <div className="flex items-start gap-2 text-sm">
-              <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-blue-500" />
+          <div className={logContainer}>
+            <div className={logItem}>
+              <div className={logDotBlue} />
               <div>
-                <span className="text-muted-foreground">14:30</span>
-                <span className="ml-2">Brave 검색 시작: &ldquo;사용자 인증 JWT 보안&rdquo;</span>
+                <span className={logTime}>14:30</span>
+                <span className={logMessage}>Brave 검색 시작: &ldquo;사용자 인증 JWT 보안&rdquo;</span>
               </div>
             </div>
-            <div className="flex items-start gap-2 text-sm">
-              <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-green-500" />
+            <div className={logItem}>
+              <div className={logDotGreen} />
               <div>
-                <span className="text-muted-foreground">14:28</span>
-                <span className="ml-2">GitHub 레포지토리 분석 완료</span>
+                <span className={logTime}>14:28</span>
+                <span className={logMessage}>GitHub 레포지토리 분석 완료</span>
               </div>
             </div>
-            <div className="flex items-start gap-2 text-sm">
-              <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-green-500" />
+            <div className={logItem}>
+              <div className={logDotGreen} />
               <div>
-                <span className="text-muted-foreground">14:25</span>
-                <span className="ml-2">Notion 문서 수집 완료</span>
+                <span className={logTime}>14:25</span>
+                <span className={logMessage}>Notion 문서 수집 완료</span>
               </div>
             </div>
           </div>

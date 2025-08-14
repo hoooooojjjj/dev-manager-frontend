@@ -15,6 +15,23 @@ import { post } from '@/lib/api/client';
 import { useToast } from '@/lib/store/useUi';
 import { useOAuthStatus, useOAuthConnect } from '@/lib/hooks/useOAuth';
 import { OAuthCard } from '@/components/auth/oauth-card';
+import {
+  container,
+  headerSection,
+  headerActions,
+  oauthSection,
+  formSection,
+  errorText,
+  focusFilesGrid,
+  focusFileBadge,
+  focusFilesActions,
+  removeButton,
+  removeIcon,
+  addFileButton,
+  submitButton,
+  loadingSpinner,
+  buttonIcon,
+} from './intake-form.css';
 
 export function IntakeForm() {
   const router = useRouter();
@@ -77,10 +94,10 @@ export function IntakeForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} className={container}>
       {/* OAuth 상태 */}
-      <div className="space-y-3">
-        <div className="flex items-center justify-between">
+      <div className={headerSection}>
+        <div className={headerActions}>
           <Label>연결 상태</Label>
           <Button
             type="button"
@@ -89,12 +106,12 @@ export function IntakeForm() {
             onClick={() => refetchOAuth()}
             disabled={isOAuthLoading}
           >
-            <RefreshCw className={`mr-2 h-4 w-4 ${isOAuthLoading ? 'animate-spin' : ''}`} />
+            <RefreshCw className={isOAuthLoading ? loadingSpinner : buttonIcon} />
             새로고침
           </Button>
         </div>
 
-        <div className="flex gap-3">
+        <div className={oauthSection}>
           <OAuthCard
             provider="github"
             isConnected={oauthStatus?.github || false}
@@ -114,7 +131,7 @@ export function IntakeForm() {
       </div>
 
       {/* 소스 Notion URL */}
-      <div className="space-y-2">
+      <div className={formSection}>
         <Label htmlFor="source_notion_url">소스 Notion URL *</Label>
         <Input
           id="source_notion_url"
@@ -122,25 +139,25 @@ export function IntakeForm() {
           {...register('source_notion_url')}
         />
         {errors.source_notion_url && (
-          <p className="text-sm text-destructive">{errors.source_notion_url.message}</p>
+          <p className={errorText}>{errors.source_notion_url.message}</p>
         )}
       </div>
 
       {/* GitHub 레포지토리 */}
-      <div className="space-y-2">
+      <div className={formSection}>
         <Label htmlFor="repo">GitHub 레포지토리 *</Label>
         <Input
           id="repo"
           placeholder="owner/repository (예: microsoft/vscode)"
           {...register('repo')}
         />
-        {errors.repo && <p className="text-sm text-destructive">{errors.repo.message}</p>}
+        {errors.repo && <p className={errorText}>{errors.repo.message}</p>}
       </div>
 
       {/* Focus Files */}
-      <div className="space-y-2">
+      <div className={formSection}>
         <Label>중점 분석 파일 *</Label>
-        <div className="flex gap-2">
+        <div className={focusFilesActions}>
           <Input
             placeholder="src/components/Button.tsx"
             value={focusFileInput}
@@ -153,34 +170,32 @@ export function IntakeForm() {
             }}
           />
           <Button type="button" onClick={addFocusFile} size="icon" variant="outline">
-            <Plus className="h-4 w-4" />
+            <Plus className={buttonIcon} />
           </Button>
         </div>
 
         {focusFiles.length > 0 && (
-          <div className="mt-2 flex flex-wrap gap-2">
+          <div className={focusFilesGrid}>
             {focusFiles.map((file, index) => (
-              <Badge key={index} variant="secondary" className="flex items-center gap-1">
+              <Badge key={index} variant="secondary" className={focusFileBadge}>
                 {file}
                 <button
                   type="button"
                   onClick={() => removeFocusFile(index)}
-                  className="ml-1 hover:text-destructive"
+                  className={removeButton}
                 >
-                  <X className="h-3 w-3" />
+                  <X className={removeIcon} />
                 </button>
               </Badge>
             ))}
           </div>
         )}
 
-        {errors.focus_files && (
-          <p className="text-sm text-destructive">{errors.focus_files.message}</p>
-        )}
+        {errors.focus_files && <p className={errorText}>{errors.focus_files.message}</p>}
       </div>
 
       {/* 출력 Notion URL */}
-      <div className="space-y-2">
+      <div className={formSection}>
         <Label htmlFor="output_notion_url">출력 Notion URL *</Label>
         <Input
           id="output_notion_url"
@@ -188,31 +203,27 @@ export function IntakeForm() {
           {...register('output_notion_url')}
         />
         {errors.output_notion_url && (
-          <p className="text-sm text-destructive">{errors.output_notion_url.message}</p>
+          <p className={errorText}>{errors.output_notion_url.message}</p>
         )}
       </div>
 
       {/* 제목 (선택사항) */}
-      <div className="space-y-2">
+      <div className={formSection}>
         <Label htmlFor="title">프로젝트 제목</Label>
         <Input id="title" placeholder="프로젝트 제목을 입력하세요" {...register('title')} />
       </div>
 
       {/* 기밀성 */}
-      <div className="space-y-2">
+      <div className={formSection}>
         <Label htmlFor="confidentiality">기밀성 수준 *</Label>
-        <select
-          id="confidentiality"
-          className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-          {...register('confidentiality')}
-        >
+        <select id="confidentiality" className={addFileButton} {...register('confidentiality')}>
           <option value="public">공개</option>
           <option value="internal">내부</option>
           <option value="confidential">기밀</option>
         </select>
       </div>
 
-      <Button type="submit" className="w-full" disabled={createProject.isPending}>
+      <Button type="submit" className={submitButton} disabled={createProject.isPending}>
         {createProject.isPending ? '생성 중...' : '프로젝트 생성'}
       </Button>
     </form>

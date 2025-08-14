@@ -26,6 +26,9 @@ import {
   mobileDropdownContainer,
   mobileNav,
   mobileNavLink,
+  srOnly,
+  icon16,
+  icon20,
 } from './header.css';
 
 export function Header() {
@@ -81,8 +84,8 @@ export function Header() {
           onClick={toggleSidebar}
           data-mobile-nav
         >
-          {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          <span className="sr-only">메뉴 토글</span>
+          {sidebarOpen ? <X className={icon20} /> : <Menu className={icon20} />}
+          <span className={srOnly}>메뉴 토글</span>
         </Button>
 
         <div className={rightSection}>
@@ -102,7 +105,7 @@ export function Header() {
             >
               <Sun className={themeIcon} />
               <Moon className={moonIcon} />
-              <span className="sr-only">테마 전환</span>
+              <span className={srOnly}>테마 전환</span>
             </Button>
 
             <Button variant="ghost" size="icon" asChild>
@@ -111,8 +114,8 @@ export function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Github className="h-4 w-4" />
-                <span className="sr-only">GitHub 리포지토리</span>
+                <Github className={icon16} />
+                <span className={srOnly}>GitHub 리포지토리</span>
               </Link>
             </Button>
           </nav>

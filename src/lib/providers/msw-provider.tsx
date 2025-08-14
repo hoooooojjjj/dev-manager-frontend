@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 /**
  * MSW Provider
@@ -6,15 +6,14 @@
  */
 
 import { useEffect, useState } from 'react';
+import { loadingContainer, loadingContent, spinner, loadingText } from './msw-provider.css';
 
 interface MSWProviderProps {
   children: React.ReactNode;
 }
 
 export function MSWProvider({ children }: MSWProviderProps) {
-  const [mswReady, setMswReady] = useState(() => 
-    process.env.NODE_ENV !== 'development'
-  );
+  const [mswReady, setMswReady] = useState(() => process.env.NODE_ENV !== 'development');
 
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
@@ -29,10 +28,10 @@ export function MSWProvider({ children }: MSWProviderProps) {
   // 개발 환경에서 MSW가 준비될 때까지 대기
   if (!mswReady) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">API 모킹 준비 중...</p>
+      <div className={loadingContainer}>
+        <div className={loadingContent}>
+          <div className={spinner}></div>
+          <p className={loadingText}>API 모킹 준비 중...</p>
         </div>
       </div>
     );

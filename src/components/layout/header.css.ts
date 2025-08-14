@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/lib/styles/theme.css';
-import { forDesktop, forMobile } from '@/lib/styles/breakpoints';
+import { forDesktop } from '@/lib/styles/breakpoints';
 
 export const header = style({
   position: 'sticky',
@@ -231,4 +231,26 @@ export const mobileNavLink = style({
     backgroundColor: vars.colors.accent,
     color: vars.colors.foreground,
   },
+});
+
+export const srOnly = style({
+  position: 'absolute',
+  width: '1px',
+  height: '1px',
+  padding: '0',
+  margin: '-1px',
+  overflow: 'hidden',
+  clip: 'rect(0, 0, 0, 0)',
+  whiteSpace: 'nowrap',
+  borderWidth: '0',
+});
+
+export const icon16 = style({
+  height: '1rem', // h-4
+  width: '1rem', // w-4
+});
+
+export const icon20 = style({
+  height: '1.25rem', // h-5
+  width: '1.25rem', // w-5
 });

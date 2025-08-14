@@ -1,5 +1,5 @@
 import { globalStyle } from '@vanilla-extract/css';
-import { vars } from './theme.css';
+import { vars, darkTheme } from './theme.css';
 
 // Reset and base styles
 globalStyle('*', {
@@ -27,4 +27,9 @@ globalStyle('*', {
 globalStyle(':focus-visible', {
   outline: 'none',
   boxShadow: `0 0 0 2px ${vars.colors.ring}, 0 0 0 4px ${vars.colors.background}`,
+});
+
+// 다크 테마 클래스 연결
+globalStyle(`.${darkTheme}`, {
+  colorScheme: 'dark',
 });

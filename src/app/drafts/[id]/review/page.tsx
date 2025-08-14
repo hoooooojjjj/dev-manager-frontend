@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { ReviewInterface } from "@/components/drafts/review-interface";
 import { Breadcrumb } from "@/components/layout/breadcrumb";
+import { container, contentWrapper, headerSection, title, description } from "./page.css";
 
 interface ReviewPageProps {
   params: Promise<{ id: string }>;
@@ -14,7 +15,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
   }
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className={container}>
       <Breadcrumb 
         items={[
           { label: "홈", href: "/" },
@@ -24,10 +25,10 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
         ]} 
       />
       
-      <div className="mt-6">
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold tracking-tight">개발 명세서 리뷰</h1>
-          <p className="text-muted-foreground">
+      <div className={contentWrapper}>
+        <div className={headerSection}>
+          <h1 className={title}>개발 명세서 리뷰</h1>
+          <p className={description}>
             섹션별 수정 지시와 Diff 확인을 통해 명세서를 개선하세요
           </p>
         </div>

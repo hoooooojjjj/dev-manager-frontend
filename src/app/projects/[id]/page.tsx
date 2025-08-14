@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { ProjectDashboard } from "@/components/projects/project-dashboard";
 import { Breadcrumb } from "@/components/layout/breadcrumb";
+import { container, contentWrapper } from "./page.css";
 
 interface ProjectPageProps {
   params: Promise<{ id: string }>;
@@ -14,7 +15,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   }
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className={container}>
       <Breadcrumb 
         items={[
           { label: "홈", href: "/" },
@@ -23,7 +24,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         ]} 
       />
       
-      <div className="mt-6">
+      <div className={contentWrapper}>
         <ProjectDashboard projectId={id} />
       </div>
     </div>

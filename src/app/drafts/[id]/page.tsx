@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { SpecViewer } from "@/components/drafts/spec-viewer";
 import { Breadcrumb } from "@/components/layout/breadcrumb";
+import { container, contentWrapper } from "./page.css";
 
 interface DraftPageProps {
   params: Promise<{ id: string }>;
@@ -14,7 +15,7 @@ export default async function DraftPage({ params }: DraftPageProps) {
   }
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className={container}>
       <Breadcrumb 
         items={[
           { label: "홈", href: "/" },
@@ -23,7 +24,7 @@ export default async function DraftPage({ params }: DraftPageProps) {
         ]} 
       />
       
-      <div className="mt-6">
+      <div className={contentWrapper}>
         <SpecViewer draftId={id} />
       </div>
     </div>

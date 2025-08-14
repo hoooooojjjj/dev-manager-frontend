@@ -10,7 +10,8 @@ import {
   heroTitle, 
   heroDescription, 
   ctaButtonGroup, 
-  featuresGrid 
+  featuresGrid,
+  featureIcon
 } from './page.css';
 
 export default function HomePage() {
@@ -39,7 +40,7 @@ export default function HomePage() {
         <div className={featuresGrid}>
           <Card>
             <CardHeader>
-              <Search className="mb-2 h-8 w-8 text-primary" />
+              <Search className={featureIcon} />
               <CardTitle>리서치 기반</CardTitle>
             </CardHeader>
             <CardContent>
@@ -51,7 +52,7 @@ export default function HomePage() {
 
           <Card>
             <CardHeader>
-              <GitBranch className="mb-2 h-8 w-8 text-primary" />
+              <GitBranch className={featureIcon} />
               <CardTitle>GitHub 통합</CardTitle>
             </CardHeader>
             <CardContent>
@@ -63,7 +64,7 @@ export default function HomePage() {
 
           <Card>
             <CardHeader>
-              <FileText className="mb-2 h-8 w-8 text-primary" />
+              <FileText className={featureIcon} />
               <CardTitle>근거 기반 명세</CardTitle>
             </CardHeader>
             <CardContent>
@@ -75,7 +76,7 @@ export default function HomePage() {
 
           <Card>
             <CardHeader>
-              <Zap className="mb-2 h-8 w-8 text-primary" />
+              <Zap className={featureIcon} />
               <CardTitle>AI 프롬프트 생성</CardTitle>
             </CardHeader>
             <CardContent>

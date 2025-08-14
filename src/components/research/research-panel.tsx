@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import * as styles from './research-panel.css';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -82,11 +83,11 @@ export function ResearchPanel({}: ResearchPanelProps) {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className={styles.container}>
       {/* 리서치 요약 */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center justify-between gap-2">
+          <CardTitle className={styles.cardTitleFlex}>
             <span>리서치 커버리지</span>
             <Badge variant={researchSummary.coverageScore >= 80 ? 'default' : 'secondary'}>
               {researchSummary.coverageScore}% 달성
@@ -94,86 +95,86 @@ export function ResearchPanel({}: ResearchPanelProps) {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-primary">{researchSummary.totalSources}</div>
-              <div className="text-sm text-muted-foreground">총 소스</div>
+          <div className={styles.statsGrid}>
+            <div className={styles.statCenter}>
+              <div className={styles.statValue}>{researchSummary.totalSources}</div>
+              <div className={styles.statLabel}>총 소스</div>
             </div>
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-1">
-                <span className="text-2xl font-bold text-green-600">
+            <div className={styles.statCenter}>
+              <div className={styles.statIconWrapper}>
+                <span className={styles.statValueGreen}>
                   {researchSummary.authoritativeSources}
                 </span>
                 {researchSummary.authoritativeSources >= 5 && (
-                  <CheckCircle2 className="h-5 w-5 text-green-600" />
+                  <CheckCircle2 className={styles.checkIcon} />
                 )}
               </div>
-              <div className="text-sm text-muted-foreground">권위 소스 (≥5)</div>
+              <div className={styles.statLabel}>권위 소스 (≥5)</div>
             </div>
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-1">
-                <span className="text-2xl font-bold text-blue-600">
+            <div className={styles.statCenter}>
+              <div className={styles.statIconWrapper}>
+                <span className={styles.statValueBlue}>
                   {researchSummary.jobPostings}
                 </span>
                 {researchSummary.jobPostings >= 3 && (
-                  <CheckCircle2 className="h-5 w-5 text-green-600" />
+                  <CheckCircle2 className={styles.checkIcon} />
                 )}
               </div>
-              <div className="text-sm text-muted-foreground">채용공고 (≥3)</div>
+              <div className={styles.statLabel}>채용공고 (≥3)</div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-purple-600">{competencyMap.length}</div>
-              <div className="text-sm text-muted-foreground">역량 매핑</div>
+            <div className={styles.statCenter}>
+              <div className={styles.statValuePurple}>{competencyMap.length}</div>
+              <div className={styles.statLabel}>역량 매핑</div>
             </div>
           </div>
         </CardContent>
       </Card>
 
       {/* 탭 패널 */}
-      <Tabs defaultValue="references" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
+      <Tabs defaultValue="references" className={styles.tabsWrapper}>
+        <TabsList className={styles.tabsGrid}>
           <TabsTrigger value="references">References</TabsTrigger>
           <TabsTrigger value="job-postings">Job Postings</TabsTrigger>
           <TabsTrigger value="competency-map">Competency Map</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="references" className="space-y-4">
+        <TabsContent value="references" className={styles.tabContent}>
           {references.map((ref) => (
-            <Card key={ref.id} className="transition-shadow hover:shadow-md">
-              <CardHeader className="items-start pb-3">
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <CardTitle className="text-lg">{ref.title}</CardTitle>
-                    <div className="mt-2 flex w-full items-center gap-4 text-sm text-muted-foreground max-md:flex-col max-md:items-start max-md:gap-2">
-                      <div className="flex items-center gap-1">
-                        <User className="h-4 w-4" />
+            <Card key={ref.id} className={styles.cardHover}>
+              <CardHeader className={styles.cardHeaderItems}>
+                <div className={styles.cardHeaderFlex}>
+                  <div className={styles.cardTitleWrapper}>
+                    <CardTitle className={styles.cardTitle}>{ref.title}</CardTitle>
+                    <div className={styles.metaWrapper}>
+                      <div className={styles.metaItem}>
+                        <User className={styles.metaIcon} />
                         {ref.author}
                       </div>
-                      <div className="flex items-center gap-1">
-                        <Calendar className="h-4 w-4" />
+                      <div className={styles.metaItem}>
+                        <Calendar className={styles.metaIcon} />
                         {new Date(ref.published_at).toLocaleDateString('ko-KR')}
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className={styles.rightActions}>
                     <Badge variant="outline">{ref.domain}</Badge>
-                    <div className="flex items-center gap-1">
-                      <Star className="h-4 w-4 text-yellow-500" />
-                      <span className="text-sm">{ref.weight.toFixed(1)}</span>
+                    <div className={styles.ratingWrapper}>
+                      <Star className={styles.starIcon} />
+                      <span className={styles.ratingText}>{ref.weight.toFixed(1)}</span>
                     </div>
                   </div>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="mb-4 text-sm text-muted-foreground">{ref.summary}</p>
-                <div className="flex items-center justify-between">
-                  <div className="flex gap-2">
+                <p className={styles.summary}>{ref.summary}</p>
+                <div className={styles.bottomActions}>
+                  <div className={styles.badgeGroup}>
                     <Badge variant="secondary">권위도: {ref.metadata.authority_score}/10</Badge>
                     <Badge variant="secondary">최신성: {ref.metadata.recency_score}/10</Badge>
                   </div>
                   <Button variant="outline" size="sm" asChild>
                     <a href={ref.url} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="mr-2 h-4 w-4" />
+                      <ExternalLink className={styles.externalLinkIcon} />
                       원문 보기
                     </a>
                   </Button>
@@ -183,20 +184,20 @@ export function ResearchPanel({}: ResearchPanelProps) {
           ))}
         </TabsContent>
 
-        <TabsContent value="job-postings" className="space-y-4">
+        <TabsContent value="job-postings" className={styles.tabContent}>
           {jobPostings.map((job) => (
-            <Card key={job.id} className="transition-shadow hover:shadow-md">
-              <CardHeader className="items-start pb-3">
-                <div className="flex items-start justify-between gap-2">
-                  <div className="flex-1">
-                    <CardTitle className="text-lg">{job.title}</CardTitle>
-                    <div className="mt-2 flex items-center gap-4 text-sm text-muted-foreground">
-                      <div className="flex items-center gap-1">
-                        <Building className="h-4 w-4" />
+            <Card key={job.id} className={styles.cardHover}>
+              <CardHeader className={styles.cardHeaderItems}>
+                <div className={styles.jobHeaderFlex}>
+                  <div className={styles.cardTitleWrapper}>
+                    <CardTitle className={styles.cardTitle}>{job.title}</CardTitle>
+                    <div className={styles.jobMetaWrapper}>
+                      <div className={styles.metaItem}>
+                        <Building className={styles.metaIcon} />
                         {job.company}
                       </div>
-                      <div className="flex items-center gap-1">
-                        <Calendar className="h-4 w-4" />
+                      <div className={styles.metaItem}>
+                        <Calendar className={styles.metaIcon} />
                         {new Date(job.published_at).toLocaleDateString('ko-KR')}
                       </div>
                     </div>
@@ -205,10 +206,10 @@ export function ResearchPanel({}: ResearchPanelProps) {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="space-y-3">
-                  <div>
-                    <h4 className="mb-2 text-sm font-medium">요구사항</h4>
-                    <div className="flex flex-wrap gap-2">
+                <div className={styles.jobContent}>
+                  <div className={styles.requirementsSection}>
+                    <h4 className={styles.requirementsTitle}>요구사항</h4>
+                    <div className={styles.requirementsBadges}>
                       {job.requirements.map((req, index) => (
                         <Badge key={index} variant="outline">
                           {req}
@@ -217,11 +218,11 @@ export function ResearchPanel({}: ResearchPanelProps) {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between">
+                  <div className={styles.bottomActions}>
                     <Badge variant="secondary">{job.metadata.salary_range}</Badge>
                     <Button variant="outline" size="sm" asChild>
                       <a href={job.url} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="mr-2 h-4 w-4" />
+                        <ExternalLink className={styles.externalLinkIcon} />
                         공고 보기
                       </a>
                     </Button>
@@ -232,17 +233,17 @@ export function ResearchPanel({}: ResearchPanelProps) {
           ))}
         </TabsContent>
 
-        <TabsContent value="competency-map" className="space-y-4">
+        <TabsContent value="competency-map" className={styles.tabContent}>
           {competencyMap.map((comp, index) => (
-            <Card key={index} className="transition-shadow hover:shadow-md">
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg">{comp.competency}</CardTitle>
+            <Card key={index} className={styles.cardHover}>
+              <CardHeader className={styles.cardHeaderItems}>
+                <CardTitle className={styles.cardTitle}>{comp.competency}</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="mb-2 text-sm font-medium">근거 소스</h4>
-                    <div className="flex flex-wrap gap-2">
+                <div className={styles.compContent}>
+                  <div className={styles.compSection}>
+                    <h4 className={styles.compSectionTitle}>근거 소스</h4>
+                    <div className={styles.compBadges}>
                       {comp.evidence.map((evidence, idx) => (
                         <Badge key={idx} variant="outline">
                           {evidence.startsWith('web://') ? '📄' : '💼'}
@@ -253,9 +254,9 @@ export function ResearchPanel({}: ResearchPanelProps) {
                     </div>
                   </div>
 
-                  <div>
-                    <h4 className="mb-2 text-sm font-medium">적용 영역</h4>
-                    <div className="flex flex-wrap gap-2">
+                  <div className={styles.compSection}>
+                    <h4 className={styles.compSectionTitle}>적용 영역</h4>
+                    <div className={styles.compBadges}>
                       {comp.applies_to.map((area, idx) => (
                         <Badge key={idx} variant="secondary">
                           {area}
@@ -264,15 +265,15 @@ export function ResearchPanel({}: ResearchPanelProps) {
                     </div>
                   </div>
 
-                  <div>
-                    <h4 className="mb-2 text-sm font-medium">학습 포인트</h4>
-                    <ul className="space-y-1">
+                  <div className={styles.compSection}>
+                    <h4 className={styles.compSectionTitle}>학습 포인트</h4>
+                    <ul className={styles.learningPointsList}>
                       {comp.learning_points.map((point, idx) => (
                         <li
                           key={idx}
-                          className="flex items-start gap-2 text-sm text-muted-foreground"
+                          className={styles.learningPoint}
                         >
-                          <span className="text-primary">•</span>
+                          <span className={styles.bulletPoint}>•</span>
                           {point}
                         </li>
                       ))}
