@@ -30,63 +30,43 @@ import {
   icon16,
   icon20,
 } from './header.css';
+import { useIsMobile } from '@/lib/hooks/useDeviceWidth';
 
 export function Header() {
   const { theme, setTheme } = useTheme();
   const { sidebarOpen, toggleSidebar, setSidebarOpen } = useUi();
 
-  // 외부 클릭 시 모바일 메뉴 닫기
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as Element;
-      if (sidebarOpen && !target.closest('[data-mobile-nav]')) {
-        setSidebarOpen(false);
-      }
-    };
-
-    if (sidebarOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
-    }
-
-    return undefined;
-  }, [sidebarOpen, setSidebarOpen]);
+  const isMobile = useIsMobile();
 
   return (
     <header className={header}>
       <div className={headerContainer}>
         <div className={desktopNav}>
           <Link href="/" className={logoLink}>
-            <span className={`${logoText} ${gugi.className}`}>
-              DEV MANAGER
-            </span>
+            <span className={`${logoText} ${gugi.className}`}>DEV MANAGER</span>
           </Link>
           <nav className={nav}>
-            <Link
-              href="/new"
-              className={navLink}
-            >
+            <Link href="/new" className={navLink}>
               새 프로젝트
             </Link>
-            <Link
-              href="/projects"
-              className={navLink}
-            >
+            <Link href="/projects" className={navLink}>
               프로젝트 목록
             </Link>
           </nav>
         </div>
 
-        <Button
-          variant="ghost"
-          size="icon"
-          className={mobileMenuButton}
-          onClick={toggleSidebar}
-          data-mobile-nav
-        >
-          {sidebarOpen ? <X className={icon20} /> : <Menu className={icon20} />}
-          <span className={srOnly}>메뉴 토글</span>
-        </Button>
+        {isMobile && (
+          <Button
+            variant="ghost"
+            size="icon"
+            className={mobileMenuButton}
+            onClick={toggleSidebar}
+            data-mobile-nav
+          >
+            {sidebarOpen ? <X className={icon20} /> : <Menu className={icon20} />}
+            <span className={srOnly}>메뉴 토글</span>
+          </Button>
+        )}
 
         <div className={rightSection}>
           <div className={mobileLogoContainer}>
@@ -124,17 +104,10 @@ export function Header() {
 
       {/* 모바일 드롭다운 메뉴 */}
       {sidebarOpen && (
-        <div
-          className={mobileDropdown}
-          data-mobile-nav
-        >
+        <div className={mobileDropdown} data-mobile-nav>
           <div className={mobileDropdownContainer}>
             <nav className={mobileNav}>
-              <Link
-                href="/new"
-                className={mobileNavLink}
-                onClick={() => setSidebarOpen(false)}
-              >
+              <Link href="/new" className={mobileNavLink} onClick={() => setSidebarOpen(false)}>
                 새 프로젝트
               </Link>
               <Link

@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/lib/styles/theme.css';
-import { forDesktop } from '@/lib/styles/breakpoints';
+import { forDesktop, forMobile } from '@/lib/styles/breakpoints';
 
 export const header = style({
   position: 'sticky',
@@ -10,7 +10,7 @@ export const header = style({
   borderBottom: `1px solid color-mix(in srgb, ${vars.colors.border} 40%, transparent)`,
   backgroundColor: `color-mix(in srgb, ${vars.colors.background} 95%, transparent)`,
   backdropFilter: 'blur(8px)',
-  
+
   '@supports': {
     '(backdrop-filter: blur(0))': {
       backgroundColor: `color-mix(in srgb, ${vars.colors.background} 60%, transparent)`,
@@ -24,17 +24,21 @@ export const headerContainer = style({
   display: 'flex',
   height: '56px',
   alignItems: 'center',
-  paddingLeft: '16px',
-  paddingRight: '16px',
-  paddingTop: '24px',
-  paddingBottom: '24px',
+  padding: '4px 16px',
+
+  '@media': {
+    [forMobile]: {
+      height: '40px',
+      padding: '4px 12px',
+    },
+  },
 });
 
 export const desktopNav = style({
   marginRight: '16px',
   display: 'none',
   alignItems: 'center',
-  
+
   '@media': {
     [forDesktop]: {
       display: 'flex',
@@ -54,9 +58,9 @@ export const logoLink = style({
 
 export const logoText = style({
   display: 'none',
-  fontSize: '1.125rem',
+  fontSize: '1.2rem',
   fontWeight: 'bold',
-  
+
   '@media': {
     '(min-width: 640px)': {
       display: 'inline-block',
@@ -69,7 +73,7 @@ export const nav = style({
   alignItems: 'center',
   gap: '16px',
   fontSize: '0.875rem',
-  
+
   '@media': {
     '(min-width: 1024px)': {
       gap: '24px',
@@ -82,7 +86,7 @@ export const navLink = style({
   transitionProperty: 'color',
   transitionDuration: '150ms',
   textDecoration: 'none',
-  
+
   ':hover': {
     color: `color-mix(in srgb, ${vars.colors.foreground} 80%, transparent)`,
   },
@@ -91,20 +95,14 @@ export const navLink = style({
 export const mobileMenuButton = style({
   paddingLeft: 0,
   fontSize: '1rem',
-  
+
   ':hover': {
     backgroundColor: 'transparent !important',
   },
-  
+
   ':focus-visible': {
     backgroundColor: 'transparent !important',
     boxShadow: 'none !important',
-  },
-  
-  '@media': {
-    [forDesktop]: {
-      display: 'none',
-    },
   },
 });
 
@@ -114,7 +112,7 @@ export const rightSection = style({
   alignItems: 'center',
   justifyContent: 'space-between',
   gap: '8px',
-  
+
   '@media': {
     [forDesktop]: {
       justifyContent: 'flex-end',
@@ -125,7 +123,7 @@ export const rightSection = style({
 export const mobileLogoContainer = style({
   width: '100%',
   flex: 1,
-  
+
   '@media': {
     [forDesktop]: {
       width: 'auto',
@@ -136,7 +134,7 @@ export const mobileLogoContainer = style({
 
 export const mobileLogoWrapper = style({
   display: 'flex',
-  
+
   '@media': {
     [forDesktop]: {
       display: 'none',
@@ -156,7 +154,7 @@ export const themeIcon = style({
   transform: 'rotate(0deg) scale(1)',
   transitionProperty: 'all',
   transitionDuration: '150ms',
-  
+
   selectors: {
     ':global(.dark) &': {
       transform: 'rotate(-90deg) scale(0)',
@@ -171,7 +169,7 @@ export const moonIcon = style({
   transform: 'rotate(90deg) scale(0)',
   transitionProperty: 'all',
   transitionDuration: '150ms',
-  
+
   selectors: {
     ':global(.dark) &': {
       transform: 'rotate(0deg) scale(1)',
@@ -189,7 +187,7 @@ export const mobileDropdown = style({
   borderBottom: `1px solid color-mix(in srgb, ${vars.colors.border} 40%, transparent)`,
   backgroundColor: `color-mix(in srgb, ${vars.colors.background} 95%, transparent)`,
   backdropFilter: 'blur(8px)',
-  
+
   '@media': {
     [forDesktop]: {
       display: 'none',
@@ -226,7 +224,7 @@ export const mobileNavLink = style({
   transitionProperty: 'color, background-color',
   transitionDuration: '150ms',
   textDecoration: 'none',
-  
+
   ':hover': {
     backgroundColor: vars.colors.accent,
     color: vars.colors.foreground,
