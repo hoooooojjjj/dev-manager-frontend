@@ -59,6 +59,7 @@ import {
   errorMessage,
   addProjectIcon,
 } from './projects-list.css';
+import { Flex } from '../ui/flex';
 
 interface ProjectsListResponse {
   projects: Project[];
@@ -131,23 +132,25 @@ export function ProjectsList() {
           </div>
 
           {/* 상태 필터 */}
-          <Select value={statusFilter} onValueChange={setStatusFilter}>
-            <SelectTrigger className={statusFilter}>
-              <SelectValue placeholder="상태 필터" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">모든 상태</SelectItem>
-              <SelectItem value="done">완료</SelectItem>
-              <SelectItem value="review">리뷰</SelectItem>
-              <SelectItem value="drafting">초안 생성 중</SelectItem>
-              <SelectItem value="researching">리서치 중</SelectItem>
-              <SelectItem value="error">오류</SelectItem>
-            </SelectContent>
-          </Select>
+          <Flex align="center">
+            <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTrigger className={statusFilter}>
+                <SelectValue placeholder="상태 필터" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">모든 상태</SelectItem>
+                <SelectItem value="done">완료</SelectItem>
+                <SelectItem value="review">리뷰</SelectItem>
+                <SelectItem value="drafting">초안 생성 중</SelectItem>
+                <SelectItem value="researching">리서치 중</SelectItem>
+                <SelectItem value="error">오류</SelectItem>
+              </SelectContent>
+            </Select>
+          </Flex>
         </div>
 
         {/* 새 프로젝트 버튼 */}
-        <Button asChild>
+        <Button asChild style={{ paddingBottom: '4px', paddingTop: '4px' }}>
           <Link href="/new">
             <Plus className={addProjectIcon} />새 프로젝트
           </Link>

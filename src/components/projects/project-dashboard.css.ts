@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/lib/styles/theme.css';
-import { forTablet, forDesktop } from '@/lib/styles/breakpoints';
+import { forTablet, forDesktop, forMobile } from '@/lib/styles/breakpoints';
 
 // 메인 컨테이너
 export const container = style({
@@ -15,9 +15,9 @@ export const headerContainer = style({
   alignItems: 'flex-start',
   justifyContent: 'space-between',
   width: '100%',
-  
+
   '@media': {
-    'screen and (max-width: 768px)': {
+    [forMobile]: {
       flexDirection: 'column',
       justifyContent: 'flex-start',
       gap: '0.5rem',
@@ -43,9 +43,9 @@ export const projectMeta = style({
   gap: '1rem',
   fontSize: '0.875rem', // text-sm
   color: vars.colors.mutedForeground,
-  
+
   '@media': {
-    'screen and (max-width: 768px)': {
+    [forMobile]: {
       flexDirection: 'column',
       alignItems: 'flex-start',
       gap: '0.5rem',
@@ -176,7 +176,7 @@ export const actionGrid = style({
   display: 'grid',
   gridTemplateColumns: '1fr',
   gap: '1rem',
-  
+
   '@media': {
     [forTablet]: {
       gridTemplateColumns: 'repeat(2, 1fr)',
@@ -189,7 +189,7 @@ export const actionGrid = style({
 
 export const actionCard = style({
   transition: 'box-shadow 150ms',
-  
+
   ':hover': {
     boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)', // hover:shadow-md
   },

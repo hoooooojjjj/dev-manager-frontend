@@ -1,3 +1,4 @@
+import { forMobile } from '@/lib/styles/breakpoints';
 import { style } from '@vanilla-extract/css';
 
 export const cardContainer = style({
@@ -11,7 +12,7 @@ export const cardContent = style({
   justifyContent: 'space-between',
 
   '@media': {
-    '(max-width: 768px)': {
+    [forMobile]: {
       flexDirection: 'column',
       gap: '8px',
     },

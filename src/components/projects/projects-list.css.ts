@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/lib/styles/theme.css';
+import { forMobile } from '@/lib/styles/breakpoints';
 
 export const container = style({
   display: 'flex',
@@ -13,23 +14,23 @@ export const headerActions = style({
   justifyContent: 'space-between',
 
   '@media': {
-    '(max-width: 768px)': {
-      alignItems: 'flex-start',
+    [forMobile]: {
+      flexDirection: 'column',
+      alignItems: 'flex-end',
       gap: '8px',
     },
   },
 });
 
 export const filtersContainer = style({
-  display: 'flex',
-  flex: 1,
-  alignItems: 'center',
+  display: 'grid',
+  gridTemplateColumns: '8fr 2fr',
   gap: '16px',
+  width: '100%',
 
   '@media': {
-    '(max-width: 768px)': {
-      flexDirection: 'column',
-      alignItems: 'flex-start',
+    [forMobile]: {
+      gridTemplateColumns: '7fr 3fr',
       gap: '8px',
     },
   },
@@ -37,8 +38,9 @@ export const filtersContainer = style({
 
 export const searchContainer = style({
   position: 'relative',
-  maxWidth: '24rem',
-  flex: 1,
+  display: 'flex',
+  alignItems: 'center',
+  gap: '8px',
 });
 
 export const searchIcon = style({
