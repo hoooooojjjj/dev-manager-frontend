@@ -154,22 +154,12 @@ export const projectCard = style({
 });
 
 export const cardHeader = style({
-  alignItems: 'flex-start',
+  alignItems: 'flex-start !important',
   paddingBottom: '12px',
-});
-
-export const cardHeaderContent = style({
-  display: 'flex',
-  alignItems: 'flex-start',
-  justifyContent: 'space-between',
-});
-
-export const cardHeaderLeft = style({
-  flex: 1,
+  gap: '12px !important',
 });
 
 export const cardTitle = style({
-  marginBottom: '8px',
   fontSize: '1.125rem',
   display: '-webkit-box',
   WebkitLineClamp: 2,
@@ -213,7 +203,6 @@ export const infoText = style({
 });
 
 export const focusFilesSection = style({
-  marginBottom: '4px',
   fontSize: '0.75rem',
   color: vars.colors.mutedForeground,
 });
@@ -265,3 +254,16 @@ export const addProjectIcon = style({
   height: '16px',
   width: '16px',
 });
+
+export const statusColors = {
+  idle: style({ background: '#f5f5f5', color: '#1f2937' }),
+  submitting: style({ background: '#dbeafe', color: '#1e3a8a' }),
+  queued: style({ background: '#fef3c7', color: '#92400e' }),
+  collecting: style({ background: '#ffedd5', color: '#9a3412' }),
+  researching: style({ background: '#ede9fe', color: '#5b21b6' }),
+  drafting: style({ background: '#e0e7ff', color: '#3730a3' }),
+  review: style({ background: '#cffafe', color: '#155e75' }),
+  publishing: style({ background: '#d1fae5', color: '#065f46' }),
+  done: style({ background: '#dcfce7', color: '#166534' }),
+  error: style({ background: '#fee2e2', color: '#991b1b' }),
+};

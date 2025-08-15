@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/select';
 import { Plus, Search, Calendar, ExternalLink, FileText, GitBranch } from 'lucide-react';
 import { get } from '@/lib/api/client';
-import { formatRelativeTime, getStatusColor } from '@/lib/utils/format';
+import { formatRelativeTime } from '@/lib/utils/format';
 import type { Project } from '@/lib/api/schemas';
 import {
   container,
@@ -39,8 +39,6 @@ import {
   resultsCounter,
   projectCard,
   cardHeader,
-  cardHeaderContent,
-  cardHeaderLeft,
   cardTitle,
   badgeContainer,
   badgeOutline,
@@ -58,12 +56,17 @@ import {
   errorContent,
   errorMessage,
   addProjectIcon,
+  statusColors,
 } from './projects-list.css';
 import { Flex } from '../ui/flex';
 
 interface ProjectsListResponse {
   projects: Project[];
   total: number;
+}
+
+export function getStatusColor(status: string): string {
+  return statusColors[status as keyof typeof statusColors] || statusColors.idle;
 }
 
 export function ProjectsList() {
@@ -204,18 +207,14 @@ export function ProjectsList() {
             {filteredProjects.map((project) => (
               <Card key={project.id} className={projectCard}>
                 <CardHeader className={cardHeader}>
-                  <div className={cardHeaderContent}>
-                    <div className={cardHeaderLeft}>
-                      <CardTitle className={cardTitle}>{project.title}</CardTitle>
-                      <div className={badgeContainer}>
-                        <Badge variant="secondary" className={getStatusColor(project.status)}>
-                          {getStatusLabel(project.status)}
-                        </Badge>
-                        <Badge variant="outline" className={badgeOutline}>
-                          {project.confidentiality}
-                        </Badge>
-                      </div>
-                    </div>
+                  <CardTitle className={cardTitle}>{project.title}</CardTitle>
+                  <div className={badgeContainer}>
+                    <Badge variant="secondary" className={getStatusColor(project.status)}>
+                      {getStatusLabel(project.status)}
+                    </Badge>
+                    <Badge variant="outline" className={badgeOutline}>
+                      {project.confidentiality}
+                    </Badge>
                   </div>
                 </CardHeader>
 
@@ -233,7 +232,7 @@ export function ProjectsList() {
                   </div>
 
                   {/* Focus Files */}
-                  <div>
+                  <Flex direction="col" align="start" gap={8}>
                     <div className={focusFilesSection}>
                       Focus Files ({project.focus_files.length})
                     </div>
@@ -249,7 +248,7 @@ export function ProjectsList() {
                         </Badge>
                       )}
                     </div>
-                  </div>
+                  </Flex>
 
                   {/* 액션 버튼 */}
                   <div className={actionButtons}>

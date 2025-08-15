@@ -3,7 +3,7 @@
  * 날짜, 시간, 텍스트, 파일 크기 등 표시용 변환
  */
 
-import { clsx, type ClassValue } from "clsx";
+import { clsx, type ClassValue } from 'clsx';
 
 /**
  * 클래스 조합 (Vanilla Extract 환경용)
@@ -15,12 +15,9 @@ export function cn(...inputs: ClassValue[]) {
 /**
  * 날짜 포맷팅 (한국 시간대)
  */
-export function formatDate(
-  date: string | Date,
-  options: Intl.DateTimeFormatOptions = {}
-): string {
+export function formatDate(date: string | Date, options: Intl.DateTimeFormatOptions = {}): string {
   const dateObj = typeof date === 'string' ? new Date(date) : date;
-  
+
   const defaultOptions: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'long',
@@ -62,10 +59,10 @@ export function formatRelativeTime(date: string | Date): string {
 export function formatFileSize(bytes: number): string {
   const sizes = ['B', 'KB', 'MB', 'GB'];
   if (bytes === 0) return '0 B';
-  
+
   const i = Math.floor(Math.log(bytes) / Math.log(1024));
   const size = bytes / Math.pow(1024, i);
-  
+
   return `${size.toFixed(1)} ${sizes[i]}`;
 }
 
@@ -119,7 +116,7 @@ export function createSlug(text: string): string {
 export function maskEmail(email: string): string {
   const [username, domain] = email.split('@');
   if (!username || !domain) return email;
-  
+
   const maskedUsername = username.slice(0, 2) + '*'.repeat(username.length - 2);
   return `${maskedUsername}@${domain}`;
 }
@@ -130,7 +127,7 @@ export function maskEmail(email: string): string {
 export function parseGitHubRepo(repo: string): { owner: string; name: string } | null {
   const match = repo.match(/^([\w.-]+)\/([\w.-]+)$/);
   if (!match || !match[1] || !match[2]) return null;
-  
+
   return {
     owner: match[1],
     name: match[2],
@@ -155,26 +152,6 @@ export function parseCitationType(citation: string): {
   } else if (citation.startsWith('job://')) {
     return { type: 'job', url: citation.replace('job://', '') };
   }
-  
-  return { type: 'unknown', url: citation };
-}
 
-/**
- * 상태에 따른 색상 클래스 반환
- */
-export function getStatusColor(status: string): string {
-  const statusColors: Record<string, string> = {
-    idle: 'bg-gray-100 text-gray-800',
-    submitting: 'bg-blue-100 text-blue-800',
-    queued: 'bg-yellow-100 text-yellow-800',
-    collecting: 'bg-orange-100 text-orange-800',
-    researching: 'bg-purple-100 text-purple-800',
-    drafting: 'bg-indigo-100 text-indigo-800',
-    review: 'bg-cyan-100 text-cyan-800',
-    publishing: 'bg-emerald-100 text-emerald-800',
-    done: 'bg-green-100 text-green-800',
-    error: 'bg-red-100 text-red-800',
-  };
-  
-  return statusColors[status] || 'bg-gray-100 text-gray-800';
+  return { type: 'unknown', url: citation };
 }

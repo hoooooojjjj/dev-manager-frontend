@@ -28,9 +28,9 @@ export const Flex: React.FC<FlexProps> = ({
         styles.justifyContent[justify],
         styles.alignItems[align],
         styles.flexWrap[wrap],
-        gap,
         className
       )}
+      style={{ gap: `${gap}px` }}
       {...rest}
     >
       {children}
