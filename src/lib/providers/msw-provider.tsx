@@ -25,17 +25,5 @@ export function MSWProvider({ children }: MSWProviderProps) {
     }
   }, []);
 
-  // 개발 환경에서 MSW가 준비될 때까지 대기
-  if (!mswReady) {
-    return (
-      <div className={loadingContainer}>
-        <div className={loadingContent}>
-          <div className={spinner}></div>
-          <p className={loadingText}>API 모킹 준비 중...</p>
-        </div>
-      </div>
-    );
-  }
-
   return <>{children}</>;
 }
