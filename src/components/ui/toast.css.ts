@@ -1,3 +1,4 @@
+import { forDesktop } from '@/lib/styles/breakpoints';
 import { style, styleVariants } from '@vanilla-extract/css';
 
 const toastBase = style({
@@ -142,13 +143,13 @@ export const toastViewport = style({
   flexDirection: 'column-reverse',
   padding: '16px',
   '@media': {
-    '(min-width: 640px)': {
+    [forDesktop]: {
       bottom: 0,
       right: 0,
       top: 'auto',
       flexDirection: 'column',
     },
-    '(min-width: 768px)': {
+    [forDesktop]: {
       maxWidth: '420px',
     },
   },

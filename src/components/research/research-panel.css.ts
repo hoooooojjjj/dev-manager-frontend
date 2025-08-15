@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/lib/styles/theme.css';
+import { forDesktop } from '@/lib/styles/breakpoints';
 
 export const container = style({
   display: 'flex',
@@ -12,7 +13,7 @@ export const statsGrid = style({
   gridTemplateColumns: 'repeat(2, 1fr)',
   gap: '1rem',
   '@media': {
-    'screen and (min-width: 768px)': {
+    [forDesktop]: {
       gridTemplateColumns: 'repeat(4, 1fr)',
     },
   },
@@ -29,17 +30,26 @@ export const statValue = style({
   color: vars.colors.primary,
 });
 
-export const statValueGreen = style([statValue, {
-  color: vars.colors.green600,
-}]);
+export const statValueGreen = style([
+  statValue,
+  {
+    color: vars.colors.green600,
+  },
+]);
 
-export const statValueBlue = style([statValue, {
-  color: vars.colors.blue600,
-}]);
+export const statValueBlue = style([
+  statValue,
+  {
+    color: vars.colors.blue600,
+  },
+]);
 
-export const statValuePurple = style([statValue, {
-  color: vars.colors.purple600,
-}]);
+export const statValuePurple = style([
+  statValue,
+  {
+    color: vars.colors.purple600,
+  },
+]);
 
 export const statLabel = style({
   fontSize: '0.875rem',

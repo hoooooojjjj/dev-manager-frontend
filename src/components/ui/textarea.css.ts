@@ -1,3 +1,4 @@
+import { forDesktop } from '@/lib/styles/breakpoints';
 import { style } from '@vanilla-extract/css';
 
 export const textarea = style({
@@ -25,7 +26,7 @@ export const textarea = style({
     opacity: 0.5,
   },
   '@media': {
-    '(min-width: 768px)': {
+    [forDesktop]: {
       fontSize: '14px',
     },
   },

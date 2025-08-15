@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/lib/styles/theme.css';
+import { forDesktop } from '@/lib/styles/breakpoints';
 
 export const projectGrid = style({
   display: 'grid',
@@ -7,10 +8,10 @@ export const projectGrid = style({
   gap: '24px',
 
   '@media': {
-    '(min-width: 768px)': {
+    [forDesktop]: {
       gridTemplateColumns: 'repeat(2, 1fr)',
     },
-    '(min-width: 1024px)': {
+    [forDesktop]: {
       gridTemplateColumns: 'repeat(3, 1fr)',
     },
   },

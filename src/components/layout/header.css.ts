@@ -62,7 +62,7 @@ export const logoText = style({
   fontWeight: 'bold',
 
   '@media': {
-    '(min-width: 640px)': {
+    [forDesktop]: {
       display: 'inline-block',
     },
   },
@@ -75,7 +75,7 @@ export const nav = style({
   fontSize: '0.875rem',
 
   '@media': {
-    '(min-width: 1024px)': {
+    [forDesktop]: {
       gap: '24px',
     },
   },
