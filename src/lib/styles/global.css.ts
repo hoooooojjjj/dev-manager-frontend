@@ -1,5 +1,5 @@
 import { globalStyle } from '@vanilla-extract/css';
-import { vars, darkTheme } from './theme.css';
+import { vars, lightTheme } from './theme.css';
 
 // Reset and base styles
 globalStyle('*', {
@@ -30,6 +30,6 @@ globalStyle(':focus-visible', {
 });
 
 // 다크 테마 클래스 연결
-globalStyle(`.${darkTheme}`, {
-  colorScheme: 'dark',
+globalStyle(`.${lightTheme}`, {
+  colorScheme: 'light',
 });
