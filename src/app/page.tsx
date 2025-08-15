@@ -62,11 +62,11 @@ interface FeatureCardProps {
 const FeatureCard = ({ icon, title, description }: FeatureCardProps) => {
   return (
     <Card className={S.featureCard}>
-      <CardHeader className={S.featureCardHeader}>
+      <CardHeader>
         {icon}
-        <CardTitle className={S.featureCardTitle}>{title}</CardTitle>
+        <CardTitle>{title}</CardTitle>
       </CardHeader>
-      <CardContent className={S.featureCardContent}>
+      <CardContent>
         <CardDescription>{description}</CardDescription>
       </CardContent>
     </Card>
