@@ -6,17 +6,17 @@ export const container = style({
   maxWidth: '1200px',
   margin: '0 auto',
   padding: '32px 16px',
-
+  paddingTop: '120px',
   '@media': {
     [forMobile]: {
       padding: '16px 12px',
+      paddingTop: '80px',
     },
   },
 });
 
 export const heroSection = style({
   display: 'flex',
-  minHeight: '80vh',
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
@@ -34,13 +34,11 @@ export const heroTitle = style({
   fontSize: '3.5rem',
   fontWeight: 'bold',
   letterSpacing: '-0.025em',
+  margin: 0,
 
   '@media': {
     [forMobile]: {
       fontSize: '2.25rem',
-    },
-    '(min-width: 640px)': {
-      fontSize: '4rem',
     },
   },
 });
@@ -51,6 +49,7 @@ export const heroDescription = style({
   color: vars.colors.mutedForeground,
   lineHeight: 1.6,
   wordBreak: 'keep-all',
+  margin: 0,
 
   '@media': {
     [forMobile]: {
@@ -73,7 +72,6 @@ export const ctaButtonGroup = style({
 });
 
 export const featuresGrid = style({
-  marginTop: '64px',
   display: 'grid',
   width: '100%',
   maxWidth: '1536px',
