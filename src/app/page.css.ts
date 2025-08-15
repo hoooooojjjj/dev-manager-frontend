@@ -80,7 +80,8 @@ export const featuresGrid = style({
 
   '@media': {
     [forMobile]: {
-      gridTemplateColumns: 'repeat(2, 1fr)',
+      gridTemplateColumns: 'repeat(1, 2fr)',
+      maxWidth: '280px',
     },
     [forDesktop]: {
       gridTemplateColumns: 'repeat(4, 1fr)',
@@ -93,4 +94,50 @@ export const featureIcon = style({
   height: '32px',
   width: '32px',
   color: vars.colors.primary,
+  '@media': {
+    [forMobile]: {
+      height: '20px',
+      width: '20px',
+    },
+  },
+});
+
+export const featureCard = style({
+  '@media': {
+    [forMobile]: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '12px',
+      padding: '12px',
+      margin: '0 auto',
+    },
+  },
+});
+
+export const featureCardHeader = style({
+  '@media': {
+    [forMobile]: {
+      display: 'flex',
+      flexDirection: 'row',
+      padding: '0px',
+      fontSize: '0.8rem',
+    },
+  },
+});
+export const featureCardTitle = style({
+  '@media': {
+    [forMobile]: {
+      display: 'none',
+    },
+  },
+});
+export const featureCardContent = style({
+  '@media': {
+    [forMobile]: {
+      padding: '0px',
+      textAlign: 'left',
+    },
+  },
 });
