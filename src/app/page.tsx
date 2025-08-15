@@ -3,15 +3,15 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { FileText, GitBranch, Search, Zap } from 'lucide-react';
 import { gugi } from '@/lib/utils/font';
-import { 
-  container, 
-  heroSection, 
-  heroContent, 
-  heroTitle, 
-  heroDescription, 
-  ctaButtonGroup, 
+import {
+  container,
+  heroSection,
+  heroContent,
+  heroTitle,
+  heroDescription,
+  ctaButtonGroup,
   featuresGrid,
-  featureIcon
+  featureIcon,
 } from './page.css';
 
 export default function HomePage() {
@@ -19,9 +19,7 @@ export default function HomePage() {
     <div className={container}>
       <div className={heroSection}>
         <div className={heroContent}>
-          <h1 className={`${heroTitle} ${gugi.className}`}>
-            DEV MANAGER
-          </h1>
+          <h1 className={`${heroTitle} ${gugi.className}`}>DEV MANAGER</h1>
 
           <p className={heroDescription}>
             PRD에서 개발 명세서, AI 실행 프롬프트까지 자동 생성하는 개발 착수 전 단계 관리 서비스
@@ -32,7 +30,7 @@ export default function HomePage() {
           <Button asChild size="lg">
             <Link href="/new">새 프로젝트 시작</Link>
           </Button>
-          <Button variant="outline" size="lg" asChild>
+          <Button size="lg" asChild>
             <Link href="/projects">프로젝트 목록</Link>
           </Button>
         </div>

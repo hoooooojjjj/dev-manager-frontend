@@ -1,3 +1,4 @@
+import { vars } from '@/lib/styles/theme.css';
 import { style, styleVariants } from '@vanilla-extract/css';
 
 const buttonBase = style({
@@ -13,12 +14,12 @@ const buttonBase = style({
   cursor: 'pointer',
   border: 'none',
   outline: 'none',
-  
+  textDecoration: 'none',
   ':focus-visible': {
     outline: '2px solid hsl(var(--ring))',
     outlineOffset: '2px',
   },
-  
+
   ':disabled': {
     pointerEvents: 'none',
     opacity: 0.5,
@@ -26,54 +27,72 @@ const buttonBase = style({
 });
 
 export const buttonVariant = styleVariants({
-  default: [buttonBase, {
-    backgroundColor: 'hsl(var(--primary))',
-    color: 'hsl(var(--primary-foreground))',
-    boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-    ':hover': {
-      backgroundColor: 'hsl(var(--primary) / 0.9)',
+  default: [
+    buttonBase,
+    {
+      backgroundColor: 'hsl(var(--primary))',
+      color: 'hsl(var(--primary-foreground))',
+      border: vars.colors.buttonBorder,
+      ':hover': {
+        backgroundColor: 'hsl(var(--primary) / 0.9)',
+      },
     },
-  }],
-  destructive: [buttonBase, {
-    backgroundColor: 'hsl(var(--destructive))',
-    color: 'hsl(var(--destructive-foreground))',
-    boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-    ':hover': {
-      backgroundColor: 'hsl(var(--destructive) / 0.9)',
+  ],
+  destructive: [
+    buttonBase,
+    {
+      backgroundColor: 'hsl(var(--destructive))',
+      color: 'hsl(var(--destructive-foreground))',
+      boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+      ':hover': {
+        backgroundColor: 'hsl(var(--destructive) / 0.9)',
+      },
     },
-  }],
-  outline: [buttonBase, {
-    border: '1px solid hsl(var(--input))',
-    backgroundColor: 'hsl(var(--background))',
-    boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-    ':hover': {
-      backgroundColor: 'hsl(var(--accent))',
-      color: 'hsl(var(--accent-foreground))',
+  ],
+  outline: [
+    buttonBase,
+    {
+      border: '1px solid hsl(var(--input))',
+      backgroundColor: 'hsl(var(--background))',
+      boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+      ':hover': {
+        backgroundColor: 'hsl(var(--accent))',
+        color: 'hsl(var(--accent-foreground))',
+      },
     },
-  }],
-  secondary: [buttonBase, {
-    backgroundColor: 'hsl(var(--secondary))',
-    color: 'hsl(var(--secondary-foreground))',
-    boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-    ':hover': {
-      backgroundColor: 'hsl(var(--secondary) / 0.8)',
+  ],
+  secondary: [
+    buttonBase,
+    {
+      backgroundColor: 'hsl(var(--secondary))',
+      color: 'hsl(var(--secondary-foreground))',
+      boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+      ':hover': {
+        backgroundColor: 'hsl(var(--secondary) / 0.8)',
+      },
     },
-  }],
-  ghost: [buttonBase, {
-    backgroundColor: 'transparent',
-    ':hover': {
-      backgroundColor: 'hsl(var(--accent))',
-      color: 'hsl(var(--accent-foreground))',
+  ],
+  ghost: [
+    buttonBase,
+    {
+      backgroundColor: 'transparent',
+      ':hover': {
+        backgroundColor: 'hsl(var(--accent))',
+        color: 'hsl(var(--accent-foreground))',
+      },
     },
-  }],
-  link: [buttonBase, {
-    color: 'hsl(var(--primary))',
-    textUnderlineOffset: '4px',
-    backgroundColor: 'transparent',
-    ':hover': {
-      textDecoration: 'underline',
+  ],
+  link: [
+    buttonBase,
+    {
+      color: 'hsl(var(--primary))',
+      textUnderlineOffset: '4px',
+      backgroundColor: 'transparent',
+      ':hover': {
+        textDecoration: 'underline',
+      },
     },
-  }],
+  ],
 });
 
 export const buttonSize = styleVariants({
@@ -100,4 +119,3 @@ export const buttonSize = styleVariants({
     width: '36px',
   },
 });
-
