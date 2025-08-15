@@ -33,9 +33,3 @@ export const flexWrap = styleVariants({
   wrap: { flexWrap: 'wrap' },
   'wrap-reverse': { flexWrap: 'wrap-reverse' },
 });
-
-// gap은 동적으로 style을 생성
-export const gap = (value: number) =>
-  style({
-    gap: `${value * 0.25}rem`, // Tailwind gap 단위처럼 4 = 1rem
-  });

@@ -7,7 +7,7 @@ type FlexProps = {
   justify?: keyof typeof styles.justifyContent;
   align?: keyof typeof styles.alignItems;
   wrap?: keyof typeof styles.flexWrap;
-  gap?: number; // Tailwind처럼 1=0.25rem
+  gap?: number;
 } & React.HTMLAttributes<HTMLDivElement>;
 
 export const Flex: React.FC<FlexProps> = ({
@@ -16,7 +16,7 @@ export const Flex: React.FC<FlexProps> = ({
   justify = 'center',
   align = 'center',
   wrap = 'nowrap',
-  gap,
+  gap = 0,
   className,
   ...rest
 }) => {
@@ -28,7 +28,7 @@ export const Flex: React.FC<FlexProps> = ({
         styles.justifyContent[justify],
         styles.alignItems[align],
         styles.flexWrap[wrap],
-        gap !== undefined && styles.gap(gap),
+        gap,
         className
       )}
       {...rest}
