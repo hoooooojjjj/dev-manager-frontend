@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/select';
 import { Plus, Search } from 'lucide-react';
 import { Flex } from '@/components/ui/flex';
-import * as S from './projects-list.css';
+import * as S from './index.css';
 
 interface ProjectsListHeaderProps {
   searchQuery: string;

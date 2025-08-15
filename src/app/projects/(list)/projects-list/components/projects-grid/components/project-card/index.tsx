@@ -8,7 +8,7 @@ import { Calendar, ExternalLink, FileText, GitBranch } from 'lucide-react';
 import { formatRelativeTime } from '@/lib/utils/format';
 import type { Project } from '@/lib/api/schemas';
 import { Flex } from '@/components/ui/flex';
-import * as S from './projects-list.css';
+import * as S from './index.css';
 
 interface ProjectCardProps {
   project: Project;
@@ -64,9 +64,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
         {/* Focus Files */}
         <Flex direction="col" align="start" gap={8}>
-          <div className={S.focusFilesSection}>
-            Focus Files ({project.focus_files.length})
-          </div>
+          <div className={S.focusFilesSection}>Focus Files ({project.focus_files.length})</div>
           <div className={S.focusFilesList}>
             {project.focus_files.slice(0, 2).map((file, index) => (
               <Badge key={index} variant="outline" className={S.focusFileBadge}>

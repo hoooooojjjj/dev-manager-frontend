@@ -99,10 +99,7 @@ export function ProjectDashboard({ projectId }: ProjectDashboardProps) {
                 <span>{project.progress}%</span>
               </div>
               <div className={progressBar}>
-                <div
-                  className={progressFill}
-                  style={{ width: `${project.progress}%` }}
-                />
+                <div className={progressFill} style={{ width: `${project.progress}%` }} />
               </div>
             </div>
 
@@ -168,9 +165,7 @@ export function ProjectDashboard({ projectId }: ProjectDashboardProps) {
             </div>
           </CardHeader>
           <CardContent>
-            <p className={actionCardDescription}>
-              자동 생성된 개발 명세서를 확인하고 검토하세요.
-            </p>
+            <p className={actionCardDescription}>자동 생성된 개발 명세서를 확인하고 검토하세요.</p>
             <Button variant="outline" className={actionButton} disabled>
               <FileText className={buttonIcon} />
               초안 생성 중...
@@ -211,7 +206,9 @@ export function ProjectDashboard({ projectId }: ProjectDashboardProps) {
               <div className={logDotBlue} />
               <div>
                 <span className={logTime}>14:30</span>
-                <span className={logMessage}>Brave 검색 시작: &ldquo;사용자 인증 JWT 보안&rdquo;</span>
+                <span className={logMessage}>
+                  Brave 검색 시작: &ldquo;사용자 인증 JWT 보안&rdquo;
+                </span>
               </div>
             </div>
             <div className={logItem}>

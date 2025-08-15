@@ -1,4 +1,4 @@
-import { ProjectsList } from '@/app/projects/components/projects-list';
+import { ProjectsList } from '@/app/projects/(list)/projects-list/index';
 import { Breadcrumb } from '@/components/layout/breadcrumb';
 import { container, contentWrapper, headerSection, title, description } from './page.css';
 

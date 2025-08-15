@@ -40,40 +40,52 @@ const toastBase = style({
 });
 
 export const toastVariant = styleVariants({
-  default: [toastBase, {
-    borderColor: 'hsl(var(--border))',
-    backgroundColor: 'hsl(var(--background))',
-    color: 'hsl(var(--foreground))',
-  }],
-  destructive: [toastBase, {
-    borderColor: 'hsl(var(--destructive))',
-    backgroundColor: 'hsl(var(--destructive))',
-    color: 'hsl(var(--destructive-foreground))',
-  }],
-  success: [toastBase, {
-    borderColor: '#bbf7d0',
-    backgroundColor: '#f0fdf4',
-    color: '#14532d',
-    '@media': {
-      '(prefers-color-scheme: dark)': {
-        borderColor: '#166534',
-        backgroundColor: '#052e16',
-        color: '#f0fdf4',
+  default: [
+    toastBase,
+    {
+      borderColor: 'hsl(var(--border))',
+      backgroundColor: 'hsl(var(--background))',
+      color: 'hsl(var(--foreground))',
+    },
+  ],
+  destructive: [
+    toastBase,
+    {
+      borderColor: 'hsl(var(--destructive))',
+      backgroundColor: 'hsl(var(--destructive))',
+      color: 'hsl(var(--destructive-foreground))',
+    },
+  ],
+  success: [
+    toastBase,
+    {
+      borderColor: '#bbf7d0',
+      backgroundColor: '#f0fdf4',
+      color: '#14532d',
+      '@media': {
+        '(prefers-color-scheme: dark)': {
+          borderColor: '#166534',
+          backgroundColor: '#052e16',
+          color: '#f0fdf4',
+        },
       },
     },
-  }],
-  warning: [toastBase, {
-    borderColor: '#fef3c7',
-    backgroundColor: '#fefce8',
-    color: '#713f12',
-    '@media': {
-      '(prefers-color-scheme: dark)': {
-        borderColor: '#854d0e',
-        backgroundColor: '#422006',
-        color: '#fefce8',
+  ],
+  warning: [
+    toastBase,
+    {
+      borderColor: '#fef3c7',
+      backgroundColor: '#fefce8',
+      color: '#713f12',
+      '@media': {
+        '(prefers-color-scheme: dark)': {
+          borderColor: '#854d0e',
+          backgroundColor: '#422006',
+          color: '#fefce8',
+        },
       },
     },
-  }],
+  ],
 });
 
 export const toastContent = style({
@@ -141,4 +153,3 @@ export const toastViewport = style({
     },
   },
 });
-

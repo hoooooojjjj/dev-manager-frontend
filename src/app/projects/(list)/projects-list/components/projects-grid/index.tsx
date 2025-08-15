@@ -2,11 +2,11 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { FileText, Plus } from 'lucide-react';
 import type { Project } from '@/lib/api/schemas';
-import { ProjectCard } from './project-card';
-import * as S from './projects-list.css';
+import { ProjectCard } from './components/project-card';
+import * as S from './index.css';
 
 interface ProjectsGridProps {
   projects: Project[];
@@ -52,27 +52,5 @@ export function ProjectsGrid({ projects, total, searchQuery, statusFilter }: Pro
         ))}
       </div>
     </>
-  );
-}
-
-// 로딩 스켈레톤 컴포넌트
-export function ProjectsGridSkeleton() {
-  return (
-    <div className={S.projectGrid}>
-      {Array.from({ length: 6 }).map((_, i) => (
-        <Card key={i} className={S.skeletonCard}>
-          <CardHeader>
-            <div className={S.skeletonHeader}></div>
-            <div className={S.skeletonDescription}></div>
-          </CardHeader>
-          <CardContent>
-            <div className={S.skeletonContent}>
-              <div className={S.skeletonLine}></div>
-              <div className={S.skeletonLineShort}></div>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
   );
 }
