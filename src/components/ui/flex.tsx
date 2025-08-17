@@ -13,9 +13,9 @@ type FlexProps = {
 export const Flex: React.FC<FlexProps> = ({
   children,
   direction = 'row',
-  justify = 'center',
-  align = 'center',
-  wrap = 'nowrap',
+  justify,
+  align,
+  wrap,
   gap = 0,
   className,
   ...rest
@@ -25,9 +25,9 @@ export const Flex: React.FC<FlexProps> = ({
       className={clsx(
         styles.flexBase,
         styles.flexDirection[direction],
-        styles.justifyContent[justify],
-        styles.alignItems[align],
-        styles.flexWrap[wrap],
+        justify && styles.justifyContent[justify],
+        align && styles.alignItems[align],
+        wrap && styles.flexWrap[wrap],
         className
       )}
       style={{ gap: `${gap}px` }}
