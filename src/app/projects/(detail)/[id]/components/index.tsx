@@ -4,43 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Clock, FileText, Search, GitBranch, MessageSquare, ExternalLink } from 'lucide-react';
-import {
-  container,
-  headerContainer,
-  headerInfo,
-  projectTitle,
-  projectMeta,
-  metaItem,
-  progressSection,
-  progressHeader,
-  progressBar,
-  progressFill,
-  timelineContainer,
-  timelineItem,
-  timelineStageCompleted,
-  timelineStageCurrent,
-  timelineStagePending,
-  timelineDotCompleted,
-  timelineDotCurrent,
-  timelineDotPending,
-  timelineConnector,
-  actionGrid,
-  actionCard,
-  actionCardHeader,
-  actionCardTitle,
-  actionCardDescription,
-  actionButton,
-  buttonIcon,
-  logContainer,
-  logItem,
-  logDotBlue,
-  logDotGreen,
-  logTime,
-  logMessage,
-  iconPurple,
-  iconBlue,
-  iconGreen,
-} from './project-dashboard.css';
+import * as S from './index.css';
 
 interface ProjectDashboardProps {
   projectId: string;
@@ -67,19 +31,19 @@ export function ProjectDashboard({ projectId }: ProjectDashboardProps) {
   ];
 
   return (
-    <div className={container}>
+    <div className={S.container}>
       {/* 프로젝트 헤더 */}
       <Card>
         <CardHeader>
-          <div className={headerContainer}>
-            <div className={headerInfo}>
-              <CardTitle className={projectTitle}>{project.title}</CardTitle>
-              <div className={projectMeta}>
-                <div className={metaItem}>
+          <div className={S.headerContainer}>
+            <div className={S.headerInfo}>
+              <CardTitle className={S.projectTitle}>{project.title}</CardTitle>
+              <div className={S.projectMeta}>
+                <div className={S.metaItem}>
                   <Clock className="h-4 w-4" />
                   생성: {new Date(project.created_at).toLocaleDateString('ko-KR')}
                 </div>
-                <div className={metaItem}>
+                <div className={S.metaItem}>
                   <Clock className="h-4 w-4" />
                   수정: {new Date(project.updated_at).toLocaleDateString('ko-KR')}
                 </div>
@@ -91,43 +55,43 @@ export function ProjectDashboard({ projectId }: ProjectDashboardProps) {
           </div>
         </CardHeader>
         <CardContent>
-          <div className={progressSection}>
+          <div className={S.progressSection}>
             {/* 진행률 */}
             <div>
-              <div className={progressHeader}>
+              <div className={S.progressHeader}>
                 <span>전체 진행률</span>
                 <span>{project.progress}%</span>
               </div>
-              <div className={progressBar}>
-                <div className={progressFill} style={{ width: `${project.progress}%` }} />
+              <div className={S.progressBar}>
+                <div className={S.progressFill} style={{ width: `${project.progress}%` }} />
               </div>
             </div>
 
             {/* 타임라인 */}
-            <div className={timelineContainer}>
+            <div className={S.timelineContainer}>
               {timeline.map((item, index) => (
-                <div key={item.stage} className={timelineItem}>
+                <div key={item.stage} className={S.timelineItem}>
                   <div
                     className={
                       item.completed
-                        ? timelineStageCompleted
+                        ? S.timelineStageCompleted
                         : item.current
-                          ? timelineStageCurrent
-                          : timelineStagePending
+                          ? S.timelineStageCurrent
+                          : S.timelineStagePending
                     }
                   >
                     <div
                       className={
                         item.completed
-                          ? timelineDotCompleted
+                          ? S.timelineDotCompleted
                           : item.current
-                            ? timelineDotCurrent
-                            : timelineDotPending
+                            ? S.timelineDotCurrent
+                            : S.timelineDotPending
                       }
                     />
                     {item.label}
                   </div>
-                  {index < timeline.length - 1 && <div className={timelineConnector} />}
+                  {index < timeline.length - 1 && <div className={S.timelineConnector} />}
                 </div>
               ))}
             </div>
@@ -136,56 +100,58 @@ export function ProjectDashboard({ projectId }: ProjectDashboardProps) {
       </Card>
 
       {/* 액션 카드들 */}
-      <div className={actionGrid}>
-        <Card className={actionCard}>
-          <CardHeader className={actionCardHeader}>
-            <div className={actionCardTitle}>
-              <Search className={`h-5 w-5 ${iconPurple}`} />
+      <div className={S.actionGrid}>
+        <Card className={S.actionCard}>
+          <CardHeader className={S.actionCardHeader}>
+            <div className={S.actionCardTitle}>
+              <Search className={`h-5 w-5 ${S.iconPurple}`} />
               <CardTitle className="text-lg">리서치 결과</CardTitle>
             </div>
           </CardHeader>
           <CardContent>
-            <p className={actionCardDescription}>
+            <p className={S.actionCardDescription}>
               Brave 검색을 통한 권위 소스와 채용공고 분석 결과를 확인하세요.
             </p>
-            <Button variant="outline" className={actionButton} asChild>
+            <Button variant="outline" className={S.actionButton} asChild>
               <a href={`/projects/${projectId}/research`}>
-                <ExternalLink className={buttonIcon} />
+                <ExternalLink className={S.buttonIcon} />
                 리서치 보기
               </a>
             </Button>
           </CardContent>
         </Card>
 
-        <Card className={actionCard}>
-          <CardHeader className={actionCardHeader}>
-            <div className={actionCardTitle}>
-              <FileText className={`h-5 w-5 ${iconBlue}`} />
+        <Card className={S.actionCard}>
+          <CardHeader className={S.actionCardHeader}>
+            <div className={S.actionCardTitle}>
+              <FileText className={`h-5 w-5 ${S.iconBlue}`} />
               <CardTitle className="text-lg">개발 명세서</CardTitle>
             </div>
           </CardHeader>
           <CardContent>
-            <p className={actionCardDescription}>자동 생성된 개발 명세서를 확인하고 검토하세요.</p>
-            <Button variant="outline" className={actionButton} disabled>
-              <FileText className={buttonIcon} />
+            <p className={S.actionCardDescription}>
+              자동 생성된 개발 명세서를 확인하고 검토하세요.
+            </p>
+            <Button variant="outline" className={S.actionButton} disabled>
+              <FileText className={S.buttonIcon} />
               초안 생성 중...
             </Button>
           </CardContent>
         </Card>
 
-        <Card className={actionCard}>
-          <CardHeader className={actionCardHeader}>
-            <div className={actionCardTitle}>
-              <MessageSquare className={`h-5 w-5 ${iconGreen}`} />
+        <Card className={S.actionCard}>
+          <CardHeader className={S.actionCardHeader}>
+            <div className={S.actionCardTitle}>
+              <MessageSquare className={`h-5 w-5 ${S.iconGreen}`} />
               <CardTitle className="text-lg">리뷰 & 수정</CardTitle>
             </div>
           </CardHeader>
           <CardContent>
-            <p className={actionCardDescription}>
+            <p className={S.actionCardDescription}>
               섹션별 수정 지시와 Diff 확인을 통해 명세서를 개선하세요.
             </p>
-            <Button variant="outline" className={actionButton} disabled>
-              <MessageSquare className={buttonIcon} />
+            <Button variant="outline" className={S.actionButton} disabled>
+              <MessageSquare className={S.buttonIcon} />
               리뷰 시작
             </Button>
           </CardContent>
@@ -195,34 +161,34 @@ export function ProjectDashboard({ projectId }: ProjectDashboardProps) {
       {/* 실시간 로그 */}
       <Card>
         <CardHeader>
-          <CardTitle className={actionCardTitle}>
+          <CardTitle className={S.actionCardTitle}>
             <GitBranch className="h-5 w-5" />
             실시간 로그
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className={logContainer}>
-            <div className={logItem}>
-              <div className={logDotBlue} />
+          <div className={S.logContainer}>
+            <div className={S.logItem}>
+              <div className={S.logDotBlue} />
               <div>
-                <span className={logTime}>14:30</span>
-                <span className={logMessage}>
+                <span className={S.logTime}>14:30</span>
+                <span className={S.logMessage}>
                   Brave 검색 시작: &ldquo;사용자 인증 JWT 보안&rdquo;
                 </span>
               </div>
             </div>
-            <div className={logItem}>
-              <div className={logDotGreen} />
+            <div className={S.logItem}>
+              <div className={S.logDotGreen} />
               <div>
-                <span className={logTime}>14:28</span>
-                <span className={logMessage}>GitHub 레포지토리 분석 완료</span>
+                <span className={S.logTime}>14:28</span>
+                <span className={S.logMessage}>GitHub 레포지토리 분석 완료</span>
               </div>
             </div>
-            <div className={logItem}>
-              <div className={logDotGreen} />
+            <div className={S.logItem}>
+              <div className={S.logDotGreen} />
               <div>
-                <span className={logTime}>14:25</span>
-                <span className={logMessage}>Notion 문서 수집 완료</span>
+                <span className={S.logTime}>14:25</span>
+                <span className={S.logMessage}>Notion 문서 수집 완료</span>
               </div>
             </div>
           </div>

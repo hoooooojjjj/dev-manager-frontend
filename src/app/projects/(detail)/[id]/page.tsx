@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { ProjectDashboard } from '@/app/projects/(detail)/[id]/components/project-dashboard';
+import { ProjectDashboard } from '@/app/projects/(detail)/[id]/components';
 import { Breadcrumb } from '@/components/layout/breadcrumb';
 import { container, contentWrapper } from './page.css';
 
