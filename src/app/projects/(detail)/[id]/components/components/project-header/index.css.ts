@@ -18,22 +18,15 @@ export const headerContainer = style({
   },
 });
 
-export const headerInfo = style({
-  display: 'flex',
-  flexDirection: 'column',
-});
-
 export const projectTitle = style({
-  textAlign: 'center',
   fontSize: '1.5rem', // text-2xl
   lineHeight: '2rem',
 });
 
 export const projectMeta = style({
-  marginTop: '0.5rem',
   display: 'flex',
   alignItems: 'center',
-  gap: '1rem',
+  gap: '0.5rem',
   fontSize: '0.875rem', // text-sm
   color: vars.colors.mutedForeground,
 
@@ -44,12 +37,6 @@ export const projectMeta = style({
       gap: '0.5rem',
     },
   },
-});
-
-export const metaItem = style({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.25rem',
 });
 
 // 진행률 섹션

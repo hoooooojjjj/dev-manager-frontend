@@ -1,6 +1,6 @@
 'use client';
 
-import { ProjectHeader } from './components/project-header/project-header';
+import { ProjectHeader } from './components/project-header';
 import { ActionCards } from './components/action-cards/action-cards';
 import { RealtimeLog } from './components/realtime-log/realtime-log';
 import { Flex } from '@/components/ui/flex';

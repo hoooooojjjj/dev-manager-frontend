@@ -3,7 +3,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Clock } from 'lucide-react';
-import * as S from './project-header.css';
+import * as S from './index.css';
+import { Flex } from '@/components/ui/flex';
 
 interface TimelineItem {
   stage: string;
@@ -45,26 +46,26 @@ export function ProjectHeader({ project, timeline }: ProjectHeaderProps) {
     <Card>
       <CardHeader>
         <div className={S.headerContainer}>
-          <div className={S.headerInfo}>
+          <Flex direction="col" gap={8}>
             <CardTitle className={S.projectTitle}>{project.title}</CardTitle>
             <div className={S.projectMeta}>
-              <div className={S.metaItem}>
-                <Clock className="h-4 w-4" />
+              <Flex align="center" gap={6}>
+                <Clock size={16} />
                 생성: {new Date(project.created_at).toLocaleDateString('ko-KR')}
-              </div>
-              <div className={S.metaItem}>
-                <Clock className="h-4 w-4" />
+              </Flex>
+              <Flex align="center" gap={6}>
+                <Clock size={16} />
                 수정: {new Date(project.updated_at).toLocaleDateString('ko-KR')}
-              </div>
-              <Badge variant="secondary">{getStatusLabel(project.status)}</Badge>
+              </Flex>
+              <Badge variant="outline">{getStatusLabel(project.status)}</Badge>
             </div>
-          </div>
+          </Flex>
         </div>
       </CardHeader>
       <CardContent>
         <div className={S.progressSection}>
           {/* 진행률 */}
-          <div>
+          <Flex direction="col" gap={8}>
             <div className={S.progressHeader}>
               <span>전체 진행률</span>
               <span>{project.progress}%</span>
@@ -72,7 +73,7 @@ export function ProjectHeader({ project, timeline }: ProjectHeaderProps) {
             <div className={S.progressBar}>
               <div className={S.progressFill} style={{ width: `${project.progress}%` }} />
             </div>
-          </div>
+          </Flex>
 
           {/* 타임라인 */}
           <div className={S.timelineContainer}>
