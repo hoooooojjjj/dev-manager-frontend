@@ -5,9 +5,9 @@ import { Badge } from '@/components/ui/badge';
 import { Clock } from 'lucide-react';
 import * as S from './index.css';
 import { Flex } from '@/components/ui/flex';
-import { getStatusLabel } from './util';
+import { dotClassMap, getStatusLabel, resolveTimelineStatus, stageClassMap } from './util';
 
-interface TimelineItem {
+export interface TimelineItem {
   stage: string;
   label: string;
   completed: boolean;
@@ -64,24 +64,8 @@ export function ProjectHeader({ project, timeline }: ProjectHeaderProps) {
           <div className={S.timelineContainer}>
             {timeline.map((item, index) => (
               <div key={item.stage} className={S.timelineItem}>
-                <div
-                  className={
-                    item.completed
-                      ? S.timelineStageCompleted
-                      : item.current
-                        ? S.timelineStageCurrent
-                        : S.timelineStagePending
-                  }
-                >
-                  <div
-                    className={
-                      item.completed
-                        ? S.timelineDotCompleted
-                        : item.current
-                          ? S.timelineDotCurrent
-                          : S.timelineDotPending
-                    }
-                  />
+                <div className={stageClassMap[resolveTimelineStatus(item)]}>
+                  <div className={dotClassMap[resolveTimelineStatus(item)]} />
                   {item.label}
                 </div>
                 {index < timeline.length - 1 && <div className={S.timelineConnector} />}
