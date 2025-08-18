@@ -19,7 +19,6 @@ export const errorText = style({
 });
 
 export const focusFilesGrid = style({
-  marginTop: '8px',
   display: 'flex',
   gap: '8px',
   flexWrap: 'wrap',
@@ -29,6 +28,7 @@ export const focusFileBadge = style({
   display: 'flex',
   alignItems: 'center',
   gap: '4px',
+  padding: '8px',
 });
 
 export const focusFilesActions = style({
@@ -39,6 +39,9 @@ export const focusFilesActions = style({
 
 export const removeButton = style({
   marginLeft: '4px',
+  padding: '0px',
+  width: '16px',
+  height: '16px',
   color: vars.colors.destructive,
 
   ':hover': {
@@ -47,8 +50,8 @@ export const removeButton = style({
 });
 
 export const removeIcon = style({
-  height: '12px',
-  width: '12px',
+  height: '14px',
+  width: '14px',
 });
 
 export const submitButton = style({

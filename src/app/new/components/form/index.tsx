@@ -23,6 +23,7 @@ import { OAuthStatus } from './components/oauth-status';
 import * as S from './index.css';
 import { addFocusFile, removeFocusFile } from './utils';
 import { IntakeSchema, IntakeValues } from './schemas';
+import { vars } from '@/lib/styles/theme.css';
 
 export function IntakeForm() {
   const router = useRouter();
@@ -121,13 +122,15 @@ export function IntakeForm() {
             {focusFiles.map((file, index) => (
               <Badge key={index} variant="secondary" className={S.focusFileBadge}>
                 {file}
-                <button
+                <Button
                   type="button"
                   onClick={() => removeFocusFile(index, focusFiles, setValue)}
                   className={S.removeButton}
+                  size="icon"
+                  variant="ghost"
                 >
-                  <X className={S.removeIcon} />
-                </button>
+                  <X className={S.removeIcon} color={vars.colors.primary} />
+                </Button>
               </Badge>
             ))}
           </div>

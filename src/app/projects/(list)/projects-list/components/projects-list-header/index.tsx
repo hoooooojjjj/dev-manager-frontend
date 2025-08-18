@@ -60,7 +60,7 @@ export function ProjectsListHeader({
       </div>
 
       {/* 새 프로젝트 버튼 */}
-      <Button asChild style={{ paddingBottom: '4px', paddingTop: '4px' }}>
+      <Button asChild style={{ paddingBottom: '0px', paddingTop: '0px' }}>
         <Link href="/new">
           <Plus className={S.addProjectIcon} />새 프로젝트
         </Link>

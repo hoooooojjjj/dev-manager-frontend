@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import * as SelectPrimitive from "@radix-ui/react-select";
-import { Check, ChevronDown, ChevronUp } from "lucide-react";
-import { 
-  selectTrigger, 
-  selectScrollButton, 
-  selectContent, 
-  selectContentPopper, 
-  selectViewport, 
-  selectViewportPopper, 
-  selectLabel, 
-  selectItem, 
-  selectItemIndicator, 
-  selectSeparator 
+import * as React from 'react';
+import * as SelectPrimitive from '@radix-ui/react-select';
+import { Check, ChevronDown, ChevronUp } from 'lucide-react';
+import {
+  selectTrigger,
+  selectScrollButton,
+  selectContent,
+  selectContentPopper,
+  selectViewport,
+  selectViewportPopper,
+  selectLabel,
+  selectItem,
+  selectItemIndicator,
+  selectSeparator,
 } from './select.css';
 
 const Select = SelectPrimitive.Root;
@@ -26,14 +26,10 @@ const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
 >(({ className, children, ...props }, ref) => (
-  <SelectPrimitive.Trigger
-    ref={ref}
-    className={`${selectTrigger} ${className || ''}`}
-    {...props}
-  >
+  <SelectPrimitive.Trigger ref={ref} className={`${selectTrigger} ${className || ''}`} {...props}>
     {children}
     <SelectPrimitive.Icon asChild>
-      <ChevronDown className="h-4 w-4 opacity-50" />
+      <ChevronDown />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ));
@@ -48,7 +44,7 @@ const SelectScrollUpButton = React.forwardRef<
     className={`${selectScrollButton} ${className || ''}`}
     {...props}
   >
-    <ChevronUp className="h-4 w-4" />
+    <ChevronUp />
   </SelectPrimitive.ScrollUpButton>
 ));
 SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName;
@@ -62,26 +58,25 @@ const SelectScrollDownButton = React.forwardRef<
     className={`${selectScrollButton} ${className || ''}`}
     {...props}
   >
-    <ChevronDown className="h-4 w-4" />
+    <ChevronDown />
   </SelectPrimitive.ScrollDownButton>
 ));
-SelectScrollDownButton.displayName =
-  SelectPrimitive.ScrollDownButton.displayName;
+SelectScrollDownButton.displayName = SelectPrimitive.ScrollDownButton.displayName;
 
 const SelectContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
->(({ className, children, position = "popper", ...props }, ref) => (
+>(({ className, children, position = 'popper', ...props }, ref) => (
   <SelectPrimitive.Portal>
     <SelectPrimitive.Content
       ref={ref}
-      className={`${selectContent} ${position === "popper" ? selectContentPopper : ''} ${className || ''}`}
+      className={`${selectContent} ${position === 'popper' ? selectContentPopper : ''} ${className || ''}`}
       position={position}
       {...props}
     >
       <SelectScrollUpButton />
       <SelectPrimitive.Viewport
-        className={`${selectViewport} ${position === "popper" ? selectViewportPopper : ''}`}
+        className={`${selectViewport} ${position === 'popper' ? selectViewportPopper : ''}`}
       >
         {children}
       </SelectPrimitive.Viewport>
@@ -95,11 +90,7 @@ const SelectLabel = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Label>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
 >(({ className, ...props }, ref) => (
-  <SelectPrimitive.Label
-    ref={ref}
-    className={`${selectLabel} ${className || ''}`}
-    {...props}
-  />
+  <SelectPrimitive.Label ref={ref} className={`${selectLabel} ${className || ''}`} {...props} />
 ));
 SelectLabel.displayName = SelectPrimitive.Label.displayName;
 
@@ -107,14 +98,10 @@ const SelectItem = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
 >(({ className, children, ...props }, ref) => (
-  <SelectPrimitive.Item
-    ref={ref}
-    className={`${selectItem} ${className || ''}`}
-    {...props}
-  >
+  <SelectPrimitive.Item ref={ref} className={`${selectItem} ${className || ''}`} {...props}>
     <span className={selectItemIndicator}>
       <SelectPrimitive.ItemIndicator>
-        <Check className="h-4 w-4" />
+        <Check size={16} />
       </SelectPrimitive.ItemIndicator>
     </span>
 
