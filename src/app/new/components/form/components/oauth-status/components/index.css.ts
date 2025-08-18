@@ -2,7 +2,9 @@ import { forMobile } from '@/lib/styles/breakpoints';
 import { style } from '@vanilla-extract/css';
 
 export const cardContainer = style({
-  flex: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
 });
 
 export const cardContent = style({

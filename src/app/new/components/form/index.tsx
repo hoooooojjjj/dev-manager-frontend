@@ -9,6 +9,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { X, Plus } from 'lucide-react';
 import { post } from '@/lib/api/client';
 import { useToast } from '@/lib/store/useUi';
@@ -151,11 +158,22 @@ export function IntakeForm() {
       {/* 기밀성 */}
       <div className={S.formSection}>
         <Label htmlFor="confidentiality">기밀성 수준 *</Label>
-        <select id="confidentiality" className={S.addFileButton} {...register('confidentiality')}>
-          <option value="public">공개</option>
-          <option value="internal">내부</option>
-          <option value="confidential">기밀</option>
-        </select>
+        <Select
+          value={watch('confidentiality')}
+          onValueChange={(value) =>
+            setValue('confidentiality', value as 'public' | 'internal' | 'confidential')
+          }
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="기밀성 수준을 선택하세요" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="public">공개</SelectItem>
+            <SelectItem value="internal">내부</SelectItem>
+            <SelectItem value="confidential">기밀</SelectItem>
+          </SelectContent>
+        </Select>
+        {errors.confidentiality && <p className={S.errorText}>{errors.confidentiality.message}</p>}
       </div>
 
       <Button type="submit" className={S.submitButton} disabled={createProject.isPending}>

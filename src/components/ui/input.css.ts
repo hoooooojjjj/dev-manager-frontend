@@ -17,21 +17,21 @@ export const input = style({
   boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
   transitionProperty: 'color, background-color, border-color',
   transitionDuration: '150ms',
-  
+  boxSizing: 'border-box',
   '::placeholder': {
     color: vars.colors.mutedForeground,
   },
-  
+
   ':focus-visible': {
     outline: 'none',
     boxShadow: `0 0 0 1px ${vars.colors.ring}`,
   },
-  
+
   ':disabled': {
     cursor: 'not-allowed',
     opacity: 0.5,
   },
-  
+
   selectors: {
     '&[type="file"]::file-selector-button': {
       border: 0,
@@ -41,7 +41,7 @@ export const input = style({
       color: vars.colors.foreground,
     },
   },
-  
+
   '@media': {
     [forDesktop]: {
       fontSize: '0.875rem',
