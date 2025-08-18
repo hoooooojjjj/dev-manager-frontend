@@ -1,6 +1,6 @@
 'use client';
 
-import * as S from './realtime-log.css';
+import * as S from './index.css';
 
 interface LogItemProps {
   time: string;

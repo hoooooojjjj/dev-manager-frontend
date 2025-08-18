@@ -2,7 +2,7 @@
 
 import { ProjectHeader } from './components/project-header';
 import { ActionCards } from './components/action-cards';
-import { RealtimeLog } from './components/realtime-log/realtime-log';
+import { RealtimeLog } from './components/realtime-log';
 import { Flex } from '@/components/ui/flex';
 
 interface ProjectDashboardProps {
