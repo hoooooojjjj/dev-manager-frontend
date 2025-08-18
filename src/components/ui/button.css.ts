@@ -16,7 +16,7 @@ const buttonBase = style({
   outline: 'none',
   textDecoration: 'none',
   ':focus-visible': {
-    outline: '2px solid hsl(var(--ring))',
+    outline: `2px solid ${vars.colors.ring}`,
     outlineOffset: '2px',
   },
 
@@ -30,45 +30,45 @@ export const buttonVariant = styleVariants({
   default: [
     buttonBase,
     {
-      backgroundColor: 'hsl(var(--primary))',
-      color: 'hsl(var(--primary-foreground))',
+      backgroundColor: vars.colors.primary,
+      color: vars.colors.primaryForeground,
       border: vars.colors.buttonBorder,
       ':hover': {
-        backgroundColor: 'hsl(var(--primary) / 0.9)',
+        backgroundColor: vars.colors.primary,
       },
     },
   ],
   destructive: [
     buttonBase,
     {
-      backgroundColor: 'hsl(var(--destructive))',
-      color: 'hsl(var(--destructive-foreground))',
+      backgroundColor: vars.colors.destructive,
+      color: vars.colors.destructiveForeground,
       boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
       ':hover': {
-        backgroundColor: 'hsl(var(--destructive) / 0.9)',
+        backgroundColor: vars.colors.destructive,
       },
     },
   ],
   outline: [
     buttonBase,
     {
-      border: '1px solid hsl(var(--input))',
-      backgroundColor: 'hsl(var(--background))',
+      border: `1px solid ${vars.colors.input}`,
+      backgroundColor: vars.colors.background,
       boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
       ':hover': {
-        backgroundColor: 'hsl(var(--accent))',
-        color: 'hsl(var(--accent-foreground))',
+        backgroundColor: vars.colors.accent,
+        color: vars.colors.accentForeground,
       },
     },
   ],
   secondary: [
     buttonBase,
     {
-      backgroundColor: 'hsl(var(--secondary))',
-      color: 'hsl(var(--secondary-foreground))',
+      backgroundColor: vars.colors.secondary,
+      color: vars.colors.secondaryForeground,
       boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
       ':hover': {
-        backgroundColor: 'hsl(var(--secondary) / 0.8)',
+        backgroundColor: vars.colors.secondary,
       },
     },
   ],
@@ -77,15 +77,15 @@ export const buttonVariant = styleVariants({
     {
       backgroundColor: 'transparent',
       ':hover': {
-        backgroundColor: 'hsl(var(--accent))',
-        color: 'hsl(var(--accent-foreground))',
+        backgroundColor: vars.colors.accent,
+        color: vars.colors.accentForeground,
       },
     },
   ],
   link: [
     buttonBase,
     {
-      color: 'hsl(var(--primary))',
+      color: vars.colors.primary,
       textUnderlineOffset: '4px',
       backgroundColor: 'transparent',
       ':hover': {
