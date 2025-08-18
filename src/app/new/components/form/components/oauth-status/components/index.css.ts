@@ -40,6 +40,12 @@ export const statusBadge = style({
   display: 'flex',
   alignItems: 'center',
   gap: '8px',
+  '@media': {
+    [forMobile]: {
+      flexDirection: 'column',
+      gap: '8px',
+    },
+  },
 });
 
 export const statusIcon = style({
