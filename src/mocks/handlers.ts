@@ -4,12 +4,8 @@
  */
 
 import { http, HttpResponse } from 'msw';
-import type { 
-  IntakeValues, 
-  Project, 
-  ResearchSource, 
-  CompetencyMap 
-} from '@/lib/api/schemas';
+import type { Project, ResearchSource, CompetencyMap } from '@/lib/api/schemas';
+import { IntakeValues } from '@/app/new/components/form/schemas';
 
 // Mock 데이터
 const mockProjects: Project[] = [];
@@ -34,18 +30,18 @@ export const handlers = [
   // OAuth 연결
   http.post('/api/v1/auth/connect/:provider', ({ params }) => {
     const provider = params.provider as string;
-    
+
     if (provider === 'github' || provider === 'notion') {
       mockOAuthStatus = {
         ...mockOAuthStatus,
         [provider]: true,
       };
-      
+
       return HttpResponse.json({
-        data: { 
-          connected: true, 
+        data: {
+          connected: true,
           provider,
-          redirectUrl: `https://${provider}.com/oauth/authorize?...` 
+          redirectUrl: `https://${provider}.com/oauth/authorize?...`,
         },
         correlationId: crypto.randomUUID(),
       });
@@ -65,8 +61,8 @@ export const handlers = [
 
   // 프로젝트 생성 (Intake)
   http.post('/api/v1/projects/intake', async ({ request }) => {
-    const body = await request.json() as IntakeValues;
-    
+    const body = (await request.json()) as IntakeValues;
+
     // 입력 검증
     if (!body.source_notion_url || !body.repo || !body.focus_files?.length) {
       return HttpResponse.json(
@@ -112,7 +108,7 @@ export const handlers = [
     // 새 프로젝트 생성
     const projectId = crypto.randomUUID();
     const jobId = crypto.randomUUID();
-    
+
     const newProject: Project = {
       id: projectId,
       user_id: 'mock-user-id',
@@ -131,7 +127,7 @@ export const handlers = [
 
     // 프로젝트 생성 후 자동으로 상태 변경 시뮬레이션
     setTimeout(() => {
-      const project = mockProjects.find(p => p.id === projectId);
+      const project = mockProjects.find((p) => p.id === projectId);
       if (project) {
         project.status = 'collecting';
         project.updated_at = new Date().toISOString();
@@ -139,7 +135,7 @@ export const handlers = [
     }, 2000);
 
     setTimeout(() => {
-      const project = mockProjects.find(p => p.id === projectId);
+      const project = mockProjects.find((p) => p.id === projectId);
       if (project) {
         project.status = 'researching';
         project.updated_at = new Date().toISOString();
@@ -157,28 +153,26 @@ export const handlers = [
     const url = new URL(request.url);
     const searchQuery = url.searchParams.get('search');
     const statusFilter = url.searchParams.get('status');
-    
+
     let filteredProjects = mockProjects;
-    
+
     // 검색 필터링
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      filteredProjects = filteredProjects.filter(project => 
-        project.title.toLowerCase().includes(query) ||
-        project.repo.toLowerCase().includes(query)
+      filteredProjects = filteredProjects.filter(
+        (project) =>
+          project.title.toLowerCase().includes(query) || project.repo.toLowerCase().includes(query)
       );
     }
-    
+
     // 상태 필터링
     if (statusFilter && statusFilter !== 'all') {
-      filteredProjects = filteredProjects.filter(project => 
-        project.status === statusFilter
-      );
+      filteredProjects = filteredProjects.filter((project) => project.status === statusFilter);
     }
-    
+
     // 최신순 정렬
-    filteredProjects.sort((a, b) => 
-      new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+    filteredProjects.sort(
+      (a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
     );
 
     return HttpResponse.json({
@@ -193,7 +187,7 @@ export const handlers = [
   // 프로젝트 상태 조회
   http.get('/api/v1/projects/:id/status', ({ params }) => {
     const projectId = params.id as string;
-    const project = mockProjects.find(p => p.id === projectId);
+    const project = mockProjects.find((p) => p.id === projectId);
 
     if (!project) {
       return HttpResponse.json(
@@ -217,7 +211,7 @@ export const handlers = [
   // 프로젝트 리서치 결과 조회
   http.get('/api/v1/projects/:id/research', ({ params }) => {
     const projectId = params.id as string;
-    const project = mockProjects.find(p => p.id === projectId);
+    const project = mockProjects.find((p) => p.id === projectId);
 
     if (!project) {
       return HttpResponse.json(
@@ -245,7 +239,7 @@ export const handlers = [
           published_at: '2024-01-10T00:00:00Z',
           summary_md: 'JWT 토큰의 보안 취약점과 최신 보안 가이드라인을 다룹니다.',
           weight: 0.9,
-          metadata: { authority_score: 9, recency_score: 8 }
+          metadata: { authority_score: 9, recency_score: 8 },
         },
         {
           id: '2',
@@ -258,8 +252,8 @@ export const handlers = [
           published_at: '2024-01-08T00:00:00Z',
           summary_md: 'JWT 토큰 기반 인증 구현, OAuth 2.0/OIDC 경험 요구',
           weight: 0.8,
-          metadata: { company_tier: '대기업', salary_range: '7000-9000만원' }
-        }
+          metadata: { company_tier: '대기업', salary_range: '7000-9000만원' },
+        },
       ],
       competency_map: [
         {
@@ -269,15 +263,15 @@ export const handlers = [
           evidence_ids: ['1', '2'],
           mapped_solutions: ['토큰 검증 로직', '리프레시 토큰 관리'],
           gaps: [],
-          learning_points: ['HS256 vs RS256 선택 기준', '토큰 만료 처리 패턴']
-        }
+          learning_points: ['HS256 vs RS256 선택 기준', '토큰 만료 처리 패턴'],
+        },
       ],
       summary: {
         totalSources: 2,
         authoritativeSources: 1,
         jobPostings: 1,
         coverageScore: 85,
-      }
+      },
     };
 
     return HttpResponse.json({
@@ -295,13 +289,15 @@ export const handlers = [
       project_id: 'mock-project-id',
       version: 1,
       title: '사용자 인증 시스템 JWT 보안 강화',
-      summary: '현재 사용자 인증 시스템의 JWT 구현에서 발견된 보안 취약점을 해결하고, 업계 표준에 맞는 보안 강화 방안을 적용합니다.',
-      current_behavior: '현재 인증 시스템은 JWT 액세스 토큰(24시간 만료)과 별도의 리프레시 토큰 없이 운영되고 있습니다.',
+      summary:
+        '현재 사용자 인증 시스템의 JWT 구현에서 발견된 보안 취약점을 해결하고, 업계 표준에 맞는 보안 강화 방안을 적용합니다.',
+      current_behavior:
+        '현재 인증 시스템은 JWT 액세스 토큰(24시간 만료)과 별도의 리프레시 토큰 없이 운영되고 있습니다.',
       root_cause: [
         {
           hypothesis: '초기 설계 시 보안 고려 부족',
-          evidence: ['code://auth/jwt.ts#L45-67', 'pr://owner/repo#123']
-        }
+          evidence: ['code://auth/jwt.ts#L45-67', 'pr://owner/repo#123'],
+        },
       ],
       solutions: [],
       learning_points: ['JWT 토큰 보안 모범 사례', 'OAuth 2.1 보안 가이드라인'],
@@ -333,16 +329,16 @@ export const mockUtils = {
   setOAuthStatus: (status: Partial<typeof mockOAuthStatus>) => {
     mockOAuthStatus = { ...mockOAuthStatus, ...status };
   },
-  
+
   // 프로젝트 상태 변경
   updateProjectStatus: (projectId: string, status: Project['status']) => {
-    const project = mockProjects.find(p => p.id === projectId);
+    const project = mockProjects.find((p) => p.id === projectId);
     if (project) {
       project.status = status;
       project.updated_at = new Date().toISOString();
     }
   },
-  
+
   // 샘플 프로젝트 생성
   addSampleProjects: () => {
     const sampleProjects: Project[] = [
@@ -399,14 +395,14 @@ export const mockUtils = {
         updated_at: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(), // 4일 전
       },
     ];
-    
-    sampleProjects.forEach(project => {
-      if (!mockProjects.find(p => p.id === project.id)) {
+
+    sampleProjects.forEach((project) => {
+      if (!mockProjects.find((p) => p.id === project.id)) {
         mockProjects.push(project);
       }
     });
   },
-  
+
   // 모든 모킹 데이터 초기화
   reset: () => {
     mockProjects.length = 0;

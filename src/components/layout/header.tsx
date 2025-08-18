@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { Menu, Moon, Sun, Github, X } from 'lucide-react';
 import { useUi } from '@/lib/store/useUi';
 import { gugi } from '@/lib/utils/font';
-import { useEffect } from 'react';
 import {
   header,
   headerContainer,

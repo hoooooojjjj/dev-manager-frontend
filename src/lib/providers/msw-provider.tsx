@@ -6,7 +6,6 @@
  */
 
 import { useEffect, useState } from 'react';
-import { loadingContainer, loadingContent, spinner, loadingText } from './msw-provider.css';
 
 interface MSWProviderProps {
   children: React.ReactNode;
