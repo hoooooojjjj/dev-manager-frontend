@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { LucideIcon } from 'lucide-react';
-import * as S from './action-cards.css';
+import * as S from './index.css';
 
 interface ActionCardProps {
   title: string;

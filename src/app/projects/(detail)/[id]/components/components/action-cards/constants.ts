@@ -1,16 +1,7 @@
-'use client';
-
 import { Search, FileText, MessageSquare, ExternalLink } from 'lucide-react';
-import { ActionCard } from './action-card';
-import * as S from './action-cards.css';
 
-interface ActionCardsProps {
-  projectId: string;
-  projectStatus: string;
-}
-
-export function ActionCards({ projectId, projectStatus }: ActionCardsProps) {
-  const actionCardsData = [
+export const getActionCardsData = (projectId: string, projectStatus: string) => {
+  return [
     {
       title: '리서치 결과',
       description: 'Brave 검색을 통한 권위 소스와 채용공고 분석 결과를 확인하세요.',
@@ -42,22 +33,4 @@ export function ActionCards({ projectId, projectStatus }: ActionCardsProps) {
       disabled: projectStatus !== 'done',
     },
   ];
-
-  return (
-    <div className={S.actionGrid}>
-      {actionCardsData.map((card, index) => (
-        <ActionCard
-          key={index}
-          title={card.title}
-          description={card.description}
-          icon={card.icon}
-          iconColorClass={card.iconColorClass}
-          buttonText={card.buttonText}
-          buttonIcon={card.buttonIcon}
-          href={card.href}
-          disabled={card.disabled}
-        />
-      ))}
-    </div>
-  );
-}
+};
