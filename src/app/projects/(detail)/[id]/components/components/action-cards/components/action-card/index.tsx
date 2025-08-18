@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { LucideIcon } from 'lucide-react';
 import * as S from './index.css';
+import Link from 'next/link';
 
 interface ActionCardProps {
   title: string;
@@ -49,14 +50,14 @@ export function ActionCard({
           <CardTitle className="text-lg">{title}</CardTitle>
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className={S.actionCardContent}>
         <p className={S.actionCardDescription}>{description}</p>
         {href ? (
           <Button variant="outline" className={S.actionButton} asChild disabled={disabled}>
-            <a href={href}>
+            <Link href={href}>
               <ButtonIcon className={S.buttonIcon} />
               {buttonText}
-            </a>
+            </Link>
           </Button>
         ) : (
           buttonContent

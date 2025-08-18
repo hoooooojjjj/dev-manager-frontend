@@ -19,7 +19,7 @@ const buttonBase = style({
     outline: `2px solid ${vars.colors.ring}`,
     outlineOffset: '2px',
   },
-
+  color: vars.colors.primary,
   ':disabled': {
     pointerEvents: 'none',
     opacity: 0.5,

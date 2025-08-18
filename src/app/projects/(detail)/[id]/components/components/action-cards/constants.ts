@@ -4,7 +4,7 @@ export const getActionCardsData = (projectId: string, projectStatus: string) => 
   return [
     {
       title: '리서치 결과',
-      description: 'Brave 검색을 통한 권위 소스와 채용공고 분석 결과를 확인하세요.',
+      description: '검색을 통한 권위 소스와 채용공고 분석 결과를 확인하세요.',
       icon: Search,
       iconColorClass: 'purple' as const,
       buttonText: '리서치 보기',

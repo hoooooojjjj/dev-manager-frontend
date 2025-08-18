@@ -5,12 +5,12 @@ export const actionCard = style({
   transition: 'box-shadow 150ms',
 
   ':hover': {
-    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)', // hover:shadow-md
+    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
   },
 });
 
 export const actionCardHeader = style({
-  paddingBottom: '0.75rem', // pb-3
+  paddingBottom: 16,
 });
 
 export const actionCardTitle = style({
@@ -21,14 +21,21 @@ export const actionCardTitle = style({
   lineHeight: '1.75rem',
 });
 
+export const actionCardContent = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 8,
+});
+
 export const actionCardDescription = style({
-  marginBottom: '1rem',
+  margin: 0,
   textAlign: 'center',
   fontSize: '0.875rem',
   color: vars.colors.mutedForeground,
 });
 
 export const actionButton = style({
+  padding: '0px !important',
   width: '100%',
 });
 
