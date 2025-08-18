@@ -45,31 +45,3 @@ export const statusIcon = style({
   height: '12px',
   width: '12px',
 });
-
-export const connectedTextLight = style({
-  color: '#1f2937', // text-gray-900
-});
-
-export const connectedTextDark = style({
-  color: '#f3f4f6', // dark:text-gray-100
-
-  '@media': {
-    '(prefers-color-scheme: dark)': {
-      color: '#f3f4f6',
-    },
-  },
-});
-
-export const disconnectedTextLight = style({
-  color: '#1f2937', // text-gray-900
-});
-
-export const disconnectedTextDark = style({
-  color: '#f3f4f6', // dark:text-gray-100
-
-  '@media': {
-    '(prefers-color-scheme: dark)': {
-      color: '#f3f4f6',
-    },
-  },
-});

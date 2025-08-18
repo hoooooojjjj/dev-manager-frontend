@@ -10,11 +10,12 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { X, Plus } from 'lucide-react';
-import { IntakeSchema, type IntakeValues } from '@/lib/api/schemas';
 import { post } from '@/lib/api/client';
 import { useToast } from '@/lib/store/useUi';
-import { OAuthStatus } from './components/oauth-status/oauth-status';
+import { OAuthStatus } from './components/oauth-status';
 import * as S from './index.css';
+import { addFocusFile, removeFocusFile } from './utils';
+import { IntakeSchema, IntakeValues } from './schemas';
 
 export function IntakeForm() {
   const router = useRouter();
@@ -36,20 +37,6 @@ export function IntakeForm() {
   });
 
   const focusFiles = watch('focus_files') || [];
-
-  const addFocusFile = () => {
-    if (focusFileInput.trim() && !focusFiles.includes(focusFileInput.trim())) {
-      setValue('focus_files', [...focusFiles, focusFileInput.trim()]);
-      setFocusFileInput('');
-    }
-  };
-
-  const removeFocusFile = (index: number) => {
-    setValue(
-      'focus_files',
-      focusFiles.filter((_, i) => i !== index)
-    );
-  };
 
   // 프로젝트 생성 mutation
   const createProject = useMutation({
@@ -108,11 +95,16 @@ export function IntakeForm() {
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 e.preventDefault();
-                addFocusFile();
+                addFocusFile(focusFileInput, focusFiles, setValue, setFocusFileInput);
               }
             }}
           />
-          <Button type="button" onClick={addFocusFile} size="icon" variant="outline">
+          <Button
+            type="button"
+            onClick={() => addFocusFile(focusFileInput, focusFiles, setValue, setFocusFileInput)}
+            size="icon"
+            variant="outline"
+          >
             <Plus className={S.buttonIcon} />
           </Button>
         </div>
@@ -124,7 +116,7 @@ export function IntakeForm() {
                 {file}
                 <button
                   type="button"
-                  onClick={() => removeFocusFile(index)}
+                  onClick={() => removeFocusFile(index, focusFiles, setValue)}
                   className={S.removeButton}
                 >
                   <X className={S.removeIcon} />

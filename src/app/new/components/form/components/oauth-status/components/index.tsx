@@ -1,19 +1,8 @@
-'use client';
-
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ExternalLink, Github, FileText, LucideIcon } from 'lucide-react';
-import {
-  cardContainer,
-  cardContent,
-  cardInfo,
-  providerIcon,
-  providerName,
-  statusBadge,
-  statusIcon,
-  connectedTextLight
-} from './oauth-card.css';
+import * as S from './index.css';
+import { Button } from '@/components/ui/button';
 
 interface OAuthCardProps {
   provider: 'github' | 'notion';
@@ -21,7 +10,6 @@ interface OAuthCardProps {
   isLoading?: boolean;
   onConnect: () => void;
   isPending?: boolean;
-  className?: string;
 }
 
 const PROVIDER_CONFIG: Record<
@@ -29,28 +17,24 @@ const PROVIDER_CONFIG: Record<
   {
     icon: LucideIcon;
     label: string;
-    color: string;
   }
 > = {
   github: {
     icon: Github,
     label: 'GitHub',
-    color: connectedTextLight,
   },
   notion: {
     icon: FileText,
     label: 'Notion',
-    color: connectedTextLight,
   },
 };
 
-export function OAuthCard({
+export default function OAuthCard({
   provider,
   isConnected,
   isLoading = false,
   onConnect,
   isPending = false,
-  className = '',
 }: OAuthCardProps) {
   const config = PROVIDER_CONFIG[provider];
   const Icon = config.icon;
@@ -66,14 +50,14 @@ export function OAuthCard({
   };
 
   return (
-    <Card className={`${cardContainer} ${className}`}>
-      <CardContent className={cardContent}>
-        <div className={cardInfo}>
-          <Icon className={`${providerIcon} ${config.color}`} />
-          <span className={providerName}>{config.label}</span>
+    <Card className={S.cardContainer}>
+      <CardContent className={S.cardContent}>
+        <div className={S.cardInfo}>
+          <Icon className={S.providerIcon} />
+          <span className={S.providerName}>{config.label}</span>
         </div>
 
-        <div className={statusBadge}>
+        <div className={S.statusBadge}>
           <Badge variant={getStatusVariant()}>{getStatusText()}</Badge>
 
           {!isConnected && (
@@ -84,7 +68,7 @@ export function OAuthCard({
               onClick={onConnect}
               disabled={isPending || isLoading}
             >
-              <ExternalLink className={statusIcon} />
+              <ExternalLink className={S.statusIcon} />
               연결
             </Button>
           )}

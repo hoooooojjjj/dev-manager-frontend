@@ -4,8 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { RefreshCw } from 'lucide-react';
 import { useOAuthStatus, useOAuthConnect } from '@/lib/hooks/useOAuth';
-import { OAuthCard } from '@/components/auth/oauth-card';
-import * as S from './oauth-status.css';
+import * as S from './index.css';
+import OAuthCard from './components';
 
 export function OAuthStatus() {
   // OAuth 상태 조회
