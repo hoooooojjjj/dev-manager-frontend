@@ -1,14 +1,14 @@
-import { IntakeForm } from "@/components/forms/intake-form";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { container, formContainer, headerSection, title, description } from "./page.css";
+import { IntakeForm } from '@/app/new/components/form';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import * as S from './page.css';
 
 export default function NewProjectPage() {
   return (
-    <div className={container}>
-      <div className={formContainer}>
-        <div className={headerSection}>
-          <h1 className={title}>새 프로젝트 생성</h1>
-          <p className={description}>
+    <div className={S.container}>
+      <div className={S.formContainer}>
+        <div className={S.headerSection}>
+          <h1 className={S.title}>새 프로젝트 생성</h1>
+          <p className={S.description}>
             Notion PRD와 GitHub 리포지토리 정보를 입력하여 개발 명세서 생성을 시작하세요
           </p>
         </div>

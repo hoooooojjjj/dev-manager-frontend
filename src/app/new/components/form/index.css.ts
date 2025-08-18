@@ -1,32 +1,10 @@
-import { style, keyframes } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 import { vars } from '@/lib/styles/theme.css';
-
-const spin = keyframes({
-  '0%': { transform: 'rotate(0deg)' },
-  '100%': { transform: 'rotate(360deg)' },
-});
 
 export const container = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '24px',
-});
-
-export const headerSection = style({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '12px',
-});
-
-export const headerActions = style({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-});
-
-export const oauthSection = style({
-  display: 'flex',
-  gap: '12px',
 });
 
 export const formSection = style({
@@ -99,13 +77,6 @@ export const addFileButton = style({
 
 export const submitButton = style({
   width: '100%',
-});
-
-export const loadingSpinner = style({
-  marginRight: '8px',
-  height: '16px',
-  width: '16px',
-  animation: `${spin} 1s linear infinite`,
 });
 
 export const buttonIcon = style({
