@@ -1,4 +1,5 @@
 import { forDesktop } from '@/lib/styles/breakpoints';
+import { vars } from '@/lib/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
 export const textarea = style({
@@ -6,7 +7,7 @@ export const textarea = style({
   minHeight: '60px',
   width: '100%',
   borderRadius: '6px',
-  border: '1px solid hsl(var(--input))',
+  border: `1px solid ${vars.colors.input}`,
   backgroundColor: 'transparent',
   paddingLeft: '12px',
   paddingRight: '12px',
@@ -15,10 +16,10 @@ export const textarea = style({
   fontSize: '16px',
   boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
   '::placeholder': {
-    color: 'hsl(var(--muted-foreground))',
+    color: vars.colors.mutedForeground,
   },
   ':focus-visible': {
-    outline: '1px solid hsl(var(--ring))',
+    outline: `1px solid ${vars.colors.ring}`,
     outlineOffset: '1px',
   },
   ':disabled': {

@@ -1,3 +1,4 @@
+import { vars } from '@/lib/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
 export const checkboxRoot = style({
@@ -5,10 +6,10 @@ export const checkboxRoot = style({
   width: '16px',
   flexShrink: 0,
   borderRadius: '2px',
-  border: '1px solid hsl(var(--primary))',
+  border: `1px solid ${vars.colors.primary}`,
   boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
   ':focus-visible': {
-    outline: '1px solid hsl(var(--ring))',
+    outline: `1px solid ${vars.colors.ring}`,
     outlineOffset: '1px',
   },
   ':disabled': {
@@ -17,8 +18,8 @@ export const checkboxRoot = style({
   },
   selectors: {
     '&[data-state=checked]': {
-      backgroundColor: 'hsl(var(--primary))',
-      color: 'hsl(var(--primary-foreground))',
+      backgroundColor: vars.colors.primary,
+      color: vars.colors.primaryForeground,
     },
   },
 });

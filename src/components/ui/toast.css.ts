@@ -1,4 +1,5 @@
 import { forDesktop } from '@/lib/styles/breakpoints';
+import { vars } from '@/lib/styles/theme.css';
 import { style, styleVariants } from '@vanilla-extract/css';
 
 const toastBase = style({
@@ -44,17 +45,17 @@ export const toastVariant = styleVariants({
   default: [
     toastBase,
     {
-      borderColor: 'hsl(var(--border))',
-      backgroundColor: 'hsl(var(--background))',
-      color: 'hsl(var(--foreground))',
+      borderColor: vars.colors.border,
+      backgroundColor: vars.colors.background,
+      color: vars.colors.foreground,
     },
   ],
   destructive: [
     toastBase,
     {
-      borderColor: 'hsl(var(--destructive))',
-      backgroundColor: 'hsl(var(--destructive))',
-      color: 'hsl(var(--destructive-foreground))',
+      borderColor: vars.colors.destructive,
+      backgroundColor: vars.colors.destructive,
+      color: vars.colors.destructiveForeground,
     },
   ],
   success: [
@@ -110,16 +111,16 @@ export const toastClose = style({
   top: '4px',
   borderRadius: '6px',
   padding: '4px',
-  color: 'hsl(var(--foreground) / 0.5)',
+  color: vars.colors.foreground,
   opacity: 0,
   transition: 'opacity 0.2s',
   ':hover': {
-    color: 'hsl(var(--foreground))',
+    color: vars.colors.foreground,
     opacity: 1,
   },
   ':focus': {
     opacity: 1,
-    outline: '1px solid hsl(var(--ring))',
+    outline: `1px solid ${vars.colors.ring}`,
     outlineOffset: '1px',
   },
   selectors: {

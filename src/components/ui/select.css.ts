@@ -1,4 +1,5 @@
 import { style } from '@vanilla-extract/css';
+import { vars } from '@/lib/styles/theme.css';
 
 export const selectTrigger = style({
   display: 'flex',
@@ -7,7 +8,7 @@ export const selectTrigger = style({
   alignItems: 'center',
   justifyContent: 'space-between',
   borderRadius: '6px',
-  border: '1px solid hsl(var(--input))',
+  border: vars.colors.input,
   backgroundColor: 'transparent',
   paddingLeft: '12px',
   paddingRight: '12px',
@@ -16,10 +17,10 @@ export const selectTrigger = style({
   fontSize: '14px',
   boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
   '::placeholder': {
-    color: 'hsl(var(--muted-foreground))',
+    color: vars.colors.mutedForeground,
   },
   ':focus': {
-    outline: '1px solid hsl(var(--ring))',
+    outline: `1px solid ${vars.colors.ring}`,
   },
   ':disabled': {
     cursor: 'not-allowed',
@@ -43,9 +44,9 @@ export const selectContent = style({
   minWidth: '128px',
   overflow: 'hidden',
   borderRadius: '6px',
-  border: '1px solid hsl(var(--border))',
-  backgroundColor: 'hsl(var(--popover))',
-  color: 'hsl(var(--popover-foreground))',
+  border: `1px solid ${vars.colors.border}`,
+  backgroundColor: vars.colors.popover,
+  color: vars.colors.popoverForeground,
   boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
   selectors: {
     '&[data-state=open]': {
@@ -124,8 +125,8 @@ export const selectItem = style({
   fontSize: '14px',
   outline: 'none',
   ':focus': {
-    backgroundColor: 'hsl(var(--accent))',
-    color: 'hsl(var(--accent-foreground))',
+    backgroundColor: vars.colors.accent,
+    color: vars.colors.accentForeground,
   },
   selectors: {
     '&[data-disabled]': {
@@ -151,5 +152,5 @@ export const selectSeparator = style({
   marginTop: '4px',
   marginBottom: '4px',
   height: '1px',
-  backgroundColor: 'hsl(var(--muted))',
+  backgroundColor: vars.colors.muted,
 });

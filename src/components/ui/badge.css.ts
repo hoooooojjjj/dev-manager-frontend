@@ -1,4 +1,5 @@
 import { style, styleVariants } from '@vanilla-extract/css';
+import { vars } from '@/lib/styles/theme.css';
 
 const badgeBase = style({
   display: 'inline-flex',
@@ -14,40 +15,51 @@ const badgeBase = style({
   transition: 'colors 0.2s',
   outline: 'none',
   ':focus': {
-    outline: '2px solid hsl(var(--ring))',
+    outline: `2px solid ${vars.colors.ring}`,
     outlineOffset: '2px',
   },
 });
 
 export const badgeVariant = styleVariants({
-  default: [badgeBase, {
-    borderColor: 'transparent',
-    backgroundColor: 'hsl(var(--primary))',
-    color: 'hsl(var(--primary-foreground))',
-    boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-    ':hover': {
-      backgroundColor: 'hsl(var(--primary) / 0.8)',
+  default: [
+    badgeBase,
+    {
+      borderColor: 'transparent',
+      backgroundColor: vars.colors.primary,
+      color: vars.colors.primaryForeground,
+      boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+      ':hover': {
+        backgroundColor: vars.colors.primary,
+      },
     },
-  }],
-  secondary: [badgeBase, {
-    borderColor: 'transparent',
-    backgroundColor: 'hsl(var(--secondary))',
-    color: 'hsl(var(--secondary-foreground))',
-    ':hover': {
-      backgroundColor: 'hsl(var(--secondary) / 0.8)',
+  ],
+  secondary: [
+    badgeBase,
+    {
+      borderColor: 'transparent',
+      backgroundColor: vars.colors.secondary,
+      color: vars.colors.secondaryForeground,
+      ':hover': {
+        backgroundColor: vars.colors.secondary,
+      },
     },
-  }],
-  destructive: [badgeBase, {
-    borderColor: 'transparent',
-    backgroundColor: 'hsl(var(--destructive))',
-    color: 'hsl(var(--destructive-foreground))',
-    boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-    ':hover': {
-      backgroundColor: 'hsl(var(--destructive) / 0.8)',
+  ],
+  destructive: [
+    badgeBase,
+    {
+      borderColor: 'transparent',
+      backgroundColor: vars.colors.destructive,
+      color: vars.colors.destructiveForeground,
+      boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+      ':hover': {
+        backgroundColor: vars.colors.destructive,
+      },
     },
-  }],
-  outline: [badgeBase, {
-    color: 'hsl(var(--foreground))',
-  }],
+  ],
+  outline: [
+    badgeBase,
+    {
+      color: vars.colors.foreground,
+    },
+  ],
 });
-
