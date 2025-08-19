@@ -24,7 +24,7 @@ export const actionCardTitle = style({
 export const actionCardContent = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: 8,
+  gap: 16,
 });
 
 export const actionCardDescription = style({

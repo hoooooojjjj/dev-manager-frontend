@@ -12,7 +12,7 @@ export const actionGrid = style({
       gridTemplateColumns: 'repeat(2, 1fr)',
     },
     [forDesktop]: {
-      gridTemplateColumns: 'repeat(3, 1fr)',
+      gridTemplateColumns: 'repeat(2, 1fr)',
     },
   },
 });

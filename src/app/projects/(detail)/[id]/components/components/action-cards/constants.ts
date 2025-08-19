@@ -1,4 +1,4 @@
-import { Search, FileText, MessageSquare, ExternalLink } from 'lucide-react';
+import { Search, FileText, ExternalLink } from 'lucide-react';
 
 export const getActionCardsData = (projectId: string, projectStatus: string) => {
   return [
@@ -20,16 +20,6 @@ export const getActionCardsData = (projectId: string, projectStatus: string) => 
       buttonText: projectStatus === 'done' ? '명세서 보기' : '초안 생성 중...',
       buttonIcon: FileText,
       href: projectStatus === 'done' ? `/drafts/${projectId}` : undefined,
-      disabled: projectStatus !== 'done',
-    },
-    {
-      title: '리뷰 & 수정',
-      description: '섹션별 수정 지시와 Diff 확인을 통해 명세서를 개선하세요.',
-      icon: MessageSquare,
-      iconColorClass: 'green' as const,
-      buttonText: '리뷰 시작',
-      buttonIcon: MessageSquare,
-      href: projectStatus === 'done' ? `/drafts/${projectId}/review` : undefined,
       disabled: projectStatus !== 'done',
     },
   ];
