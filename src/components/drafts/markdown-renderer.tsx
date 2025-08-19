@@ -5,9 +5,8 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypePrism from 'rehype-prism-plus';
 import { Copy, Check } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import './markdown-renderer.css';
+import * as S from './markdown-renderer.css';
 
 interface MarkdownRendererProps {
   content: string;
@@ -23,9 +22,8 @@ interface CodeBlockProps {
 function CodeBlock({ children, className, showHeader = false }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
 
-  // 언어 추출 (className="language-typescript" 형태)
   const language = className?.replace('language-', '') || 'typescript';
-  const code = children.replace(/\n$/, ''); // 마지막 개행 제거
+  const code = (typeof children === 'string' ? children : String(children)).replace(/\n$/, '');
 
   const handleCopy = async () => {
     try {
@@ -38,34 +36,51 @@ function CodeBlock({ children, className, showHeader = false }: CodeBlockProps) 
   };
 
   return (
-    <div className="notion-code-block">
+    <div className={S.codeBlockContainer}>
       {showHeader && (
-        <div className="notion-code-header">
-          <Badge variant="secondary" className="notion-language-badge">
+        <div className={S.codeHeader}>
+          <Badge variant="secondary" className={S.languageBadge}>
             {language}
           </Badge>
-          <Button
-            variant="ghost"
-            size="sm"
+          <button
             onClick={handleCopy}
-            className="notion-copy-button"
+            className={S.copyButton}
             aria-label={copied ? '복사됨!' : '코드 복사'}
           >
             {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-            <span className="ml-1">{copied ? '복사됨!' : '복사'}</span>
-          </Button>
+            <span>{copied ? '복사됨!' : '복사'}</span>
+          </button>
         </div>
       )}
-      <pre className={`notion-pre ${className || ''}`}>
-        <code className="notion-code">{children}</code>
-      </pre>
+
+      {/* ✨ 가로 스크롤 전용 래퍼 (노션풍) */}
+      <div className={S.codeScrollArea} role="region" aria-label="코드 스니펫 스크롤 영역">
+        {/* pre는 내용 너비만큼 늘어나고, 바깥 래퍼가 가로 스크롤을 담당 */}
+        <pre className={`${S.codeBlockPre} ${className || ''}`}>
+          <code className={S.codeBlockCode}>{children}</code>
+        </pre>
+
+        {/* 스크롤 힌트용 페이드 (시각적) */}
+        <span className={S.scrollFadeLeft} aria-hidden />
+        <span className={S.scrollFadeRight} aria-hidden />
+      </div>
+
+      {/* 헤더가 없을 때는 플로팅 복사 버튼 */}
+      {!showHeader && (
+        <button
+          onClick={handleCopy}
+          className={S.floatingCopyButton}
+          aria-label={copied ? '복사됨!' : '코드 복사'}
+        >
+          {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+        </button>
+      )}
     </div>
   );
 }
-
 export function MarkdownRenderer({ content, showCodeHeader = false }: MarkdownRendererProps) {
   return (
-    <div className="notion-markdown">
+    <div className={S.markdownContainer}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[
@@ -106,7 +121,7 @@ export function MarkdownRenderer({ content, showCodeHeader = false }: MarkdownRe
             }
             // 인라인 코드
             return (
-              <code className="notion-inline-code" {...props}>
+              <code className={S.inlineCode} {...props}>
                 {children}
               </code>
             );
@@ -114,112 +129,100 @@ export function MarkdownRenderer({ content, showCodeHeader = false }: MarkdownRe
 
           // 헤딩
           h1: ({ children, ...props }) => (
-            <h1 className="notion-h1" {...props}>
+            <h1 className={S.heading1} {...props}>
               {children}
             </h1>
           ),
           h2: ({ children, ...props }) => (
-            <h2 className="notion-h2" {...props}>
+            <h2 className={S.heading2} {...props}>
               {children}
             </h2>
           ),
           h3: ({ children, ...props }) => (
-            <h3 className="notion-h3" {...props}>
+            <h3 className={S.heading3} {...props}>
               {children}
             </h3>
           ),
           h4: ({ children, ...props }) => (
-            <h4 className="notion-h4" {...props}>
+            <h4 className={S.heading4} {...props}>
               {children}
             </h4>
           ),
           h5: ({ children, ...props }) => (
-            <h5 className="notion-h5" {...props}>
+            <h5 className={S.heading5} {...props}>
               {children}
             </h5>
           ),
           h6: ({ children, ...props }) => (
-            <h6 className="notion-h6" {...props}>
+            <h6 className={S.heading6} {...props}>
               {children}
             </h6>
           ),
 
           // 단락
           p: ({ children, ...props }) => (
-            <p className="notion-paragraph" {...props}>
+            <p className={S.paragraph} {...props}>
               {children}
             </p>
           ),
 
           // 리스트
           ul: ({ children, ...props }) => (
-            <ul className="notion-ul" {...props}>
+            <ul className={S.ul} {...props}>
               {children}
             </ul>
           ),
           ol: ({ children, ...props }) => (
-            <ol className="notion-ol" {...props}>
+            <ol className={S.ol} {...props}>
               {children}
             </ol>
           ),
           li: ({ children, ...props }) => (
-            <li className="notion-li" {...props}>
+            <li className={S.li} {...props}>
               {children}
             </li>
           ),
 
           // 강조
           strong: ({ children, ...props }) => (
-            <strong className="notion-bold" {...props}>
+            <strong className={S.bold} {...props}>
               {children}
             </strong>
           ),
           em: ({ children, ...props }) => (
-            <em className="notion-italic" {...props}>
+            <em className={S.italic} {...props}>
               {children}
             </em>
           ),
 
           // 인용구
           blockquote: ({ children, ...props }) => (
-            <blockquote className="notion-blockquote" {...props}>
+            <blockquote className={S.blockquote} {...props}>
               {children}
             </blockquote>
           ),
 
           // 수평선
-          hr: ({ ...props }) => <hr className="notion-hr" {...props} />,
+          hr: ({ ...props }) => <hr className={S.hr} {...props} />,
 
           // 테이블
           table: ({ children, ...props }) => (
-            <div className="notion-table-wrapper">
-              <table className="notion-table" {...props}>
+            <div className={S.tableWrapper}>
+              <table className={S.table} {...props}>
                 {children}
               </table>
             </div>
           ),
-          thead: ({ children, ...props }) => (
-            <thead className="notion-thead" {...props}>
-              {children}
-            </thead>
-          ),
-          tbody: ({ children, ...props }) => (
-            <tbody className="notion-tbody" {...props}>
-              {children}
-            </tbody>
-          ),
-          tr: ({ children, ...props }) => (
-            <tr className="notion-tr" {...props}>
-              {children}
-            </tr>
-          ),
+          thead: ({ children, ...props }) => <thead {...props}>{children}</thead>,
+          tbody: ({ children, ...props }) => <tbody {...props}>{children}</tbody>,
+          tr: ({ children, ...props }) => <tr {...props}>{children}</tr>,
           th: ({ children, ...props }) => (
-            <th className="notion-th" {...props}>
+            <th className={S.th} {...props}>
               {children}
             </th>
           ),
           td: ({ children, ...props }) => (
-            <td className="notion-td" {...props}>
+            <td className={S.td} {...props}>
               {children}
             </td>
           ),
