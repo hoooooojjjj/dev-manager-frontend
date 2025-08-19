@@ -7,25 +7,6 @@ export const markdownContainer = style({
   color: vars.colors.foreground,
   fontSize: '16px',
   fontFamily: vars.fontFamily.sans,
-  minWidth: 0, // ✅ 그리드/플렉스 컨텍스트에서 가로 오버플로우 허용
-});
-
-export const codeScrollArea = style({
-  position: 'relative',
-  overflowX: 'auto', // 가로 스크롤 책임
-  overflowY: 'hidden',
-  width: '100%', // 부모 기준 꽉 채움
-  maxWidth: '100%',
-  WebkitOverflowScrolling: 'touch',
-
-  // 가로 스크롤바 스타일
-  selectors: {
-    '&::-webkit-scrollbar': { height: '8px' },
-    '&::-webkit-scrollbar-thumb': {
-      background: vars.colors.border,
-      borderRadius: '4px',
-    },
-  },
 });
 
 // 헤딩 스타일
@@ -103,56 +84,31 @@ export const li = style({
   lineHeight: 1.6,
 });
 
-// 리스트 아이템 내 단락 스타일
-globalStyle(`${ul} li p, ${ol} li p`, {
-  margin: 0,
-});
-
 // 인라인 코드
 export const inlineCode = style({
-  marginRight: '0.25em',
-  marginLeft: '0.25em',
   backgroundColor: vars.colors.muted,
-  border: 'none',
   borderRadius: '4px',
-  color: 'hsl(0 84.2% 60.2%)',
-  fontFamily: '"JetBrains Mono", "Fira Code", Menlo, Consolas, "Courier New", monospace',
+  color: '#e11d48',
+  fontFamily: '"JetBrains Mono", "Fira Code", Menlo, Consolas, monospace',
   fontSize: '0.9em',
   padding: '0.15em 0.4em',
   fontWeight: 500,
-  display: 'inline-block',
-  verticalAlign: 'baseline',
+  whiteSpace: 'pre-wrap', // ✅ 줄바꿈 허용
+  wordBreak: 'break-word', // ✅ 모바일에서 잘림 방지
 });
 
+// 코드 블록 컨테이너
 export const codeBlockContainer = style({
   margin: '1.5em 0',
   borderRadius: '8px',
   backgroundColor: vars.colors.card,
   border: `1px solid ${vars.colors.border}`,
-  boxShadow: '0 2px 8px rgba(0,0,0,.06)',
-  overflow: 'hidden', // 카드 바깥 삐져나옴 방지
+  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)',
+  overflow: 'hidden',
+  position: 'relative',
 });
 
-export const scrollFadeLeft = style({
-  position: 'absolute',
-  top: 0,
-  bottom: 0,
-  left: 0,
-  width: '24px',
-  background: 'linear-gradient(to right, rgba(0,0,0,0.05), transparent)',
-  pointerEvents: 'none',
-});
-export const scrollFadeRight = style({
-  position: 'absolute',
-  top: 0,
-  bottom: 0,
-  right: 0,
-  width: '24px',
-  background: 'linear-gradient(to left, rgba(0,0,0,0.05), transparent)',
-  pointerEvents: 'none',
-});
-
-/** 헤더(언어/복사 버튼) 그대로 사용 가능 */
+// 코드 헤더
 export const codeHeader = style({
   display: 'flex',
   alignItems: 'center',
@@ -160,18 +116,10 @@ export const codeHeader = style({
   padding: '10px 16px',
   backgroundColor: vars.colors.muted,
   borderBottom: `1px solid ${vars.colors.border}`,
-  fontSize: '12px',
-});
-
-export const codeBlockPre = style({
-  display: 'inline-block', // ✅ 내용만큼 확장
-  minWidth: 'auto',
-  whiteSpace: 'pre',
-  overflowX: 'visible', // 스크롤은 부모가 담당
 });
 
 export const languageBadge = style({
-  fontFamily: '"JetBrains Mono", "Fira Code", Menlo, Consolas, "Courier New", monospace',
+  fontFamily: '"JetBrains Mono", "Fira Code", Menlo, Consolas, monospace',
   fontSize: '11px',
   fontWeight: 500,
   textTransform: 'lowercase',
@@ -182,18 +130,17 @@ export const languageBadge = style({
 });
 
 export const copyButton = style({
-  fontSize: '12px',
-  padding: '4px 8px',
-  height: 'auto',
-  color: vars.colors.mutedForeground,
-  background: 'transparent',
-  border: 'none',
-  borderRadius: '3px',
-  transition: 'all 0.2s ease',
-  cursor: 'pointer',
   display: 'flex',
   alignItems: 'center',
   gap: '4px',
+  padding: '4px 8px',
+  fontSize: '12px',
+  color: vars.colors.mutedForeground,
+  backgroundColor: 'transparent',
+  border: 'none',
+  borderRadius: '4px',
+  cursor: 'pointer',
+  transition: 'all 0.2s ease',
 
   ':hover': {
     backgroundColor: vars.colors.accent,
@@ -206,42 +153,63 @@ export const copyButton = style({
   },
 });
 
-/** code는 별도 줄바꿈/폰트만 유지 */
-export const codeBlockCode = style({
-  fontFamily: 'inherit',
-  fontSize: 'inherit',
-  lineHeight: 'inherit',
-  background: 'transparent',
+// 코드 블록 프리
+export const codeBlockPre = style({
+  margin: 0,
+  padding: '20px',
+  overflow: 'auto',
+  backgroundColor: 'transparent',
+  fontFamily: '"JetBrains Mono", "Fira Code", Menlo, Consolas, monospace',
+  fontSize: '13px',
+  lineHeight: 1.6,
+  whiteSpace: 'pre',
+  '::-webkit-scrollbar': {
+    height: '6px',
+    width: '6px',
+  },
+  '::-webkit-scrollbar-track': {
+    backgroundColor: 'transparent',
+  },
+  '::-webkit-scrollbar-thumb': {
+    backgroundColor: vars.colors.border,
+    borderRadius: '3px',
+  },
 });
 
-/** 헤더가 없을 때 우상단에 뜨는 복사 버튼 */
+export const codeBlockCode = style({
+  fontFamily: '"JetBrains Mono", "Fira Code", Menlo, Consolas, monospace',
+  fontSize: '14px',
+  lineHeight: 1.6,
+  whiteSpace: 'pre', // ✅ 줄바꿈 그대로
+  display: 'block',
+});
+// 플로팅 복사 버튼
 export const floatingCopyButton = style({
   position: 'absolute',
-  top: 10,
-  right: 10,
-  backgroundColor: 'rgba(0,0,0,.6)',
+  top: '12px',
+  right: '12px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '6px',
+  backgroundColor: 'rgba(0, 0, 0, 0.6)',
   color: 'white',
   border: 'none',
   borderRadius: '6px',
-  padding: '6px',
   cursor: 'pointer',
   opacity: 0.6,
-  transition: 'opacity .2s ease, transform .1s ease',
-  zIndex: 1,
-  '@media': {
-    '(prefers-color-scheme: dark)': {
-      backgroundColor: 'rgba(0,0,0,.5)',
-    },
-  },
-  selectors: {
-    '&:hover': { opacity: 1, transform: 'scale(1.05)' },
-    '&:focus': { outline: `2px solid ${vars.colors.ring}`, outlineOffset: '2px' },
-  },
-});
+  transition: 'opacity 0.2s ease, transform 0.1s ease',
+  zIndex: 10,
 
-// 스크롤바 호버 스타일
-globalStyle(`${codeBlockPre}::-webkit-scrollbar-thumb:hover`, {
-  backgroundColor: vars.colors.mutedForeground,
+  ':hover': {
+    opacity: 1,
+    transform: 'scale(1.05)',
+  },
+
+  ':focus': {
+    outline: `2px solid ${vars.colors.ring}`,
+    outlineOffset: '2px',
+  },
 });
 
 // 인용구
@@ -286,15 +254,19 @@ export const td = style({
   textAlign: 'left',
 });
 
-// Prism.js 토큰 스타일 전역 설정
+// 전역 스타일
+globalStyle(`${ul} li p, ${ol} li p`, {
+  margin: 0,
+});
+
+globalStyle(`${codeBlockPre}::-webkit-scrollbar-thumb:hover`, {
+  backgroundColor: vars.colors.mutedForeground,
+});
+
+// Prism.js 토큰 스타일
 globalStyle('.token.comment, .token.prolog, .token.doctype, .token.cdata', {
   color: vars.colors.mutedForeground,
   fontStyle: 'italic',
-});
-
-globalStyle('pre[class*="language-"]', {
-  whiteSpace: 'pre !important',
-  overflowX: 'auto',
 });
 
 globalStyle('.token.punctuation', {
@@ -384,4 +356,9 @@ globalStyle(`${heading3}`, {
       fontSize: '1.2em',
     },
   },
+});
+
+globalStyle('pre[class*="language-"]', {
+  whiteSpace: 'pre !important',
+  overflowX: 'auto',
 });

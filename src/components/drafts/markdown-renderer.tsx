@@ -23,7 +23,7 @@ function CodeBlock({ children, className, showHeader = false }: CodeBlockProps) 
   const [copied, setCopied] = useState(false);
 
   const language = className?.replace('language-', '') || 'typescript';
-  const code = (typeof children === 'string' ? children : String(children)).replace(/\n$/, '');
+  const code = String(children).replace(/\n$/, '');
 
   const handleCopy = async () => {
     try {
@@ -53,19 +53,10 @@ function CodeBlock({ children, className, showHeader = false }: CodeBlockProps) 
         </div>
       )}
 
-      {/* ✨ 가로 스크롤 전용 래퍼 (노션풍) */}
-      <div className={S.codeScrollArea} role="region" aria-label="코드 스니펫 스크롤 영역">
-        {/* pre는 내용 너비만큼 늘어나고, 바깥 래퍼가 가로 스크롤을 담당 */}
-        <pre className={`${S.codeBlockPre} ${className || ''}`}>
-          <code className={S.codeBlockCode}>{children}</code>
-        </pre>
+      <pre className={`${S.codeBlockPre} ${className || ''}`}>
+        <code className={S.codeBlockCode}>{children}</code>
+      </pre>
 
-        {/* 스크롤 힌트용 페이드 (시각적) */}
-        <span className={S.scrollFadeLeft} aria-hidden />
-        <span className={S.scrollFadeRight} aria-hidden />
-      </div>
-
-      {/* 헤더가 없을 때는 플로팅 복사 버튼 */}
       {!showHeader && (
         <button
           onClick={handleCopy}
@@ -78,6 +69,7 @@ function CodeBlock({ children, className, showHeader = false }: CodeBlockProps) 
     </div>
   );
 }
+
 export function MarkdownRenderer({ content, showCodeHeader = false }: MarkdownRendererProps) {
   return (
     <div className={S.markdownContainer}>
@@ -93,7 +85,7 @@ export function MarkdownRenderer({ content, showCodeHeader = false }: MarkdownRe
           ],
         ]}
         components={{
-          // 코드 블록 커스텀 렌더링
+          // 코드 블록
           pre: ({ children, ...props }) => {
             const child = React.Children.only(children) as React.ReactElement<{
               className?: string;
@@ -111,15 +103,16 @@ export function MarkdownRenderer({ content, showCodeHeader = false }: MarkdownRe
 
           // 인라인 코드
           code: ({ children, className, ...props }) => {
-            // pre > code는 위에서 처리됨
+            // 블록 코드 (``` ... ```)
             if (className?.startsWith('language-')) {
               return (
-                <code className={className} {...props}>
+                <code className={`${className} ${S.codeBlockCode}`} {...props}>
                   {children}
                 </code>
               );
             }
-            // 인라인 코드
+
+            // 인라인 코드 (`...`)
             return (
               <code className={S.inlineCode} {...props}>
                 {children}

@@ -208,7 +208,10 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <MarkdownRenderer content="세그먼트 기반 트랙 큐레이션 시스템 구현으로 신규 사용자 전환율 개선. 주요 개선사항: (1) 사용자 세그먼트별 맞춤형 트랙 분류, (2) 키워드 기반 트랙 매핑 시스템, (3) 세그먼트 탭 UI 구현. 예상 개발 기간: 2주, 전환율 목표: 15% 향상." />
+              <MarkdownRenderer
+                content="세그먼트 기반 트랙 큐레이션 시스템 구현으로 신규 사용자 전환율 개선. 주요 개선사항: (1) 사용자 세그먼트별 맞춤형 트랙 분류, (2) 키워드 기반 트랙 매핑 시스템, (3) 세그먼트 탭 UI 구현. 예상 개발 기간: 2주, 전환율 목표: 15% 향상."
+                showCodeHeader={false}
+              />
             </CardContent>
           </Card>
 
@@ -227,6 +230,7 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
 현재 트랙 카드 구성은 단순히 '마감 임박', '개발 관련', '비개발 관련'으로만 분류되어 있어 사용자 개인의 관심사, 경력 목표, 기술적 관심도에 맞는 맞춤형 정보를 제공하지 못하고 있습니다. 
 
 이로 인해, 트랙에 관심은 있으나 적절한 전환 동기 없이 많은 사용자들이 트랙 상세 페이지(PV)로 전환되지 않고 이탈하고 있는 실정입니다.`}
+                showCodeHeader={false}
               />
             </CardContent>
           </Card>
@@ -250,6 +254,7 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
 2. **섹션 제목과 가이드 문구가 단순함**: copy.ts의 sectionTitles 객체에 정의된 섹션 제목들이 사용자 목표나 관심사에 맞는 맥락 정보를 제공하지 않음
 
 3. **사용자 세그먼트 기반 추천 부재**: 현재 코드는 사용자의 직업, 관심사, 경력 목표 등 세그먼트 정보를 활용한 맞춤형 트랙 추천 기능이 없음`}
+                showCodeHeader={true}
               />
             </CardContent>
           </Card>
@@ -352,6 +357,7 @@ export default function BootCampCardSection({ boostingState, sortedTrackRounds }
 - **성능**: 세그먼트 기반 필터링으로 추가 계산이 필요하나, 메모이제이션으로 최적화 가능
 - **유지보수성**: 키워드와 세그먼트 정의를 별도 파일로 분리하여 마케팅 팀이 쉽게 업데이트 가능
 - **개발자 경험**: TypeScript 타입 정의로 코드 안정성 확보 및 향후 확장성 고려`}
+                showCodeHeader={true}
               />
             </CardContent>
           </Card>
@@ -391,6 +397,7 @@ export default function BootCampCardSection({ boostingState, sortedTrackRounds }
 - **실무 중심 역량**: 현재 대기업 채용에서 중요시되는 사용자 경험과 비즈니스 가치 창출 능력 강화
 
 이 프로젝트를 통해 최신 프론트엔드 기술과 사용자 중심 개발 방법론을 모두 경험할 수 있으며, 개인화 추천 시스템 설계 및 구현을 통해 현업에서 필요로 하는 역량을 키울 수 있습니다.`}
+                showCodeHeader={false}
               />
             </CardContent>
           </Card>
