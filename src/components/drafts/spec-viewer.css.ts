@@ -4,8 +4,9 @@ import { forTablet, forDesktop } from '@/lib/styles/breakpoints';
 
 // 메인 컨테이너
 export const container = style({
-  maxWidth: '72rem', // max-w-6xl
+  maxWidth: '72rem',
   margin: '0 auto',
+  padding: '0 1rem',
   display: 'flex',
   flexDirection: 'column',
   gap: '1.5rem',
@@ -14,8 +15,16 @@ export const container = style({
 // 헤더 섹션
 export const headerContainer = style({
   display: 'flex',
-  alignItems: 'flex-start',
-  justifyContent: 'space-between',
+  flexDirection: 'column',
+  gap: '1rem',
+
+  '@media': {
+    [forTablet]: {
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+      justifyContent: 'space-between',
+    },
+  },
 });
 
 export const headerContent = style({
@@ -23,25 +32,30 @@ export const headerContent = style({
 });
 
 export const title = style({
-  fontSize: '1.5rem', // text-2xl
+  fontSize: '1.5rem',
   lineHeight: '2rem',
   marginBottom: '0.5rem',
+  fontWeight: '600',
 });
 
 export const summary = style({
   color: vars.colors.mutedForeground,
+  lineHeight: '1.6',
+  marginBottom: '1rem',
 });
 
 export const badgeContainer = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '1rem',
-  marginTop: '1rem',
+  gap: '0.75rem',
+  flexWrap: 'wrap',
 });
 
 export const headerActions = style({
   display: 'flex',
   gap: '0.5rem',
+  flexWrap: 'wrap',
+  alignSelf: 'flex-start',
 });
 
 // 메인 레이아웃
@@ -49,10 +63,12 @@ export const mainLayout = style({
   display: 'grid',
   gridTemplateColumns: '1fr',
   gap: '1.5rem',
+  alignItems: 'start',
 
   '@media': {
     [forDesktop]: {
-      gridTemplateColumns: '1fr 3fr',
+      gridTemplateColumns: '280px 1fr',
+      gap: '2rem',
     },
   },
 });
@@ -61,22 +77,29 @@ export const mainLayout = style({
 export const tocContainer = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '0.5rem',
+  gap: '0.25rem',
 });
 
 export const tocItem = style({
   display: 'flex',
-  alignItems: 'center',
+  alignItems: 'flex-start',
   justifyContent: 'space-between',
-  padding: '0.5rem',
+  padding: '0.75rem',
   fontSize: '0.875rem',
   borderRadius: vars.spacing.radius,
-  transition: 'background-color 150ms',
+  transition: 'all 150ms',
   textDecoration: 'none',
   color: vars.colors.foreground,
+  border: `1px solid transparent`,
 
   ':hover': {
     backgroundColor: vars.colors.muted,
+    borderColor: vars.colors.border,
+  },
+
+  ':focus': {
+    outline: `2px solid ${vars.colors.ring}`,
+    outlineOffset: '1px',
   },
 });
 
@@ -85,95 +108,56 @@ export const contentContainer = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '1.5rem',
+  minWidth: 0, // 그리드 아이템 오버플로우 방지
 });
 
-export const contentText = style({
-  fontSize: '0.875rem',
-  lineHeight: '1.625', // leading-relaxed
-});
-
-export const problemsContainer = style({
-  backgroundColor: vars.colors.muted,
-  padding: '1rem',
-  borderRadius: vars.spacing.radius,
-});
-
-export const problemsTitle = style({
-  fontWeight: '500',
-  marginBottom: '0.5rem',
-});
-
-export const problemsList = style({
+// TOC 항목 내부 레이아웃
+export const tocItemContent = style({
   display: 'flex',
-  flexDirection: 'column',
-  gap: '0.25rem',
-  fontSize: '0.875rem',
-});
-
-export const problemItem = style({
-  display: 'flex',
-  alignItems: 'flex-start',
+  flex: 1,
+  alignItems: 'center',
   gap: '0.5rem',
 });
 
-export const problemBullet = style({
-  color: vars.colors.destructive,
-});
-
-// 분석 섹션
-export const analysisContainer = style({
+export const tocItemDetails = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '1rem',
 });
 
-export const hypothesisCard = style({
-  borderLeft: '4px solid #eab308', // border-yellow-500
-  paddingLeft: '1rem',
-});
-
-export const hypothesisTitle = style({
+export const tocItemTitle = style({
   fontWeight: '500',
+  fontSize: '0.875rem',
 });
 
-export const hypothesisDescription = style({
-  fontSize: '0.875rem',
+export const tocItemDescription = style({
+  fontSize: '0.75rem',
   color: vars.colors.mutedForeground,
-  marginTop: '0.25rem',
 });
 
-export const citationContainer = style({
-  display: 'flex',
-  flexWrap: 'wrap',
-  gap: '0.5rem',
-  marginTop: '0.5rem',
-});
-
-export const citationBadge = style({
-  fontSize: '0.75rem', // text-xs
-});
-
-// 미완성 섹션
-export const incompleteSection = style({
-  backgroundColor: '#fefce8', // bg-yellow-50
-  border: '1px solid #fde047', // border-yellow-200
-  borderRadius: vars.spacing.radius,
-  padding: '1rem',
-});
-
-export const incompleteText = style({
-  fontSize: '0.875rem',
-  color: '#a16207', // text-yellow-800
-});
-
+// 섹션 헤더
 export const sectionHeader = style({
   display: 'flex',
   alignItems: 'center',
   gap: '0.5rem',
 });
 
-export const warningIcon = style({
-  color: '#ca8a04', // text-yellow-600
+export const sectionIcon = style({
+  height: '1.25rem',
+  width: '1.25rem',
+});
+
+// 상태 아이콘
+export const completedIcon = style({
+  color: vars.colors.primary,
+});
+
+export const pendingIcon = style({
+  color: '#f59e0b',
+});
+
+export const statusIcon = style({
+  height: '1rem',
+  width: '1rem',
 });
 
 // 인용 목록
@@ -230,13 +214,4 @@ export const citationUrl = style({
 export const citationButton = style({
   height: '1.5rem',
   width: '1.5rem',
-});
-
-// 상태 아이콘
-export const completedIcon = style({
-  color: '#16a34a', // text-green-600
-});
-
-export const pendingIcon = style({
-  color: '#ca8a04', // text-yellow-600
 });
