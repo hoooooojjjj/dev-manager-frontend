@@ -19,7 +19,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <Breadcrumb
         items={[
           { label: '홈', href: '/' },
-          { label: '프로젝트', href: '/projects' },
+          { label: '프로젝트 목록', href: '/projects' },
           { label: `프로젝트 ${id}`, href: `/projects/${id}` },
         ]}
       />
