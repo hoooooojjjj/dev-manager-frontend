@@ -22,7 +22,8 @@ interface CodeBlockProps {
 function CodeBlock({ children, className, showHeader = false }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
 
-  const language = className?.replace('language-', '') || 'typescript';
+  const language =
+    className?.replace('language-', '').replace('code-highlight', '') || 'typescript';
   const code = String(children).replace(/\n$/, '');
 
   const handleCopy = async () => {
@@ -56,16 +57,6 @@ function CodeBlock({ children, className, showHeader = false }: CodeBlockProps) 
       <pre className={`${S.codeBlockPre} ${className || ''}`}>
         <code className={S.codeBlockCode}>{children}</code>
       </pre>
-
-      {!showHeader && (
-        <button
-          onClick={handleCopy}
-          className={S.floatingCopyButton}
-          aria-label={copied ? '복사됨!' : '코드 복사'}
-        >
-          {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-        </button>
-      )}
     </div>
   );
 }
@@ -86,19 +77,16 @@ export function MarkdownRenderer({ content, showCodeHeader = false }: MarkdownRe
         ]}
         components={{
           // 코드 블록
-          pre: ({ children, ...props }) => {
+          pre: ({ children }) => {
             const child = React.Children.only(children) as React.ReactElement<{
               className?: string;
               children: string;
             }>;
-            if (child?.type === 'code') {
-              return (
-                <CodeBlock className={child.props.className} showHeader={showCodeHeader}>
-                  {child.props.children}
-                </CodeBlock>
-              );
-            }
-            return <pre {...props}>{children}</pre>;
+            return (
+              <CodeBlock className={child.props.className} showHeader={showCodeHeader}>
+                {child.props.children}
+              </CodeBlock>
+            );
           },
 
           // 인라인 코드
