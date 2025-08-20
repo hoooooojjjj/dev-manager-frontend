@@ -18,35 +18,8 @@ import {
   Search,
   Lightbulb,
 } from 'lucide-react';
-import { MarkdownRenderer } from './markdown-renderer';
-import {
-  container,
-  headerContainer,
-  headerContent,
-  title,
-  summary,
-  badgeContainer,
-  headerActions,
-  mainLayout,
-  tocContainer,
-  tocItem,
-  tocItemContent,
-  tocItemDetails,
-  tocItemTitle,
-  tocItemDescription,
-  contentContainer,
-  sectionHeader,
-  sectionIcon,
-  citationsGrid,
-  citationItem,
-  citationContent,
-  citationTitle,
-  citationUrl,
-  citationButton,
-  completedIcon,
-  pendingIcon,
-  statusIcon,
-} from './spec-viewer.css';
+import { MarkdownRenderer } from '../../../../../components/drafts/markdown-renderer';
+import * as S from './index.css';
 
 interface SpecViewerProps {
   draftId: string;
@@ -133,22 +106,22 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
   };
 
   return (
-    <div className={container}>
+    <div className={S.container}>
       {/* 헤더 */}
       <Card>
         <CardHeader>
-          <div className={headerContainer}>
-            <div className={headerContent}>
-              <CardTitle className={title}>{spec.title}</CardTitle>
-              <p className={summary}>{spec.summary}</p>
-              <div className={badgeContainer}>
+          <div className={S.headerContainer}>
+            <div className={S.headerContent}>
+              <CardTitle className={S.title}>{spec.title}</CardTitle>
+              <p className={S.summary}>{spec.summary}</p>
+              <div className={S.badgeContainer}>
                 <Badge variant="outline">v{spec.version}</Badge>
                 <Badge variant={spec.quality_score >= 80 ? 'default' : 'secondary'}>
                   품질 점수: {spec.quality_score}%
                 </Badge>
               </div>
             </div>
-            <div className={headerActions}>
+            <div className={S.headerActions}>
               <Button variant="outline" asChild>
                 <a href={`/drafts/${draftId}/review`}>
                   <FileText className="mr-2 h-4 w-4" />
@@ -163,7 +136,7 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
         </CardHeader>
       </Card>
 
-      <div className={mainLayout}>
+      <div className={S.mainLayout}>
         {/* 좌측 목차 */}
         <Card>
           <CardHeader>
@@ -173,22 +146,22 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <nav className={tocContainer}>
+            <nav className={S.tocContainer}>
               {spec.sections.map((section) => {
                 const IconComponent = section.icon;
                 return (
-                  <a key={section.id} href={`#${section.id}`} className={tocItem}>
-                    <div className={tocItemContent}>
-                      <IconComponent className={sectionIcon} />
-                      <div className={tocItemDetails}>
-                        <span className={tocItemTitle}>{section.title}</span>
-                        <span className={tocItemDescription}>{section.description}</span>
+                  <a key={section.id} href={`#${section.id}`} className={S.tocItem}>
+                    <div className={S.tocItemContent}>
+                      <IconComponent className={S.sectionIcon} />
+                      <div className={S.tocItemDetails}>
+                        <span className={S.tocItemTitle}>{section.title}</span>
+                        <span className={S.tocItemDescription}>{section.description}</span>
                       </div>
                     </div>
                     {section.completed ? (
-                      <CheckCircle2 className={`${statusIcon} ${completedIcon}`} />
+                      <CheckCircle2 className={`${S.statusIcon} ${S.completedIcon}`} />
                     ) : (
-                      <AlertTriangle className={`${statusIcon} ${pendingIcon}`} />
+                      <AlertTriangle className={`${S.statusIcon} ${S.pendingIcon}`} />
                     )}
                   </a>
                 );
@@ -198,12 +171,12 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
         </Card>
 
         {/* 메인 콘텐츠 */}
-        <div className={contentContainer}>
+        <div className={S.contentContainer}>
           {/* TL;DR */}
           <Card id="tldr">
             <CardHeader>
-              <CardTitle className={sectionHeader}>
-                <Target className={sectionIcon} />
+              <CardTitle className={S.sectionHeader}>
+                <Target className={S.sectionIcon} />
                 TL;DR
               </CardTitle>
             </CardHeader>
@@ -218,8 +191,8 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
           {/* 현상 */}
           <Card id="current_behavior">
             <CardHeader>
-              <CardTitle className={sectionHeader}>
-                <Search className={sectionIcon} />
+              <CardTitle className={S.sectionHeader}>
+                <Search className={S.sectionIcon} />
                 현상 (Current Behavior)
               </CardTitle>
             </CardHeader>
@@ -238,8 +211,8 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
           {/* 원인 분석 */}
           <Card id="root_cause">
             <CardHeader>
-              <CardTitle className={sectionHeader}>
-                <AlertTriangle className={sectionIcon} />
+              <CardTitle className={S.sectionHeader}>
+                <AlertTriangle className={S.sectionIcon} />
                 원인 분석 (Root Cause Analysis)
               </CardTitle>
             </CardHeader>
@@ -262,8 +235,8 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
           {/* 해결 방안 */}
           <Card id="solutions">
             <CardHeader>
-              <CardTitle className={sectionHeader}>
-                <Code className={sectionIcon} />
+              <CardTitle className={S.sectionHeader}>
+                <Code className={S.sectionIcon} />
                 해결 방안 (Proposed Solution)
               </CardTitle>
             </CardHeader>
@@ -365,8 +338,8 @@ export default function BootCampCardSection({ boostingState, sortedTrackRounds }
           {/* 학습 포인트 */}
           <Card id="learning_points">
             <CardHeader>
-              <CardTitle className={sectionHeader}>
-                <Lightbulb className={sectionIcon} />
+              <CardTitle className={S.sectionHeader}>
+                <Lightbulb className={S.sectionIcon} />
                 학습 포인트 (Learning Takeaways)
               </CardTitle>
             </CardHeader>
@@ -410,15 +383,15 @@ export default function BootCampCardSection({ boostingState, sortedTrackRounds }
           <CardTitle>인용 소스</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className={citationsGrid}>
+          <div className={S.citationsGrid}>
             {citations.map((citation, index) => (
-              <div key={index} className={citationItem}>
+              <div key={index} className={S.citationItem}>
                 {getCitationIcon(citation.type)}
-                <div className={citationContent}>
-                  <p className={citationTitle}>{citation.title}</p>
-                  <p className={citationUrl}>{citation.url}</p>
+                <div className={S.citationContent}>
+                  <p className={S.citationTitle}>{citation.title}</p>
+                  <p className={S.citationUrl}>{citation.url}</p>
                 </div>
-                <Button variant="ghost" size="icon" className={citationButton}>
+                <Button variant="ghost" size="icon" className={S.citationButton}>
                   <ExternalLink />
                 </Button>
               </div>
