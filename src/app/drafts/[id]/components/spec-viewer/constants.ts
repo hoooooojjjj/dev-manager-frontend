@@ -192,3 +192,45 @@ export const citations = [
   { type: 'job', url: 'kakao-ux-engineer', title: '카카오 UX 엔지니어' },
   { type: 'job', url: 'line-react-developer', title: '라인 React 개발자' },
 ];
+
+// 섹션 정보 타입 정의
+export interface SpecSectionInfo {
+  id: keyof typeof spec;
+  title: string;
+  icon: typeof Target;
+  showCodeHeader: boolean;
+}
+
+// 섹션 정보 상수
+export const SPEC_SECTIONS: SpecSectionInfo[] = [
+  {
+    id: 'tldr',
+    title: 'TL;DR',
+    icon: Target,
+    showCodeHeader: true,
+  },
+  {
+    id: 'current_behavior',
+    title: '현상 (Current Behavior)',
+    icon: Search,
+    showCodeHeader: false,
+  },
+  {
+    id: 'root_cause',
+    title: '원인 분석 (Root Cause Analysis)',
+    icon: AlertTriangle,
+    showCodeHeader: true,
+  },
+  {
+    id: 'solutions',
+    title: '해결 방안 (Proposed Solution)',
+    icon: Code,
+    showCodeHeader: true,
+  },
+  {
+    id: 'learning_points',
+    title: '학습 포인트 (Learning Takeaways)',
+    icon: Lightbulb,
+    showCodeHeader: true,
+  },
+];

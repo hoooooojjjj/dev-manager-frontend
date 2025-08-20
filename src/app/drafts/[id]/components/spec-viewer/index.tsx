@@ -3,21 +3,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import {
-  FileText,
-  ExternalLink,
-  Code,
-  CheckCircle2,
-  AlertTriangle,
-  BookOpen,
-  Target,
-  Search,
-  Lightbulb,
-} from 'lucide-react';
-import { MarkdownRenderer } from '../../../../../components/drafts/markdown-renderer';
+import { FileText, ExternalLink, CheckCircle2, AlertTriangle, BookOpen } from 'lucide-react';
 import * as S from './index.css';
-import { citations, spec, specSummary } from './constants';
+import { citations, spec, specSummary, SPEC_SECTIONS } from './constants';
 import { getCitationIcon } from './utils';
+import { SpecSection } from './components/spec-section';
 
 interface SpecViewerProps {
   draftId: string;
@@ -91,70 +81,16 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
 
         {/* 메인 콘텐츠 */}
         <div className={S.contentContainer}>
-          {/* TL;DR */}
-          <Card id="tldr">
-            <CardHeader>
-              <CardTitle className={S.sectionHeader}>
-                <Target className={S.sectionIcon} />
-                TL;DR
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <MarkdownRenderer content={spec.tldr} showCodeHeader={false} />
-            </CardContent>
-          </Card>
-
-          {/* 현상 */}
-          <Card id="current_behavior">
-            <CardHeader>
-              <CardTitle className={S.sectionHeader}>
-                <Search className={S.sectionIcon} />
-                현상 (Current Behavior)
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <MarkdownRenderer content={spec.current_behavior} showCodeHeader={false} />
-            </CardContent>
-          </Card>
-
-          {/* 원인 분석 */}
-          <Card id="root_cause">
-            <CardHeader>
-              <CardTitle className={S.sectionHeader}>
-                <AlertTriangle className={S.sectionIcon} />
-                원인 분석 (Root Cause Analysis)
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <MarkdownRenderer content={spec.root_cause} showCodeHeader={true} />
-            </CardContent>
-          </Card>
-
-          {/* 해결 방안 */}
-          <Card id="solutions">
-            <CardHeader>
-              <CardTitle className={S.sectionHeader}>
-                <Code className={S.sectionIcon} />
-                해결 방안 (Proposed Solution)
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <MarkdownRenderer content={spec.solutions} showCodeHeader={true} />
-            </CardContent>
-          </Card>
-
-          {/* 학습 포인트 */}
-          <Card id="learning_points">
-            <CardHeader>
-              <CardTitle className={S.sectionHeader}>
-                <Lightbulb className={S.sectionIcon} />
-                학습 포인트 (Learning Takeaways)
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <MarkdownRenderer content={spec.learning_points} showCodeHeader={false} />
-            </CardContent>
-          </Card>
+          {SPEC_SECTIONS.map((section) => (
+            <SpecSection
+              key={section.id}
+              id={section.id}
+              title={section.title}
+              icon={section.icon}
+              content={spec[section.id as keyof typeof spec]}
+              showCodeHeader={section.showCodeHeader}
+            />
+          ))}
         </div>
       </div>
 
