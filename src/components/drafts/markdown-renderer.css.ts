@@ -89,19 +89,18 @@ export const inlineCode = style({
   backgroundColor: vars.colors.muted,
   borderRadius: '4px',
   color: '#e11d48',
-  fontFamily: '"JetBrains Mono", "Fira Code", Menlo, Consolas, monospace',
   fontSize: '0.9em',
   padding: '0.15em 0.4em',
   fontWeight: 500,
-  whiteSpace: 'pre-wrap', // ✅ 줄바꿈 허용
-  wordBreak: 'break-word', // ✅ 모바일에서 잘림 방지
+  whiteSpace: 'pre-wrap',
+  wordBreak: 'break-word',
 });
 
 // 코드 블록 컨테이너
 export const codeBlockContainer = style({
   margin: '1.5em 0',
   borderRadius: '8px',
-  backgroundColor: vars.colors.card,
+  backgroundColor: vars.colors.codeBlockBackground,
   border: `1px solid ${vars.colors.border}`,
   boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)',
   overflow: 'hidden',
@@ -113,7 +112,7 @@ export const codeHeader = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  padding: '10px 16px',
+  padding: '4px 12px',
   backgroundColor: vars.colors.muted,
   borderBottom: `1px solid ${vars.colors.border}`,
 });
@@ -146,11 +145,6 @@ export const copyButton = style({
     backgroundColor: vars.colors.accent,
     color: vars.colors.accentForeground,
   },
-
-  ':focus': {
-    outline: `2px solid ${vars.colors.ring}`,
-    outlineOffset: '2px',
-  },
 });
 
 // 코드 블록 프리
@@ -159,7 +153,6 @@ export const codeBlockPre = style({
   padding: '20px',
   overflow: 'auto',
   backgroundColor: 'transparent',
-  fontFamily: '"JetBrains Mono", "Fira Code", Menlo, Consolas, monospace',
   fontSize: '13px',
   lineHeight: 1.6,
   whiteSpace: 'pre',
@@ -177,7 +170,6 @@ export const codeBlockPre = style({
 });
 
 export const codeBlockCode = style({
-  fontFamily: '"JetBrains Mono", "Fira Code", Menlo, Consolas, monospace',
   fontSize: '14px',
   lineHeight: 1.6,
   whiteSpace: 'pre', // ✅ 줄바꿈 그대로

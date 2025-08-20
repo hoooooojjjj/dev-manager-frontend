@@ -28,6 +28,7 @@ export const vars = createGlobalTheme(':root', {
     yellow500: 'hsl(45 93% 47%)',
     buttonBoxShadow: '0 2px 6px rgba(60, 60, 70, 0.6)',
     buttonBorder: '1px solid rgb(56, 56, 61)',
+    codeBlockBackground: '#191919',
   },
   spacing: {
     radius: '0.5rem',
@@ -65,6 +66,7 @@ export const lightTheme = createTheme(vars, {
     yellow500: 'hsl(45 93% 47%)',
     buttonBoxShadow: '0 2px 6px rgba(0, 0, 0, 0.06)',
     buttonBorder: '1px solid rgb(210, 210, 215)',
+    codeBlockBackground: '#F1F1EF',
   },
   spacing: {
     radius: '0.5rem',

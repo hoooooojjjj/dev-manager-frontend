@@ -19,6 +19,7 @@ interface CodeBlockProps {
   showHeader?: boolean;
 }
 
+// 코드 블록 텍스트 string으로 변환 함수
 export function extractCodeText(node: ReactNode): string {
   if (node == null || typeof node === 'boolean') return '';
   if (typeof node === 'string' || typeof node === 'number') return String(node);
@@ -64,7 +65,7 @@ function CodeBlock({ children, className, showHeader = false }: CodeBlockProps) 
             className={S.copyButton}
             aria-label={copied ? '복사됨!' : '코드 복사'}
           >
-            {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+            {copied ? <Check size={14} /> : <Copy size={14} />}
             <span>{copied ? '복사됨!' : '복사'}</span>
           </button>
         </div>
