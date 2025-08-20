@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, isValidElement, ReactNode } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypePrism from 'rehype-prism-plus';
@@ -14,9 +14,24 @@ interface MarkdownRendererProps {
 }
 
 interface CodeBlockProps {
-  children: string;
+  children: React.ReactNode;
   className?: string | undefined;
   showHeader?: boolean;
+}
+
+export function extractCodeText(node: ReactNode): string {
+  if (node == null || typeof node === 'boolean') return '';
+  if (typeof node === 'string' || typeof node === 'number') return String(node);
+
+  if (Array.isArray(node)) {
+    return node.map(extractCodeText).join('');
+  }
+
+  if (isValidElement(node)) {
+    return extractCodeText((node.props as any)?.children);
+  }
+
+  return '';
 }
 
 function CodeBlock({ children, className, showHeader = false }: CodeBlockProps) {
@@ -24,7 +39,8 @@ function CodeBlock({ children, className, showHeader = false }: CodeBlockProps) 
 
   const language =
     className?.replace('language-', '').replace('code-highlight', '') || 'typescript';
-  const code = String(children).replace(/\n$/, '');
+
+  const code = extractCodeText(children);
 
   const handleCopy = async () => {
     try {
@@ -80,8 +96,9 @@ export function MarkdownRenderer({ content, showCodeHeader = false }: MarkdownRe
           pre: ({ children }) => {
             const child = React.Children.only(children) as React.ReactElement<{
               className?: string;
-              children: string;
+              children: React.ReactNode;
             }>;
+
             return (
               <CodeBlock className={child.props.className} showHeader={showCodeHeader}>
                 {child.props.children}
