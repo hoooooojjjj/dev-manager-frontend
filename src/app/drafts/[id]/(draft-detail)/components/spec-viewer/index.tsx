@@ -139,7 +139,7 @@ export function SpecSection({
   showCodeHeader = false,
 }: SpecSectionProps) {
   return (
-    <Card id={id}>
+    <Card id={id} className={S.sectionCard}>
       <CardHeader>
         <CardTitle className={S.sectionHeader}>
           <Icon className={S.sectionIcon} />

@@ -140,27 +140,46 @@ export const tocItem = style({
   padding: '0.75rem',
   fontSize: '0.875rem',
   borderRadius: vars.spacing.radius,
-  transition: 'all 150ms ease-in-out',
+  transition: 'all 250ms ease-in-out',
   textDecoration: 'none',
   color: vars.colors.foreground,
   border: `1px solid transparent`,
-  scrollBehavior: 'smooth',
+  position: 'relative',
 
-  ':hover': {
-    backgroundColor: vars.colors.muted,
-    borderColor: vars.colors.border,
-    transform: 'translateX(4px)',
-  },
-
-  ':focus': {
-    outline: `2px solid ${vars.colors.ring}`,
-    outlineOffset: '1px',
-  },
-
-  ':active': {
-    backgroundColor: vars.colors.accent,
-    borderColor: vars.colors.primary,
-    color: vars.colors.primary,
+  selectors: {
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      left: 0,
+      top: '50%',
+      transform: 'translateY(-50%)',
+      width: '2px',
+      height: '0%',
+      backgroundColor: vars.colors.primary,
+      borderRadius: '0 3px 3px 0',
+      transition: 'height 250ms ease-in-out',
+    },
+    '&:hover': {
+      backgroundColor: vars.colors.muted,
+      borderColor: vars.colors.border,
+      transform: 'translateX(6px)',
+    },
+    '&:hover::before': {
+      height: '60%',
+    },
+    '&:focus': {
+      outline: `1px solid ${vars.colors.ring}`,
+      outlineOffset: '1px',
+    },
+    '&:active': {
+      backgroundColor: vars.colors.accent,
+      borderColor: vars.colors.primary,
+      color: vars.colors.primary,
+      transform: 'translateX(8px)',
+    },
+    '&:active::before': {
+      height: '80%',
+    },
   },
 });
 
@@ -200,6 +219,16 @@ export const tocItemTitle = style({
 export const tocItemDescription = style({
   fontSize: '0.75rem',
   color: vars.colors.mutedForeground,
+});
+
+// 섹션 카드 (앵커 대상)
+export const sectionCard = style({
+  scrollMarginTop: 100,
+  transition: 'all 0.3s ease-in-out',
+
+  ':target': {
+    boxShadow: `0 0 0 2px ${vars.colors.primary}, 0 8px 25px -5px rgba(0, 0, 0, 0.15)`,
+  },
 });
 
 // 섹션 헤더
