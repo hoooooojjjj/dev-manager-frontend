@@ -14,7 +14,7 @@ import {
 import * as S from './index.css';
 import { citations, spec, specSummary, SPEC_SECTIONS } from './constants';
 import { getCitationIcon } from './utils';
-import MarkdownRenderer from '@/app/drafts/[id]/components/markdown-renderer';
+import MarkdownRenderer from '../markdown-renderer';
 
 interface SpecViewerProps {
   draftId: string;

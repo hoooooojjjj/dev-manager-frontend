@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
-import { SpecViewer } from '@/app/drafts/[id]/components/spec-viewer';
 import { Breadcrumb } from '@/components/layout/breadcrumb';
 import { container, contentWrapper } from './page.css';
+import { SpecViewer } from './components/spec-viewer';
 
 interface DraftPageProps {
   params: Promise<{ id: string }>;
