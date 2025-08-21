@@ -87,9 +87,10 @@ export const li = style({
 // 인라인 코드
 export const inlineCode = style({
   backgroundColor: vars.colors.muted,
+  margin: '0 2px',
   borderRadius: '4px',
   color: '#e11d48',
-  fontSize: '0.9em',
+  fontSize: '13px',
   padding: '0.15em 0.4em',
   fontWeight: 500,
   whiteSpace: 'pre-wrap',
