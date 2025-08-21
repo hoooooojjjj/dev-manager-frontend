@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, isValidElement, ReactNode } from 'react';
+import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypePrism from 'rehype-prism-plus';
@@ -8,75 +8,11 @@ import { Copy, Check } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import * as S from './index.css';
 import { sourceCodePro } from '@/lib/utils/font';
+import { extractCodeText } from './utils';
 
 interface MarkdownRendererProps {
   content: string;
   showCodeHeader?: boolean;
-}
-
-interface CodeBlockProps {
-  children: React.ReactNode;
-  className?: string | undefined;
-  showHeader?: boolean;
-}
-
-// 코드 블록 텍스트 string으로 변환 함수
-export function extractCodeText(node: ReactNode): string {
-  if (node == null || typeof node === 'boolean') return '';
-  if (typeof node === 'string' || typeof node === 'number') return String(node);
-
-  if (Array.isArray(node)) {
-    return node.map(extractCodeText).join('');
-  }
-
-  if (isValidElement(node)) {
-    return extractCodeText((node.props as { children?: ReactNode })?.children);
-  }
-
-  return '';
-}
-
-function CodeBlock({ children, className, showHeader = false }: CodeBlockProps) {
-  const [copied, setCopied] = useState(false);
-
-  const language =
-    className?.replace('language-', '').replace('code-highlight', '') || 'typescript';
-
-  const code = extractCodeText(children);
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(code);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy code:', err);
-    }
-  };
-
-  return (
-    <div className={S.codeBlockContainer}>
-      {showHeader && (
-        <div className={S.codeHeader}>
-          <Badge variant="secondary" className={S.languageBadge}>
-            {language}
-          </Badge>
-          <button
-            onClick={handleCopy}
-            className={S.copyButton}
-            aria-label={copied ? '복사됨!' : '코드 복사'}
-          >
-            {copied ? <Check size={14} /> : <Copy size={14} />}
-            <span>{copied ? '복사됨!' : '복사'}</span>
-          </button>
-        </div>
-      )}
-
-      <pre className={`${S.codeBlockPre} ${className || ''}`}>
-        <code className={`${S.codeBlockCode} ${sourceCodePro.className}`}>{children}</code>
-      </pre>
-    </div>
-  );
 }
 
 export default function MarkdownRenderer({
@@ -233,6 +169,55 @@ export default function MarkdownRenderer({
       >
         {content}
       </ReactMarkdown>
+    </div>
+  );
+}
+
+interface CodeBlockProps {
+  children: React.ReactNode;
+  className?: string | undefined;
+  showHeader?: boolean;
+}
+
+function CodeBlock({ children, className, showHeader = false }: CodeBlockProps) {
+  const [copied, setCopied] = useState(false);
+
+  const language =
+    className?.replace('language-', '').replace('code-highlight', '') || 'typescript';
+
+  const code = extractCodeText(children);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy code:', err);
+    }
+  };
+
+  return (
+    <div className={S.codeBlockContainer}>
+      {showHeader && (
+        <div className={S.codeHeader}>
+          <Badge variant="secondary" className={S.languageBadge}>
+            {language}
+          </Badge>
+          <button
+            onClick={handleCopy}
+            className={S.copyButton}
+            aria-label={copied ? '복사됨!' : '코드 복사'}
+          >
+            {copied ? <Check size={14} /> : <Copy size={14} />}
+            <span>{copied ? '복사됨!' : '복사'}</span>
+          </button>
+        </div>
+      )}
+
+      <pre className={`${S.codeBlockPre} ${className || ''}`}>
+        <code className={`${S.codeBlockCode} ${sourceCodePro.className}`}>{children}</code>
+      </pre>
     </div>
   );
 }
