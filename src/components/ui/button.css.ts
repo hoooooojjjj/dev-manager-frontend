@@ -33,7 +33,8 @@ export const buttonVariant = styleVariants({
       backgroundColor: vars.colors.primary,
       color: vars.colors.primaryForeground,
       ':hover': {
-        backgroundColor: vars.colors.primary,
+        backgroundColor: vars.colors.border,
+        color: vars.colors.muted,
       },
     },
   ],

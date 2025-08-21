@@ -17,6 +17,8 @@ export const headerContainer = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '1rem',
+  alignItems: 'flex-start',
+  padding: '20px',
 
   '@media': {
     [forTablet]: {
@@ -27,35 +29,41 @@ export const headerContainer = style({
   },
 });
 
-export const headerContent = style({
-  flex: 1,
-});
-
 export const title = style({
   fontSize: '1.5rem',
   lineHeight: '2rem',
-  marginBottom: '0.5rem',
   fontWeight: '600',
 });
 
 export const summary = style({
   color: vars.colors.mutedForeground,
   lineHeight: '1.6',
-  marginBottom: '1rem',
-});
-
-export const badgeContainer = style({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.75rem',
-  flexWrap: 'wrap',
+  margin: 0,
 });
 
 export const headerActions = style({
   display: 'flex',
   gap: '0.5rem',
   flexWrap: 'wrap',
-  alignSelf: 'flex-start',
+  justifyContent: 'space-between',
+  width: '100%',
+});
+
+export const headerBadge = style({
+  borderRadius: '0.375rem',
+  border: '1px solid #374151',
+  backgroundColor: '#1f2937',
+  padding: '0.375rem 0.75rem',
+  fontSize: '0.875rem',
+  fontWeight: 500,
+  color: '#60a5fa',
+});
+
+export const badgeContainer = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.5rem',
+  flexWrap: 'wrap',
 });
 
 // 메인 레이아웃

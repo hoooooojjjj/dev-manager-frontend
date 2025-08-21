@@ -15,6 +15,7 @@ import * as S from './index.css';
 import { citations, spec, specSummary, SPEC_SECTIONS } from './constants';
 import { getCitationIcon } from './utils';
 import MarkdownRenderer from '../markdown-renderer';
+import { Flex } from '@/components/ui/flex';
 
 interface SpecViewerProps {
   draftId: string;
@@ -25,30 +26,30 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
     <div className={S.container}>
       {/* 헤더 */}
       <Card>
-        <CardHeader>
-          <div className={S.headerContainer}>
-            <div className={S.headerContent}>
-              <CardTitle className={S.title}>{specSummary.title}</CardTitle>
-              <p className={S.summary}>{specSummary.summary}</p>
-              <div className={S.badgeContainer}>
-                <Badge variant="outline">v{specSummary.version}</Badge>
-                <Badge variant={specSummary.quality_score >= 80 ? 'default' : 'secondary'}>
-                  품질 점수: {specSummary.quality_score}%
-                </Badge>
-              </div>
-            </div>
-            <div className={S.headerActions}>
+        <CardHeader className={S.headerContainer}>
+          <div className={S.headerActions}>
+            <Flex align="center">
+              <span className={S.headerBadge}>개발 명세서</span>
+            </Flex>
+            <Flex direction="row" gap={8}>
               <Button variant="outline" asChild>
-                <a href={`/drafts/${draftId}/review`}>
-                  <FileText className="mr-2 h-4 w-4" />
-                  리뷰하기
-                </a>
+                <a href={`/drafts/${draftId}/review`}>리뷰하기</a>
               </Button>
               <Button asChild>
                 <a href={`/drafts/${draftId}/prompts`}>프롬프트 생성</a>
               </Button>
-            </div>
+            </Flex>
           </div>
+          <Flex direction="row" gap={12}>
+            <CardTitle className={S.title}>{specSummary.title}</CardTitle>
+            <div className={S.badgeContainer}>
+              <Badge variant="outline">v{specSummary.version}</Badge>
+              <Badge variant={specSummary.quality_score >= 80 ? 'default' : 'secondary'}>
+                품질 점수: {specSummary.quality_score}%
+              </Badge>
+            </div>
+          </Flex>
+          <p className={S.summary}>{specSummary.summary}</p>
         </CardHeader>
       </Card>
 
