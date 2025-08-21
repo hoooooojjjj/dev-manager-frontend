@@ -14,10 +14,8 @@ export const container = style({
 
 // 헤더 카드
 export const headerCard = style({
-  background: `linear-gradient(135deg, ${vars.colors.background} 0%, ${vars.colors.muted} 100%)`,
-  border: `1px solid ${vars.colors.border}`,
-  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
   position: 'relative',
+  background: vars.colors.accent,
 });
 
 // 헤더 섹션
