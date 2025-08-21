@@ -3,11 +3,18 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { FileText, ExternalLink, CheckCircle2, AlertTriangle, BookOpen } from 'lucide-react';
+import {
+  FileText,
+  ExternalLink,
+  CheckCircle2,
+  AlertTriangle,
+  BookOpen,
+  LucideIcon,
+} from 'lucide-react';
 import * as S from './index.css';
 import { citations, spec, specSummary, SPEC_SECTIONS } from './constants';
 import { getCitationIcon } from './utils';
-import { SpecSection } from './components/spec-section';
+import MarkdownRenderer from '@/components/drafts/markdown-renderer';
 
 interface SpecViewerProps {
   draftId: string;
@@ -117,5 +124,35 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+interface SpecSectionProps {
+  id: string;
+  title: string;
+  icon: LucideIcon;
+  content: string;
+  showCodeHeader?: boolean;
+}
+
+export function SpecSection({
+  id,
+  title,
+  icon: Icon,
+  content,
+  showCodeHeader = false,
+}: SpecSectionProps) {
+  return (
+    <Card id={id}>
+      <CardHeader>
+        <CardTitle className={S.sectionHeader}>
+          <Icon className={S.sectionIcon} />
+          {title}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <MarkdownRenderer content={content} showCodeHeader={showCodeHeader} />
+      </CardContent>
+    </Card>
   );
 }

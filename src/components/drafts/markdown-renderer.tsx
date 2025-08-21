@@ -79,7 +79,10 @@ function CodeBlock({ children, className, showHeader = false }: CodeBlockProps) 
   );
 }
 
-export function MarkdownRenderer({ content, showCodeHeader = false }: MarkdownRendererProps) {
+export default function MarkdownRenderer({
+  content,
+  showCodeHeader = false,
+}: MarkdownRendererProps) {
   return (
     <div className={S.markdownContainer}>
       <ReactMarkdown
