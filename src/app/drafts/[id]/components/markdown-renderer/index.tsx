@@ -6,7 +6,7 @@ import remarkGfm from 'remark-gfm';
 import rehypePrism from 'rehype-prism-plus';
 import { Copy, Check } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import * as S from './markdown-renderer.css';
+import * as S from './index.css';
 import { sourceCodePro } from '@/lib/utils/font';
 
 interface MarkdownRendererProps {
