@@ -18,7 +18,7 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
   return (
     <div className={S.container}>
       {/* 헤더 */}
-      <Card>
+      <Card className={S.headerCard}>
         <CardHeader className={S.headerContainer}>
           <div className={S.headerActions}>
             <Flex align="center">
@@ -96,27 +96,29 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
       </div>
 
       {/* 인용 목록 */}
-      <Card>
-        <CardHeader>
-          <CardTitle>인용 소스</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className={S.citationsGrid}>
-            {citations.map((citation, index) => (
-              <div key={index} className={S.citationItem}>
-                {getCitationIcon(citation.type)}
-                <div className={S.citationContent}>
-                  <p className={S.citationTitle}>{citation.title}</p>
-                  <p className={S.citationUrl}>{citation.url}</p>
+      <div className={S.contentContainer}>
+        <Card>
+          <CardHeader>
+            <CardTitle>인용 소스</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className={S.citationsGrid}>
+              {citations.map((citation, index) => (
+                <div key={index} className={S.citationItem}>
+                  {getCitationIcon(citation.type)}
+                  <div className={S.citationContent}>
+                    <p className={S.citationTitle}>{citation.title}</p>
+                    <p className={S.citationUrl}>{citation.url}</p>
+                  </div>
+                  <Button variant="ghost" size="icon" className={S.citationButton}>
+                    <ExternalLink />
+                  </Button>
                 </div>
-                <Button variant="ghost" size="icon" className={S.citationButton}>
-                  <ExternalLink />
-                </Button>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

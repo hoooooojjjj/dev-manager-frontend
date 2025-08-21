@@ -12,6 +12,14 @@ export const container = style({
   gap: '1.5rem',
 });
 
+// 헤더 카드
+export const headerCard = style({
+  background: `linear-gradient(135deg, ${vars.colors.background} 0%, ${vars.colors.muted} 100%)`,
+  border: `1px solid ${vars.colors.border}`,
+  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+  position: 'relative',
+});
+
 // 헤더 섹션
 export const headerContainer = style({
   display: 'flex',
@@ -69,8 +77,8 @@ export const badgeContainer = style({
 // 좌측 목차 사이드바 (Fixed 포지션)
 export const tocSidebar = style({
   position: 'fixed',
-  left: '1rem',
-  top: '100px', // 헤더 아래 시작
+  left: '2rem',
+  top: '135px',
   width: '280px',
   maxHeight: 'calc(100vh - 120px)',
   overflowY: 'auto',
