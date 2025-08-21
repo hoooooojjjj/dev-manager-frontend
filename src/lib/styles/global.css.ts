@@ -6,6 +6,10 @@ globalStyle('*', {
   borderColor: vars.colors.border,
 });
 
+globalStyle('html', {
+  scrollBehavior: 'smooth',
+});
+
 globalStyle('body', {
   backgroundColor: vars.colors.background,
   color: vars.colors.foreground,

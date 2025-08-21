@@ -3,14 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import {
-  FileText,
-  ExternalLink,
-  CheckCircle2,
-  AlertTriangle,
-  BookOpen,
-  LucideIcon,
-} from 'lucide-react';
+import { ExternalLink, CheckCircle2, AlertTriangle, BookOpen, LucideIcon } from 'lucide-react';
 import * as S from './index.css';
 import { citations, spec, specSummary, SPEC_SECTIONS } from './constants';
 import { getCitationIcon } from './utils';
@@ -53,11 +46,11 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
         </CardHeader>
       </Card>
 
-      <div className={S.mainLayout}>
-        {/* 좌측 목차 */}
-        <Card>
+      {/* 좌측 목차 */}
+      <div className={S.tocSidebar}>
+        <Card className={S.tocCard}>
           <CardHeader>
-            <CardTitle>
+            <CardTitle className={S.tocTitle}>
               <BookOpen />
               목차
             </CardTitle>
@@ -86,20 +79,20 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
             </nav>
           </CardContent>
         </Card>
+      </div>
 
-        {/* 메인 콘텐츠 */}
-        <div className={S.contentContainer}>
-          {SPEC_SECTIONS.map((section) => (
-            <SpecSection
-              key={section.id}
-              id={section.id}
-              title={section.title}
-              icon={section.icon}
-              content={spec[section.id as keyof typeof spec]}
-              showCodeHeader={section.showCodeHeader}
-            />
-          ))}
-        </div>
+      {/* 메인 콘텐츠 */}
+      <div className={S.contentContainer}>
+        {SPEC_SECTIONS.map((section) => (
+          <SpecSection
+            key={section.id}
+            id={section.id}
+            title={section.title}
+            icon={section.icon}
+            content={spec[section.id as keyof typeof spec]}
+            showCodeHeader={section.showCodeHeader}
+          />
+        ))}
       </div>
 
       {/* 인용 목록 */}

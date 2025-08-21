@@ -66,19 +66,56 @@ export const badgeContainer = style({
   flexWrap: 'wrap',
 });
 
-// 메인 레이아웃
-export const mainLayout = style({
-  display: 'grid',
-  gridTemplateColumns: '1fr',
-  gap: '1.5rem',
-  alignItems: 'start',
+// 좌측 목차 사이드바 (Fixed 포지션)
+export const tocSidebar = style({
+  position: 'fixed',
+  left: '1rem',
+  top: '100px', // 헤더 아래 시작
+  width: '280px',
+  maxHeight: 'calc(100vh - 120px)',
+  overflowY: 'auto',
+  zIndex: 10,
+  display: 'none', // 기본적으로 숨김
+  scrollbarWidth: 'thin', // Firefox용 스크롤바 스타일
+
+  // Webkit 스크롤바 스타일
+  selectors: {
+    '&::-webkit-scrollbar': {
+      width: '6px',
+    },
+    '&::-webkit-scrollbar-track': {
+      background: 'transparent',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      background: vars.colors.border,
+      borderRadius: '3px',
+    },
+    '&::-webkit-scrollbar-thumb:hover': {
+      background: vars.colors.mutedForeground,
+    },
+  },
 
   '@media': {
     [forDesktop]: {
-      gridTemplateColumns: '280px 1fr',
-      gap: '2rem',
+      display: 'block', // 데스크톱에서만 표시
     },
   },
+});
+
+export const tocCard = style({
+  position: 'sticky',
+  top: 0,
+  backgroundColor: vars.colors.card,
+  border: `1px solid ${vars.colors.border}`,
+  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+});
+
+export const tocTitle = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.5rem',
+  fontSize: '1rem',
+  fontWeight: '600',
 });
 
 // 목차 네비게이션
@@ -95,20 +132,35 @@ export const tocItem = style({
   padding: '0.75rem',
   fontSize: '0.875rem',
   borderRadius: vars.spacing.radius,
-  transition: 'all 150ms',
+  transition: 'all 150ms ease-in-out',
   textDecoration: 'none',
   color: vars.colors.foreground,
   border: `1px solid transparent`,
+  scrollBehavior: 'smooth',
 
   ':hover': {
     backgroundColor: vars.colors.muted,
     borderColor: vars.colors.border,
+    transform: 'translateX(4px)',
   },
 
   ':focus': {
     outline: `2px solid ${vars.colors.ring}`,
     outlineOffset: '1px',
   },
+
+  ':active': {
+    backgroundColor: vars.colors.accent,
+    borderColor: vars.colors.primary,
+    color: vars.colors.primary,
+  },
+});
+
+export const tocItemActive = style({
+  backgroundColor: vars.colors.accent,
+  borderColor: vars.colors.primary,
+  color: vars.colors.primary,
+  fontWeight: '500',
 });
 
 // 메인 콘텐츠
@@ -116,7 +168,7 @@ export const contentContainer = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '1.5rem',
-  minWidth: 0, // 그리드 아이템 오버플로우 방지
+  width: '100%',
 });
 
 // TOC 항목 내부 레이아웃
