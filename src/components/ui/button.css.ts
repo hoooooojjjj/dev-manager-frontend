@@ -32,7 +32,6 @@ export const buttonVariant = styleVariants({
     {
       backgroundColor: vars.colors.primary,
       color: vars.colors.primaryForeground,
-      border: vars.colors.buttonBorder,
       ':hover': {
         backgroundColor: vars.colors.primary,
       },
@@ -52,7 +51,7 @@ export const buttonVariant = styleVariants({
   outline: [
     buttonBase,
     {
-      border: `1px solid ${vars.colors.input}`,
+      border: `1px solid ${vars.colors.buttonBorder}`,
       backgroundColor: vars.colors.background,
       boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
       ':hover': {

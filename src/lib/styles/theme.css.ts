@@ -26,8 +26,7 @@ export const vars = createGlobalTheme(':root', {
     blue600: 'hsl(221 83% 53%)',
     purple600: 'hsl(271 81% 56%)',
     yellow500: 'hsl(45 93% 47%)',
-    buttonBoxShadow: '0 2px 6px rgba(60, 60, 70, 0.6)',
-    buttonBorder: '1px solid rgb(56, 56, 61)',
+    buttonBorder: '#8b8b99',
     codeBlockBackground: '#191919',
   },
   spacing: {
@@ -64,7 +63,6 @@ export const lightTheme = createTheme(vars, {
     blue600: 'hsl(221 83% 53%)',
     purple600: 'hsl(271 81% 56%)',
     yellow500: 'hsl(45 93% 47%)',
-    buttonBoxShadow: '0 2px 6px rgba(0, 0, 0, 0.06)',
     buttonBorder: '1px solid rgb(210, 210, 215)',
     codeBlockBackground: '#F1F1EF',
   },
