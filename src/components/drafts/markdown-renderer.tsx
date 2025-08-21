@@ -30,7 +30,7 @@ export function extractCodeText(node: ReactNode): string {
   }
 
   if (isValidElement(node)) {
-    return extractCodeText((node.props as any)?.children);
+    return extractCodeText((node.props as { children?: ReactNode })?.children);
   }
 
   return '';
