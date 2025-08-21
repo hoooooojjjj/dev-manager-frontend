@@ -118,7 +118,6 @@ export const codeHeader = style({
 });
 
 export const languageBadge = style({
-  fontFamily: '"JetBrains Mono", "Fira Code", Menlo, Consolas, monospace',
   fontSize: '11px',
   fontWeight: 500,
   textTransform: 'lowercase',
@@ -170,7 +169,8 @@ export const codeBlockPre = style({
 });
 
 export const codeBlockCode = style({
-  fontSize: '14px',
+  fontSize: '13px',
+  fontWeight: 500,
   lineHeight: 1.6,
   whiteSpace: 'pre', // ✅ 줄바꿈 그대로
   display: 'block',

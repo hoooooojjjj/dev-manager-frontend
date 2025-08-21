@@ -7,6 +7,7 @@ import rehypePrism from 'rehype-prism-plus';
 import { Copy, Check } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import * as S from './markdown-renderer.css';
+import { jetBrainsMono } from '@/lib/utils/font';
 
 interface MarkdownRendererProps {
   content: string;
@@ -72,7 +73,7 @@ function CodeBlock({ children, className, showHeader = false }: CodeBlockProps) 
       )}
 
       <pre className={`${S.codeBlockPre} ${className || ''}`}>
-        <code className={S.codeBlockCode}>{children}</code>
+        <code className={`${S.codeBlockCode} ${jetBrainsMono.className}`}>{children}</code>
       </pre>
     </div>
   );
