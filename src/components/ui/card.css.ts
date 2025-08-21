@@ -15,7 +15,7 @@ export const cardHeader = style({
   alignItems: 'center',
   justifyContent: 'center',
   gap: '8px',
-  padding: '24px',
+  padding: '20px',
   paddingBottom: '18px',
 });
 
@@ -32,13 +32,13 @@ export const cardDescription = style({
 });
 
 export const cardContent = style({
-  padding: '24px',
+  padding: '20px',
   paddingTop: 0,
 });
 
 export const cardFooter = style({
   display: 'flex',
   alignItems: 'center',
-  padding: '24px',
+  padding: '20px',
   paddingTop: 0,
 });

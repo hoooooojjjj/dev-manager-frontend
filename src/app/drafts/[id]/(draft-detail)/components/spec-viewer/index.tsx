@@ -63,10 +63,10 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
                   <a key={section.id} href={`#${section.id}`} className={S.tocItem}>
                     <div className={S.tocItemContent}>
                       <IconComponent className={S.sectionIcon} />
-                      <div className={S.tocItemDetails}>
+                      <Flex direction="col" gap={2}>
                         <span className={S.tocItemTitle}>{section.title}</span>
                         <span className={S.tocItemDescription}>{section.description}</span>
-                      </div>
+                      </Flex>
                     </div>
                     {section.completed ? (
                       <CheckCircle2 className={`${S.statusIcon} ${S.completedIcon}`} />

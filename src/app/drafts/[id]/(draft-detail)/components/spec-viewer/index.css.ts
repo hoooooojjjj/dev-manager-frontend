@@ -77,9 +77,8 @@ export const badgeContainer = style({
 // 좌측 목차 사이드바 (Fixed 포지션)
 export const tocSidebar = style({
   position: 'fixed',
-  left: '2rem',
+  left: '1.5rem',
   top: '135px',
-  width: '280px',
   maxHeight: 'calc(100vh - 120px)',
   overflowY: 'auto',
   zIndex: 10,
@@ -135,7 +134,8 @@ export const tocContainer = style({
 
 export const tocItem = style({
   display: 'flex',
-  alignItems: 'flex-start',
+  alignItems: 'center',
+  gap: '0.7rem',
   justifyContent: 'space-between',
   padding: '0.75rem',
   fontSize: '0.875rem',
@@ -203,12 +203,7 @@ export const tocItemContent = style({
   display: 'flex',
   flex: 1,
   alignItems: 'center',
-  gap: '0.5rem',
-});
-
-export const tocItemDetails = style({
-  display: 'flex',
-  flexDirection: 'column',
+  gap: '1rem',
 });
 
 export const tocItemTitle = style({
