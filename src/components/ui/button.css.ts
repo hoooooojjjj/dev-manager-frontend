@@ -100,8 +100,6 @@ export const buttonSize = styleVariants({
     height: '36px',
     paddingLeft: '16px',
     paddingRight: '16px',
-    paddingTop: '8px',
-    paddingBottom: '8px',
   },
   sm: {
     height: '32px',
