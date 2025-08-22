@@ -25,14 +25,6 @@ export const headerContainer = style({
   gap: '1rem',
   alignItems: 'flex-start',
   padding: '20px',
-
-  '@media': {
-    [forTablet]: {
-      flexDirection: 'row',
-      alignItems: 'flex-start',
-      justifyContent: 'space-between',
-    },
-  },
 });
 
 export const title = style({
