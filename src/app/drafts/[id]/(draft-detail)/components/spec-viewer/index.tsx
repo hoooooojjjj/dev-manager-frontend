@@ -9,6 +9,7 @@ import { citations, spec, specSummary, SPEC_SECTIONS } from './constants';
 import { getCitationIcon } from './utils';
 import MarkdownRenderer from '../markdown-renderer';
 import { Flex } from '@/components/ui/flex';
+import DraggableFabPanel from '@/components/DraggableFabPanel';
 
 interface SpecViewerProps {
   draftId: string;
@@ -18,6 +19,11 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
   return (
     <div className={S.container}>
       {/* 헤더 */}
+      <DraggableFabPanel openIcon={<BookOpen />} closeIcon={<BookOpen />}>
+        <div>
+          <h1>Hello</h1>
+        </div>
+      </DraggableFabPanel>
       <Card className={S.headerCard}>
         <CardHeader className={S.headerContainer}>
           <div className={S.headerActions}>
