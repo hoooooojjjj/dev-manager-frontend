@@ -79,7 +79,7 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
       {/* 인용 목록 */}
       <div className={S.contentContainer}>
         <Card>
-          <CardHeader>
+          <CardHeader className={S.cardHeader}>
             <CardTitle>인용 소스</CardTitle>
           </CardHeader>
           <CardContent>
@@ -121,7 +121,7 @@ export function SpecSection({
 }: SpecSectionProps) {
   return (
     <Card id={id} className={S.sectionCard}>
-      <CardHeader>
+      <CardHeader className={S.cardHeader}>
         <CardTitle className={S.sectionHeader}>
           <Icon className={S.sectionIcon} />
           {title}

@@ -14,6 +14,7 @@ export const container = style({
 export const header = style({
   display: 'flex',
   alignItems: 'center',
+  justifyContent: 'center',
   gap: '0.5rem',
   paddingBottom: '0.75rem',
   borderBottom: `1px solid ${vars.colors.border}`,

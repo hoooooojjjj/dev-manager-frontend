@@ -17,6 +17,8 @@ export const cardHeader = style({
   gap: '8px',
   padding: '20px',
   paddingBottom: '18px',
+  borderTopLeftRadius: `calc(${vars.spacing.radius} * 2)`, // rounded-xl
+  borderTopRightRadius: `calc(${vars.spacing.radius} * 2)`, // rounded-xl
 });
 
 export const cardTitle = style({
@@ -34,6 +36,8 @@ export const cardDescription = style({
 export const cardContent = style({
   padding: '20px',
   paddingTop: 0,
+  borderBottomLeftRadius: `calc(${vars.spacing.radius} * 2)`, // rounded-xl
+  borderBottomRightRadius: `calc(${vars.spacing.radius} * 2)`, // rounded-xl
 });
 
 export const cardFooter = style({

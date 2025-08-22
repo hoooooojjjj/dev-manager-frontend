@@ -74,7 +74,8 @@ export const fabButtonVariant = styleVariants({
 
 export const panelBase = {
   padding: '16px',
-  borderRadius: vars.spacing.radius,
+  marginBottom: 8,
+  borderRadius: '16px',
   backgroundColor: vars.colors.card,
   color: vars.colors.cardForeground,
   border: `1px solid ${vars.colors.border}`,

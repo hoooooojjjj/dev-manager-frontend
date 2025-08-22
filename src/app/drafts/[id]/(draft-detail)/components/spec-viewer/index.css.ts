@@ -234,11 +234,19 @@ export const sectionCard = style({
   },
 });
 
+export const cardHeader = style({
+  backgroundColor: vars.colors.accent,
+  marginBottom: 16,
+  borderBottom: `1px solid ${vars.colors.border}`,
+  padding: '16px',
+});
+
 // 섹션 헤더
 export const sectionHeader = style({
   display: 'flex',
   alignItems: 'center',
   gap: '0.5rem',
+  fontSize: '1rem',
 });
 
 export const sectionIcon = style({
