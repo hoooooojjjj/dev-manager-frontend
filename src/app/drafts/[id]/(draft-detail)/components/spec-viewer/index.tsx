@@ -11,21 +11,25 @@ import MarkdownRenderer from '../markdown-renderer';
 import { Flex } from '@/components/ui/flex';
 import DraggableFabPanel from '@/components/DraggableFabPanel';
 import { TableOfContents } from './components/table-of-contents';
+import { useIsMobile } from '@/lib/hooks/useDeviceWidth';
 
 interface SpecViewerProps {
   draftId: string;
 }
 
 export function SpecViewer({ draftId }: SpecViewerProps) {
+  const isMobile = useIsMobile();
   return (
     <div className={S.container}>
       {/* 헤더 */}
       <Card className={S.headerCard}>
         <CardHeader className={S.headerContainer}>
           <div className={S.headerActions}>
-            <Flex align="center">
-              <span className={S.headerBadge}>개발 명세서</span>
-            </Flex>
+            {!isMobile && (
+              <Flex align="center">
+                <span className={S.headerBadge}>개발 명세서</span>
+              </Flex>
+            )}
             <Flex direction="row" gap={8}>
               <Button variant="outline" asChild>
                 <a href={`/drafts/${draftId}/review`}>리뷰하기</a>
@@ -35,7 +39,7 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
               </Button>
             </Flex>
           </div>
-          <Flex direction="row" gap={12}>
+          <Flex direction={isMobile ? 'col' : 'row'} gap={12}>
             <CardTitle className={S.title}>{specSummary.title}</CardTitle>
             <div className={S.badgeContainer}>
               <Badge variant="outline">v{specSummary.version}</Badge>

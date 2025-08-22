@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/lib/styles/theme.css';
-import { forTablet, forDesktop } from '@/lib/styles/breakpoints';
+import { forDesktop, forMobile } from '@/lib/styles/breakpoints';
 
 // 메인 컨테이너
 export const container = style({
@@ -31,12 +31,24 @@ export const title = style({
   fontSize: '1.5rem',
   lineHeight: '2rem',
   fontWeight: '600',
+  '@media': {
+    [forMobile]: {
+      fontSize: '1.25rem',
+      lineHeight: '1.75rem',
+    },
+  },
 });
 
 export const summary = style({
   color: vars.colors.mutedForeground,
   lineHeight: '1.6',
   margin: 0,
+  '@media': {
+    [forMobile]: {
+      fontSize: '0.875rem',
+      lineHeight: '1.3',
+    },
+  },
 });
 
 export const headerActions = style({
@@ -45,6 +57,12 @@ export const headerActions = style({
   flexWrap: 'wrap',
   justifyContent: 'space-between',
   width: '100%',
+  '@media': {
+    [forMobile]: {
+      justifyContent: 'flex-start',
+      gap: '8px',
+    },
+  },
 });
 
 export const headerBadge = style({
@@ -242,20 +260,12 @@ export const statusIcon = style({
   width: '1rem',
 });
 
-// 인용 목록
+// 인용 목록 - 아이템 개수에 따라 자동 조정
 export const citationsGrid = style({
   display: 'grid',
-  gridTemplateColumns: '1fr',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
   gap: '0.75rem',
-
-  '@media': {
-    [forTablet]: {
-      gridTemplateColumns: 'repeat(2, 1fr)',
-    },
-    [forDesktop]: {
-      gridTemplateColumns: 'repeat(3, 1fr)',
-    },
-  },
+  width: '100%',
 });
 
 export const citationItem = style({
@@ -267,14 +277,19 @@ export const citationItem = style({
   borderRadius: vars.spacing.radius,
   transition: 'background-color 150ms',
 
-  ':hover': {
-    backgroundColor: vars.colors.muted,
+  selectors: {
+    '&:hover': {
+      backgroundColor: vars.colors.muted,
+    },
   },
 });
 
 export const citationContent = style({
   flex: 1,
-  minWidth: 0,
+  minWidth: 0, // flex item 오버플로우 방지
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.25rem',
 });
 
 export const citationTitle = style({
@@ -283,6 +298,8 @@ export const citationTitle = style({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
+  margin: 0,
+  lineHeight: '1.3',
 });
 
 export const citationUrl = style({
@@ -291,6 +308,8 @@ export const citationUrl = style({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
+  margin: 0,
+  lineHeight: '1.3',
 });
 
 export const citationButton = style({
