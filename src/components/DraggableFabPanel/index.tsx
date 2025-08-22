@@ -11,12 +11,14 @@ export interface DraggableFabPanelProps {
   openIcon: ReactNode;
   /** FAB 버튼에 표시될 아이콘 (열린 상태) */
   closeIcon?: ReactNode;
+  /** 패널 contents 위치 */
+  contentsPosition?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left';
   /** FAB 버튼 색상 테마 */
   variant?: 'default' | 'secondary' | 'accent' | 'destructive';
   /** FAB 버튼 크기 */
   size?: 'sm' | 'md' | 'lg';
   /** 초기 위치 */
-  position?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left';
+  togglePosition?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left';
   /** 초기 열림/닫힘 상태 */
   defaultOpen?: boolean;
   /** 드래그 가능 여부 */
@@ -37,13 +39,14 @@ export function DraggableFabPanel({
   closeIcon = '✕',
   variant = 'default',
   size = 'md',
-  position = 'bottom-right',
+  togglePosition = 'bottom-right',
   defaultOpen = false,
   draggable = true,
   ariaLabel = 'Toggle panel',
   onOpenChange,
   onDragStart,
   onDragEnd,
+  contentsPosition = 'top-left',
 }: DraggableFabPanelProps) {
   const [open, setOpen] = useState(defaultOpen);
   const hasDraggedRef = useRef(false);
@@ -86,7 +89,7 @@ export function DraggableFabPanel({
     }
   };
 
-  const className = `${S.containerBase} ${S.positionVariant[position]}`;
+  const className = `${S.containerBase} ${S.positionVariant[togglePosition]}`;
 
   return draggable ? (
     <motion.div
@@ -95,7 +98,6 @@ export function DraggableFabPanel({
       onDragStart={handleDragStart}
       onDrag={handleDrag}
       onDragEnd={handleDragEnd}
-      initial={{ x: -100, y: -100 }}
       className={className}
     >
       <Collapsible.Root open={open}>
@@ -113,7 +115,7 @@ export function DraggableFabPanel({
 
         <Collapsible.Content
           id="fab-panel-content"
-          className={S.panel}
+          className={S.panel[contentsPosition]}
           role="dialog"
           aria-modal="false"
         >
@@ -138,7 +140,7 @@ export function DraggableFabPanel({
 
         <Collapsible.Content
           id="fab-panel-content"
-          className={S.panel}
+          className={S.panel[contentsPosition]}
           role="dialog"
           aria-modal="false"
         >

@@ -72,13 +72,7 @@ export const fabButtonVariant = styleVariants({
   },
 });
 
-// 패널 기본 스타일
-export const panel = style({
-  position: 'absolute',
-  top: 'calc(100% + 12px)',
-  right: 0,
-  minWidth: '220px',
-  maxWidth: '320px',
+export const panelBase = {
   padding: '16px',
   borderRadius: vars.spacing.radius,
   backgroundColor: vars.colors.card,
@@ -86,6 +80,34 @@ export const panel = style({
   border: `1px solid ${vars.colors.border}`,
   boxShadow: '0 8px 25px -5px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
   zIndex: 50,
+};
+
+// 패널 기본 스타일
+export const panel = styleVariants({
+  'top-left': {
+    ...panelBase,
+    position: 'absolute',
+    bottom: 'calc(100% + 12px)',
+    right: 0,
+  },
+  'top-right': {
+    ...panelBase,
+    position: 'absolute',
+    bottom: 'calc(100% + 12px)',
+    left: 0,
+  },
+  'bottom-left': {
+    ...panelBase,
+    position: 'absolute',
+    top: 'calc(100% + 12px)',
+    right: 0,
+  },
+  'bottom-right': {
+    ...panelBase,
+    position: 'absolute',
+    top: 'calc(100% + 12px)',
+    left: 0,
+  },
 });
 
 // 크기 변형

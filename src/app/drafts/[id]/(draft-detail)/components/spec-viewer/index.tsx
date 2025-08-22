@@ -3,13 +3,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ExternalLink, CheckCircle2, AlertTriangle, BookOpen, LucideIcon } from 'lucide-react';
+import { ExternalLink, BookOpen, LucideIcon } from 'lucide-react';
 import * as S from './index.css';
 import { citations, spec, specSummary, SPEC_SECTIONS } from './constants';
 import { getCitationIcon } from './utils';
 import MarkdownRenderer from '../markdown-renderer';
 import { Flex } from '@/components/ui/flex';
 import DraggableFabPanel from '@/components/DraggableFabPanel';
+import { TableOfContents } from './components/table-of-contents';
 
 interface SpecViewerProps {
   draftId: string;
@@ -19,11 +20,6 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
   return (
     <div className={S.container}>
       {/* 헤더 */}
-      <DraggableFabPanel openIcon={<BookOpen />} closeIcon={<BookOpen />}>
-        <div>
-          <h1>Hello</h1>
-        </div>
-      </DraggableFabPanel>
       <Card className={S.headerCard}>
         <CardHeader className={S.headerContainer}>
           <div className={S.headerActions}>
@@ -52,40 +48,15 @@ export function SpecViewer({ draftId }: SpecViewerProps) {
         </CardHeader>
       </Card>
 
-      {/* 좌측 목차 */}
-      <div className={S.tocSidebar}>
-        <Card className={S.tocCard}>
-          <CardHeader>
-            <CardTitle className={S.tocTitle}>
-              <BookOpen />
-              목차
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <nav className={S.tocContainer}>
-              {specSummary.sections.map((section) => {
-                const IconComponent = section.icon;
-                return (
-                  <a key={section.id} href={`#${section.id}`} className={S.tocItem}>
-                    <div className={S.tocItemContent}>
-                      <IconComponent className={S.sectionIcon} />
-                      <Flex direction="col" gap={2}>
-                        <span className={S.tocItemTitle}>{section.title}</span>
-                        <span className={S.tocItemDescription}>{section.description}</span>
-                      </Flex>
-                    </div>
-                    {section.completed ? (
-                      <CheckCircle2 className={`${S.statusIcon} ${S.completedIcon}`} />
-                    ) : (
-                      <AlertTriangle className={`${S.statusIcon} ${S.pendingIcon}`} />
-                    )}
-                  </a>
-                );
-              })}
-            </nav>
-          </CardContent>
-        </Card>
-      </div>
+      <DraggableFabPanel
+        openIcon={<BookOpen />}
+        closeIcon={<BookOpen />}
+        ariaLabel="목차 보기"
+        togglePosition="bottom-right"
+        variant="default"
+      >
+        <TableOfContents />
+      </DraggableFabPanel>
 
       {/* 메인 콘텐츠 */}
       <div className={S.contentContainer}>
