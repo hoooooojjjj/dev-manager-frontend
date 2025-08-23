@@ -27,4 +27,12 @@ export const tabsContent = style({
     outline: `2px solid ${vars.colors.ring}`,
     outlineOffset: '2px',
   },
+  selectors: {
+    '&[data-state=inactive]': {
+      display: 'none',
+    },
+    '&[hidden]': {
+      display: 'none',
+    },
+  },
 });
