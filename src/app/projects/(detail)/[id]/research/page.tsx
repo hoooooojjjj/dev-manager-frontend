@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { ResearchPanel } from '@/app/projects/(detail)/[id]/research/components/research';
+import { ResearchPanel } from '@/app/projects/(detail)/[id]/research/components/research-panel';
 import { Breadcrumb } from '@/components/layout/breadcrumb';
 import * as S from './page.css';
 
