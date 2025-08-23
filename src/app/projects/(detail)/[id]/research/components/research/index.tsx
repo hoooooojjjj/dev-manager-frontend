@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import * as styles from './research-panel.css';
+import * as styles from './index.css';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -113,12 +113,8 @@ export function ResearchPanel({}: ResearchPanelProps) {
             </div>
             <div className={styles.statCenter}>
               <div className={styles.statIconWrapper}>
-                <span className={styles.statValueBlue}>
-                  {researchSummary.jobPostings}
-                </span>
-                {researchSummary.jobPostings >= 3 && (
-                  <CheckCircle2 className={styles.checkIcon} />
-                )}
+                <span className={styles.statValueBlue}>{researchSummary.jobPostings}</span>
+                {researchSummary.jobPostings >= 3 && <CheckCircle2 className={styles.checkIcon} />}
               </div>
               <div className={styles.statLabel}>채용공고 (≥3)</div>
             </div>
@@ -269,10 +265,7 @@ export function ResearchPanel({}: ResearchPanelProps) {
                     <h4 className={styles.compSectionTitle}>학습 포인트</h4>
                     <ul className={styles.learningPointsList}>
                       {comp.learning_points.map((point, idx) => (
-                        <li
-                          key={idx}
-                          className={styles.learningPoint}
-                        >
+                        <li key={idx} className={styles.learningPoint}>
                           <span className={styles.bulletPoint}>•</span>
                           {point}
                         </li>
