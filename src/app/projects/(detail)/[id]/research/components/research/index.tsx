@@ -18,7 +18,7 @@ export function ResearchPanel({}: ResearchPanelProps) {
     <div className={S.container}>
       {/* 리서치 요약 */}
       <Card>
-        <CardContent>
+        <CardContent className={S.cardContent}>
           <div className={S.statsGrid}>
             <div className={S.statCenter}>
               <div className={S.statValue}>{researchSummary.totalSources}</div>
@@ -27,16 +27,12 @@ export function ResearchPanel({}: ResearchPanelProps) {
             <div className={S.statCenter}>
               <div className={S.statIconWrapper}>
                 <span className={S.statValueGreen}>{researchSummary.authoritativeSources}</span>
-                {researchSummary.authoritativeSources >= 5 && (
-                  <CheckCircle2 className={S.checkIcon} />
-                )}
               </div>
               <div className={S.statLabel}>References (≥5)</div>
             </div>
             <div className={S.statCenter}>
               <div className={S.statIconWrapper}>
                 <span className={S.statValueBlue}>{researchSummary.jobPostings}</span>
-                {researchSummary.jobPostings >= 3 && <CheckCircle2 className={S.checkIcon} />}
               </div>
               <div className={S.statLabel}>채용공고 (≥3)</div>
             </div>
@@ -51,9 +47,15 @@ export function ResearchPanel({}: ResearchPanelProps) {
       {/* 탭 패널 */}
       <Tabs defaultValue="references" className={S.tabsWrapper}>
         <TabsList className={S.tabsGrid}>
-          <TabsTrigger value="references">References</TabsTrigger>
-          <TabsTrigger value="job-postings">Job Postings</TabsTrigger>
-          <TabsTrigger value="competency-map">Competency Map</TabsTrigger>
+          <TabsTrigger variant="outline" size="lg" value="references">
+            레퍼런스
+          </TabsTrigger>
+          <TabsTrigger variant="outline" size="lg" value="job-postings">
+            채용공고
+          </TabsTrigger>
+          <TabsTrigger variant="outline" size="lg" value="competency-map">
+            역량 매핑
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="references" className={S.tabContent}>

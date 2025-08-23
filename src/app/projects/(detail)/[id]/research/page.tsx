@@ -28,7 +28,7 @@ export default async function ResearchPage({ params }: ResearchPageProps) {
       <div className={S.contentWrapper}>
         <div className={S.headerSection}>
           <h1 className={S.title}>리서치 결과</h1>
-          <p className={S.description}>Brave 검색을 통한 References와 대기업 채용공고 분석 결과</p>
+          <p className={S.description}>Brave 검색을 통한 레퍼런스와 대기업 채용공고 분석 결과</p>
         </div>
 
         <ResearchPanel projectId={id} />

@@ -71,13 +71,16 @@ export const checkIcon = style({
 });
 
 export const tabsWrapper = style({
-  width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1rem',
 });
 
 export const tabsGrid = style({
   display: 'grid',
   width: '100%',
   gridTemplateColumns: 'repeat(3, 1fr)',
+  gap: '0.5rem',
 });
 
 export const tabContent = style({
@@ -111,6 +114,10 @@ export const cardTitleWrapper = style({
 export const cardTitle = style({
   fontSize: '1.125rem',
   lineHeight: '1.75rem',
+});
+
+export const cardContent = style({
+  paddingTop: '20px !important',
 });
 
 export const metaWrapper = style({

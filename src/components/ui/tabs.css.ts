@@ -7,35 +7,14 @@ export const tabsList = style({
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: '8px',
-  backgroundColor: vars.colors.muted,
   padding: '4px',
   color: vars.colors.mutedForeground,
 });
 
-export const tabsTrigger = style({
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  whiteSpace: 'nowrap',
-  borderRadius: '6px',
-  paddingLeft: '12px',
-  paddingRight: '12px',
-  paddingTop: '4px',
-  paddingBottom: '4px',
-  fontSize: '14px',
-  fontWeight: 500,
-  transition: 'all 0.2s',
-  ':focus-visible': {
-    outline: `2px solid ${vars.colors.ring}`,
-    outlineOffset: '2px',
-  },
-  ':disabled': {
-    pointerEvents: 'none',
-    opacity: 0.5,
-  },
+export const tabsTriggerActive = style({
   selectors: {
     '&[data-state=active]': {
-      backgroundColor: vars.colors.background,
+      backgroundColor: vars.colors.accent,
       color: vars.colors.foreground,
       boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
     },
