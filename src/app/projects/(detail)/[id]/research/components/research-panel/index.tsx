@@ -14,9 +14,14 @@ interface ResearchPanelProps {
 }
 
 const TAB_CONFIG = [
-  { id: 'references', label: '레퍼런스', component: ReferencesTab },
-  { id: 'job-postings', label: '채용공고', component: JobPostingsTab },
-  { id: 'competency-map', label: '역량 매핑', component: CompetencyMapTab },
+  { id: 'references', label: '레퍼런스', color: 'green' as const, component: ReferencesTab },
+  { id: 'job-postings', label: '채용공고', color: 'blue' as const, component: JobPostingsTab },
+  {
+    id: 'competency-map',
+    label: '역량 매핑',
+    color: 'purple' as const,
+    component: CompetencyMapTab,
+  },
 ] as const;
 
 export function ResearchPanel({}: ResearchPanelProps) {
@@ -26,8 +31,8 @@ export function ResearchPanel({}: ResearchPanelProps) {
 
       <Tabs defaultValue="references" className={S.tabsWrapper}>
         <TabsList className={S.tabsGrid}>
-          {TAB_CONFIG.map(({ id, label }) => (
-            <TabsTrigger key={id} variant="outline" size="lg" value={id}>
+          {TAB_CONFIG.map(({ id, label, color }) => (
+            <TabsTrigger key={id} color={color} value={id}>
               {label}
             </TabsTrigger>
           ))}

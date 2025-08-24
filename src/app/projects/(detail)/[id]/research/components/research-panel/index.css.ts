@@ -73,14 +73,11 @@ export const checkIcon = style({
 export const tabsWrapper = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '1rem',
+  // gap removed - TabsList now handles spacing via marginBottom
 });
 
 export const tabsGrid = style({
-  display: 'grid',
-  width: '100%',
-  gridTemplateColumns: 'repeat(3, 1fr)',
-  gap: '0.5rem',
+  // Remove conflicting styles - TabsList now handles its own layout
 });
 
 export const tabContent = style({

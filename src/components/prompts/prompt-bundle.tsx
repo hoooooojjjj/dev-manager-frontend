@@ -182,15 +182,15 @@ export function PromptBundle({}: PromptBundleProps) {
       {/* 프롬프트 탭 */}
       <Tabs defaultValue="codegen" className="w-full">
         <TabsList className={tabsList}>
-          <TabsTrigger value="codegen" className={tabTrigger}>
+          <TabsTrigger value="codegen" color="blue" className={tabTrigger}>
             <Code className="h-4 w-4" />
             코드 생성
           </TabsTrigger>
-          <TabsTrigger value="test" className={tabTrigger}>
+          <TabsTrigger value="test" color="green" className={tabTrigger}>
             <TestTube className="h-4 w-4" />
             테스트 작성
           </TabsTrigger>
-          <TabsTrigger value="review" className={tabTrigger}>
+          <TabsTrigger value="review" color="purple" className={tabTrigger}>
             <MessageSquare className="h-4 w-4" />
             코드 리뷰
           </TabsTrigger>

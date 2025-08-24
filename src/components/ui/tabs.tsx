@@ -2,8 +2,7 @@
 
 import * as React from 'react';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
-import { tabsList, tabsContent, tabsTriggerActive } from './tabs.css';
-import { buttonVariant, buttonSize } from './button.css';
+import { tabsList, tabsContent, tabsTriggerBase, tabsTriggerVariants } from './tabs.css';
 
 const Tabs = TabsPrimitive.Root;
 
@@ -16,24 +15,27 @@ const TabsList = React.forwardRef<
 TabsList.displayName = TabsPrimitive.List.displayName;
 
 type TabsTriggerVariants = {
-  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
-  size?: 'default' | 'sm' | 'lg' | 'icon';
+  color?: 'default' | 'green' | 'blue' | 'purple';
 };
 
 export interface TabsTriggerProps
-  extends React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>,
+  extends Omit<React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>, 'color'>,
     TabsTriggerVariants {}
 
 const TabsTrigger = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Trigger>,
   TabsTriggerProps
->(({ className, variant = 'default', size = 'sm', ...props }, ref) => (
-  <TabsPrimitive.Trigger
-    ref={ref}
-    className={`${buttonVariant[variant]} ${buttonSize[size]} ${tabsTriggerActive} ${className || ''}`}
-    {...props}
-  />
-));
+>(({ className, color = 'default' as const, ...props }, ref) => {
+  const colorClass = tabsTriggerVariants[color as keyof typeof tabsTriggerVariants];
+
+  return (
+    <TabsPrimitive.Trigger
+      ref={ref}
+      className={`${tabsTriggerBase} ${colorClass} ${className || ''}`}
+      {...props}
+    />
+  );
+});
 TabsTrigger.displayName = TabsPrimitive.Trigger.displayName;
 
 const TabsContent = React.forwardRef<

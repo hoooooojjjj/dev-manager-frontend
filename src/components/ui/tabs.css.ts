@@ -1,28 +1,76 @@
-import { style } from '@vanilla-extract/css';
+import { style, styleVariants } from '@vanilla-extract/css';
 import { vars } from '@/lib/styles/theme.css';
 
 export const tabsList = style({
-  display: 'inline-flex',
-  height: '36px',
-  alignItems: 'center',
-  justifyContent: 'center',
-  borderRadius: '8px',
-  padding: '4px',
-  color: vars.colors.mutedForeground,
+  display: 'flex',
+  marginBottom: '24px',
+  borderBottom: `1px solid ${vars.colors.border}`,
 });
 
-export const tabsTriggerActive = style({
-  selectors: {
-    '&[data-state=active]': {
-      backgroundColor: vars.colors.accent,
-      color: vars.colors.foreground,
-      boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+// Base trigger styles
+export const tabsTriggerBase = style({
+  paddingLeft: '24px',
+  paddingRight: '24px',
+  paddingTop: '12px',
+  paddingBottom: '12px',
+  fontWeight: '500',
+  fontSize: '14px',
+  lineHeight: '20px',
+  color: vars.colors.mutedForeground,
+  backgroundColor: 'transparent',
+  border: 'none',
+  borderBottom: '2px solid transparent',
+  cursor: 'pointer',
+  transition: 'all 0.2s ease-in-out',
+
+  ':hover': {
+    color: vars.colors.foreground,
+  },
+
+  ':focus-visible': {
+    outline: `2px solid ${vars.colors.ring}`,
+    outlineOffset: '2px',
+  },
+});
+
+// Color variants for active states
+export const tabsTriggerVariants = styleVariants({
+  default: {
+    selectors: {
+      '&[data-state=active]': {
+        color: vars.colors.primary,
+        borderBottomColor: vars.colors.primary,
+      },
+    },
+  },
+  green: {
+    selectors: {
+      '&[data-state=active]': {
+        color: '#10b981', // emerald-500
+        borderBottomColor: '#10b981',
+      },
+    },
+  },
+  blue: {
+    selectors: {
+      '&[data-state=active]': {
+        color: '#3b82f6', // blue-500
+        borderBottomColor: '#3b82f6',
+      },
+    },
+  },
+  purple: {
+    selectors: {
+      '&[data-state=active]': {
+        color: '#8b5cf6', // violet-500
+        borderBottomColor: '#8b5cf6',
+      },
     },
   },
 });
 
 export const tabsContent = style({
-  marginTop: '8px',
+  marginTop: '0px',
   ':focus-visible': {
     outline: `2px solid ${vars.colors.ring}`,
     outlineOffset: '2px',
