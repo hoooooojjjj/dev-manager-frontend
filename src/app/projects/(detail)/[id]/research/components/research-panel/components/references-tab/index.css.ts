@@ -13,23 +13,12 @@ export const cardHeaderItems = style({
   paddingBottom: '0.75rem',
 });
 
-export const cardHeaderFlex = style({
-  display: 'flex',
-  alignItems: 'flex-start',
-  justifyContent: 'space-between',
-});
-
-export const cardTitleWrapper = style({
-  flex: '1 1 0%',
-});
-
 export const cardTitle = style({
   fontSize: '1.125rem',
   lineHeight: '1.75rem',
 });
 
 export const metaWrapper = style({
-  marginTop: '0.5rem',
   display: 'flex',
   width: '100%',
   alignItems: 'center',

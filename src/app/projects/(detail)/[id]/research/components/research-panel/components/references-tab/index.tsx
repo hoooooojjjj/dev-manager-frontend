@@ -4,6 +4,7 @@ import { Calendar, ExternalLink, Star, User } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import * as S from './index.css';
+import { Flex } from '@/components/ui/flex';
 
 export function ReferencesTab() {
   return (
@@ -23,26 +24,24 @@ function ReferenceCard({ reference }: ReferenceCardProps) {
   return (
     <Card className={S.cardHover}>
       <CardHeader className={S.cardHeaderItems}>
-        <div className={S.cardHeaderFlex}>
-          <div className={S.cardTitleWrapper}>
-            <CardTitle className={S.cardTitle}>{reference.title}</CardTitle>
-            <div className={S.metaWrapper}>
-              <div className={S.metaItem}>
-                <User className={S.metaIcon} />
-                {reference.author}
-              </div>
-              <div className={S.metaItem}>
-                <Calendar className={S.metaIcon} />
-                {new Date(reference.published_at).toLocaleDateString('ko-KR')}
-              </div>
-            </div>
-          </div>
+        <Flex direction="row" align="center" gap={10}>
+          <CardTitle className={S.cardTitle}>{reference.title}</CardTitle>
           <div className={S.rightActions}>
             <Badge variant="outline">{reference.domain}</Badge>
             <div className={S.ratingWrapper}>
               <Star className={S.starIcon} />
               <span className={S.ratingText}>{reference.weight.toFixed(1)}</span>
             </div>
+          </div>
+        </Flex>
+        <div className={S.metaWrapper}>
+          <div className={S.metaItem}>
+            <User className={S.metaIcon} />
+            {reference.author}
+          </div>
+          <div className={S.metaItem}>
+            <Calendar className={S.metaIcon} />
+            {new Date(reference.published_at).toLocaleDateString('ko-KR')}
           </div>
         </div>
       </CardHeader>

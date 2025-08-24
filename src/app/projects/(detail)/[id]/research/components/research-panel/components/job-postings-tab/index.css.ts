@@ -41,7 +41,6 @@ export const jobHeaderFlex = style({
 });
 
 export const jobMetaWrapper = style({
-  marginTop: '0.5rem',
   display: 'flex',
   alignItems: 'center',
   gap: '1rem',
@@ -60,6 +59,7 @@ export const requirementsSection = style({});
 
 export const requirementsTitle = style({
   marginBottom: '0.5rem',
+  marginTop: '10px',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   fontWeight: '500',

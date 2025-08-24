@@ -26,7 +26,7 @@ function CompetencyCard({ competency }: CompetencyCardProps) {
       <CardContent>
         <div className={S.compContent}>
           <div className={S.compSection}>
-            <h4 className={S.compSectionTitle}>근거 소스</h4>
+            <h4 className={S.compSectionTitle}>레퍼런스</h4>
             <div className={S.compBadges}>
               {competency.evidence.map((evidence, idx) => (
                 <Badge key={idx} variant="outline">

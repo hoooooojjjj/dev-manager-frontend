@@ -4,6 +4,7 @@ import { Building, Calendar, ExternalLink } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import * as S from './index.css';
+import { Flex } from '@/components/ui/flex';
 
 export function JobPostingsTab() {
   return (
@@ -23,21 +24,19 @@ function JobPostingCard({ job }: JobPostingCardProps) {
   return (
     <Card className={S.cardHover}>
       <CardHeader className={S.cardHeaderItems}>
-        <div className={S.jobHeaderFlex}>
-          <div className={S.cardTitleWrapper}>
-            <CardTitle className={S.cardTitle}>{job.title}</CardTitle>
-            <div className={S.jobMetaWrapper}>
-              <div className={S.metaItem}>
-                <Building className={S.metaIcon} />
-                {job.company}
-              </div>
-              <div className={S.metaItem}>
-                <Calendar className={S.metaIcon} />
-                {new Date(job.published_at).toLocaleDateString('ko-KR')}
-              </div>
-            </div>
-          </div>
+        <Flex direction="row" align="center" gap={10}>
+          <CardTitle className={S.cardTitle}>{job.title}</CardTitle>
           <Badge>{job.metadata.company_tier}</Badge>
+        </Flex>
+        <div className={S.jobMetaWrapper}>
+          <div className={S.metaItem}>
+            <Building className={S.metaIcon} />
+            {job.company}
+          </div>
+          <div className={S.metaItem}>
+            <Calendar className={S.metaIcon} />
+            {new Date(job.published_at).toLocaleDateString('ko-KR')}
+          </div>
         </div>
       </CardHeader>
       <CardContent>

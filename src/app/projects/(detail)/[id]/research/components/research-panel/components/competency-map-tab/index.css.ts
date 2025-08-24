@@ -28,6 +28,7 @@ export const compSection = style({});
 
 export const compSectionTitle = style({
   marginBottom: '0.5rem',
+  marginTop: '10px',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   fontWeight: '500',
