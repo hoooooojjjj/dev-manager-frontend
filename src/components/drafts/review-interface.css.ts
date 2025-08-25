@@ -190,7 +190,6 @@ export const diffHeader = style({
 export const beforeDiff = style({
   borderRadius: vars.spacing.radius,
   border: '1px solid #fecaca', // border-red-200
-  backgroundColor: '#fef2f2', // bg-red-50
   padding: '0.75rem',
   fontSize: '0.875rem',
 });
@@ -198,7 +197,6 @@ export const beforeDiff = style({
 export const afterDiff = style({
   borderRadius: vars.spacing.radius,
   border: '1px solid #bbf7d0', // border-green-200
-  backgroundColor: '#f0fdf4', // bg-green-50
   padding: '0.75rem',
   fontSize: '0.875rem',
 });
