@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { ReviewInterface } from '@/app/drafts/[id]/review/components';
+import { ReviewInterface } from '@/app/drafts/[id]/review/components/review-interface';
 import { Breadcrumb } from '@/components/layout/breadcrumb';
 import * as S from './page.css';
 
