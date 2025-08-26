@@ -225,7 +225,6 @@ export const emptyState = style({
   height: '200px',
   textAlign: 'center',
   color: vars.colors.mutedForeground,
-  gap: '0.75rem',
 });
 
 export const emptyIcon = style({

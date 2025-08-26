@@ -301,12 +301,14 @@ export function ReviewInterface({ draftId }: ReviewInterfaceProps) {
       <Card className={S.fullWidthCard}>
         <CardHeader>
           <CardTitle>
-            <History className="mr-2 h-5 w-5" />
-            {showDiff && pendingReview
-              ? '리뷰 결과 확인'
-              : selectedSection
-                ? `${selectedSection.title} 내용`
-                : '리뷰 히스토리'}
+            <Flex justify="center" gap={4} align="center">
+              <History className="h-5 w-5" />
+              {showDiff && pendingReview
+                ? '리뷰 결과 확인'
+                : selectedSection
+                  ? `${selectedSection.title} 내용`
+                  : '리뷰 히스토리'}
+            </Flex>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -421,10 +423,8 @@ export function ReviewInterface({ draftId }: ReviewInterfaceProps) {
         <Card className={S.fullWidthCard}>
           <CardHeader>
             <CardTitle>
-              <Flex align="center" gap={4}>
-                <History className="h-5 w-5" />
-                {selectedSection.title} 리뷰 히스토리
-              </Flex>
+              <History className="h-5 w-5" />
+              {selectedSection.title} 리뷰 히스토리
             </CardTitle>
           </CardHeader>
           <CardContent>
