@@ -4,8 +4,6 @@ import { forTablet, forDesktop } from '@/lib/styles/breakpoints';
 
 // 메인 컨테이너
 export const container = style({
-  maxWidth: '72rem', // max-w-6xl
-  margin: '0 auto',
   display: 'grid',
   gridTemplateColumns: '1fr',
   gap: '1.5rem',
@@ -60,6 +58,14 @@ export const sectionButtonSelected = style([
 
 export const sectionTitle = style({
   fontWeight: '500',
+});
+
+export const badge = style({
+  padding: '5px 10px',
+  width: 50,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 });
 
 // 리뷰 폼

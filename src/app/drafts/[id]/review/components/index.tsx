@@ -9,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { MessageSquare, Send, CheckCircle2, XCircle, RotateCcw, Clock } from 'lucide-react';
 import * as S from './index.css';
+import { Flex } from '@/components/ui/flex';
 
 interface ReviewInterfaceProps {
   draftId: string;
@@ -79,10 +80,13 @@ export function ReviewInterface({}: ReviewInterfaceProps) {
                         ? 'secondary'
                         : 'outline'
                   }
+                  className={S.badge}
                 >
-                  {section.status === 'completed' && <CheckCircle2 className="mr-1 h-3 w-3" />}
-                  {section.status === 'needs_work' && <Clock className="mr-1 h-3 w-3" />}
-                  {section.status === 'completed' ? '완료' : '작업 필요'}
+                  <Flex justify="center" gap={4}>
+                    {section.status === 'completed' && <CheckCircle2 size={14} />}
+                    {section.status === 'needs_work' && <Clock size={14} />}
+                    {section.status === 'completed' ? '완료' : '미완료'}
+                  </Flex>
                 </Badge>
               </button>
             ))}
