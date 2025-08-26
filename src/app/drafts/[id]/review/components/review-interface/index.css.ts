@@ -215,3 +215,48 @@ export const iconDestructive = style({
 export const iconSuccess = style({
   color: '#16a34a', // text-green-600
 });
+
+// 빈 상태
+export const emptyState = style({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  height: '200px',
+  textAlign: 'center',
+  color: vars.colors.mutedForeground,
+  gap: '0.75rem',
+});
+
+export const emptyIcon = style({
+  height: '3rem',
+  width: '3rem',
+  opacity: '0.5',
+});
+
+// 섹션 콘텐츠 뷰
+export const sectionContentContainer = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1rem',
+});
+
+export const sectionContent = style({
+  borderRadius: vars.spacing.radius,
+  border: `1px solid ${vars.colors.border}`,
+  padding: '1rem',
+});
+
+export const sectionContentTitle = style({
+  marginBottom: '0.75rem',
+  fontSize: '1.125rem',
+  fontWeight: '600',
+  color: vars.colors.foreground,
+});
+
+export const sectionContentText = style({
+  fontSize: '0.875rem',
+  lineHeight: '1.5',
+  color: vars.colors.foreground,
+  whiteSpace: 'pre-wrap',
+});
