@@ -4,7 +4,7 @@ import { forDesktop, forMobile } from '@/lib/styles/breakpoints';
 
 // 메인 컨테이너
 export const container = style({
-  maxWidth: '72rem',
+  maxWidth: '50rem',
   margin: '0 auto',
   padding: '0 1rem',
   display: 'flex',
