@@ -12,10 +12,10 @@ export const historyContainer = style({
 });
 
 export const historyItem = style({
-  border: '1px solid hsl(var(--border))',
+  border: `1px solid ${vars.colors.border}`,
   borderRadius: '0.5rem',
   padding: '1rem',
-  backgroundColor: 'hsl(var(--card))',
+  backgroundColor: vars.colors.card,
 });
 
 export const historyHeader = style({
@@ -33,7 +33,7 @@ export const historyMeta = style({
 
 export const historyTimestamp = style({
   fontSize: '0.875rem',
-  color: 'hsl(var(--muted-foreground))',
+  color: vars.colors.mutedForeground,
 });
 
 export const historyActions = style({
@@ -48,7 +48,7 @@ export const historyContent = style({
 });
 
 export const instructionSection = style({
-  backgroundColor: 'hsl(var(--muted) / 0.3)',
+  backgroundColor: vars.colors.muted,
   borderRadius: '0.375rem',
   padding: '0.75rem',
 });
@@ -62,7 +62,7 @@ export const instructionTitle = style({
 export const instructionText = style({
   fontSize: '0.875rem',
   lineHeight: '1.5',
-  color: 'hsl(var(--foreground))',
+  color: vars.colors.foreground,
 });
 
 export const diffGrid = style({
@@ -91,16 +91,16 @@ export const diffHeader = style({
 });
 
 export const iconDestructive = style({
-  color: 'hsl(var(--destructive))',
+  color: vars.colors.destructive,
 });
 
 export const iconSuccess = style({
-  color: 'hsl(var(--primary))',
+  color: vars.colors.primary,
 });
 
 export const beforeDiff = style({
-  backgroundColor: 'hsl(var(--destructive) / 0.1)',
-  border: '1px solid hsl(var(--destructive) / 0.2)',
+  backgroundColor: vars.colors.destructive,
+  border: `1px solid ${vars.colors.destructive}`,
   borderRadius: '0.375rem',
   padding: '0.75rem',
   fontSize: '0.875rem',
@@ -109,8 +109,8 @@ export const beforeDiff = style({
 });
 
 export const afterDiff = style({
-  backgroundColor: 'hsl(var(--primary) / 0.1)',
-  border: '1px solid hsl(var(--primary) / 0.2)',
+  backgroundColor: vars.colors.primary,
+  border: `1px solid ${vars.colors.primary}`,
   borderRadius: '0.375rem',
   padding: '0.75rem',
   fontSize: '0.875rem',
@@ -125,8 +125,6 @@ export const sectionContentContainer = style({
 });
 
 export const sectionContent = style({
-  border: '1px solid hsl(var(--border))',
-  borderRadius: '0.5rem',
   padding: '1rem',
 });
 
@@ -161,7 +159,7 @@ export const emptyState = style({
   alignItems: 'center',
   gap: '1rem',
   padding: '3rem 1rem',
-  color: 'hsl(var(--muted-foreground))',
+  color: vars.colors.mutedForeground,
   textAlign: 'center',
 });
 

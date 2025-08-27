@@ -1,3 +1,4 @@
+import { vars } from '@/lib/styles/theme.css';
 import { style, keyframes } from '@vanilla-extract/css';
 
 const spin = keyframes({
@@ -66,7 +67,7 @@ export const emptyState = style({
   alignItems: 'center',
   gap: '1rem',
   padding: '3rem 1rem',
-  color: 'hsl(var(--muted-foreground))',
+  color: vars.colors.mutedForeground,
   textAlign: 'center',
 });
 
