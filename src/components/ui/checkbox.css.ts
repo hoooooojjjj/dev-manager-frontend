@@ -4,6 +4,7 @@ import { style } from '@vanilla-extract/css';
 export const checkboxRoot = style({
   height: '16px',
   width: '16px',
+  padding: '0',
   flexShrink: 0,
   borderRadius: '2px',
   border: `1px solid ${vars.colors.primary}`,
@@ -25,8 +26,9 @@ export const checkboxRoot = style({
 });
 
 export const checkboxIndicator = style({
+  height: '16px',
+  width: '16px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  color: 'currentColor',
 });

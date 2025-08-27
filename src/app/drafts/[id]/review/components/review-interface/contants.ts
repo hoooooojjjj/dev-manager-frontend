@@ -1,4 +1,4 @@
-import { Section } from '.';
+import { Section } from './types';
 
 // 섹션 데이터 (실제로는 API에서 가져올 내용)
 export const sectionDatas: Section[] = [

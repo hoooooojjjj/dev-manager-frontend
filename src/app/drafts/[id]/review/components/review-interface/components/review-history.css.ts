@@ -136,6 +136,8 @@ export const expandIconRotated = style([
 export const cardContent = style({
   padding: '1.5rem',
   backgroundColor: vars.colors.card,
+  maxHeight: '300px',
+  overflow: 'auto',
 });
 
 export const instructionSection = style({
