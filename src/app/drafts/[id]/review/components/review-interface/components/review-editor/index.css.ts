@@ -5,6 +5,12 @@ const spin = keyframes({
   '100%': { transform: 'rotate(360deg)' },
 });
 
+export const card = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1rem',
+});
+
 export const diffHeader = style({
   display: 'flex',
   alignItems: 'center',
@@ -20,7 +26,7 @@ export const reviewFormContainer = style({
 export const instructionContainer = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '0.5rem',
+  gap: '1rem',
 });
 
 export const minHeightTextarea = style({
@@ -42,6 +48,7 @@ export const checkboxLabel = style({
 
 export const submitButton = style({
   alignSelf: 'flex-end',
+  marginTop: '10px',
 });
 
 export const spinningIcon = style({

@@ -31,10 +31,10 @@ interface ReviewEditorProps {
 
 /**
  * 사용자가 리뷰 지시문을 입력하고 AI 리뷰를 요청하는 컴포넌트
- * 
+ *
  * 수정 지시문 입력, 엄격한 인용 검증 옵션 선택,
  * 그리고 리뷰 제출 기능을 제공합니다.
- * 
+ *
  * @param props - ReviewEditorProps
  */
 export function ReviewEditor({
@@ -47,11 +47,12 @@ export function ReviewEditor({
   onSubmitReview,
 }: ReviewEditorProps) {
   return (
-    <Card>
+    <Card className={S.card}>
       <CardHeader>
         <CardTitle className={S.diffHeader}>
-          <MessageSquare className="h-5 w-5" />
-          {selectedSection ? `${selectedSection.title} 리뷰` : '섹션을 선택하세요'}
+          <h3 style={{ margin: '0' }}>
+            {selectedSection ? `${selectedSection.title} 리뷰` : '섹션을 선택하세요'}
+          </h3>
         </CardTitle>
       </CardHeader>
       <CardContent>

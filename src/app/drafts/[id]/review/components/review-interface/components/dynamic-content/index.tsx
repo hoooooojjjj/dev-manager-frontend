@@ -35,13 +35,13 @@ interface DynamicContentProps {
 
 /**
  * 리뷰 인터페이스의 메인 콘텐츠 영역
- * 
+ *
  * 상황에 따라 다른 콘텐츠를 동적으로 표시합니다:
  * - Before/After Diff 보기 (pendingReview가 있고 showDiff가 true인 경우)
  * - 선택된 섹션의 현재 내용 보기
  * - 전체 리뷰 히스토리 보기
  * - 빈 상태 메시지
- * 
+ *
  * @param props - DynamicContentProps
  */
 export function DynamicContent({
@@ -113,7 +113,6 @@ export function DynamicContent({
     return (
       <div className={S.sectionContentContainer}>
         <div className={S.sectionContent}>
-          <h3 className={S.sectionContentTitle}>{selectedSection.title} 현재 내용</h3>
           <div className={S.sectionContentText}>{selectedSection.content}</div>
         </div>
       </div>
@@ -175,7 +174,7 @@ export function DynamicContent({
 
   const getTitle = () => {
     if (showDiff && pendingReview) return '리뷰 결과 확인';
-    if (selectedSection) return `${selectedSection.title} 내용`;
+    if (selectedSection) return `현재 ${selectedSection.title} 내용`;
     return '리뷰 히스토리';
   };
 
@@ -193,8 +192,7 @@ export function DynamicContent({
         <CardHeader>
           <CardTitle>
             <Flex justify="center" gap={4} align="center">
-              <History className="h-5 w-5" />
-              {getTitle()}
+              <h3 style={{ margin: '0' }}>{getTitle()}</h3>
             </Flex>
           </CardTitle>
         </CardHeader>

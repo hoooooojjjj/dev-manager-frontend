@@ -1,3 +1,4 @@
+import { vars } from '@/lib/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
 export const fullWidthCard = style({
@@ -135,10 +136,18 @@ export const sectionContentTitle = style({
   marginBottom: '0.75rem',
 });
 
+export const sectionContentTitleHighlight = style({
+  color: vars.colors.ring,
+  fontWeight: 'bold',
+});
+
 export const sectionContentText = style({
   fontSize: '0.875rem',
   lineHeight: '1.6',
   whiteSpace: 'pre-wrap',
+  backgroundColor: vars.colors.muted,
+  padding: '10px',
+  borderRadius: '0.5rem',
 });
 
 export const buttonIcon = style({

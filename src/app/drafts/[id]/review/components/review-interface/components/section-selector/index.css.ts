@@ -1,3 +1,4 @@
+import { vars } from '@/lib/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
 export const sectionsContainer = style({
@@ -13,21 +14,21 @@ export const sectionButton = style({
   padding: '0.75rem 1rem',
   width: '100%',
   borderRadius: '0.5rem',
-  border: '1px solid hsl(var(--border))',
+  border: `1px solid ${vars.colors.buttonBorder}`,
   backgroundColor: 'transparent',
   textAlign: 'left',
   cursor: 'pointer',
   transition: 'all 0.2s',
   ':hover': {
-    backgroundColor: 'hsl(var(--muted) / 0.5)',
+    backgroundColor: vars.colors.muted,
   },
 });
 
 export const sectionButtonSelected = style([
   sectionButton,
   {
-    backgroundColor: 'hsl(var(--muted))',
-    borderColor: 'hsl(var(--primary))',
+    backgroundColor: vars.colors.muted,
+    borderColor: vars.colors.accentForeground,
   },
 ]);
 
