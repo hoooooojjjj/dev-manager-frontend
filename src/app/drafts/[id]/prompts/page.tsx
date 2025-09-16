@@ -29,7 +29,7 @@ export default async function PromptsPage({ params }: PromptsPageProps) {
       <div className={contentWrapper}>
         <div className={headerSection}>
           <h1 className={title}>AI 실행 프롬프트</h1>
-          <p className={description}>codegen, test, review 용도별 구조화된 프롬프트 번들</p>
+          <p className={description}>codegen, test, review 용도별 구조화된 프롬프트 </p>
         </div>
 
         <PromptBundle draftId={id} />
