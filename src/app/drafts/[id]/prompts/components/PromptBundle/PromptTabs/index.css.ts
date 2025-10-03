@@ -1,3 +1,4 @@
+import { forMobile } from '@/lib/styles/breakpoints';
 import { vars } from '@/lib/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
@@ -13,12 +14,6 @@ export const tabTrigger = style({
   justifyContent: 'center',
   gap: '0.5rem',
   fontSize: '1rem',
-});
-
-export const promptCardHeader = style({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
 });
 
 export const promptCardTitle = style({
@@ -47,4 +42,11 @@ export const copyButton = style({
   position: 'absolute',
   right: 20,
   top: 20,
+  '@media': {
+    [forMobile]: {
+      position: 'relative',
+      right: 0,
+      top: 0,
+    },
+  },
 });

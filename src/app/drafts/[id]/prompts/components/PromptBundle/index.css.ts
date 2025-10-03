@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/lib/styles/theme.css';
-import { forTablet } from '@/lib/styles/breakpoints';
+import { forMobile, forTablet } from '@/lib/styles/breakpoints';
 
 // 메인 컨테이너
 export const container = style({
@@ -29,6 +29,13 @@ export const headerActions = style({
   position: 'absolute',
   right: 20,
   top: 20,
+  '@media': {
+    [forMobile]: {
+      position: 'relative',
+      right: 0,
+      top: 0,
+    },
+  },
 });
 
 export const description = style({
@@ -71,24 +78,6 @@ export const guideTitle = style({
 export const guideDescription = style({
   fontSize: '0.875rem',
   color: vars.colors.mutedForeground,
-});
-
-export const tipSection = style({
-  backgroundColor: '#eff6ff', // bg-blue-50
-  border: '1px solid #bfdbfe', // border-blue-200
-  borderRadius: vars.spacing.radius,
-  padding: '1rem',
-});
-
-export const tipTitle = style({
-  fontWeight: '500',
-  color: '#1e3a8a', // text-blue-900
-  marginBottom: '0.25rem',
-});
-
-export const tipText = style({
-  fontSize: '0.875rem',
-  color: '#1e40af', // text-blue-800
 });
 
 // 아이콘 색상

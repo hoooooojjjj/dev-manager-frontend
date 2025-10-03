@@ -6,6 +6,7 @@ import * as S from './index.css';
 import { prompts } from './constants';
 import { useToast } from '@/lib/store/useUi';
 import { useState } from 'react';
+import { Flex } from '@/components/ui/flex';
 
 export function PromptTabs() {
   const { success } = useToast();
@@ -68,30 +69,30 @@ export function PromptTabs() {
       {Object.entries(prompts).map(([type, prompt]) => (
         <TabsContent key={type} value={type} className="space-y-4">
           <Card style={{ position: 'relative' }}>
-            <Button
-              onClick={() => copyToClipboard(prompt, type)}
-              variant="outline"
-              className={S.copyButton}
-            >
-              {copiedPrompt === type ? (
-                <>
-                  <Check className="" />
-                  복사됨
-                </>
-              ) : (
-                <>
-                  <Copy className="" />
-                  복사
-                </>
-              )}
-            </Button>
             <CardHeader>
-              <div className={S.promptCardHeader}>
+              <Flex justify="between" align="center" style={{ width: '100%' }}>
                 <CardTitle className={S.promptCardTitle}>
                   {getPromptIcon(type)}
                   {getPromptTitle(type)} 프롬프트
                 </CardTitle>
-              </div>
+                <Button
+                  onClick={() => copyToClipboard(prompt, type)}
+                  variant="outline"
+                  className={S.copyButton}
+                >
+                  {copiedPrompt === type ? (
+                    <>
+                      <Check className="" />
+                      복사됨
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="" />
+                      복사
+                    </>
+                  )}
+                </Button>
+              </Flex>
             </CardHeader>
             <CardContent>
               <div className={S.promptContent}>

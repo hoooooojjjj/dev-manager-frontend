@@ -32,7 +32,7 @@ export default async function PromptsPage({ params }: PromptsPageProps) {
           <p className={description}>codegen, test, review 용도별 구조화된 프롬프트 </p>
         </div>
 
-        <PromptBundle draftId={id} />
+        <PromptBundle />
       </div>
     </div>
   );
