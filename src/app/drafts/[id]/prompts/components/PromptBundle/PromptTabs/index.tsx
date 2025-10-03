@@ -1,10 +1,9 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Badge } from '@/components/ui/badge';
 import { Copy, Check, Code, TestTube, MessageSquare } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import * as S from './index.css';
-import { prompts, variables } from './constants';
+import { prompts } from './constants';
 import { useToast } from '@/lib/store/useUi';
 import { useState } from 'react';
 
@@ -68,52 +67,35 @@ export function PromptTabs() {
 
       {Object.entries(prompts).map(([type, prompt]) => (
         <TabsContent key={type} value={type} className="space-y-4">
-          <Card>
+          <Card style={{ position: 'relative' }}>
+            <Button
+              onClick={() => copyToClipboard(prompt, type)}
+              variant="outline"
+              className={S.copyButton}
+            >
+              {copiedPrompt === type ? (
+                <>
+                  <Check className="" />
+                  복사됨
+                </>
+              ) : (
+                <>
+                  <Copy className="" />
+                  복사
+                </>
+              )}
+            </Button>
             <CardHeader>
               <div className={S.promptCardHeader}>
                 <CardTitle className={S.promptCardTitle}>
                   {getPromptIcon(type)}
                   {getPromptTitle(type)} 프롬프트
                 </CardTitle>
-                <Button
-                  onClick={() => copyToClipboard(prompt, type)}
-                  variant="outline"
-                  className={S.copyButton}
-                >
-                  {copiedPrompt === type ? (
-                    <>
-                      <Check className="" />
-                      복사됨
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="" />
-                      복사
-                    </>
-                  )}
-                </Button>
               </div>
             </CardHeader>
             <CardContent>
               <div className={S.promptContent}>
                 <pre className={S.promptText}>{prompt}</pre>
-
-                {/* 변수 목록 */}
-                <div>
-                  <h4 className={S.variablesTitle}>사용된 변수</h4>
-                  <div className={S.variablesGrid}>
-                    {variables[type as keyof typeof variables]?.map((variable, index) => (
-                      <div key={index} className={S.variableCard}>
-                        <div className={S.variableHeader}>
-                          <Badge variant="outline" className={S.variableName}>
-                            {variable.name}
-                          </Badge>
-                        </div>
-                        <p className={S.variableValue}>{variable.value}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
               </div>
             </CardContent>
           </Card>

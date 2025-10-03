@@ -53,19 +53,3 @@ export const prompts = {
 
 출력: 구체적인 개선사항과 우선순위.`,
 };
-
-export const variables = {
-  codegen: [
-    { name: '{project_context}', value: '사용자 인증 시스템 JWT 보안 강화' },
-    { name: '{constraints}', value: 'Asia/Seoul, Redis, 성능 < 5ms' },
-    { name: '{requirements}', value: '토큰 만료 15분, 리프레시 로테이션' },
-  ],
-  test: [
-    { name: '{test_scenarios}', value: '토큰 만료, 리프레시 로테이션, CSRF 방어' },
-    { name: '{performance_target}', value: '응답시간 < 5ms' },
-  ],
-  review: [
-    { name: '{code_snippet}', value: '실제 구현된 JWT 코드 스니펫' },
-    { name: '{security_criteria}', value: 'OWASP Top 10, JWT 가이드라인' },
-  ],
-};

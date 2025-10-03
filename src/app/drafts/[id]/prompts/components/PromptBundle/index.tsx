@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Code, TestTube, MessageSquare, Download, RefreshCw } from 'lucide-react';
 import * as S from './index.css';
+import { PromptTabs } from './PromptTabs';
 
 interface PromptBundleProps {
   draftId: string;
@@ -13,6 +14,7 @@ export function PromptBundle({}: PromptBundleProps) {
     <div className={S.container}>
       <Header />
 
+      <PromptTabs />
       {/* 사용 가이드 */}
       <Card>
         <CardHeader>
