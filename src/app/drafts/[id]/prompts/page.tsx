@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { PromptBundle } from '@/components/prompts/prompt-bundle';
+import { PromptBundle } from './components/index';
 import { Breadcrumb } from '@/components/layout/breadcrumb';
 import { container, contentWrapper, headerSection, title, description } from './page.css';
 

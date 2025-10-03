@@ -7,37 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Copy, Check, Code, TestTube, MessageSquare, Download, RefreshCw } from 'lucide-react';
 import { useToast } from '@/lib/store/useUi';
-import {
-  container,
-  headerContainer,
-  title,
-  headerActions,
-  description,
-  tabsList,
-  tabTrigger,
-  promptCardHeader,
-  promptCardTitle,
-  copyButton,
-  promptContent,
-  promptText,
-  variablesTitle,
-  variablesGrid,
-  variableCard,
-  variableHeader,
-  variableName,
-  variableValue,
-  guideGrid,
-  guideCard,
-  guideTitle,
-  guideDescription,
-  tipSection,
-  tipTitle,
-  tipText,
-  iconBlue,
-  iconGreen,
-  iconPurple,
-  buttonIcon,
-} from './prompt-bundle.css';
+import * as S from './index.css';
 
 interface PromptBundleProps {
   draftId: string;
@@ -134,13 +104,13 @@ export function PromptBundle({}: PromptBundleProps) {
   const getPromptIcon = (type: string) => {
     switch (type) {
       case 'codegen':
-        return <Code className="h-4 w-4" />;
+        return <Code className="" />;
       case 'test':
-        return <TestTube className="h-4 w-4" />;
+        return <TestTube className="" />;
       case 'review':
-        return <MessageSquare className="h-4 w-4" />;
+        return <MessageSquare className="" />;
       default:
-        return <Code className="h-4 w-4" />;
+        return <Code className="" />;
     }
   };
 
@@ -158,40 +128,40 @@ export function PromptBundle({}: PromptBundleProps) {
   };
 
   return (
-    <div className={container}>
+    <div className={S.container}>
       {/* 헤더 */}
       <Card>
         <CardHeader>
-          <div className={headerContainer}>
-            <CardTitle className={title}>AI 실행 프롬프트 번들</CardTitle>
-            <div className={headerActions}>
+          <div className={S.headerContainer}>
+            <CardTitle className={S.title}>AI 실행 프롬프트 번들</CardTitle>
+            <div className={S.headerActions}>
               <Button variant="outline">
-                <RefreshCw className={buttonIcon} />
+                <RefreshCw className={S.buttonIcon} />
                 재생성
               </Button>
               <Button>
-                <Download className={buttonIcon} />
+                <Download className={S.buttonIcon} />
                 다운로드
               </Button>
             </div>
           </div>
-          <p className={description}>개발 명세서를 기반으로 생성된 구조화된 AI 프롬프트입니다.</p>
+          <p className={S.description}>개발 명세서를 기반으로 생성된 구조화된 AI 프롬프트입니다.</p>
         </CardHeader>
       </Card>
 
       {/* 프롬프트 탭 */}
       <Tabs defaultValue="codegen" className="w-full">
-        <TabsList className={tabsList}>
-          <TabsTrigger value="codegen" color="blue" className={tabTrigger}>
-            <Code className="h-4 w-4" />
+        <TabsList className={S.tabsList}>
+          <TabsTrigger value="codegen" color="blue" className={S.tabTrigger}>
+            <Code className="" />
             코드 생성
           </TabsTrigger>
-          <TabsTrigger value="test" color="green" className={tabTrigger}>
-            <TestTube className="h-4 w-4" />
+          <TabsTrigger value="test" color="green" className={S.tabTrigger}>
+            <TestTube className="" />
             테스트 작성
           </TabsTrigger>
-          <TabsTrigger value="review" color="purple" className={tabTrigger}>
-            <MessageSquare className="h-4 w-4" />
+          <TabsTrigger value="review" color="purple" className={S.tabTrigger}>
+            <MessageSquare className="" />
             코드 리뷰
           </TabsTrigger>
         </TabsList>
@@ -200,24 +170,24 @@ export function PromptBundle({}: PromptBundleProps) {
           <TabsContent key={type} value={type} className="space-y-4">
             <Card>
               <CardHeader>
-                <div className={promptCardHeader}>
-                  <CardTitle className={promptCardTitle}>
+                <div className={S.promptCardHeader}>
+                  <CardTitle className={S.promptCardTitle}>
                     {getPromptIcon(type)}
                     {getPromptTitle(type)} 프롬프트
                   </CardTitle>
                   <Button
                     onClick={() => copyToClipboard(prompt, type)}
                     variant="outline"
-                    className={copyButton}
+                    className={S.copyButton}
                   >
                     {copiedPrompt === type ? (
                       <>
-                        <Check className="h-4 w-4" />
+                        <Check className="" />
                         복사됨
                       </>
                     ) : (
                       <>
-                        <Copy className="h-4 w-4" />
+                        <Copy className="" />
                         복사
                       </>
                     )}
@@ -225,21 +195,21 @@ export function PromptBundle({}: PromptBundleProps) {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className={promptContent}>
-                  <pre className={promptText}>{prompt}</pre>
+                <div className={S.promptContent}>
+                  <pre className={S.promptText}>{prompt}</pre>
 
                   {/* 변수 목록 */}
                   <div>
-                    <h4 className={variablesTitle}>사용된 변수</h4>
-                    <div className={variablesGrid}>
+                    <h4 className={S.variablesTitle}>사용된 변수</h4>
+                    <div className={S.variablesGrid}>
                       {variables[type as keyof typeof variables]?.map((variable, index) => (
-                        <div key={index} className={variableCard}>
-                          <div className={variableHeader}>
-                            <Badge variant="outline" className={variableName}>
+                        <div key={index} className={S.variableCard}>
+                          <div className={S.variableHeader}>
+                            <Badge variant="outline" className={S.variableName}>
                               {variable.name}
                             </Badge>
                           </div>
-                          <p className={variableValue}>{variable.value}</p>
+                          <p className={S.variableValue}>{variable.value}</p>
                         </div>
                       ))}
                     </div>
@@ -257,45 +227,45 @@ export function PromptBundle({}: PromptBundleProps) {
           <CardTitle>사용 가이드</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className={promptContent}>
-            <div className={guideGrid}>
-              <div className={guideCard}>
-                <h4 className={guideTitle}>
-                  <Code className={`h-4 w-4 ${iconBlue}`} />
+          <div className={S.promptContent}>
+            <div className={S.guideGrid}>
+              <div className={S.guideCard}>
+                <h4 className={S.guideTitle}>
+                  <Code className={`${S.iconBlue}`} />
                   코드 생성
                 </h4>
-                <p className={guideDescription}>
+                <p className={S.guideDescription}>
                   Claude, GPT-4 등에서 전체 파일 코드를 생성할 때 사용하세요. 컨텍스트와 제약사항이
                   포함되어 있습니다.
                 </p>
               </div>
 
-              <div className={guideCard}>
-                <h4 className={guideTitle}>
-                  <TestTube className={`h-4 w-4 ${iconGreen}`} />
+              <div className={S.guideCard}>
+                <h4 className={S.guideTitle}>
+                  <TestTube className={`${S.iconGreen}`} />
                   테스트 작성
                 </h4>
-                <p className={guideDescription}>
+                <p className={S.guideDescription}>
                   보안 테스트와 성능 벤치마크 코드를 생성할 때 사용하세요. 엣지 케이스까지
                   포함됩니다.
                 </p>
               </div>
 
-              <div className={guideCard}>
-                <h4 className={guideTitle}>
-                  <MessageSquare className={`h-4 w-4 ${iconPurple}`} />
+              <div className={S.guideCard}>
+                <h4 className={S.guideTitle}>
+                  <MessageSquare className={`${S.iconPurple}`} />
                   코드 리뷰
                 </h4>
-                <p className={guideDescription}>
+                <p className={S.guideDescription}>
                   구현된 코드의 보안성과 품질을 검토할 때 사용하세요. 구체적인 개선사항을
                   제안합니다.
                 </p>
               </div>
             </div>
 
-            <div className={tipSection}>
-              <h4 className={tipTitle}>💡 팁</h4>
-              <p className={tipText}>
+            <div className={S.tipSection}>
+              <h4 className={S.tipTitle}>💡 팁</h4>
+              <p className={S.tipText}>
                 변수는 실제 값으로 교체한 후 사용하세요. 프롬프트 엔진의 특성에 맞게 시스템 메시지와
                 사용자 메시지를 구분하여 입력하시기 바랍니다.
               </p>
