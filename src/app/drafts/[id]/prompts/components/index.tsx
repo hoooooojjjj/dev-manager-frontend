@@ -129,26 +129,7 @@ export function PromptBundle({}: PromptBundleProps) {
 
   return (
     <div className={S.container}>
-      {/* 헤더 */}
-      <Card>
-        <CardHeader>
-          <div className={S.headerContainer}>
-            <CardTitle className={S.title}>AI 실행 프롬프트 번들</CardTitle>
-            <div className={S.headerActions}>
-              <Button variant="outline">
-                <RefreshCw className={S.buttonIcon} />
-                재생성
-              </Button>
-              <Button>
-                <Download className={S.buttonIcon} />
-                다운로드
-              </Button>
-            </div>
-          </div>
-          <p className={S.description}>개발 명세서를 기반으로 생성된 구조화된 AI 프롬프트입니다.</p>
-        </CardHeader>
-      </Card>
-
+      <Header />
       {/* 프롬프트 탭 */}
       <Tabs defaultValue="codegen" className="w-full">
         <TabsList className={S.tabsList}>
@@ -276,3 +257,26 @@ export function PromptBundle({}: PromptBundleProps) {
     </div>
   );
 }
+
+const Header = () => {
+  return (
+    <Card>
+      <CardHeader style={{ position: 'relative' }}>
+        <div className={S.headerContainer}>
+          <CardTitle className={S.title}>AI 실행 프롬프트 번들</CardTitle>
+        </div>
+        <p className={S.description}>개발 명세서를 기반으로 생성된 구조화된 AI 프롬프트입니다.</p>
+        <div className={S.headerActions}>
+          <Button variant="outline">
+            <RefreshCw className={S.buttonIcon} />
+            재생성
+          </Button>
+          <Button>
+            <Download className={S.buttonIcon} />
+            다운로드
+          </Button>
+        </div>
+      </CardHeader>
+    </Card>
+  );
+};

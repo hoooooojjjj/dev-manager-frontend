@@ -26,6 +26,9 @@ export const title = style({
 export const headerActions = style({
   display: 'flex',
   gap: '0.5rem',
+  position: 'absolute',
+  right: 20,
+  top: 20,
 });
 
 export const description = style({
