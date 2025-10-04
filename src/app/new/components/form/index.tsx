@@ -15,7 +15,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '@/components/ui/components/Select';
 import { X, Plus } from 'lucide-react';
 import { post } from '@/lib/api/client';
 import { useToast } from '@/lib/store/useUi';

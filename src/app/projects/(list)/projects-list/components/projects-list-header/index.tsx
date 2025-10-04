@@ -9,7 +9,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '@/components/ui/components/Select';
 import { Plus, Search } from 'lucide-react';
 import { Flex } from '@/components/ui/components/Flex';
 import * as S from './index.css';
