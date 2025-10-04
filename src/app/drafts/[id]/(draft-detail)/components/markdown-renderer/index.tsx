@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypePrism from 'rehype-prism-plus';
 import { Copy, Check } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
+import { Badge } from '@/components/ui/components/Badge';
 import * as S from './index.css';
 import { sourceCodePro } from '@/lib/utils/font';
 import { extractCodeText } from './utils';

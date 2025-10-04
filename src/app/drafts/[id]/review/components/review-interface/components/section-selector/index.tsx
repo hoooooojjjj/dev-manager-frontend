@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Badge } from '@/components/ui/components/Badge';
 import { CheckCircle2, Clock } from 'lucide-react';
 import { Flex } from '@/components/ui/flex';
 import { Section } from '../../types';
@@ -21,13 +21,17 @@ interface SectionSelectorProps {
 
 /**
  * 리뷰할 섹션을 선택하는 사이드바 컴포넌트
- * 
+ *
  * 각 섹션의 완료/미완료 상태를 보여주고,
  * 사용자가 리뷰하고자 하는 섹션을 선택할 수 있도록 합니다.
- * 
+ *
  * @param props - SectionSelectorProps
  */
-export function SectionSelector({ sections, selectedSection, onSectionSelect }: SectionSelectorProps) {
+export function SectionSelector({
+  sections,
+  selectedSection,
+  onSectionSelect,
+}: SectionSelectorProps) {
   return (
     <Card>
       <CardHeader>

@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Badge } from '@/components/ui/components/Badge';
 import { Clock } from 'lucide-react';
 import * as S from './index.css';
 import { Flex } from '@/components/ui/flex';

@@ -12,7 +12,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { Badge } from '@/components/ui/components/Badge';
 import * as S from './review-history.css';
 
 export interface ReviewHistoryItem {

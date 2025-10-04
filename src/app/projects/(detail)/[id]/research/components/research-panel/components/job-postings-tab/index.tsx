@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { jobPostings } from '../../constants';
 import { Building, Calendar, ExternalLink } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
+import { Badge } from '@/components/ui/components/Badge';
 import { Button } from '@/components/ui/button';
 import * as S from './index.css';
 import { Flex } from '@/components/ui/flex';

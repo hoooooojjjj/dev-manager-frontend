@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Badge } from '@/components/ui/components/Badge';
 import { Calendar, ExternalLink, FileText, GitBranch } from 'lucide-react';
 import { formatRelativeTime } from '@/lib/utils/format';
 import type { Project } from '@/lib/api/schemas';

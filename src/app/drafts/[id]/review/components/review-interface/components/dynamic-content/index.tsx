@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { Badge } from '@/components/ui/components/Badge';
 import { CheckCircle2, XCircle, RotateCcw, History } from 'lucide-react';
 import { Flex } from '@/components/ui/flex';
 import { Section, Review } from '../../types';
