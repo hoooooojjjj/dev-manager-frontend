@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Review } from '../types';
-import { ReviewHistoryItem } from '../components/review-history';
+import { ReviewHistoryItem } from '../components/dynamic-content/components';
 
 /**
  * 리뷰 히스토리 및 섹션별 리뷰 관리를 담당하는 커스텀 훅
@@ -15,7 +15,7 @@ export function useReviewHistory() {
    * @param review - 추가할 리뷰
    */
   const addReview = (review: Review) => {
-    setReviews(prev => [review, ...prev]);
+    setReviews((prev) => [review, ...prev]);
   };
 
   /**
@@ -24,7 +24,7 @@ export function useReviewHistory() {
    * @param reviewItem - 추가할 리뷰 아이템
    */
   const addSectionReview = (sectionId: string, reviewItem: ReviewHistoryItem) => {
-    setSectionReviews(prev => ({
+    setSectionReviews((prev) => ({
       ...prev,
       [sectionId]: [...(prev[sectionId] || []), reviewItem],
     }));
@@ -37,16 +37,14 @@ export function useReviewHistory() {
    * @param status - 새로운 상태 ('applied' | 'reverted')
    */
   const updateSectionReviewStatus = (
-    sectionId: string, 
-    reviewId: string, 
+    sectionId: string,
+    reviewId: string,
     status: 'applied' | 'reverted'
   ) => {
-    setSectionReviews(prev => ({
+    setSectionReviews((prev) => ({
       ...prev,
-      [sectionId]: (prev[sectionId] || []).map(review =>
-        review.id === reviewId 
-          ? { ...review, status }
-          : review
+      [sectionId]: (prev[sectionId] || []).map((review) =>
+        review.id === reviewId ? { ...review, status } : review
       ),
     }));
   };
@@ -67,7 +65,7 @@ export function useReviewHistory() {
    * @returns 찾은 리뷰 또는 undefined
    */
   const getReviewById = (sectionId: string, reviewId: string) => {
-    return getSectionReviews(sectionId).find(review => review.id === reviewId);
+    return getSectionReviews(sectionId).find((review) => review.id === reviewId);
   };
 
   return {

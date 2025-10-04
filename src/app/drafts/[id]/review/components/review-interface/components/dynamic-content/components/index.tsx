@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/components/Button';
 import { Badge } from '@/components/ui/components/Badge';
-import * as S from './review-history.css';
+import * as S from './index.css';
 
 export interface ReviewHistoryItem {
   id: string;

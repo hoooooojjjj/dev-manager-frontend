@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/components/Badge';
 import { CheckCircle2, XCircle, RotateCcw, History } from 'lucide-react';
 import { Flex } from '@/components/ui/components/Flex';
 import { Section, Review } from '../../types';
-import { ReviewHistory, type ReviewHistoryItem } from '../review-history';
+import { ReviewHistory, type ReviewHistoryItem } from './components';
 import * as S from './index.css';
 
 /**

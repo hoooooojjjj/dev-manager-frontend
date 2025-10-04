@@ -1,5 +1,5 @@
 import { Section } from '../types';
-import { ReviewHistoryItem } from '../components/review-history';
+import { ReviewHistoryItem } from '../components/dynamic-content/components';
 import { mockAIReview } from '../utils/mock-ai';
 import { useSectionManagement } from './use-section-management';
 import { useReviewForm } from './use-review-form';
