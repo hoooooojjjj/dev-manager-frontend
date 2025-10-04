@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
 import { Button } from '@/components/ui/components/Button';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/components/ui/components/Input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/components/Badge';
 import {

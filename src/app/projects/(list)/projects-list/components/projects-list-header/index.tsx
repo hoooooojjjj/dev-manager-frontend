@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/components/Button';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/components/ui/components/Input';
 import {
   Select,
   SelectContent,
