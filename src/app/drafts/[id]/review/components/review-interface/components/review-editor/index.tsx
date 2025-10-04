@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/compon
 import { Button } from '@/components/ui/components/Button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Checkbox } from '@/components/ui/checkbox';
+import { Checkbox } from '@/components/ui/components/Checkbox';
 import { MessageSquare, Send, Clock } from 'lucide-react';
 import { Section } from '../../types';
 import * as S from './index.css';
