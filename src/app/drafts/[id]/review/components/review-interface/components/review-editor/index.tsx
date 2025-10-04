@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/components/Card';
 import { Button } from '@/components/ui/components/Button';
 import { Label } from '@/components/ui/components/Label';
-import { Textarea } from '@/components/ui/textarea';
+import { Textarea } from '@/components/ui/components/Textarea';
 import { Checkbox } from '@/components/ui/components/Checkbox';
 import { MessageSquare, Send, Clock } from 'lucide-react';
 import { Section } from '../../types';
