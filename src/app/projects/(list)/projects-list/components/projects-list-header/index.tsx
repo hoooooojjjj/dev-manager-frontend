@@ -11,7 +11,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Plus, Search } from 'lucide-react';
-import { Flex } from '@/components/ui/flex';
+import { Flex } from '@/components/ui/components/Flex';
 import * as S from './index.css';
 
 interface ProjectsListHeaderProps {

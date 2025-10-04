@@ -6,7 +6,7 @@ import * as S from './index.css';
 import { prompts } from './constants';
 import { useToast } from '@/lib/store/useUi';
 import { useState } from 'react';
-import { Flex } from '@/components/ui/flex';
+import { Flex } from '@/components/ui/components/Flex';
 
 export function PromptTabs() {
   const { success } = useToast();

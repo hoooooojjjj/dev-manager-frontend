@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import * as styles from './flex.css';
+import * as styles from './index.css';
 
 type FlexProps = {
   direction?: keyof typeof styles.flexDirection;

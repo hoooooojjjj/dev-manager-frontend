@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/compon
 import { Badge } from '@/components/ui/components/Badge';
 import { Clock } from 'lucide-react';
 import * as S from './index.css';
-import { Flex } from '@/components/ui/flex';
+import { Flex } from '@/components/ui/components/Flex';
 import { dotClassMap, getStatusLabel, resolveTimelineStatus, stageClassMap } from './util';
 
 export interface TimelineItem {

@@ -4,7 +4,7 @@ import { Calendar, ExternalLink, Star, User } from 'lucide-react';
 import { Badge } from '@/components/ui/components/Badge';
 import { Button } from '@/components/ui/components/Button';
 import * as S from './index.css';
-import { Flex } from '@/components/ui/flex';
+import { Flex } from '@/components/ui/components/Flex';
 
 export function ReferencesTab() {
   return (

@@ -2,7 +2,7 @@
 
 import { CheckCircle2, AlertTriangle, BookOpen } from 'lucide-react';
 import { specSummary } from '../../constants';
-import { Flex } from '@/components/ui/flex';
+import { Flex } from '@/components/ui/components/Flex';
 import * as S from './index.css';
 
 export function TableOfContents() {

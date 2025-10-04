@@ -8,7 +8,7 @@ import * as S from './index.css';
 import { citations, spec, specSummary, SPEC_SECTIONS } from './constants';
 import { getCitationIcon } from './utils';
 import MarkdownRenderer from '../markdown-renderer';
-import { Flex } from '@/components/ui/flex';
+import { Flex } from '@/components/ui/components/Flex';
 import DraggableFabPanel from '@/components/DraggableFabPanel';
 import { TableOfContents } from './components/table-of-contents';
 import { useIsMobile } from '@/lib/hooks/useDeviceWidth';

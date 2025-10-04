@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/components/Card';
 import { Badge } from '@/components/ui/components/Badge';
 import { CheckCircle2, Clock } from 'lucide-react';
-import { Flex } from '@/components/ui/flex';
+import { Flex } from '@/components/ui/components/Flex';
 import { Section } from '../../types';
 import * as S from './index.css';
 

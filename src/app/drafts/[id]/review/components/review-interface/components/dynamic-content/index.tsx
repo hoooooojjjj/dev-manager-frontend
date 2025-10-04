@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/compon
 import { Button } from '@/components/ui/components/Button';
 import { Badge } from '@/components/ui/components/Badge';
 import { CheckCircle2, XCircle, RotateCcw, History } from 'lucide-react';
-import { Flex } from '@/components/ui/flex';
+import { Flex } from '@/components/ui/components/Flex';
 import { Section, Review } from '../../types';
 import { ReviewHistory, type ReviewHistoryItem } from '../review-history';
 import * as S from './index.css';
