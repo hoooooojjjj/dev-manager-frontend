@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { references } from '../../constants';
 import { Calendar, ExternalLink, Star, User } from 'lucide-react';
 import { Badge } from '@/components/ui/components/Badge';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/components/Button';
 import * as S from './index.css';
 import { Flex } from '@/components/ui/flex';
 

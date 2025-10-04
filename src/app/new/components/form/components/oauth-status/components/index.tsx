@@ -2,7 +2,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/components/Badge';
 import { ExternalLink, Github, FileText, LucideIcon } from 'lucide-react';
 import * as S from './index.css';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/components/Button';
 
 interface OAuthCardProps {
   provider: 'github' | 'notion';

@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/components/Button';
 import { LucideIcon } from 'lucide-react';
 import * as S from './index.css';
 import Link from 'next/link';

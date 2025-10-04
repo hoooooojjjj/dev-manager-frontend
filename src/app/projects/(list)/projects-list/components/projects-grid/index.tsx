@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/components/Button';
 import { Card, CardContent } from '@/components/ui/card';
 import { FileText, Plus } from 'lucide-react';
 import type { Project } from '@/lib/api/schemas';

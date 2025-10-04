@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/components/Button';
 import { Menu, Moon, Sun, Github, X } from 'lucide-react';
 import { useUi } from '@/lib/store/useUi';
 import { gugi } from '@/lib/utils/font';

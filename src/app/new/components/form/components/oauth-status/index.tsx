@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/components/Button';
 import { Label } from '@/components/ui/label';
 import { RefreshCw } from 'lucide-react';
 import { useOAuthStatus, useOAuthConnect } from '@/lib/hooks/useOAuth';
