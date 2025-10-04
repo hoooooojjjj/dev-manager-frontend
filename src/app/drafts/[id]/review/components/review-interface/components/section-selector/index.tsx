@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/components/Card';
 import { Badge } from '@/components/ui/components/Badge';
 import { CheckCircle2, Clock } from 'lucide-react';
 import { Flex } from '@/components/ui/flex';

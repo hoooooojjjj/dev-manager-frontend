@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/components/Card';
 import { competencyMap } from '../../constants';
 import { Badge } from '@/components/ui/components/Badge';
 import * as S from './index.css';

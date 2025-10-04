@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/components/Button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/components/Card';
 import { FileText, Plus } from 'lucide-react';
 import type { Project } from '@/lib/api/schemas';
 import { ProjectCard } from './components/project-card';

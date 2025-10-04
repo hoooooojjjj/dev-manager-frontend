@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/components/Card';
 import * as S from './index.css';
 
 export function ProjectsGridSkeleton() {

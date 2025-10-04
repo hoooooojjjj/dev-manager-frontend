@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/components/Card';
 import { jobPostings } from '../../constants';
 import { Building, Calendar, ExternalLink } from 'lucide-react';
 import { Badge } from '@/components/ui/components/Badge';

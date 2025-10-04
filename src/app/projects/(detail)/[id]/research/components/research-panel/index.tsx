@@ -2,7 +2,7 @@
 
 import React from 'react';
 import * as S from './index.css';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/components/Card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { researchSummary, competencyMap } from './constants';
 import { ReferencesTab } from './components/references-tab';

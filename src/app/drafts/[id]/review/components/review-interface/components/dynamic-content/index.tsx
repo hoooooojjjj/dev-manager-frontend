@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/components/Card';
 import { Button } from '@/components/ui/components/Button';
 import { Badge } from '@/components/ui/components/Badge';
 import { CheckCircle2, XCircle, RotateCcw, History } from 'lucide-react';

@@ -1,4 +1,4 @@
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/components/Card';
 import { Badge } from '@/components/ui/components/Badge';
 import { ExternalLink, Github, FileText, LucideIcon } from 'lucide-react';
 import * as S from './index.css';

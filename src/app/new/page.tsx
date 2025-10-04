@@ -1,5 +1,11 @@
 import { IntakeForm } from '@/app/new/components/form';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/components/Card';
 import * as S from './page.css';
 
 export default function NewProjectPage() {

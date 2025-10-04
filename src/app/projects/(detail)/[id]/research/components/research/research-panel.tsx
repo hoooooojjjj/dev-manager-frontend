@@ -2,7 +2,7 @@
 
 import React from 'react';
 import * as styles from './research-panel.css';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/components/Card';
 import { Badge } from '@/components/ui/components/Badge';
 import { Button } from '@/components/ui/components/Button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
