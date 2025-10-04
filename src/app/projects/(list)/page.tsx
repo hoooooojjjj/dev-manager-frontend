@@ -1,5 +1,5 @@
 import { ProjectsList } from '@/app/projects/(list)/projects-list/index';
-import { Breadcrumb } from '@/components/layout/breadcrumb';
+import { Breadcrumb } from '@/components/layout/components/Breadcrumb';
 import { container, contentWrapper, headerSection, title, description } from './page.css';
 
 export default function ProjectsPage() {

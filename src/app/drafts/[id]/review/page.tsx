@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { ReviewInterface } from '@/app/drafts/[id]/review/components/review-interface';
-import { Breadcrumb } from '@/components/layout/breadcrumb';
+import { Breadcrumb } from '@/components/layout/components/Breadcrumb';
 import * as S from './page.css';
 
 interface ReviewPageProps {

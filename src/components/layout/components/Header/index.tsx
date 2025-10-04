@@ -6,29 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Menu, Moon, Sun, Github, X } from 'lucide-react';
 import { useUi } from '@/lib/store/useUi';
 import { gugi } from '@/lib/utils/font';
-import {
-  header,
-  headerContainer,
-  desktopNav,
-  logoLink,
-  logoText,
-  nav,
-  navLink,
-  mobileMenuButton,
-  rightSection,
-  mobileLogoContainer,
-  mobileLogoWrapper,
-  rightNav,
-  themeIcon,
-  moonIcon,
-  mobileDropdown,
-  mobileDropdownContainer,
-  mobileNav,
-  mobileNavLink,
-  srOnly,
-  icon16,
-  icon20,
-} from './header.css';
+import * as S from './index.css';
 import { useIsMobile } from '@/lib/hooks/useDeviceWidth';
 
 export function Header() {
@@ -38,17 +16,17 @@ export function Header() {
   const isMobile = useIsMobile();
 
   return (
-    <header className={header}>
-      <div className={headerContainer}>
-        <div className={desktopNav}>
-          <Link href="/" className={logoLink}>
-            <span className={`${logoText} ${gugi.className}`}>DEV MANAGER</span>
+    <header className={S.header}>
+      <div className={S.headerContainer}>
+        <div className={S.desktopNav}>
+          <Link href="/" className={S.logoLink}>
+            <span className={`${S.logoText} ${gugi.className}`}>DEV MANAGER</span>
           </Link>
-          <nav className={nav}>
-            <Link href="/new" className={navLink}>
+          <nav className={S.nav}>
+            <Link href="/new" className={S.navLink}>
               새 프로젝트
             </Link>
-            <Link href="/projects" className={navLink}>
+            <Link href="/projects" className={S.navLink}>
               프로젝트 목록
             </Link>
           </nav>
@@ -58,33 +36,33 @@ export function Header() {
           <Button
             variant="ghost"
             size="icon"
-            className={mobileMenuButton}
+            className={S.mobileMenuButton}
             onClick={toggleSidebar}
             data-mobile-nav
           >
-            {sidebarOpen ? <X className={icon20} /> : <Menu className={icon20} />}
-            <span className={srOnly}>메뉴 토글</span>
+            {sidebarOpen ? <X className={S.icon20} /> : <Menu className={S.icon20} />}
+            <span className={S.srOnly}>메뉴 토글</span>
           </Button>
         )}
 
-        <div className={rightSection}>
-          <div className={mobileLogoContainer}>
-            <div className={mobileLogoWrapper}>
-              <Link href="/" className={logoLink}>
+        <div className={S.rightSection}>
+          <div className={S.mobileLogoContainer}>
+            <div className={S.mobileLogoWrapper}>
+              <Link href="/" className={S.logoLink}>
                 <span className={`font-bold ${gugi.className}`}>DEV MANAGER</span>
               </Link>
             </div>
           </div>
 
-          <nav className={rightNav}>
+          <nav className={S.rightNav}>
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
             >
-              <Sun className={themeIcon} />
-              <Moon className={moonIcon} />
-              <span className={srOnly}>테마 전환</span>
+              <Sun className={S.themeIcon} />
+              <Moon className={S.moonIcon} />
+              <span className={S.srOnly}>테마 전환</span>
             </Button>
 
             <Button variant="ghost" size="icon" asChild>
@@ -93,8 +71,8 @@ export function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Github className={icon16} />
-                <span className={srOnly}>GitHub 리포지토리</span>
+                <Github className={S.icon16} />
+                <span className={S.srOnly}>GitHub 리포지토리</span>
               </Link>
             </Button>
           </nav>
@@ -103,15 +81,15 @@ export function Header() {
 
       {/* 모바일 드롭다운 메뉴 */}
       {sidebarOpen && (
-        <div className={mobileDropdown} data-mobile-nav>
-          <div className={mobileDropdownContainer}>
-            <nav className={mobileNav}>
-              <Link href="/new" className={mobileNavLink} onClick={() => setSidebarOpen(false)}>
+        <div className={S.mobileDropdown} data-mobile-nav>
+          <div className={S.mobileDropdownContainer}>
+            <nav className={S.mobileNav}>
+              <Link href="/new" className={S.mobileNavLink} onClick={() => setSidebarOpen(false)}>
                 새 프로젝트
               </Link>
               <Link
                 href="/projects"
-                className={mobileNavLink}
+                className={S.mobileNavLink}
                 onClick={() => setSidebarOpen(false)}
               >
                 프로젝트 목록

@@ -3,7 +3,7 @@ import '@/lib/styles/global.css';
 import { QueryProvider } from '@/lib/providers/query-provider';
 import { ThemeProvider } from '@/lib/providers/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
-import { Header } from '@/components/layout/header';
+import { Header } from '@/components/layout/components/Header';
 import { MSWProvider } from '@/lib/providers/msw-provider';
 import { bodyStyle, rootContainer, mainContent } from './layout.css';
 
