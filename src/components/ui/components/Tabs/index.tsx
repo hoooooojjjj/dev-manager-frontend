@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
-import { tabsList, tabsContent, tabsTriggerBase, tabsTriggerVariants } from './tabs.css';
+import * as S from './index.css';
 
 const Tabs = TabsPrimitive.Root;
 
@@ -10,7 +10,7 @@ const TabsList = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
 >(({ className, ...props }, ref) => (
-  <TabsPrimitive.List ref={ref} className={`${tabsList} ${className || ''}`} {...props} />
+  <TabsPrimitive.List ref={ref} className={`${S.tabsList} ${className || ''}`} {...props} />
 ));
 TabsList.displayName = TabsPrimitive.List.displayName;
 
@@ -26,12 +26,12 @@ const TabsTrigger = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Trigger>,
   TabsTriggerProps
 >(({ className, color = 'default' as const, ...props }, ref) => {
-  const colorClass = tabsTriggerVariants[color as keyof typeof tabsTriggerVariants];
+  const colorClass = S.tabsTriggerVariants[color as keyof typeof S.tabsTriggerVariants];
 
   return (
     <TabsPrimitive.Trigger
       ref={ref}
-      className={`${tabsTriggerBase} ${colorClass} ${className || ''}`}
+      className={`${S.tabsTriggerBase} ${colorClass} ${className || ''}`}
       {...props}
     />
   );
@@ -42,7 +42,7 @@ const TabsContent = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
 >(({ className, ...props }, ref) => (
-  <TabsPrimitive.Content ref={ref} className={`${tabsContent} ${className || ''}`} {...props} />
+  <TabsPrimitive.Content ref={ref} className={`${S.tabsContent} ${className || ''}`} {...props} />
 ));
 TabsContent.displayName = TabsPrimitive.Content.displayName;
 
