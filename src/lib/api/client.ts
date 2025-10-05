@@ -3,12 +3,7 @@
  * ProblemDetails 형식의 에러 처리와 상관 ID 지원
  */
 
-import axios, { 
-  AxiosInstance, 
-  AxiosRequestConfig, 
-  AxiosResponse, 
-  AxiosError 
-} from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
 interface ApiResponse<T = unknown> {
   data?: T;
@@ -41,8 +36,8 @@ export class ApiError extends Error {
  * Axios 인스턴스 생성
  */
 const createApiClient = (): AxiosInstance => {
-  const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL || '/api/v1';
-  
+  const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL || '';
+
   const client = axios.create({
     baseURL,
     timeout: 30000,
@@ -56,7 +51,7 @@ const createApiClient = (): AxiosInstance => {
     (config) => {
       // 상관 ID 추가
       config.headers['X-Correlation-ID'] = crypto.randomUUID();
-      
+
       // 디버그 로깅 (개발 환경에서만)
       if (process.env.NODE_ENV === 'development') {
         console.log(`[API] ${config.method?.toUpperCase()} ${config.url}`, {
@@ -64,7 +59,7 @@ const createApiClient = (): AxiosInstance => {
           data: config.data,
         });
       }
-      
+
       return config;
     },
     (error) => {
@@ -84,7 +79,7 @@ const createApiClient = (): AxiosInstance => {
     (error: AxiosError) => {
       const status = error.response?.status || 0;
       const correlationId = error.config?.headers?.['X-Correlation-ID'] as string;
-      
+
       // 에러 로깅
       if (process.env.NODE_ENV === 'development') {
         console.error(`[API] ❌ ${status} ${error.config?.url}`, {
@@ -96,20 +91,11 @@ const createApiClient = (): AxiosInstance => {
       // ProblemDetails 형식의 에러 변환
       if (error.response?.data) {
         const errorData = error.response.data as ProblemDetails;
-        throw new ApiError(
-          errorData.title || error.message,
-          status,
-          correlationId,
-          errorData
-        );
+        throw new ApiError(errorData.title || error.message, status, correlationId, errorData);
       }
 
       // 네트워크 에러 등
-      throw new ApiError(
-        error.message,
-        status,
-        correlationId
-      );
+      throw new ApiError(error.message, status, correlationId);
     }
   );
 
@@ -122,23 +108,16 @@ export const apiClient = createApiClient();
 /**
  * 기본 API 호출 함수
  */
-export async function api<T>(
-  url: string,
-  config?: AxiosRequestConfig
-): Promise<T> {
+export async function api<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
   const response = await apiClient.request<ApiResponse<T>>({
     url,
     ...config,
   });
 
   const result = response.data;
-  
+
   if (result.error) {
-    throw new ApiError(
-      result.error,
-      response.status,
-      result.correlationId
-    );
+    throw new ApiError(result.error, response.status, result.correlationId);
   }
 
   return result.data as T;
@@ -147,7 +126,10 @@ export async function api<T>(
 /**
  * GET 요청
  */
-export function get<T>(url: string, params?: Record<string, string | number | boolean | undefined>) {
+export function get<T>(
+  url: string,
+  params?: Record<string, string | number | boolean | undefined>
+) {
   return api<T>(url, {
     method: 'GET',
     params,

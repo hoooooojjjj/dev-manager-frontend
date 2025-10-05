@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
@@ -24,8 +24,21 @@ import * as S from './index.css';
 import { addFocusFile, removeFocusFile } from './utils';
 import { IntakeSchema, IntakeValues } from './schemas';
 import { vars } from '@/lib/styles/theme.css';
+import { axiosInstance } from '@/lib/api/axios';
 
 export function IntakeForm() {
+  useEffect(() => {
+    console.log('useEffect');
+    axiosInstance
+      .get('/hello')
+      .then((res) => {
+        console.log('result', res);
+      })
+      .catch((err) => {
+        console.log('error', err);
+      });
+  }, []);
+
   const router = useRouter();
   const { success, error } = useToast();
   const [focusFileInput, setFocusFileInput] = useState('');
