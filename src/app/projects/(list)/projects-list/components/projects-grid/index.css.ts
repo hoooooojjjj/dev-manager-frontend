@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from '@/lib/styles/theme.css';
-import { forDesktop } from '@/lib/styles/breakpoints';
+import { vars } from '@/styles/theme.css';
+import { forDesktop } from '@/styles/breakpoints';
 
 export const projectGrid = style({
   display: 'grid',

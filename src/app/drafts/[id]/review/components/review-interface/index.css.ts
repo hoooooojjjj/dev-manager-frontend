@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { forDesktop } from '@/lib/styles/breakpoints';
+import { forDesktop } from '@/styles/breakpoints';
 
 export const container = style({
   display: 'grid',

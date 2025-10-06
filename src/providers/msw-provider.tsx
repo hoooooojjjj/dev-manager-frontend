@@ -16,7 +16,7 @@ export function MSWProvider({ children }: MSWProviderProps) {
 
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
-      import('@/lib/mocks').then(({ initMocks }) => {
+      import('@/mocks/mocks').then(({ initMocks }) => {
         initMocks().then(() => {
           setMswReady(true);
         });

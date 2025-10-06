@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
-import { forMobile } from '@/lib/styles/breakpoints';
-import { vars } from '@/lib/styles/theme.css';
+import { forMobile } from '@/styles/breakpoints';
+import { vars } from '@/styles/theme.css';
 
 export const headerActions = style({
   display: 'flex',

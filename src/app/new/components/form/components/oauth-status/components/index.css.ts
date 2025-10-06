@@ -1,4 +1,4 @@
-import { forMobile } from '@/lib/styles/breakpoints';
+import { forMobile } from '@/styles/breakpoints';
 import { style } from '@vanilla-extract/css';
 
 export const cardContainer = style({

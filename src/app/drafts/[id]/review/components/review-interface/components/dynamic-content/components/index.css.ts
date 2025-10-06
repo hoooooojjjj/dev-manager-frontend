@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from '@/lib/styles/theme.css';
-import { forTablet } from '@/lib/styles/breakpoints';
+import { vars } from '@/styles/theme.css';
+import { forTablet } from '@/styles/breakpoints';
 
 // 히스토리 컨테이너
 export const historyContainer = style({

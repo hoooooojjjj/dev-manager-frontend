@@ -9,7 +9,7 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { ThemeProviderProps as NextThemeProviderProps } from 'next-themes';
 import { useTheme } from 'next-themes';
 import { useEffect } from 'react';
-import { lightTheme } from '@/lib/styles/theme.css';
+import { lightTheme } from '@/styles/theme.css';
 
 function ThemeController({ children }: { children: React.ReactNode }) {
   const { theme, systemTheme } = useTheme();

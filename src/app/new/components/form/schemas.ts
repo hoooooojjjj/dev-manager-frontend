@@ -1,4 +1,4 @@
-import { ConfidentialitySchema } from '@/lib/api/schemas';
+import { ConfidentialitySchema } from '@/api/schemas';
 import { z } from 'zod';
 export const IntakeSchema = z.object({
   source_notion_url: z

@@ -1,4 +1,4 @@
-import { vars } from '@/lib/styles/theme.css';
+import { vars } from '@/styles/theme.css';
 import { style, styleVariants } from '@vanilla-extract/css';
 
 const buttonBase = style({

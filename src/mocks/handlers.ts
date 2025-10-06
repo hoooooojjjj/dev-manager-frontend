@@ -4,7 +4,7 @@
  */
 
 import { http, HttpResponse } from 'msw';
-import type { Project, ResearchSource, CompetencyMap } from '@/lib/api/schemas';
+import type { Project, ResearchSource, CompetencyMap } from '@/api/schemas';
 import { IntakeValues } from '@/app/new/components/form/schemas';
 
 // Mock 데이터

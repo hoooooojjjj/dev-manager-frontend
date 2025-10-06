@@ -4,7 +4,7 @@ import * as React from 'react';
 import * as ToastPrimitives from '@radix-ui/react-toast';
 import { X } from 'lucide-react';
 import * as S from './index.css';
-import { useUi, type ToastMessage } from '@/lib/store/useUi';
+import { useUi, type ToastMessage } from '@/store/useUi';
 
 interface ToastProps extends Omit<ToastMessage, 'id'> {
   variant?: 'default' | 'destructive' | 'success' | 'warning';

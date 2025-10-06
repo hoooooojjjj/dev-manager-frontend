@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/components/Button';
 import { Label } from '@/components/ui/components/Label';
 import { RefreshCw } from 'lucide-react';
-import { useOAuthStatus, useOAuthConnect } from '@/lib/hooks/useOAuth';
+import { useOAuthStatus, useOAuthConnect } from '@/hooks/useOAuth';
 import * as S from './index.css';
 import OAuthCard from './components';
 

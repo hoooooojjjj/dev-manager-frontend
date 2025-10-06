@@ -1,5 +1,5 @@
-import { forDesktop } from '@/lib/styles/breakpoints';
-import { vars } from '@/lib/styles/theme.css';
+import { forDesktop } from '@/styles/breakpoints';
+import { vars } from '@/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
 export const textarea = style({

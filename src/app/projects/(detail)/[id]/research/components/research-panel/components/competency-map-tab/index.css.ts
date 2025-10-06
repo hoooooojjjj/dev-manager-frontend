@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from '@/lib/styles/theme.css';
+import { vars } from '@/styles/theme.css';
 
 export const cardHover = style({
   transition: 'box-shadow 0.15s ease-in-out',

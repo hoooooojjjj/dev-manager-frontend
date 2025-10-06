@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from '@/lib/styles/theme.css';
-import { forMobile, forTablet } from '@/lib/styles/breakpoints';
+import { vars } from '@/styles/theme.css';
+import { forMobile, forTablet } from '@/styles/breakpoints';
 
 // 메인 컨테이너
 export const container = style({

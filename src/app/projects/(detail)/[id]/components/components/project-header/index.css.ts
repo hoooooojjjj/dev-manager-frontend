@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from '@/lib/styles/theme.css';
-import { forMobile } from '@/lib/styles/breakpoints';
+import { vars } from '@/styles/theme.css';
+import { forMobile } from '@/styles/breakpoints';
 
 // 프로젝트 헤더 영역
 export const headerContainer = style({

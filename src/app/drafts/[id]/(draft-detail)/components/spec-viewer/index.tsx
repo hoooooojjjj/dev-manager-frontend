@@ -11,7 +11,7 @@ import MarkdownRenderer from '../markdown-renderer';
 import { Flex } from '@/components/ui/components/Flex';
 import DraggableFabPanel from '@/components/DraggableFabPanel';
 import { TableOfContents } from './components/table-of-contents';
-import { useIsMobile } from '@/lib/hooks/useDeviceWidth';
+import { useIsMobile } from '@/hooks/useDeviceWidth';
 
 interface SpecViewerProps {
   draftId: string;

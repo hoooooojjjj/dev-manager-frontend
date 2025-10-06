@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/components/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/components/Card';
 import { Badge } from '@/components/ui/components/Badge';
 import { Calendar, ExternalLink, FileText, GitBranch } from 'lucide-react';
-import { formatRelativeTime } from '@/lib/utils/format';
-import type { Project } from '@/lib/api/schemas';
+import { formatRelativeTime } from '@/utils/format';
+import type { Project } from '@/api/schemas';
 import { Flex } from '@/components/ui/components/Flex';
 import * as S from './index.css';
 

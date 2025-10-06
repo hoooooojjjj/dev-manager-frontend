@@ -326,8 +326,8 @@ export function Button({ variant, size, children, onClick }: ButtonProps) {
 ### **API 클라이언트 사용법**
 
 ```typescript
-import { get, post } from '@/lib/api/client';
-import { ProjectSchema } from '@/lib/api/schemas';
+import { get, post } from '@/api/client';
+import { ProjectSchema } from '@/api/schemas';
 
 // GET 요청
 const projects = await get<Project[]>('/projects');

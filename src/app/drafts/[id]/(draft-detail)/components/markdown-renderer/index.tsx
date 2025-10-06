@@ -7,7 +7,7 @@ import rehypePrism from 'rehype-prism-plus';
 import { Copy, Check } from 'lucide-react';
 import { Badge } from '@/components/ui/components/Badge';
 import * as S from './index.css';
-import { sourceCodePro } from '@/lib/utils/font';
+import { sourceCodePro } from '@/utils/font';
 import { extractCodeText } from './utils';
 
 interface MarkdownRendererProps {

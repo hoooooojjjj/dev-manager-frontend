@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from '@/lib/styles/theme.css';
+import { vars } from '@/styles/theme.css';
 
 // 컨테이너
 export const container = style({

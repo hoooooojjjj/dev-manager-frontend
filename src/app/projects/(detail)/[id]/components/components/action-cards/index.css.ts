@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { forTablet, forDesktop } from '@/lib/styles/breakpoints';
+import { forTablet, forDesktop } from '@/styles/breakpoints';
 
 // 액션 카드 그리드
 export const actionGrid = style({

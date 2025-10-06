@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/components/Button';
 import { Menu, Moon, Sun, Github, X } from 'lucide-react';
-import { useUi } from '@/lib/store/useUi';
-import { gugi } from '@/lib/utils/font';
+import { useUi } from '@/store/useUi';
+import { gugi } from '@/utils/font';
 import * as S from './index.css';
-import { useIsMobile } from '@/lib/hooks/useDeviceWidth';
+import { useIsMobile } from '@/hooks/useDeviceWidth';
 
 export function Header() {
   const { theme, setTheme } = useTheme();

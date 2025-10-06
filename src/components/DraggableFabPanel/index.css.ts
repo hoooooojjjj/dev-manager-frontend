@@ -1,5 +1,5 @@
 import { style, styleVariants } from '@vanilla-extract/css';
-import { vars } from '@/lib/styles/theme.css';
+import { vars } from '@/styles/theme.css';
 
 // FAB 버튼 기본 스타일
 export const fabButton = style({

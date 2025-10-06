@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/compon
 import { Button } from '@/components/ui/components/Button';
 import * as S from './index.css';
 import { prompts } from './constants';
-import { useToast } from '@/lib/store/useUi';
+import { useToast } from '@/store/useUi';
 import { useState } from 'react';
 import { Flex } from '@/components/ui/components/Flex';
 

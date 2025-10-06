@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from '@/lib/styles/theme.css';
+import { vars } from '@/styles/theme.css';
 
 export const card = style({
   borderRadius: `calc(${vars.spacing.radius} * 2)`, // rounded-xl

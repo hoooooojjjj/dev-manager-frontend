@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from '@/components/ui/components/Card';
 import { FileText, GitBranch, Search, Zap } from 'lucide-react';
-import { gugi } from '@/lib/utils/font';
+import { gugi } from '@/utils/font';
 import * as S from './page.css';
 
 export default function HomePage() {

@@ -1,5 +1,5 @@
-import { forMobile } from '@/lib/styles/breakpoints';
-import { vars } from '@/lib/styles/theme.css';
+import { forMobile } from '@/styles/breakpoints';
+import { vars } from '@/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
 export const tabsList = style({

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ChevronRight, Home } from 'lucide-react';
-import { cn } from '@/lib/utils/format';
+import { cn } from '@/utils/format';
 import * as S from './index.css';
 
 interface BreadcrumbItem {

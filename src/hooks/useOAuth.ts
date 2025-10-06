@@ -4,8 +4,8 @@
  */
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getOAuthStatus, connectOAuth, type OAuthStatus } from '@/lib/api/auth';
-import { useToast } from '@/lib/store/useUi';
+import { getOAuthStatus, connectOAuth, type OAuthStatus } from '@/api/auth';
+import { useToast } from '@/store/useUi';
 
 export function useOAuthStatus() {
   return useQuery({
@@ -50,8 +50,8 @@ export function useOAuthDisconnect() {
   const { success, error } = useToast();
 
   return useMutation({
-    mutationFn: (provider: 'github' | 'notion') => 
-      import('@/lib/api/auth').then(({ disconnectOAuth }) => disconnectOAuth(provider)),
+    mutationFn: (provider: 'github' | 'notion') =>
+      import('@/api/auth').then(({ disconnectOAuth }) => disconnectOAuth(provider)),
     onSuccess: (_, provider) => {
       // OAuth 상태 캐시 업데이트
       queryClient.setQueryData(['oauth', 'status'], (old: OAuthStatus | undefined) => ({

@@ -64,8 +64,8 @@ All API calls use the centralized client in `src/lib/api/client.ts`:
 Usage:
 
 ```typescript
-import { get, post } from '@/lib/api/client';
-import { ProjectSchema } from '@/lib/api/schemas';
+import { get, post } from '@/api/client';
+import { ProjectSchema } from '@/api/schemas';
 
 const projects = await get<Project[]>('/projects');
 const project = await post('/projects', { title: 'New Project' });
@@ -166,7 +166,7 @@ Development environment includes comprehensive API mocking:
 Real-time progress tracking using SSE:
 
 ```typescript
-import { createSSEConnection } from '@/lib/api/sse';
+import { createSSEConnection } from '@/api/sse';
 
 const eventSource = createSSEConnection('/events', {
   onMessage: (data) => console.log('Progress:', data),

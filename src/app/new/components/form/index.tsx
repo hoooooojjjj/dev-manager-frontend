@@ -17,13 +17,13 @@ import {
   SelectValue,
 } from '@/components/ui/components/Select';
 import { X, Plus } from 'lucide-react';
-import { get, post } from '@/lib/api/client';
-import { useToast } from '@/lib/store/useUi';
+import { get, post } from '@/api/client';
+import { useToast } from '@/store/useUi';
 import { OAuthStatus } from './components/oauth-status';
 import * as S from './index.css';
 import { addFocusFile, removeFocusFile } from './utils';
 import { IntakeSchema, IntakeValues } from './schemas';
-import { vars } from '@/lib/styles/theme.css';
+import { vars } from '@/styles/theme.css';
 
 export function IntakeForm() {
   useEffect(() => {
