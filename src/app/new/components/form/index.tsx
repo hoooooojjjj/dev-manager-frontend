@@ -26,16 +26,6 @@ import { IntakeSchema, IntakeValues } from './schemas';
 import { vars } from '@/styles/theme.css';
 
 export function IntakeForm() {
-  useEffect(() => {
-    get('/hello')
-      .then((res) => {
-        console.log('result', res);
-      })
-      .catch((err) => {
-        console.log('error', err);
-      });
-  }, []);
-
   const router = useRouter();
   const { success, error } = useToast();
   const [focusFileInput, setFocusFileInput] = useState('');
