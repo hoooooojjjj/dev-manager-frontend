@@ -17,20 +17,17 @@ import {
   SelectValue,
 } from '@/components/ui/components/Select';
 import { X, Plus } from 'lucide-react';
-import { post } from '@/lib/api/client';
+import { get, post } from '@/lib/api/client';
 import { useToast } from '@/lib/store/useUi';
 import { OAuthStatus } from './components/oauth-status';
 import * as S from './index.css';
 import { addFocusFile, removeFocusFile } from './utils';
 import { IntakeSchema, IntakeValues } from './schemas';
 import { vars } from '@/lib/styles/theme.css';
-import { axiosInstance } from '@/lib/api/axios';
 
 export function IntakeForm() {
   useEffect(() => {
-    console.log('useEffect');
-    axiosInstance
-      .get('/hello')
+    get('/hello')
       .then((res) => {
         console.log('result', res);
       })
