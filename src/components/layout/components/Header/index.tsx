@@ -8,6 +8,7 @@ import { useUi } from '@/store/useUi';
 import { gugi } from '@/utils/font';
 import * as S from './index.css';
 import { useIsMobile } from '@/hooks/useDeviceWidth';
+import { LoginButton } from '@/components/Login';
 
 export function Header() {
   const { theme, setTheme } = useTheme();
@@ -64,17 +65,7 @@ export function Header() {
               <Moon className={S.moonIcon} />
               <span className={S.srOnly}>테마 전환</span>
             </Button>
-
-            <Button variant="ghost" size="icon" asChild>
-              <Link
-                href="https://github.com/hoooooojjjj/dev-manager-frontend"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Github className={S.icon16} />
-                <span className={S.srOnly}>GitHub 리포지토리</span>
-              </Link>
-            </Button>
+            <LoginButton />
           </nav>
         </div>
       </div>
