@@ -19,46 +19,6 @@ let mockOAuthStatus = {
 };
 
 export const handlers = [
-  // OAuth 상태 조회
-  http.get('/api/v1/auth/status', () => {
-    return HttpResponse.json({
-      data: mockOAuthStatus,
-      correlationId: crypto.randomUUID(),
-    });
-  }),
-
-  // OAuth 연결
-  http.post('/api/v1/auth/connect/:provider', ({ params }) => {
-    const provider = params.provider as string;
-
-    if (provider === 'github' || provider === 'notion') {
-      mockOAuthStatus = {
-        ...mockOAuthStatus,
-        [provider]: true,
-      };
-
-      return HttpResponse.json({
-        data: {
-          connected: true,
-          provider,
-          redirectUrl: `https://${provider}.com/oauth/authorize?...`,
-        },
-        correlationId: crypto.randomUUID(),
-      });
-    }
-
-    return HttpResponse.json(
-      {
-        type: 'invalid-provider',
-        title: '지원하지 않는 OAuth 제공자',
-        status: 400,
-        detail: `${provider}는 지원하지 않는 OAuth 제공자입니다.`,
-        correlationId: crypto.randomUUID(),
-      },
-      { status: 400 }
-    );
-  }),
-
   // 프로젝트 생성 (Intake)
   http.post('/api/v1/projects/intake', async ({ request }) => {
     const body = (await request.json()) as IntakeValues;
@@ -88,20 +48,6 @@ export const handlers = [
           correlationId: crypto.randomUUID(),
         },
         { status: 422 }
-      );
-    }
-
-    // OAuth 연결 상태 확인
-    if (!mockOAuthStatus.github) {
-      return HttpResponse.json(
-        {
-          type: 'oauth-required',
-          title: 'GitHub 연결 필요',
-          status: 401,
-          detail: 'GitHub OAuth 연결이 필요합니다.',
-          correlationId: crypto.randomUUID(),
-        },
-        { status: 401 }
       );
     }
 

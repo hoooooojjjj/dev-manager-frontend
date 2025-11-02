@@ -3,12 +3,13 @@
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/components/Button';
-import { Menu, Moon, Sun, Github, X } from 'lucide-react';
+import { Menu, Moon, Sun, X } from 'lucide-react';
 import { useUi } from '@/store/useUi';
 import { gugi } from '@/utils/font';
 import * as S from './index.css';
 import { useIsMobile } from '@/hooks/useDeviceWidth';
 import { LoginButton } from '@/components/Login';
+import { Suspense } from 'react';
 
 export function Header() {
   const { theme, setTheme } = useTheme();
@@ -65,7 +66,15 @@ export function Header() {
               <Moon className={S.moonIcon} />
               <span className={S.srOnly}>테마 전환</span>
             </Button>
-            <LoginButton />
+            <Suspense
+              fallback={
+                <Button variant="ghost" disabled>
+                  로그인
+                </Button>
+              }
+            >
+              <LoginButton />
+            </Suspense>
           </nav>
         </div>
       </div>

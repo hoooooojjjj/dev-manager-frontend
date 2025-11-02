@@ -1,7 +1,7 @@
 import { useMutation, UseMutationResult, useQueryClient } from '@tanstack/react-query';
 import { githubCallback, logout as logoutApi } from './apis';
-import type { GithubCallbackRequest } from './requests';
-import type { AuthResponse } from './responses';
+import type { GithubCallbackRequest } from './requests.dto';
+import type { AuthResponse } from './responses.dto';
 import { setAccessToken, setRefreshToken, clearTokens } from '@/utils/token';
 
 /**

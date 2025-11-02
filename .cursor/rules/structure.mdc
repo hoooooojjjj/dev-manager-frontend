@@ -45,7 +45,7 @@ src/
 │   │   ├── auth.ts       # OAuth API 호출
 │   │   ├── sse.ts        # Server-Sent Events 유틸
 │   │   └── errors.ts     # ProblemDetails 에러 클래스
-│   ├── hooks/            # 커스텀 훅 (useOAuth)
+│   ├── hooks/
 │   ├── providers/        # Context Providers (Query, Theme, MSW)
 │   ├── store/            # Zustand 스토어 (useUi + 토스트)
 │   ├── styles/           # Vanilla Extract 전역 스타일 (theme, breakpoints, animations)

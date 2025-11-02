@@ -325,7 +325,6 @@ export function Button({ variant, size, children, onClick }: ButtonProps) {
 
 ```typescript
 import { get, post } from '@/api/client';
-import { ProjectSchema } from '@/api/schemas';
 
 // GET 요청
 const projects = await get<Project[]>('/projects');

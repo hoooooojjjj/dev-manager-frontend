@@ -1,6 +1,6 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { getCurrentUser } from './apis';
-import type { User } from './responses';
+import type { User } from './responses.dto';
 import { hasTokens } from '@/utils/token';
 
 /**

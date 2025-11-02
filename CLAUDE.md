@@ -65,7 +65,6 @@ Usage:
 
 ```typescript
 import { get, post } from '@/api/client';
-import { ProjectSchema } from '@/api/schemas';
 
 const projects = await get<Project[]>('/projects');
 const project = await post('/projects', { title: 'New Project' });
@@ -143,15 +142,6 @@ src/components/
 - Responsive design mobile-first
 
 ## Important Notes
-
-### OAuth Integration
-
-The app integrates with GitHub and Notion via OAuth. Check connection status using:
-
-```typescript
-const { data: oauthStatus } = useOAuthStatus();
-const connectOAuth = useOAuthConnect();
-```
 
 ### MSW Mocking
 

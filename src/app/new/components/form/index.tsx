@@ -17,9 +17,8 @@ import {
   SelectValue,
 } from '@/components/ui/components/Select';
 import { X, Plus } from 'lucide-react';
-import { get, post } from '@/api/client';
+import { post } from '@/api/client';
 import { useToast } from '@/store/useUi';
-import { OAuthStatus } from './components/oauth-status';
 import * as S from './index.css';
 import { addFocusFile, removeFocusFile } from './utils';
 import { IntakeSchema, IntakeValues } from './schemas';
@@ -65,9 +64,6 @@ export function IntakeForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={S.container}>
-      {/* OAuth 상태 */}
-      <OAuthStatus />
-
       {/* 소스 Notion URL */}
       <div className={S.formSection}>
         <Label htmlFor="source_notion_url">소스 Notion URL *</Label>

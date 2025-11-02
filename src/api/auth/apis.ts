@@ -1,6 +1,6 @@
 import { get, post } from '@/api/client';
-import type { AuthResponse, RefreshResponse, User } from './responses';
-import type { GithubCallbackRequest, RefreshTokenRequest } from './requests';
+import type { AuthResponse, RefreshResponse, User } from './responses.dto';
+import type { GithubCallbackRequest, RefreshTokenRequest } from './requests.dto';
 
 /**
  * GitHub OAuth Callback
