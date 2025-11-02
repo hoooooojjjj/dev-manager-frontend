@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/components/Card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { GitBranch } from 'lucide-react';
 import { LogItem } from './components';
 import * as S from './index.css';

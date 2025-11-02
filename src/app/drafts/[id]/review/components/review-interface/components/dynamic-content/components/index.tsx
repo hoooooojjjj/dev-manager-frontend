@@ -11,8 +11,8 @@ import {
   History,
   ArrowRight,
 } from 'lucide-react';
-import { Button } from '@/components/ui/components/Button';
-import { Badge } from '@/components/ui/components/Badge';
+import { Button } from '@/components/ui/Button';
+import { Badge } from '@/components/ui/Badge';
 import * as S from './index.css';
 
 export interface ReviewHistoryItem {

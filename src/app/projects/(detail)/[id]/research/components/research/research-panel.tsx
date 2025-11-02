@@ -2,10 +2,10 @@
 
 import React from 'react';
 import * as styles from './research-panel.css';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/components/Card';
-import { Badge } from '@/components/ui/components/Badge';
-import { Button } from '@/components/ui/components/Button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/components/Tabs';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Badge } from '@/components/ui/Badge';
+import { Button } from '@/components/ui/Button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs';
 import { ExternalLink, Calendar, User, Building, CheckCircle2, Star } from 'lucide-react';
 
 interface ResearchPanelProps {

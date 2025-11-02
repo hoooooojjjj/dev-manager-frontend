@@ -1,6 +1,6 @@
 'use client';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/components/Card';
-import { Button } from '@/components/ui/components/Button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
 import { Code, TestTube, MessageSquare, Download, RefreshCw } from 'lucide-react';
 import * as S from './index.css';
 import { PromptTabs } from './PromptTabs';

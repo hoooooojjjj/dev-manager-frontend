@@ -3,7 +3,7 @@
 import { ProjectHeader } from './components/project-header';
 import { ActionCards } from './components/action-cards';
 import { RealtimeLog } from './components/realtime-log';
-import { Flex } from '@/components/ui/components/Flex';
+import { Flex } from '@/components/ui/Flex';
 
 interface ProjectDashboardProps {
   projectId: string;

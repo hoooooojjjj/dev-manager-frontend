@@ -1,12 +1,12 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/components/Tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs';
 import { Copy, Check, Code, TestTube, MessageSquare } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/components/Card';
-import { Button } from '@/components/ui/components/Button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
 import * as S from './index.css';
 import { prompts } from './constants';
 import { useToast } from '@/store/useUi';
 import { useState } from 'react';
-import { Flex } from '@/components/ui/components/Flex';
+import { Flex } from '@/components/ui/Flex';
 
 export function PromptTabs() {
   const { success } = useToast();

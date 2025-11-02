@@ -1,13 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { Button } from '@/components/ui/components/Button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/components/Card';
-import { Badge } from '@/components/ui/components/Badge';
+import { Button } from '@/components/ui/Button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Badge } from '@/components/ui/Badge';
 import { Calendar, ExternalLink, FileText, GitBranch } from 'lucide-react';
 import { formatRelativeTime } from '@/utils/format';
 import type { Project } from '@/api/schemas';
-import { Flex } from '@/components/ui/components/Flex';
+import { Flex } from '@/components/ui/Flex';
 import * as S from './index.css';
 
 interface ProjectCardProps {

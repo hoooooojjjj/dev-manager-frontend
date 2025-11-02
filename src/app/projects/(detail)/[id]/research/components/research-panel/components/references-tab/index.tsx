@@ -1,10 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/components/Card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { references } from '../../constants';
 import { Calendar, ExternalLink, Star, User } from 'lucide-react';
-import { Badge } from '@/components/ui/components/Badge';
-import { Button } from '@/components/ui/components/Button';
+import { Badge } from '@/components/ui/Badge';
+import { Button } from '@/components/ui/Button';
 import * as S from './index.css';
-import { Flex } from '@/components/ui/components/Flex';
+import { Flex } from '@/components/ui/Flex';
 
 export function ReferencesTab() {
   return (

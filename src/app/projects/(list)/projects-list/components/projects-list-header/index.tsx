@@ -1,17 +1,17 @@
 'use client';
 
 import Link from 'next/link';
-import { Button } from '@/components/ui/components/Button';
-import { Input } from '@/components/ui/components/Input';
+import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/components/Select';
+} from '@/components/ui/Select';
 import { Plus, Search } from 'lucide-react';
-import { Flex } from '@/components/ui/components/Flex';
+import { Flex } from '@/components/ui/Flex';
 import * as S from './index.css';
 
 interface ProjectsListHeaderProps {

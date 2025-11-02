@@ -1,6 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/components/Card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { competencyMap } from '../../constants';
-import { Badge } from '@/components/ui/components/Badge';
+import { Badge } from '@/components/ui/Badge';
 import * as S from './index.css';
 
 export function CompetencyMapTab() {

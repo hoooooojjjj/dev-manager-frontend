@@ -1,6 +1,6 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
-import { Button } from '../ui/components/Button';
+import { Button } from '../ui/Button';
 import { useEffect } from 'react';
 import { useGithubLogin } from '@/api/auth/mutations';
 import { useLogout } from '@/api/auth/mutations';

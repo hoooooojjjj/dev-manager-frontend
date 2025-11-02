@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import '@/styles/global.css';
 import { QueryProvider } from '@/providers/query-provider';
 import { ThemeProvider } from '@/providers/theme-provider';
-import { Toaster } from '@/components/ui/components/Toast';
-import { Header } from '@/components/layout/components/Header';
+import { Toaster } from '@/components/ui/Toast';
+import { Header } from '@/components/layout/Header';
 import { MSWProvider } from '@/providers/msw-provider';
 import { bodyStyle, rootContainer, mainContent } from './layout.css';
 

@@ -1,14 +1,14 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/components/Card';
-import { Badge } from '@/components/ui/components/Badge';
-import { Button } from '@/components/ui/components/Button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Badge } from '@/components/ui/Badge';
+import { Button } from '@/components/ui/Button';
 import { ExternalLink, BookOpen, LucideIcon } from 'lucide-react';
 import * as S from './index.css';
 import { citations, spec, specSummary, SPEC_SECTIONS } from './constants';
 import { getCitationIcon } from './utils';
 import MarkdownRenderer from '../markdown-renderer';
-import { Flex } from '@/components/ui/components/Flex';
+import { Flex } from '@/components/ui/Flex';
 import DraggableFabPanel from '@/components/DraggableFabPanel';
 import { TableOfContents } from './components/table-of-contents';
 import { useIsMobile } from '@/hooks/useDeviceWidth';

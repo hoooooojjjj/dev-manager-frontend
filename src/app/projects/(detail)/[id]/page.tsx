@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { ProjectDashboard } from '@/app/projects/(detail)/[id]/components';
-import { Breadcrumb } from '@/components/layout/components/Breadcrumb';
+import { Breadcrumb } from '@/components/layout/Breadcrumb';
 import { container, contentWrapper } from './page.css';
 
 interface ProjectPageProps {

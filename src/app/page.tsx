@@ -1,12 +1,6 @@
 import Link from 'next/link';
-import { Button } from '@/components/ui/components/Button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/components/Card';
+import { Button } from '@/components/ui/Button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card';
 import { FileText, GitBranch, Search, Zap } from 'lucide-react';
 import { gugi } from '@/utils/font';
 import * as S from './page.css';

@@ -1,10 +1,10 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/components/Card';
-import { Button } from '@/components/ui/components/Button';
-import { Label } from '@/components/ui/components/Label';
-import { Textarea } from '@/components/ui/components/Textarea';
-import { Checkbox } from '@/components/ui/components/Checkbox';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { Label } from '@/components/ui/Label';
+import { Textarea } from '@/components/ui/Textarea';
+import { Checkbox } from '@/components/ui/Checkbox';
 import { MessageSquare, Send, Clock } from 'lucide-react';
 import { Section } from '../../types';
 import * as S from './index.css';

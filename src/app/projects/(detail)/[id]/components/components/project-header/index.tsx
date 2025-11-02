@@ -1,10 +1,10 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/components/Card';
-import { Badge } from '@/components/ui/components/Badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Badge } from '@/components/ui/Badge';
 import { Clock } from 'lucide-react';
 import * as S from './index.css';
-import { Flex } from '@/components/ui/components/Flex';
+import { Flex } from '@/components/ui/Flex';
 import { dotClassMap, getStatusLabel, resolveTimelineStatus, stageClassMap } from './util';
 
 export interface TimelineItem {

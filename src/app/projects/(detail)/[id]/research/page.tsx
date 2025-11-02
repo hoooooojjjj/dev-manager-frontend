@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { ResearchPanel } from '@/app/projects/(detail)/[id]/research/components/research-panel';
-import { Breadcrumb } from '@/components/layout/components/Breadcrumb';
+import { Breadcrumb } from '@/components/layout/Breadcrumb';
 import * as S from './page.css';
 
 interface ResearchPageProps {

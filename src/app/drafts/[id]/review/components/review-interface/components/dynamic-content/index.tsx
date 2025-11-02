@@ -1,10 +1,10 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/components/Card';
-import { Button } from '@/components/ui/components/Button';
-import { Badge } from '@/components/ui/components/Badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { Badge } from '@/components/ui/Badge';
 import { CheckCircle2, XCircle, RotateCcw, History } from 'lucide-react';
-import { Flex } from '@/components/ui/components/Flex';
+import { Flex } from '@/components/ui/Flex';
 import { Section, Review } from '../../types';
 import { ReviewHistory, type ReviewHistoryItem } from './components';
 import * as S from './index.css';

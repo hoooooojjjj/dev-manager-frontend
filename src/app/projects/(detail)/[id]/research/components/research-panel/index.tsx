@@ -2,8 +2,8 @@
 
 import React from 'react';
 import * as S from './index.css';
-import { Card, CardContent } from '@/components/ui/components/Card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/components/Tabs';
+import { Card, CardContent } from '@/components/ui/Card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs';
 import { researchSummary, competencyMap } from './constants';
 import { ReferencesTab } from './components/references-tab';
 import { JobPostingsTab } from './components/job-postings-tab';

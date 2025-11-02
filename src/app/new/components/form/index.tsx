@@ -5,17 +5,17 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
-import { Button } from '@/components/ui/components/Button';
-import { Input } from '@/components/ui/components/Input';
-import { Label } from '@/components/ui/components/Label';
-import { Badge } from '@/components/ui/components/Badge';
+import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
+import { Label } from '@/components/ui/Label';
+import { Badge } from '@/components/ui/Badge';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/components/Select';
+} from '@/components/ui/Select';
 import { X, Plus } from 'lucide-react';
 import { post } from '@/api/client';
 import { useToast } from '@/store/useUi';

@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { Breadcrumb } from '@/components/layout/components/Breadcrumb';
+import { Breadcrumb } from '@/components/layout/Breadcrumb';
 import { container, contentWrapper } from './page.css';
 import { SpecViewer } from './components/spec-viewer';
 
