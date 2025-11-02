@@ -7,9 +7,6 @@ const isDev = process.env.NODE_ENV !== 'production';
 const withVanillaExtract = createVanillaExtractPlugin();
 
 const nextConfig: NextConfig = {
-  env: {
-    NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3333',
-  },
   serverExternalPackages: ['msw'],
   ...(isDev && {
     webpack: (config, { dev, isServer }) => {

@@ -259,8 +259,6 @@ vercel --prod
 
 # 3. 환경 변수 설정 (Vercel 대시보드)
 NEXT_PUBLIC_API_BASE_URL=https://api.your-domain.com/v1
-GITHUB_CLIENT_ID=your_github_client_id
-NOTION_CLIENT_ID=your_notion_client_id
 ```
 
 ### **GitHub Actions CI/CD**
