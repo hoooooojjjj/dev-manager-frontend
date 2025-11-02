@@ -9,7 +9,7 @@ export default function NewProjectPage() {
         <div className={S.headerSection}>
           <h1 className={S.title}>새 프로젝트 생성</h1>
           <p className={S.description}>
-            Notion PRD와 GitHub 리포지토리 정보를 입력하여 개발 명세서 생성을 시작하세요
+            Notion PRD와 GitHub Repository 정보를 입력하여 개발 명세서 생성을 시작하세요
           </p>
         </div>
 

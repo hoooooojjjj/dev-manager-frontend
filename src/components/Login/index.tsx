@@ -10,7 +10,7 @@ import * as styles from './index.css';
 
 const GITHUB_LOGIN_URL = 'https://github.com/login/oauth/authorize';
 
-export function LoginButton() {
+export default function LoginButton() {
   const searchParams = useSearchParams();
 
   const { mutate: githubLogin, isPending: isGithubLoginPending } = useGithubLogin();

@@ -8,7 +8,7 @@ import { useUi } from '@/store/useUi';
 import { gugi } from '@/utils/font';
 import * as S from './index.css';
 import { useIsMobile } from '@/hooks/useDeviceWidth';
-import { LoginButton } from '@/components/Login';
+import LoginButton from '@/components/Login';
 import { Suspense } from 'react';
 
 export function Header() {
