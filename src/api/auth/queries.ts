@@ -27,6 +27,6 @@ export function useCurrentUser(): UseQueryResult<User, Error> {
  * 로그인 여부 확인
  */
 export function useIsAuthenticated(): boolean {
-  const { data } = useCurrentUser();
-  return !!data;
+  const { data, isLoading } = useCurrentUser();
+  return !!data && !isLoading;
 }

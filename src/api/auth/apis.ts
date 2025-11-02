@@ -6,26 +6,31 @@ import type { GithubCallbackRequest, RefreshTokenRequest } from './requests';
  * GitHub OAuth Callback
  */
 export async function githubCallback(request: GithubCallbackRequest): Promise<AuthResponse> {
-  return post<AuthResponse>('/api/v1/auth/github/callback', request);
+  const response = await post<{ data: AuthResponse }>('/api/v1/auth/github/callback', request);
+
+  return response.data;
 }
 
 /**
  * Access Token Refresh
  */
 export async function refreshAccessToken(request: RefreshTokenRequest): Promise<RefreshResponse> {
-  return post<RefreshResponse>('/api/v1/auth/refresh', request);
+  const response = await post<{ data: RefreshResponse }>('/api/v1/auth/refresh', request);
+  return response.data;
 }
 
 /**
  * Logout
  */
 export async function logout(): Promise<{ message: string }> {
-  return post<{ message: string }>('/api/v1/auth/logout');
+  const response = await post<{ data: { message: string } }>('/api/v1/auth/logout');
+  return response.data;
 }
 
 /**
  * Get Current User
  */
 export async function getCurrentUser(): Promise<User> {
-  return get<User>('/api/v1/auth/me');
+  const response = await get<{ data: User }>('/api/v1/auth/me');
+  return response.data;
 }

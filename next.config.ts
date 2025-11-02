@@ -14,6 +14,16 @@ const nextConfig: NextConfig = {
       return config;
     },
   }),
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
 };
 
 export default withVanillaExtract(nextConfig);
