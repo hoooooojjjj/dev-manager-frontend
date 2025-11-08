@@ -45,7 +45,7 @@ alwaysApply: true
 
 - **목적**: 프로젝트 생성, OAuth 연결, 파일 지정
 - **구현**: React Hook Form + Zod 검증, OAuth 배지, Focus Files 관리
-- **API**: POST `/api/v1/projects/intake`
+- **API**: POST `/api/v1/projects`
 
 ### 📊 프로젝트 목록 (/projects) ✅
 

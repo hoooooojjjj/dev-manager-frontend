@@ -5,7 +5,7 @@
 
 import { http, HttpResponse } from 'msw';
 import type { Project, ResearchSource, CompetencyMap } from '@/api/schemas';
-import { IntakeValues } from '@/app/new/components/form/schemas';
+import { IntakeValues } from '@/api/project/requests.dto';
 
 // Mock 데이터
 const mockProjects: Project[] = [];
@@ -19,81 +19,6 @@ let mockOAuthStatus = {
 };
 
 export const handlers = [
-  // 프로젝트 생성 (Intake)
-  http.post('/api/v1/projects/intake', async ({ request }) => {
-    const body = (await request.json()) as IntakeValues;
-
-    // 입력 검증
-    if (!body.source_notion_url || !body.repo || !body.focus_files?.length) {
-      return HttpResponse.json(
-        {
-          type: 'validation-error',
-          title: '입력 데이터 오류',
-          status: 422,
-          detail: '필수 필드가 누락되었습니다.',
-          correlationId: crypto.randomUUID(),
-        },
-        { status: 422 }
-      );
-    }
-
-    // GitHub 레포지토리 형식 검증
-    if (!/^[\w.-]+\/[\w.-]+$/.test(body.repo)) {
-      return HttpResponse.json(
-        {
-          type: 'invalid-repo',
-          title: '잘못된 GitHub 레포지토리',
-          status: 422,
-          detail: 'owner/repository 형식으로 입력해주세요.',
-          correlationId: crypto.randomUUID(),
-        },
-        { status: 422 }
-      );
-    }
-
-    // 새 프로젝트 생성
-    const projectId = crypto.randomUUID();
-    const jobId = crypto.randomUUID();
-
-    const newProject: Project = {
-      id: projectId,
-      user_id: 'mock-user-id',
-      title: body.title || `${body.repo} 개선 프로젝트`,
-      source_notion_url: body.source_notion_url,
-      repo: body.repo,
-      focus_files: body.focus_files,
-      output_notion_url: body.output_notion_url,
-      confidentiality: body.confidentiality,
-      status: 'queued',
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
-    };
-
-    mockProjects.push(newProject);
-
-    // 프로젝트 생성 후 자동으로 상태 변경 시뮬레이션
-    setTimeout(() => {
-      const project = mockProjects.find((p) => p.id === projectId);
-      if (project) {
-        project.status = 'collecting';
-        project.updated_at = new Date().toISOString();
-      }
-    }, 2000);
-
-    setTimeout(() => {
-      const project = mockProjects.find((p) => p.id === projectId);
-      if (project) {
-        project.status = 'researching';
-        project.updated_at = new Date().toISOString();
-      }
-    }, 5000);
-
-    return HttpResponse.json({
-      data: { jobId, projectId },
-      correlationId: crypto.randomUUID(),
-    });
-  }),
-
   // 프로젝트 목록 조회
   http.get('/api/v1/projects', ({ request }) => {
     const url = new URL(request.url);
@@ -292,7 +217,7 @@ export const mockUtils = {
         id: 'sample-1',
         user_id: 'mock-user-id',
         title: '사용자 인증 시스템 JWT 보안 강화',
-        source_notion_url: 'https://notion.so/sample-auth-project',
+        notion_url: 'https://notion.so/sample-auth-project',
         repo: 'company/auth-service',
         focus_files: ['src/auth/jwt.ts', 'src/middleware/auth.ts', 'tests/auth.test.ts'],
         output_notion_url: 'https://notion.so/auth-output',
@@ -305,7 +230,7 @@ export const mockUtils = {
         id: 'sample-2',
         user_id: 'mock-user-id',
         title: 'React 컴포넌트 성능 최적화',
-        source_notion_url: 'https://notion.so/sample-react-project',
+        notion_url: 'https://notion.so/sample-react-project',
         repo: 'company/react-app',
         focus_files: ['src/components/DataTable.tsx', 'src/hooks/useVirtualization.ts'],
         output_notion_url: 'https://notion.so/react-output',
@@ -318,7 +243,7 @@ export const mockUtils = {
         id: 'sample-3',
         user_id: 'mock-user-id',
         title: 'GraphQL API 설계 개선',
-        source_notion_url: 'https://notion.so/sample-graphql-project',
+        notion_url: 'https://notion.so/sample-graphql-project',
         repo: 'company/graphql-api',
         focus_files: ['src/schema/user.graphql', 'src/resolvers/user.ts', 'src/types/index.ts'],
         output_notion_url: 'https://notion.so/graphql-output',
@@ -331,7 +256,7 @@ export const mockUtils = {
         id: 'sample-4',
         user_id: 'mock-user-id',
         title: 'TypeScript 마이그레이션 전략',
-        source_notion_url: 'https://notion.so/sample-typescript-project',
+        notion_url: 'https://notion.so/sample-typescript-project',
         repo: 'company/legacy-js-app',
         focus_files: ['src/utils/helpers.js', 'src/components/Legacy.jsx'],
         output_notion_url: 'https://notion.so/typescript-output',

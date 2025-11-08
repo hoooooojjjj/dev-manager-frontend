@@ -259,7 +259,7 @@ alwaysApply: false
 
 - **개인 개발자(=유호준)**: 기능/프로젝트 착수 전 5분 이내에 고품질 Dev Spec과 실행 프롬프트를 확보하고 싶다.
 - **시나리오**
-  1. 사용자가 `source_notion_url`, `repo`, `focus_files[]`, `output_notion_url`을 제출.
+  1. 사용자가 `notion_url`, `repo`, `focus_files[]`, `output_notion_url`을 제출.
   2. 서버가 Notion/GitHub를 수집·정규화하고 \*\*리서치 파이프라인(Brave)\*\*을 병렬 실행.
   3. AI가 리서치 결과 + 코드맥락 기반으로 Dev Spec 초안을 생성(근거 인용 포함).
   4. 사용자가 채팅형 리뷰로 수치/서술/트레이드오프 보강 → 부분 재생성.
@@ -272,7 +272,7 @@ alwaysApply: false
 
 1. **Intake 폼**(클라이언트) →
 
-- 입력: `source_notion_url`, `repo`, `focus_files[]`, `output_notion_url`, `title(optional)`, `confidentiality(level)`
+- 입력: `notion_url`, `repo`, `focus_files[]`, `output_notion_url`, `title(optional)`, `confidentiality(level)`
 - OAuth 상태 확인(노션/깃허브)
 
 1. **수집/분석 파이프라인**(서버) →
@@ -394,7 +394,7 @@ alwaysApply: false
 ## 7. 데이터 모델(요약)
 
 - `user(id, email, display_name, created_at)`
-- `project(id, user_id, title, source_notion_url, repo, output_notion_url, confidentiality, status)`
+- `project(id, user_id, title, notion_url, repo, output_notion_url, confidentiality, status)`
 - `source_doc(id, project_id, type[notion|github|web], uri, sha, meta_json, content_md)`
 - `embedding(id, source_doc_id, chunk_id, vector_json JSON, text, meta_json)`
 - `research_source(id, project_id, kind[reference|job_posting], domain, url, title, author, published_at, summary_md, weight)`
@@ -464,7 +464,7 @@ alwaysApply: false
 
 ```json
 {
-  "source_notion_url": "string",
+  "notion_url": "string",
   "repo": "owner/name",
   "focus_files": ["src/foo.ts", "app/page.tsx"],
   "output_notion_url": "string",
@@ -544,7 +544,7 @@ alwaysApply: false
 
 - **목적**: 프로젝트 생성, OAuth 연결, 파일 지정
 - **구현**: React Hook Form + Zod 검증, OAuth 배지, Focus Files 관리
-- **API**: POST `/api/v1/projects/intake`
+- **API**: POST `/api/v1/projects`
 
 ### 📊 프로젝트 목록 (/projects) ✅
 

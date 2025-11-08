@@ -1,10 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
-import { useMutation } from '@tanstack/react-query';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Label } from '@/components/ui/Label';
@@ -17,16 +15,13 @@ import {
   SelectValue,
 } from '@/components/ui/Select';
 import { X, Plus } from 'lucide-react';
-import { post } from '@/api/client';
-import { useToast } from '@/store/useUi';
 import * as S from './index.css';
 import { addFocusFile, removeFocusFile } from './utils';
-import { IntakeSchema, IntakeValues } from './schemas';
 import { vars } from '@/styles/theme.css';
+import { useCreateProject } from '@/api/project/mutations';
+import { IntakeSchema, IntakeValues } from '@/api/project/requests.dto';
 
 export function IntakeForm() {
-  const router = useRouter();
-  const { success, error } = useToast();
   const [focusFileInput, setFocusFileInput] = useState('');
 
   const {
@@ -45,36 +40,23 @@ export function IntakeForm() {
 
   const focusFiles = watch('focus_files') || [];
 
-  // 프로젝트 생성 mutation
-  const createProject = useMutation({
-    mutationFn: (data: IntakeValues) =>
-      post<{ jobId: string; projectId: string }>('/projects/intake', data),
-    onSuccess: (response) => {
-      success('프로젝트가 생성되었습니다! 프로젝트 대시보드로 이동합니다.');
-      router.push(`/projects/${response.projectId}`);
-    },
-    onError: (err: Error) => {
-      error(err.message || '프로젝트 생성에 실패했습니다.', '프로젝트 생성 실패');
-    },
-  });
+  const { mutate: createProject, isPending } = useCreateProject();
 
   const onSubmit = (data: IntakeValues) => {
-    createProject.mutate(data);
+    createProject(data);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={S.container}>
       {/* 소스 Notion URL */}
       <div className={S.formSection}>
-        <Label htmlFor="source_notion_url">소스 Notion URL *</Label>
+        <Label htmlFor="notion_url">소스 Notion URL *</Label>
         <Input
-          id="source_notion_url"
+          id="notion_url"
           placeholder="https://notion.so/your-page-url"
-          {...register('source_notion_url')}
+          {...register('notion_url')}
         />
-        {errors.source_notion_url && (
-          <p className={S.errorText}>{errors.source_notion_url.message}</p>
-        )}
+        {errors.notion_url && <p className={S.errorText}>{errors.notion_url.message}</p>}
       </div>
 
       {/* GitHub 레포지토리 */}
@@ -175,8 +157,8 @@ export function IntakeForm() {
         {errors.confidentiality && <p className={S.errorText}>{errors.confidentiality.message}</p>}
       </div>
 
-      <Button type="submit" className={S.submitButton} disabled={createProject.isPending}>
-        {createProject.isPending ? '생성 중...' : '프로젝트 생성'}
+      <Button type="submit" className={S.submitButton} disabled={isPending}>
+        {isPending ? '생성 중...' : '프로젝트 생성'}
       </Button>
     </form>
   );

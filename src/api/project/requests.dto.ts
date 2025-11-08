@@ -1,7 +1,8 @@
 import { ConfidentialitySchema } from '@/api/schemas';
 import { z } from 'zod';
+
 export const IntakeSchema = z.object({
-  source_notion_url: z
+  notion_url: z
     .string()
     .url({ message: '올바른 Notion URL을 입력해주세요' })
     .refine((url) => url.includes('notion.so') || url.includes('notion.com'), {

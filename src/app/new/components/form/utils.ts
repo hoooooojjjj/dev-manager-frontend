@@ -1,5 +1,5 @@
+import { IntakeValues } from '@/api/project/requests.dto';
 import { UseFormSetValue } from 'react-hook-form';
-import { IntakeValues } from './schemas';
 
 export const addFocusFile = (
   focusFileInput: string,

@@ -32,7 +32,7 @@ export const ProjectSchema = z.object({
   id: z.string(),
   user_id: z.string(),
   title: z.string(),
-  source_notion_url: z.string().url(),
+  notion_url: z.string().url(),
   repo: z.string(),
   focus_files: z.array(z.string()),
   output_notion_url: z.string().url(),
