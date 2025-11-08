@@ -51,26 +51,30 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <div className={S.projectInfo}>
           <div className={S.infoRow}>
             <GitBranch className={S.infoIcon} />
-            <span className={S.infoText}>{project.repo}</span>
+            <span className={S.infoText}>
+              {project.repos.length > 1
+                ? `${project.repos[0]} +${project.repos.length - 1}`
+                : project.repos[0]}
+            </span>
           </div>
           <div className={S.infoRow}>
             <Calendar className={S.infoIcon} />
-            <span>생성: {formatRelativeTime(project.created_at)}</span>
+            <span>생성: {formatRelativeTime(project.createdAt)}</span>
           </div>
         </div>
 
         {/* Focus Files */}
         <Flex direction="col" align="start" gap={8}>
-          <div className={S.focusFilesSection}>Focus Files ({project.focus_files.length})</div>
+          <div className={S.focusFilesSection}>Focus Files ({project.focusFiles.length})</div>
           <div className={S.focusFilesList}>
-            {project.focus_files.slice(0, 2).map((file, index) => (
+            {project.focusFiles.slice(0, 2).map((file, index) => (
               <Badge key={index} variant="outline" className={S.focusFileBadge}>
                 {file.split('/').pop()}
               </Badge>
             ))}
-            {project.focus_files.length > 2 && (
+            {project.focusFiles.length > 2 && (
               <Badge variant="outline" className={S.focusFileBadge}>
-                +{project.focus_files.length - 2}
+                +{project.focusFiles.length - 2}
               </Badge>
             )}
           </div>

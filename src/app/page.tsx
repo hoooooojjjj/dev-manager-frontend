@@ -35,7 +35,7 @@ export default function HomePage() {
           <FeatureCard
             icon={<GitBranch className={S.featureIcon} />}
             title="GitHub 통합"
-            description="focus_files 기반 코드 분석과 PR/커밋 히스토리 자동 수집"
+            description="focusFiles 기반 코드 분석과 PR/커밋 히스토리 자동 수집"
           />
           <FeatureCard
             icon={<FileText className={S.featureIcon} />}

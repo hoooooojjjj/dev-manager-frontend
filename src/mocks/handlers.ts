@@ -19,38 +19,33 @@ let mockOAuthStatus = {
 };
 
 export const handlers = [
-  // 프로젝트 목록 조회
-  http.get('/projects', ({ request }) => {
-    const url = new URL(request.url);
-    const searchQuery = url.searchParams.get('search');
-    const statusFilter = url.searchParams.get('status');
+  // 프로젝트 생성
+  http.post('/projects', async ({ request }) => {
+    const body = (await request.json()) as {
+      title: string;
+      notionUrls: string[];
+      repos: string[];
+      focusFiles: string[];
+      outputNotionUrl: string;
+    };
 
-    let filteredProjects = mockProjects;
+    const newProject: Project = {
+      id: crypto.randomUUID(),
+      userId: 'mock-user-id',
+      title: body.title,
+      notionUrls: body.notionUrls,
+      repos: body.repos,
+      focusFiles: body.focusFiles,
+      outputNotionUrl: body.outputNotionUrl,
+      status: 'intake',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
 
-    // 검색 필터링
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      filteredProjects = filteredProjects.filter(
-        (project) =>
-          project.title.toLowerCase().includes(query) || project.repo.toLowerCase().includes(query)
-      );
-    }
-
-    // 상태 필터링
-    if (statusFilter && statusFilter !== 'all') {
-      filteredProjects = filteredProjects.filter((project) => project.status === statusFilter);
-    }
-
-    // 최신순 정렬
-    filteredProjects.sort(
-      (a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
-    );
+    mockProjects.push(newProject);
 
     return HttpResponse.json({
-      data: {
-        projects: filteredProjects,
-        total: mockProjects.length,
-      },
+      data: newProject,
       correlationId: crypto.randomUUID(),
     });
   }),
@@ -175,7 +170,7 @@ export const handlers = [
       quality_score: 75,
       json: {},
       md: '',
-      created_at: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
     };
 
     return HttpResponse.json({
@@ -206,7 +201,7 @@ export const mockUtils = {
     const project = mockProjects.find((p) => p.id === projectId);
     if (project) {
       project.status = status;
-      project.updated_at = new Date().toISOString();
+      project.updatedAt = new Date().toISOString();
     }
   },
 
@@ -215,51 +210,51 @@ export const mockUtils = {
     const sampleProjects: Project[] = [
       {
         id: 'sample-1',
-        user_id: 'mock-user-id',
+        userId: 'mock-user-id',
         title: '사용자 인증 시스템 JWT 보안 강화',
-        notion_url: 'https://notion.so/sample-auth-project',
-        repo: 'company/auth-service',
-        focus_files: ['src/auth/jwt.ts', 'src/middleware/auth.ts', 'tests/auth.test.ts'],
-        output_notion_url: 'https://notion.so/auth-output',
+        notionUrls: ['https://notion.so/sample-auth-project', 'https://notion.so/auth-docs'],
+        repos: ['company/auth-service', 'company/auth-common'],
+        focusFiles: ['src/auth/jwt.ts', 'src/middleware/auth.ts', 'tests/auth.test.ts'],
+        outputNotionUrl: 'https://notion.so/auth-output',
         status: 'completed',
-        created_at: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(), // 7일 전
-        updated_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1일 전
+        createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(), // 7일 전
+        updatedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1일 전
       },
       {
         id: 'sample-2',
-        user_id: 'mock-user-id',
+        userId: 'mock-user-id',
         title: 'React 컴포넌트 성능 최적화',
-        notion_url: 'https://notion.so/sample-react-project',
-        repo: 'company/react-app',
-        focus_files: ['src/components/DataTable.tsx', 'src/hooks/useVirtualization.ts'],
-        output_notion_url: 'https://notion.so/react-output',
+        notionUrls: ['https://notion.so/sample-react-project'],
+        repos: ['company/react-app'],
+        focusFiles: ['src/components/DataTable.tsx', 'src/hooks/useVirtualization.ts'],
+        outputNotionUrl: 'https://notion.so/react-output',
         status: 'research',
-        created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(), // 3일 전
-        updated_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2시간 전
+        createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(), // 3일 전
+        updatedAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2시간 전
       },
       {
         id: 'sample-3',
-        user_id: 'mock-user-id',
+        userId: 'mock-user-id',
         title: 'GraphQL API 설계 개선',
-        notion_url: 'https://notion.so/sample-graphql-project',
-        repo: 'company/graphql-api',
-        focus_files: ['src/schema/user.graphql', 'src/resolvers/user.ts', 'src/types/index.ts'],
-        output_notion_url: 'https://notion.so/graphql-output',
+        notionUrls: ['https://notion.so/sample-graphql-project'],
+        repos: ['company/graphql-api'],
+        focusFiles: ['src/schema/user.graphql', 'src/resolvers/user.ts', 'src/types/index.ts'],
+        outputNotionUrl: 'https://notion.so/graphql-output',
         status: 'research',
-        created_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1일 전
-        updated_at: new Date(Date.now() - 30 * 60 * 1000).toISOString(), // 30분 전
+        createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1일 전
+        updatedAt: new Date(Date.now() - 30 * 60 * 1000).toISOString(), // 30분 전
       },
       {
         id: 'sample-4',
-        user_id: 'mock-user-id',
+        userId: 'mock-user-id',
         title: 'TypeScript 마이그레이션 전략',
-        notion_url: 'https://notion.so/sample-typescript-project',
-        repo: 'company/legacy-js-app',
-        focus_files: ['src/utils/helpers.js', 'src/components/Legacy.jsx'],
-        output_notion_url: 'https://notion.so/typescript-output',
+        notionUrls: ['https://notion.so/sample-typescript-project'],
+        repos: ['company/legacy-js-app'],
+        focusFiles: ['src/utils/helpers.js', 'src/components/Legacy.jsx'],
+        outputNotionUrl: 'https://notion.so/typescript-output',
         status: 'research',
-        created_at: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(), // 5일 전
-        updated_at: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(), // 4일 전
+        createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(), // 5일 전
+        updatedAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(), // 4일 전
       },
     ];
 

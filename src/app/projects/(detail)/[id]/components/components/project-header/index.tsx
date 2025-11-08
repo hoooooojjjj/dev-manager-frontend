@@ -20,8 +20,8 @@ interface ProjectHeaderProps {
     title: string;
     status: string;
     progress: number;
-    created_at: string;
-    updated_at: string;
+    createdAt: string;
+    updatedAt: string;
   };
   timeline: TimelineItem[];
 }
@@ -36,11 +36,11 @@ export function ProjectHeader({ project, timeline }: ProjectHeaderProps) {
             <div className={S.projectMeta}>
               <Flex align="center" gap={6}>
                 <Clock size={16} />
-                생성: {new Date(project.created_at).toLocaleDateString('ko-KR')}
+                생성: {new Date(project.createdAt).toLocaleDateString('ko-KR')}
               </Flex>
               <Flex align="center" gap={6}>
                 <Clock size={16} />
-                수정: {new Date(project.updated_at).toLocaleDateString('ko-KR')}
+                수정: {new Date(project.updatedAt).toLocaleDateString('ko-KR')}
               </Flex>
               <Badge variant="outline">{getStatusLabel(project.status)}</Badge>
             </div>

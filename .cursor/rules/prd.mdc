@@ -31,7 +31,7 @@ alwaysApply: false
 
 **목표**
 
-- **G1. 인입 명시화**: Notion PRD·회의록과 \*\*GitHub 레포 + 중점 파일 목록(`focus_files[]`)\*\*을 입력으로 받아 자동 수집·정규화.
+- **G1. 인입 명시화**: Notion PRD·회의록과 \*\*GitHub 레포 + 중점 파일 목록(`focusFiles[]`)\*\*을 입력으로 받아 자동 수집·정규화.
 - **G2. 표준 개발 명세서**: `현상 → 원인 분석 → 해결 방안 → 학습 포인트` 구조로 초안 자동 생성(근거 인용 필수).
 - **G2.5. 사전 리서치/분석 강화(Brave MCP)**: 최근 12개월 **권위 소스 ≥5** + **대기업 채용공고 ≥3**를 분석하여 **Competency Map(요구역량↔솔루션/학습 포인트 매핑)** 생성.
 - **G3. 대화형 리뷰 루프**: 섹션별 수정·Diff·근거 강화.
@@ -49,7 +49,7 @@ alwaysApply: false
 
 - **개인 개발자(=유호준)**: 기능/프로젝트 착수 전 5분 이내에 고품질 Dev Spec과 실행 프롬프트를 확보하고 싶다.
 - **시나리오**
-  1. 사용자가 `notion_url`, `repo`, `focus_files[]`, `output_notion_url`을 제출.
+  1. 사용자가 `notionUrl`, `repo`, `focusFiles[]`, `outputNotionUrl`을 제출.
   2. 서버가 Notion/GitHub를 수집·정규화하고 \*\*리서치 파이프라인(Brave)\*\*을 병렬 실행.
   3. AI가 리서치 결과 + 코드맥락 기반으로 Dev Spec 초안을 생성(근거 인용 포함).
   4. 사용자가 채팅형 리뷰로 수치/서술/트레이드오프 보강 → 부분 재생성.
@@ -62,13 +62,13 @@ alwaysApply: false
 
 1. **Intake 폼**(클라이언트) →
 
-- 입력: `notion_url`, `repo`, `focus_files[]`, `output_notion_url`, `title(optional)`
+- 입력: `notionUrl`, `repo`, `focusFiles[]`, `outputNotionUrl`, `title(optional)`
 - OAuth 상태 확인(노션/깃허브)
 
 1. **수집/분석 파이프라인**(서버) →
 
 - Notion MCP: 페이지/하위 블록 Markdown Export
-- GitHub MCP: 레포 트리, 최근 N PR/커밋/이슈, **focus_files AST/metrics**
+- GitHub MCP: 레포 트리, 최근 N PR/커밋/이슈, **focusFiles AST/metrics**
 - **Brave MCP(필수)**: 최신 레퍼런스/대기업 공고 수집→정규화→중복제거→랭킹
 - **인덱싱**: MySQL 저장 + **FULLTEXT** 인덱스(초기) / 선택적 **JSON 임베딩** 저장 후 앱 레벨 재랭킹
 
@@ -105,7 +105,7 @@ alwaysApply: false
 ### FR3. GitHub 리포/코드 분석
 
 - AC3.1 레포 메타/트리, 최근 N PR/커밋/이슈
-- \*\AC3.2 \\\*\*\*`focus_files`\*\***에 대해 AST/Complexity/변화이력/주요 시그니처 추출**
+- \*\AC3.2 \\\*\*\*`focusFiles`\*\***에 대해 AST/Complexity/변화이력/주요 시그니처 추출**
 
 ### FR4. 맥락 저장/검색(저비용)
 
@@ -183,18 +183,18 @@ alwaysApply: false
 
 ## 7. 데이터 모델(요약)
 
-- `user(id, email, display_name, created_at)`
-- `project(id, user_id, title, notion_url, repo, output_notion_url, status)`
+- `user(id, email, display_name, createdAt)`
+- `project(id, userId, title, notionUrl, repo, outputNotionUrl, status)`
 - `source_doc(id, project_id, type[notion|github|web], uri, sha, meta_json, content_md)`
 - `embedding(id, source_doc_id, chunk_id, vector_json JSON, text, meta_json)`
 - `research_source(id, project_id, kind[reference|job_posting], domain, url, title, author, published_at, summary_md, weight)`
 - `competency_map(id, project_id, competency, evidence_ids JSON, mapped_solutions JSON, gaps JSON)`
-- `spec_draft(id, project_id, version, json, md, quality_score, created_at)`
-- `ai_prompt(id, project_id, draft_version, kind[codegen|test|review], content_md, created_at)`
-- `feedback(id, draft_id, section_key, role[user|ai], message, created_at)`
-- `iteration(id, project_id, from_version, to_version, diff_json, created_at)`
-- `publish_log(id, project_id, draft_version, notion_page_id, url, created_at)`
-- `oauth_token(id, user_id, provider, scope, enc_token, refreshed_at)`
+- `spec_draft(id, project_id, version, json, md, quality_score, createdAt)`
+- `ai_prompt(id, project_id, draft_version, kind[codegen|test|review], content_md, createdAt)`
+- `feedback(id, draft_id, section_key, role[user|ai], message, createdAt)`
+- `iteration(id, project_id, from_version, to_version, diff_json, createdAt)`
+- `publish_log(id, project_id, draft_version, notion_page_id, url, createdAt)`
+- `oauth_token(id, userId, provider, scope, enc_token, refreshed_at)`
 
 ---
 
@@ -254,10 +254,10 @@ alwaysApply: false
 
 ```json
 {
-  "notion_url": "string",
+  "notionUrl": "string",
   "repo": "owner/name",
-  "focus_files": ["src/foo.ts", "app/page.tsx"],
-  "output_notion_url": "string",
+  "focusFiles": ["src/foo.ts", "app/page.tsx"],
+  "outputNotionUrl": "string",
   "title": "string?"
 }
 ```
@@ -302,7 +302,7 @@ alwaysApply: false
 ## 11. MCP 통합
 
 - **Notion MCP**: 페이지 조회/업데이트, 데이터베이스 메타, 백오프
-- **GitHub MCP**: 트리/파일/PR/커밋/이슈, `focus_files` 우선 스캔
+- **GitHub MCP**: 트리/파일/PR/커밋/이슈, `focusFiles` 우선 스캔
 - **Brave MCP(필수)**: 레퍼런스/채용공고 수집, 중복제거/요약/랭킹
 
 ---
@@ -364,6 +364,6 @@ alwaysApply: false
 
 - Notion/GitHub/Brave Rate Limit → 큐/백오프/캐시, 증분 동기화
 - 저품질/편향 소스 → 도메인 allowlist, 다중 출처 교차검증, 날짜 필터
-- 대형 레포 성능 → `focus_files` 우선, 파일 샘플링, AST/metrics 비동기화
+- 대형 레포 성능 → `focusFiles` 우선, 파일 샘플링, AST/metrics 비동기화
 
 ---
