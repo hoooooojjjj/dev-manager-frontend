@@ -1,4 +1,3 @@
-import { ConfidentialitySchema } from '@/api/schemas';
 import { z } from 'zod';
 
 export const IntakeSchema = z.object({
@@ -22,7 +21,6 @@ export const IntakeSchema = z.object({
       message: 'Notion URL이어야 합니다',
     }),
   title: z.string().optional(),
-  confidentiality: ConfidentialitySchema,
 });
 
 export type IntakeValues = z.infer<typeof IntakeSchema>;

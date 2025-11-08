@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
 import { get } from '@/api/client';
-import type { Project } from '@/api/schemas';
+import type { Project } from '@/api/project/responses.dto';
 import { ProjectsListHeader } from './components/projects-list-header';
 import { ProjectsGrid } from './components/projects-grid';
 import { ProjectsGridSkeleton } from './components/projects-grid-skeleton';

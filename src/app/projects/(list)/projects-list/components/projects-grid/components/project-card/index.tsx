@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Calendar, ExternalLink, FileText, GitBranch } from 'lucide-react';
 import { formatRelativeTime } from '@/utils/format';
-import type { Project } from '@/api/schemas';
+import type { Project } from '@/api/project/responses.dto';
 import { Flex } from '@/components/ui/Flex';
 import * as S from './index.css';
 
@@ -42,9 +42,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <div className={S.badgeContainer}>
           <Badge variant="secondary" className={getStatusColor(project.status)}>
             {getStatusLabel(project.status)}
-          </Badge>
-          <Badge variant="outline" className={S.badgeOutline}>
-            {project.confidentiality}
           </Badge>
         </div>
       </CardHeader>

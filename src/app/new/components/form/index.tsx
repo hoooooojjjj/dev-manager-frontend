@@ -33,7 +33,6 @@ export function IntakeForm() {
   } = useForm<IntakeValues>({
     resolver: zodResolver(IntakeSchema),
     defaultValues: {
-      confidentiality: 'public',
       focus_files: [],
     },
   });
@@ -134,27 +133,6 @@ export function IntakeForm() {
       <div className={S.formSection}>
         <Label htmlFor="title">프로젝트 제목</Label>
         <Input id="title" placeholder="프로젝트 제목을 입력하세요" {...register('title')} />
-      </div>
-
-      {/* 기밀성 */}
-      <div className={S.formSection}>
-        <Label htmlFor="confidentiality">기밀성 수준 *</Label>
-        <Select
-          value={watch('confidentiality')}
-          onValueChange={(value) =>
-            setValue('confidentiality', value as 'public' | 'internal' | 'confidential')
-          }
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="기밀성 수준을 선택하세요" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="public">공개</SelectItem>
-            <SelectItem value="internal">내부</SelectItem>
-            <SelectItem value="confidential">기밀</SelectItem>
-          </SelectContent>
-        </Select>
-        {errors.confidentiality && <p className={S.errorText}>{errors.confidentiality.message}</p>}
       </div>
 
       <Button type="submit" className={S.submitButton} disabled={isPending}>

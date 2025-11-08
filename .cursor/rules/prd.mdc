@@ -62,7 +62,7 @@ alwaysApply: false
 
 1. **Intake 폼**(클라이언트) →
 
-- 입력: `notion_url`, `repo`, `focus_files[]`, `output_notion_url`, `title(optional)`, `confidentiality(level)`
+- 입력: `notion_url`, `repo`, `focus_files[]`, `output_notion_url`, `title(optional)`
 - OAuth 상태 확인(노션/깃허브)
 
 1. **수집/분석 파이프라인**(서버) →
@@ -184,7 +184,7 @@ alwaysApply: false
 ## 7. 데이터 모델(요약)
 
 - `user(id, email, display_name, created_at)`
-- `project(id, user_id, title, notion_url, repo, output_notion_url, confidentiality, status)`
+- `project(id, user_id, title, notion_url, repo, output_notion_url, status)`
 - `source_doc(id, project_id, type[notion|github|web], uri, sha, meta_json, content_md)`
 - `embedding(id, source_doc_id, chunk_id, vector_json JSON, text, meta_json)`
 - `research_source(id, project_id, kind[reference|job_posting], domain, url, title, author, published_at, summary_md, weight)`
@@ -258,8 +258,7 @@ alwaysApply: false
   "repo": "owner/name",
   "focus_files": ["src/foo.ts", "app/page.tsx"],
   "output_notion_url": "string",
-  "title": "string?",
-  "confidentiality": "public|internal|confidential"
+  "title": "string?"
 }
 ```
 

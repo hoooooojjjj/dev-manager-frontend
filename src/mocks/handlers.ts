@@ -4,8 +4,8 @@
  */
 
 import { http, HttpResponse } from 'msw';
-import type { Project, ResearchSource, CompetencyMap } from '@/api/schemas';
-import { IntakeValues } from '@/api/project/requests.dto';
+import type { ResearchSource, CompetencyMap } from '@/api/schemas';
+import { Project } from '@/api/project/responses.dto';
 
 // Mock 데이터
 const mockProjects: Project[] = [];
@@ -20,7 +20,7 @@ let mockOAuthStatus = {
 
 export const handlers = [
   // 프로젝트 목록 조회
-  http.get('/api/v1/projects', ({ request }) => {
+  http.get('/projects', ({ request }) => {
     const url = new URL(request.url);
     const searchQuery = url.searchParams.get('search');
     const statusFilter = url.searchParams.get('status');
@@ -221,7 +221,6 @@ export const mockUtils = {
         repo: 'company/auth-service',
         focus_files: ['src/auth/jwt.ts', 'src/middleware/auth.ts', 'tests/auth.test.ts'],
         output_notion_url: 'https://notion.so/auth-output',
-        confidentiality: 'internal',
         status: 'done',
         created_at: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(), // 7일 전
         updated_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1일 전
@@ -234,7 +233,6 @@ export const mockUtils = {
         repo: 'company/react-app',
         focus_files: ['src/components/DataTable.tsx', 'src/hooks/useVirtualization.ts'],
         output_notion_url: 'https://notion.so/react-output',
-        confidentiality: 'public',
         status: 'review',
         created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(), // 3일 전
         updated_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2시간 전
@@ -247,7 +245,6 @@ export const mockUtils = {
         repo: 'company/graphql-api',
         focus_files: ['src/schema/user.graphql', 'src/resolvers/user.ts', 'src/types/index.ts'],
         output_notion_url: 'https://notion.so/graphql-output',
-        confidentiality: 'confidential',
         status: 'researching',
         created_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1일 전
         updated_at: new Date(Date.now() - 30 * 60 * 1000).toISOString(), // 30분 전
@@ -260,7 +257,6 @@ export const mockUtils = {
         repo: 'company/legacy-js-app',
         focus_files: ['src/utils/helpers.js', 'src/components/Legacy.jsx'],
         output_notion_url: 'https://notion.so/typescript-output',
-        confidentiality: 'internal',
         status: 'error',
         created_at: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(), // 5일 전
         updated_at: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(), // 4일 전

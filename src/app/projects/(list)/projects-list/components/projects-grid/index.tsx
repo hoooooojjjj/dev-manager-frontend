@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
 import { FileText, Plus } from 'lucide-react';
-import type { Project } from '@/api/schemas';
+import type { Project } from '@/api/project/responses.dto';
 import { ProjectCard } from './components/project-card';
 import * as S from './index.css';
 
