@@ -458,7 +458,7 @@ alwaysApply: false
 
 ## 9. API 설계 (NestJS · REST)
 
-### POST `/api/v1/projects/intake`
+### POST `/projects/intake`
 
 요청:
 
@@ -474,23 +474,23 @@ alwaysApply: false
 
 응답: `{ jobId: string, projectId: string }`
 
-### POST `/api/v1/projects/:id/research`
+### POST `/projects/:id/research`
 
 - 리서치 파이프라인 트리거(Brave), 상태 폴링/스트림 제공
 
-### GET `/api/v1/drafts/:id`
+### GET `/drafts/:id`
 
 - 초안 JSON+MD 반환, 섹션 키 포함
 
-### PATCH `/api/v1/drafts/:id`
+### PATCH `/drafts/:id`
 
 - 요청 `{ section_key, instruction, strict_citation }` → 부분 재생성 + Diff
 
-### POST `/api/v1/drafts/:id/prompts`
+### POST `/drafts/:id/prompts`
 
 - 현 초안을 기반으로 `ai_prompts` 생성/갱신
 
-### POST `/api/v1/drafts/:id/publish`
+### POST `/drafts/:id/publish`
 
 - 요청 `{ checklist_ack: true }` → `{ notionUrl, version, snapshotUrl }`
 
@@ -543,7 +543,7 @@ alwaysApply: false
 
 - **목적**: 프로젝트 생성, OAuth 연결, 파일 지정
 - **구현**: React Hook Form + Zod 검증, OAuth 배지, Focus Files 관리
-- **API**: POST `/api/v1/projects`
+- **API**: POST `/projects`
 
 ### 📊 프로젝트 목록 (/projects) ✅
 
@@ -743,7 +743,7 @@ retry: (failureCount, error) => {
 
 - **자동 배포**: main 브랜치 푸시 시
 - **프리뷰 배포**: PR 생성 시
-- **환경 변수**: 기본값 `/api/v1` 설정
+- **환경 변수**: 기본값 `` 설정
 
 ### GitHub Actions ✅
 

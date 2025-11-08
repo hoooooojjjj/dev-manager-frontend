@@ -248,7 +248,7 @@ alwaysApply: false
 
 ## 9. API 설계 (NestJS · REST)
 
-### POST `/api/v1/projects`
+### POST `/projects`
 
 요청:
 
@@ -264,23 +264,23 @@ alwaysApply: false
 
 응답: `{ jobId: string, projectId: string }`
 
-### POST `/api/v1/projects/:id/research`
+### POST `/projects/:id/research`
 
 - 리서치 파이프라인 트리거(Brave), 상태 폴링/스트림 제공
 
-### GET `/api/v1/drafts/:id`
+### GET `/drafts/:id`
 
 - 초안 JSON+MD 반환, 섹션 키 포함
 
-### PATCH `/api/v1/drafts/:id`
+### PATCH `/drafts/:id`
 
 - 요청 `{ section_key, instruction, strict_citation }` → 부분 재생성 + Diff
 
-### POST `/api/v1/drafts/:id/prompts`
+### POST `/drafts/:id/prompts`
 
 - 현 초안을 기반으로 `ai_prompts` 생성/갱신
 
-### POST `/api/v1/drafts/:id/publish`
+### POST `/drafts/:id/publish`
 
 - 요청 `{ checklist_ack: true }` → `{ notionUrl, version, snapshotUrl }`
 

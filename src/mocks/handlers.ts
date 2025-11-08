@@ -56,7 +56,7 @@ export const handlers = [
   }),
 
   // 프로젝트 상태 조회
-  http.get('/api/v1/projects/:id/status', ({ params }) => {
+  http.get('/projects/:id/status', ({ params }) => {
     const projectId = params.id as string;
     const project = mockProjects.find((p) => p.id === projectId);
 
@@ -80,7 +80,7 @@ export const handlers = [
   }),
 
   // 프로젝트 리서치 결과 조회
-  http.get('/api/v1/projects/:id/research', ({ params }) => {
+  http.get('/projects/:id/research', ({ params }) => {
     const projectId = params.id as string;
     const project = mockProjects.find((p) => p.id === projectId);
 
@@ -152,7 +152,7 @@ export const handlers = [
   }),
 
   // 드래프트 조회
-  http.get('/api/v1/drafts/:id', ({ params }) => {
+  http.get('/drafts/:id', ({ params }) => {
     const draftId = params.id as string;
 
     const mockDraft = {
@@ -185,7 +185,7 @@ export const handlers = [
   }),
 
   // 백그라운드 작업을 위한 지연 응답 시뮬레이션
-  http.get('/api/v1/projects/:id/events', () => {
+  http.get('/projects/:id/events', () => {
     // SSE는 별도 구현 필요
     return HttpResponse.json({
       data: { message: 'SSE endpoint - 브라우저에서 EventSource로 연결하세요' },
