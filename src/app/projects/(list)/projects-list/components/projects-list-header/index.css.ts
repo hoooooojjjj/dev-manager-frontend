@@ -48,7 +48,7 @@ export const searchIcon = style({
 });
 
 export const searchInput = style({
-  paddingLeft: '36px',
+  paddingLeft: '36px !important',
 });
 
 export const statusFilter = style({

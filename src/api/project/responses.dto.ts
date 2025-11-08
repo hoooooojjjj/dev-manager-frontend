@@ -10,6 +10,8 @@ export const ProjectStatusSchema = z.enum([
   'error',
 ]);
 
+export type ProjectStatus = z.infer<typeof ProjectStatusSchema>;
+
 export const ProjectSchema = z.object({
   id: z.string(),
   userId: z.string(),

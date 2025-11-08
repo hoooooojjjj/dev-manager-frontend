@@ -44,7 +44,7 @@ export function IntakeForm() {
     <form onSubmit={handleSubmit(onSubmit)} className={S.container}>
       {/* 소스 Notion URL */}
       <ArrayFormSection
-        label="소스 Notion URL"
+        label="PRD (Notion URL)"
         values={notionUrls}
         setValue={setValue}
         fieldName="notionUrls"
@@ -66,7 +66,7 @@ export function IntakeForm() {
 
       {/* Focus Files */}
       <ArrayFormSection
-        label="중점 분석 파일"
+        label="강조할 파일명"
         values={focusFiles}
         setValue={setValue}
         fieldName="focusFiles"
@@ -77,7 +77,7 @@ export function IntakeForm() {
 
       {/* 출력 Notion URL */}
       <div className={S.formSection}>
-        <Label htmlFor="outputNotionUrl">출력 Notion URL *</Label>
+        <Label htmlFor="outputNotionUrl">개발명세서 발행 페이지 (Notion URL) *</Label>
         <Input
           id="outputNotionUrl"
           placeholder="https://notion.so/output-page-url"

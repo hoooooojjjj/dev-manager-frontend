@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/styles/theme.css';
+import { ProjectStatus, ProjectStatusSchema } from '@/api/project/responses.dto';
 
 export const projectCard = style({
   transition: 'box-shadow 0.15s ease-in-out',
@@ -21,6 +22,7 @@ export const cardTitle = style({
   WebkitLineClamp: 2,
   WebkitBoxOrient: 'vertical',
   overflow: 'hidden',
+  minHeight: '20px',
 });
 
 export const badgeContainer = style({
@@ -56,6 +58,14 @@ export const infoText = style({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
+});
+
+export const infoLink = style({
+  color: vars.colors.foreground,
+  textDecoration: 'none',
+  ':hover': {
+    textDecoration: 'underline',
+  },
 });
 
 export const focusFilesSection = style({
@@ -95,15 +105,12 @@ export const container = style({
   gap: '16px',
 });
 
-export const statusColors = {
-  idle: style({ background: '#f5f5f5', color: '#1f2937' }),
-  submitting: style({ background: '#dbeafe', color: '#1e3a8a' }),
-  queued: style({ background: '#fef3c7', color: '#92400e' }),
-  collecting: style({ background: '#ffedd5', color: '#9a3412' }),
-  researching: style({ background: '#ede9fe', color: '#5b21b6' }),
-  drafting: style({ background: '#e0e7ff', color: '#3730a3' }),
-  review: style({ background: '#cffafe', color: '#155e75' }),
-  publishing: style({ background: '#d1fae5', color: '#065f46' }),
-  done: style({ background: '#dcfce7', color: '#166534' }),
-  error: style({ background: '#fee2e2', color: '#991b1b' }),
+export const statusColors: Record<ProjectStatus, string> = {
+  [ProjectStatusSchema.enum.intake]: '#f5f5f5',
+  [ProjectStatusSchema.enum.research]: '#dbeafe',
+  [ProjectStatusSchema.enum.draft]: '#fef3c7',
+  [ProjectStatusSchema.enum.review]: '#ffedd5',
+  [ProjectStatusSchema.enum.prompts]: '#ede9fe',
+  [ProjectStatusSchema.enum.completed]: '#dcfce7',
+  [ProjectStatusSchema.enum.error]: '#fee2e2',
 };
