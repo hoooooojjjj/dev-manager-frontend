@@ -221,7 +221,7 @@ export const mockUtils = {
         repo: 'company/auth-service',
         focus_files: ['src/auth/jwt.ts', 'src/middleware/auth.ts', 'tests/auth.test.ts'],
         output_notion_url: 'https://notion.so/auth-output',
-        status: 'done',
+        status: 'completed',
         created_at: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(), // 7일 전
         updated_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1일 전
       },
@@ -233,7 +233,7 @@ export const mockUtils = {
         repo: 'company/react-app',
         focus_files: ['src/components/DataTable.tsx', 'src/hooks/useVirtualization.ts'],
         output_notion_url: 'https://notion.so/react-output',
-        status: 'review',
+        status: 'processing',
         created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(), // 3일 전
         updated_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2시간 전
       },
@@ -245,7 +245,7 @@ export const mockUtils = {
         repo: 'company/graphql-api',
         focus_files: ['src/schema/user.graphql', 'src/resolvers/user.ts', 'src/types/index.ts'],
         output_notion_url: 'https://notion.so/graphql-output',
-        status: 'researching',
+        status: 'processing',
         created_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1일 전
         updated_at: new Date(Date.now() - 30 * 60 * 1000).toISOString(), // 30분 전
       },

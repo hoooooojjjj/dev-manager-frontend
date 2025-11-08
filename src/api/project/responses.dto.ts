@@ -1,17 +1,6 @@
 import { z } from 'zod';
 
-export const ProjectStatusSchema = z.enum([
-  'idle',
-  'submitting',
-  'queued',
-  'collecting',
-  'researching',
-  'drafting',
-  'review',
-  'publishing',
-  'done',
-  'error',
-]);
+export const ProjectStatusSchema = z.enum(['processing', 'completed', 'error']);
 
 export const ProjectSchema = z.object({
   id: z.string(),

@@ -85,7 +85,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             </Link>
           </Button>
 
-          {project.status === 'done' && (
+          {project.status === 'completed' && (
             <Button asChild variant="outline" size="sm">
               <Link href={`/drafts/${project.id}`}>
                 <FileText className={S.buttonIcon} />
