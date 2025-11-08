@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldErrors, useForm, UseFormSetValue } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -9,23 +9,12 @@ import { Label } from '@/components/ui/Label';
 import { Badge } from '@/components/ui/Badge';
 import { X, Plus } from 'lucide-react';
 import * as S from './index.css';
-import {
-  addFocusFile,
-  removeFocusFile,
-  addNotionUrl,
-  removeNotionUrl,
-  addRepo,
-  removeRepo,
-} from './utils';
+import { addArrayItem, ArrayFieldName, removeArrayItem } from './utils';
 import { vars } from '@/styles/theme.css';
 import { useCreateProject } from '@/api/project/mutations';
 import { IntakeSchema, IntakeValues } from '@/api/project/requests.dto';
 
 export function IntakeForm() {
-  const [notionUrlInput, setNotionUrlInput] = useState('');
-  const [repoInput, setRepoInput] = useState('');
-  const [focusFileInput, setFocusFileInput] = useState('');
-
   const {
     register,
     handleSubmit,
@@ -54,145 +43,37 @@ export function IntakeForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={S.container}>
       {/* 소스 Notion URL */}
-      <div className={S.formSection}>
-        <Label>소스 Notion URL *</Label>
-        <div className={S.focusFilesActions}>
-          <Input
-            placeholder="https://notion.so/your-page-url"
-            value={notionUrlInput}
-            onChange={(e) => setNotionUrlInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault();
-                addNotionUrl(notionUrlInput, notionUrls, setValue, setNotionUrlInput);
-              }
-            }}
-          />
-          <Button
-            type="button"
-            onClick={() => addNotionUrl(notionUrlInput, notionUrls, setValue, setNotionUrlInput)}
-            size="icon"
-            variant="outline"
-          >
-            <Plus className={S.buttonIcon} />
-          </Button>
-        </div>
-
-        {notionUrls.length > 0 && (
-          <div className={S.focusFilesGrid}>
-            {notionUrls.map((url, index) => (
-              <Badge key={index} variant="secondary" className={S.focusFileBadge}>
-                {url}
-                <Button
-                  type="button"
-                  onClick={() => removeNotionUrl(index, notionUrls, setValue)}
-                  className={S.removeButton}
-                  size="icon"
-                  variant="ghost"
-                >
-                  <X className={S.removeIcon} color={vars.colors.primary} />
-                </Button>
-              </Badge>
-            ))}
-          </div>
-        )}
-
-        {errors.notionUrls && <p className={S.errorText}>{errors.notionUrls.message}</p>}
-      </div>
+      <ArrayFormSection
+        label="소스 Notion URL"
+        values={notionUrls}
+        setValue={setValue}
+        fieldName="notionUrls"
+        addArrayItem={addArrayItem}
+        removeArrayItem={removeArrayItem}
+        errors={errors}
+      />
 
       {/* GitHub 레포지토리 */}
-      <div className={S.formSection}>
-        <Label>GitHub 레포지토리 *</Label>
-        <div className={S.focusFilesActions}>
-          <Input
-            placeholder="owner/repository (예: microsoft/vscode)"
-            value={repoInput}
-            onChange={(e) => setRepoInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault();
-                addRepo(repoInput, repos, setValue, setRepoInput);
-              }
-            }}
-          />
-          <Button
-            type="button"
-            onClick={() => addRepo(repoInput, repos, setValue, setRepoInput)}
-            size="icon"
-            variant="outline"
-          >
-            <Plus className={S.buttonIcon} />
-          </Button>
-        </div>
-
-        {repos.length > 0 && (
-          <div className={S.focusFilesGrid}>
-            {repos.map((repo, index) => (
-              <Badge key={index} variant="secondary" className={S.focusFileBadge}>
-                {repo}
-                <Button
-                  type="button"
-                  onClick={() => removeRepo(index, repos, setValue)}
-                  className={S.removeButton}
-                  size="icon"
-                  variant="ghost"
-                >
-                  <X className={S.removeIcon} color={vars.colors.primary} />
-                </Button>
-              </Badge>
-            ))}
-          </div>
-        )}
-
-        {errors.repos && <p className={S.errorText}>{errors.repos.message}</p>}
-      </div>
+      <ArrayFormSection
+        label="GitHub 레포지토리"
+        values={repos}
+        setValue={setValue}
+        fieldName="repos"
+        addArrayItem={addArrayItem}
+        removeArrayItem={removeArrayItem}
+        errors={errors}
+      />
 
       {/* Focus Files */}
-      <div className={S.formSection}>
-        <Label>중점 분석 파일 *</Label>
-        <div className={S.focusFilesActions}>
-          <Input
-            placeholder="src/components/Button.tsx"
-            value={focusFileInput}
-            onChange={(e) => setFocusFileInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault();
-                addFocusFile(focusFileInput, focusFiles, setValue, setFocusFileInput);
-              }
-            }}
-          />
-          <Button
-            type="button"
-            onClick={() => addFocusFile(focusFileInput, focusFiles, setValue, setFocusFileInput)}
-            size="icon"
-            variant="outline"
-          >
-            <Plus className={S.buttonIcon} />
-          </Button>
-        </div>
-
-        {focusFiles.length > 0 && (
-          <div className={S.focusFilesGrid}>
-            {focusFiles.map((file, index) => (
-              <Badge key={index} variant="secondary" className={S.focusFileBadge}>
-                {file}
-                <Button
-                  type="button"
-                  onClick={() => removeFocusFile(index, focusFiles, setValue)}
-                  className={S.removeButton}
-                  size="icon"
-                  variant="ghost"
-                >
-                  <X className={S.removeIcon} color={vars.colors.primary} />
-                </Button>
-              </Badge>
-            ))}
-          </div>
-        )}
-
-        {errors.focusFiles && <p className={S.errorText}>{errors.focusFiles.message}</p>}
-      </div>
+      <ArrayFormSection
+        label="중점 분석 파일"
+        values={focusFiles}
+        setValue={setValue}
+        fieldName="focusFiles"
+        addArrayItem={addArrayItem}
+        removeArrayItem={removeArrayItem}
+        errors={errors}
+      />
 
       {/* 출력 Notion URL */}
       <div className={S.formSection}>
@@ -218,3 +99,84 @@ export function IntakeForm() {
     </form>
   );
 }
+
+interface ArrayFormSectionProps {
+  label: string;
+  values: IntakeValues['notionUrls'] | IntakeValues['repos'] | IntakeValues['focusFiles'];
+  setValue: UseFormSetValue<IntakeValues>;
+  fieldName: ArrayFieldName;
+  addArrayItem: (
+    input: string,
+    currentArray: string[],
+    fieldName: ArrayFieldName,
+    setValue: UseFormSetValue<IntakeValues>,
+    setInput: (value: string) => void
+  ) => void;
+  removeArrayItem: (
+    index: number,
+    currentArray: string[],
+    fieldName: ArrayFieldName,
+    setValue: UseFormSetValue<IntakeValues>
+  ) => void;
+  errors: FieldErrors<IntakeValues>;
+}
+
+const ArrayFormSection = ({
+  label,
+  values,
+  setValue,
+  fieldName,
+  addArrayItem,
+  removeArrayItem,
+  errors,
+}: ArrayFormSectionProps) => {
+  const [inputs, setInputs] = useState('');
+
+  return (
+    <div className={S.formSection}>
+      <Label>{label} *</Label>
+      <div className={S.focusFilesActions}>
+        <Input
+          placeholder="src/components/Button.tsx"
+          value={inputs}
+          onChange={(e) => setInputs(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              addArrayItem(inputs, values, fieldName, setValue, setInputs);
+            }
+          }}
+        />
+        <Button
+          type="button"
+          onClick={() => addArrayItem(inputs, values, fieldName, setValue, setInputs)}
+          size="icon"
+          variant="outline"
+        >
+          <Plus className={S.buttonIcon} />
+        </Button>
+      </div>
+
+      {values.length > 0 && (
+        <div className={S.focusFilesGrid}>
+          {values.map((file, index) => (
+            <Badge key={index} variant="secondary" className={S.focusFileBadge}>
+              {file}
+              <Button
+                type="button"
+                onClick={() => removeArrayItem(index, values, fieldName, setValue)}
+                className={S.removeButton}
+                size="icon"
+                variant="ghost"
+              >
+                <X className={S.removeIcon} color={vars.colors.primary} />
+              </Button>
+            </Badge>
+          ))}
+        </div>
+      )}
+
+      {errors.focusFiles && <p className={S.errorText}>{errors.focusFiles.message}</p>}
+    </div>
+  );
+};
