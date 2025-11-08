@@ -233,7 +233,7 @@ export const mockUtils = {
         repo: 'company/react-app',
         focus_files: ['src/components/DataTable.tsx', 'src/hooks/useVirtualization.ts'],
         output_notion_url: 'https://notion.so/react-output',
-        status: 'processing',
+        status: 'research',
         created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(), // 3일 전
         updated_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2시간 전
       },
@@ -245,7 +245,7 @@ export const mockUtils = {
         repo: 'company/graphql-api',
         focus_files: ['src/schema/user.graphql', 'src/resolvers/user.ts', 'src/types/index.ts'],
         output_notion_url: 'https://notion.so/graphql-output',
-        status: 'processing',
+        status: 'research',
         created_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1일 전
         updated_at: new Date(Date.now() - 30 * 60 * 1000).toISOString(), // 30분 전
       },
@@ -257,7 +257,7 @@ export const mockUtils = {
         repo: 'company/legacy-js-app',
         focus_files: ['src/utils/helpers.js', 'src/components/Legacy.jsx'],
         output_notion_url: 'https://notion.so/typescript-output',
-        status: 'error',
+        status: 'research',
         created_at: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(), // 5일 전
         updated_at: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(), // 4일 전
       },
