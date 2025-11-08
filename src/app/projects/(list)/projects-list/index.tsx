@@ -10,8 +10,8 @@ import * as S from './index.css';
 import { useGetProjects } from '@/api/project/queries';
 
 export function ProjectsList() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [statusFilter, setStatusFilter] = useState<string>('all');
+  // const [searchQuery, setSearchQuery] = useState('');
+  // const [statusFilter, setStatusFilter] = useState<string>('all');
 
   // 프로젝트 목록 조회
   const { data, isLoading, error, refetch } = useGetProjects();
@@ -36,12 +36,12 @@ export function ProjectsList() {
   if (isLoading) {
     return (
       <div className={S.container}>
-        <ProjectsListHeader
+        {/* <ProjectsListHeader
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
           statusFilter={statusFilter}
           onStatusFilterChange={setStatusFilter}
-        />
+        /> */}
         <ProjectsGridSkeleton />
       </div>
     );
@@ -49,18 +49,13 @@ export function ProjectsList() {
 
   return (
     <div className={S.container}>
-      <ProjectsListHeader
+      {/* <ProjectsListHeader
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
         statusFilter={statusFilter}
         onStatusFilterChange={setStatusFilter}
-      />
-      <ProjectsGrid
-        projects={data || []}
-        total={data?.length || 0}
-        searchQuery={searchQuery}
-        statusFilter={statusFilter}
-      />
+      /> */}
+      <ProjectsGrid projects={data || []} total={data?.length || 0} />
     </div>
   );
 }
