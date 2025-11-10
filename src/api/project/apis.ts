@@ -11,3 +11,8 @@ export async function getProjects(): Promise<Project[]> {
   const response = await get<{ data: Project[] }>('/projects');
   return response.data;
 }
+
+export async function getProject(id: string): Promise<Project> {
+  const response = await get<{ data: Project }>(`/projects/${id}`);
+  return response.data;
+}

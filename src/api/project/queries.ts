@@ -1,5 +1,5 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
-import { getProjects } from './apis';
+import { getProject, getProjects } from './apis';
 import { Project } from './responses.dto';
 
 /**
@@ -11,5 +11,15 @@ export const useGetProjects = (): UseQueryResult<Project[], Error> => {
     queryFn: getProjects,
     staleTime: 300 * 1000, // 5분
     gcTime: 600 * 1000, // 10분
+  });
+};
+
+/**
+ * 프로젝트 상세 조회
+ */
+export const useGetProject = (id: string): UseQueryResult<Project, Error> => {
+  return useQuery({
+    queryKey: ['projects', id],
+    queryFn: () => getProject(id),
   });
 };
