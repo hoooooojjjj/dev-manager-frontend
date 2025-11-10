@@ -6,45 +6,30 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Calendar, ExternalLink, FileText, GitBranch } from 'lucide-react';
 import { formatRelativeTime } from '@/utils/format';
-import type { Project } from '@/api/schemas';
+import { ProjectStatus, ProjectStatusSchema, type Project } from '@/api/project/responses.dto';
 import { Flex } from '@/components/ui/Flex';
 import * as S from './index.css';
+import { getStatusLabel } from './contanst';
 
 interface ProjectCardProps {
   project: Project;
 }
 
-function getStatusColor(status: string): string {
-  return S.statusColors[status as keyof typeof S.statusColors] || S.statusColors.idle;
-}
-
-function getStatusLabel(status: string): string {
-  const statusLabels: Record<string, string> = {
-    idle: '대기',
-    submitting: '제출 중',
-    queued: '대기열',
-    collecting: '수집 중',
-    researching: '리서치 중',
-    drafting: '초안 생성 중',
-    review: '리뷰',
-    publishing: '발행 중',
-    done: '완료',
-    error: '오류',
-  };
-  return statusLabels[status] || status;
+function getStatusColor(status: ProjectStatus): string {
+  return S.statusColors[status] || S.statusColors[ProjectStatusSchema.enum.intake];
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Card className={S.projectCard}>
       <CardHeader className={S.cardHeader}>
-        <CardTitle className={S.cardTitle}>{project.title}</CardTitle>
+        <Flex gap={10}>
+          <CardTitle className={S.cardTitle}>{project.title}</CardTitle>
+          <div className={S.infoRow}>{formatRelativeTime(project.createdAt)}</div>
+        </Flex>
         <div className={S.badgeContainer}>
           <Badge variant="secondary" className={getStatusColor(project.status)}>
             {getStatusLabel(project.status)}
-          </Badge>
-          <Badge variant="outline" className={S.badgeOutline}>
-            {project.confidentiality}
           </Badge>
         </div>
       </CardHeader>
@@ -54,29 +39,43 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <div className={S.projectInfo}>
           <div className={S.infoRow}>
             <GitBranch className={S.infoIcon} />
-            <span className={S.infoText}>{project.repo}</span>
-          </div>
-          <div className={S.infoRow}>
-            <Calendar className={S.infoIcon} />
-            <span>생성: {formatRelativeTime(project.created_at)}</span>
+            <Flex direction="col" gap={4} className={S.infoText}>
+              {project.repos.map((repo) => (
+                <Link key={repo} href={repo} className={S.infoLink} target="_blank">
+                  {repo.split('/').pop()}
+                </Link>
+              ))}
+            </Flex>
           </div>
         </div>
 
         {/* Focus Files */}
         <Flex direction="col" align="start" gap={8}>
-          <div className={S.focusFilesSection}>Focus Files ({project.focus_files.length})</div>
+          <div className={S.focusFilesSection}>Focus Files ({project.focusFiles.length})</div>
           <div className={S.focusFilesList}>
-            {project.focus_files.slice(0, 2).map((file, index) => (
+            {project.focusFiles.slice(0, 2).map((file, index) => (
               <Badge key={index} variant="outline" className={S.focusFileBadge}>
-                {file.split('/').pop()}
+                {file}
               </Badge>
             ))}
-            {project.focus_files.length > 2 && (
+            {project.focusFiles.length > 2 && (
               <Badge variant="outline" className={S.focusFileBadge}>
-                +{project.focus_files.length - 2}
+                +{project.focusFiles.length - 2}
               </Badge>
             )}
           </div>
+        </Flex>
+
+        {/* 소스 Notion URLs */}
+        <Flex direction="col" align="start" gap={8}>
+          <div className={S.focusFilesSection}>PRD ({project.notionUrls.length})</div>
+          <Flex direction="col" gap={4} className={S.infoText}>
+            {project.notionUrls.map((url) => (
+              <Link key={url} href={url} className={S.infoLink} target="_blank">
+                {url}
+              </Link>
+            ))}
+          </Flex>
         </Flex>
 
         {/* 액션 버튼 */}
@@ -88,7 +87,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             </Link>
           </Button>
 
-          {project.status === 'done' && (
+          {project.status === 'completed' && (
             <Button asChild variant="outline" size="sm">
               <Link href={`/drafts/${project.id}`}>
                 <FileText className={S.buttonIcon} />

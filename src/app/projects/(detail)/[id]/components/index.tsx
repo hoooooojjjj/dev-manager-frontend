@@ -16,8 +16,8 @@ export function ProjectDashboard({ projectId }: ProjectDashboardProps) {
     title: '사용자 인증 시스템 개선',
     status: 'researching' as const,
     progress: 45,
-    created_at: '2024-01-15T09:00:00Z',
-    updated_at: '2024-01-15T14:30:00Z',
+    createdAt: '2024-01-15T09:00:00Z',
+    updatedAt: '2024-01-15T14:30:00Z',
   };
 
   const timeline = [

@@ -45,7 +45,7 @@ alwaysApply: true
 
 - **목적**: 프로젝트 생성, OAuth 연결, 파일 지정
 - **구현**: React Hook Form + Zod 검증, OAuth 배지, Focus Files 관리
-- **API**: POST `/api/v1/projects/intake`
+- **API**: POST `/projects`
 
 ### 📊 프로젝트 목록 (/projects) ✅
 
@@ -242,7 +242,7 @@ retry: (failureCount, error) => {
 
 - **자동 배포**: main 브랜치 푸시 시
 - **프리뷰 배포**: PR 생성 시
-- **환경 변수**: 기본값 `/api/v1` 설정
+- **환경 변수**: 기본값 `` 설정
 
 ### GitHub Actions ✅
 

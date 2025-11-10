@@ -6,45 +6,6 @@
 import { z } from 'zod';
 
 // ============================================================================
-// 기본 공통 스키마
-// ============================================================================
-
-export const ConfidentialitySchema = z.enum(['public', 'internal', 'confidential']);
-
-export const ProjectStatusSchema = z.enum([
-  'idle',
-  'submitting',
-  'queued',
-  'collecting',
-  'researching',
-  'drafting',
-  'review',
-  'publishing',
-  'done',
-  'error',
-]);
-
-// ============================================================================
-// 프로젝트 스키마
-// ============================================================================
-
-export const ProjectSchema = z.object({
-  id: z.string(),
-  user_id: z.string(),
-  title: z.string(),
-  source_notion_url: z.string().url(),
-  repo: z.string(),
-  focus_files: z.array(z.string()),
-  output_notion_url: z.string().url(),
-  confidentiality: ConfidentialitySchema,
-  status: ProjectStatusSchema,
-  created_at: z.string(),
-  updated_at: z.string(),
-});
-
-export type Project = z.infer<typeof ProjectSchema>;
-
-// ============================================================================
 // 리서치 스키마
 // ============================================================================
 

@@ -130,7 +130,7 @@ const createApiClient = (): AxiosInstance => {
           }
 
           const response = await axios.post<{ accessToken: string; expiresIn: number }>(
-            `${baseURL}/api/v1/auth/refresh`,
+            `${baseURL}/auth/refresh`,
             { refreshToken }
           );
 

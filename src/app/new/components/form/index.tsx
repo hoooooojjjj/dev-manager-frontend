@@ -1,34 +1,20 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { FieldErrors, useForm, UseFormSetValue } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
-import { useMutation } from '@tanstack/react-query';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Label } from '@/components/ui/Label';
 import { Badge } from '@/components/ui/Badge';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/Select';
 import { X, Plus } from 'lucide-react';
-import { post } from '@/api/client';
-import { useToast } from '@/store/useUi';
 import * as S from './index.css';
-import { addFocusFile, removeFocusFile } from './utils';
-import { IntakeSchema, IntakeValues } from './schemas';
+import { addArrayItem, ArrayFieldName, removeArrayItem } from './utils';
 import { vars } from '@/styles/theme.css';
+import { useCreateProject } from '@/api/project/mutations';
+import { IntakeSchema, IntakeValues } from '@/api/project/requests.dto';
 
 export function IntakeForm() {
-  const router = useRouter();
-  const { success, error } = useToast();
-  const [focusFileInput, setFocusFileInput] = useState('');
-
   const {
     register,
     handleSubmit,
@@ -38,146 +24,159 @@ export function IntakeForm() {
   } = useForm<IntakeValues>({
     resolver: zodResolver(IntakeSchema),
     defaultValues: {
-      confidentiality: 'public',
-      focus_files: [],
+      notionUrls: [],
+      repos: [],
+      focusFiles: [],
     },
   });
 
-  const focusFiles = watch('focus_files') || [];
+  const notionUrls = watch('notionUrls') || [];
+  const repos = watch('repos') || [];
+  const focusFiles = watch('focusFiles') || [];
 
-  // 프로젝트 생성 mutation
-  const createProject = useMutation({
-    mutationFn: (data: IntakeValues) =>
-      post<{ jobId: string; projectId: string }>('/projects/intake', data),
-    onSuccess: (response) => {
-      success('프로젝트가 생성되었습니다! 프로젝트 대시보드로 이동합니다.');
-      router.push(`/projects/${response.projectId}`);
-    },
-    onError: (err: Error) => {
-      error(err.message || '프로젝트 생성에 실패했습니다.', '프로젝트 생성 실패');
-    },
-  });
+  const { mutate: createProject, isPending } = useCreateProject();
 
   const onSubmit = (data: IntakeValues) => {
-    createProject.mutate(data);
+    createProject(data);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={S.container}>
       {/* 소스 Notion URL */}
-      <div className={S.formSection}>
-        <Label htmlFor="source_notion_url">소스 Notion URL *</Label>
-        <Input
-          id="source_notion_url"
-          placeholder="https://notion.so/your-page-url"
-          {...register('source_notion_url')}
-        />
-        {errors.source_notion_url && (
-          <p className={S.errorText}>{errors.source_notion_url.message}</p>
-        )}
-      </div>
+      <ArrayFormSection
+        label="PRD (Notion URL)"
+        values={notionUrls}
+        setValue={setValue}
+        fieldName="notionUrls"
+        addArrayItem={addArrayItem}
+        removeArrayItem={removeArrayItem}
+        errors={errors}
+      />
 
       {/* GitHub 레포지토리 */}
-      <div className={S.formSection}>
-        <Label htmlFor="repo">GitHub 레포지토리 *</Label>
-        <Input
-          id="repo"
-          placeholder="owner/repository (예: microsoft/vscode)"
-          {...register('repo')}
-        />
-        {errors.repo && <p className={S.errorText}>{errors.repo.message}</p>}
-      </div>
+      <ArrayFormSection
+        label="GitHub 레포지토리"
+        values={repos}
+        setValue={setValue}
+        fieldName="repos"
+        addArrayItem={addArrayItem}
+        removeArrayItem={removeArrayItem}
+        errors={errors}
+      />
 
       {/* Focus Files */}
-      <div className={S.formSection}>
-        <Label>중점 분석 파일 *</Label>
-        <div className={S.focusFilesActions}>
-          <Input
-            placeholder="src/components/Button.tsx"
-            value={focusFileInput}
-            onChange={(e) => setFocusFileInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault();
-                addFocusFile(focusFileInput, focusFiles, setValue, setFocusFileInput);
-              }
-            }}
-          />
-          <Button
-            type="button"
-            onClick={() => addFocusFile(focusFileInput, focusFiles, setValue, setFocusFileInput)}
-            size="icon"
-            variant="outline"
-          >
-            <Plus className={S.buttonIcon} />
-          </Button>
-        </div>
-
-        {focusFiles.length > 0 && (
-          <div className={S.focusFilesGrid}>
-            {focusFiles.map((file, index) => (
-              <Badge key={index} variant="secondary" className={S.focusFileBadge}>
-                {file}
-                <Button
-                  type="button"
-                  onClick={() => removeFocusFile(index, focusFiles, setValue)}
-                  className={S.removeButton}
-                  size="icon"
-                  variant="ghost"
-                >
-                  <X className={S.removeIcon} color={vars.colors.primary} />
-                </Button>
-              </Badge>
-            ))}
-          </div>
-        )}
-
-        {errors.focus_files && <p className={S.errorText}>{errors.focus_files.message}</p>}
-      </div>
+      <ArrayFormSection
+        label="강조할 파일명"
+        values={focusFiles}
+        setValue={setValue}
+        fieldName="focusFiles"
+        addArrayItem={addArrayItem}
+        removeArrayItem={removeArrayItem}
+        errors={errors}
+      />
 
       {/* 출력 Notion URL */}
       <div className={S.formSection}>
-        <Label htmlFor="output_notion_url">출력 Notion URL *</Label>
+        <Label htmlFor="outputNotionUrl">개발명세서 발행 페이지 (Notion URL) *</Label>
         <Input
-          id="output_notion_url"
+          id="outputNotionUrl"
           placeholder="https://notion.so/output-page-url"
-          {...register('output_notion_url')}
+          {...register('outputNotionUrl')}
         />
-        {errors.output_notion_url && (
-          <p className={S.errorText}>{errors.output_notion_url.message}</p>
-        )}
+        {errors.outputNotionUrl && <p className={S.errorText}>{errors.outputNotionUrl.message}</p>}
       </div>
 
-      {/* 제목 (선택사항) */}
+      {/* 제목 */}
       <div className={S.formSection}>
-        <Label htmlFor="title">프로젝트 제목</Label>
+        <Label htmlFor="title">프로젝트 제목 *</Label>
         <Input id="title" placeholder="프로젝트 제목을 입력하세요" {...register('title')} />
+        {errors.title && <p className={S.errorText}>{errors.title.message}</p>}
       </div>
 
-      {/* 기밀성 */}
-      <div className={S.formSection}>
-        <Label htmlFor="confidentiality">기밀성 수준 *</Label>
-        <Select
-          value={watch('confidentiality')}
-          onValueChange={(value) =>
-            setValue('confidentiality', value as 'public' | 'internal' | 'confidential')
-          }
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="기밀성 수준을 선택하세요" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="public">공개</SelectItem>
-            <SelectItem value="internal">내부</SelectItem>
-            <SelectItem value="confidential">기밀</SelectItem>
-          </SelectContent>
-        </Select>
-        {errors.confidentiality && <p className={S.errorText}>{errors.confidentiality.message}</p>}
-      </div>
-
-      <Button type="submit" className={S.submitButton} disabled={createProject.isPending}>
-        {createProject.isPending ? '생성 중...' : '프로젝트 생성'}
+      <Button type="submit" className={S.submitButton} disabled={isPending}>
+        {isPending ? '생성 중...' : '프로젝트 생성'}
       </Button>
     </form>
   );
 }
+
+interface ArrayFormSectionProps {
+  label: string;
+  values: IntakeValues['notionUrls'] | IntakeValues['repos'] | IntakeValues['focusFiles'];
+  setValue: UseFormSetValue<IntakeValues>;
+  fieldName: ArrayFieldName;
+  addArrayItem: (
+    input: string,
+    currentArray: string[],
+    fieldName: ArrayFieldName,
+    setValue: UseFormSetValue<IntakeValues>,
+    setInput: (value: string) => void
+  ) => void;
+  removeArrayItem: (
+    index: number,
+    currentArray: string[],
+    fieldName: ArrayFieldName,
+    setValue: UseFormSetValue<IntakeValues>
+  ) => void;
+  errors: FieldErrors<IntakeValues>;
+}
+
+const ArrayFormSection = ({
+  label,
+  values,
+  setValue,
+  fieldName,
+  addArrayItem,
+  removeArrayItem,
+  errors,
+}: ArrayFormSectionProps) => {
+  const [inputs, setInputs] = useState('');
+
+  return (
+    <div className={S.formSection}>
+      <Label>{label} *</Label>
+      <div className={S.focusFilesActions}>
+        <Input
+          placeholder="src/components/Button.tsx"
+          value={inputs}
+          onChange={(e) => setInputs(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              addArrayItem(inputs, values, fieldName, setValue, setInputs);
+            }
+          }}
+        />
+        <Button
+          type="button"
+          onClick={() => addArrayItem(inputs, values, fieldName, setValue, setInputs)}
+          size="icon"
+          variant="outline"
+        >
+          <Plus className={S.buttonIcon} />
+        </Button>
+      </div>
+
+      {values.length > 0 && (
+        <div className={S.focusFilesGrid}>
+          {values.map((file, index) => (
+            <Badge key={index} variant="secondary" className={S.focusFileBadge}>
+              {file}
+              <Button
+                type="button"
+                onClick={() => removeArrayItem(index, values, fieldName, setValue)}
+                className={S.removeButton}
+                size="icon"
+                variant="ghost"
+              >
+                <X className={S.removeIcon} color={vars.colors.primary} />
+              </Button>
+            </Badge>
+          ))}
+        </div>
+      )}
+
+      {errors.focusFiles && <p className={S.errorText}>{errors.focusFiles.message}</p>}
+    </div>
+  );
+};

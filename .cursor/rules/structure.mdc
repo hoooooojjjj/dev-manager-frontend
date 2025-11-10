@@ -83,7 +83,7 @@ src/
 ## API 연동 규칙
 
 - 상태 조회는 폴링 간격 3s 또는 SSE.
-- 엔드포인트 합의: `/api/v1/projects/:id/status`, `/events`(SSE), `/drafts/:id`, `PATCH /drafts/:id`, `POST /drafts/:id/publish`.
+- 엔드포인트 합의: `/projects/:id/status`, `/events`(SSE), `/drafts/:id`, `PATCH /drafts/:id`, `POST /drafts/:id/publish`.
 
 ## 리서치 패널 구현 규칙
 
